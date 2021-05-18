@@ -15,3 +15,4 @@ Recipe 101 에는 다양한 유저들이 제공하는 많은 레시피가 존재
 Recipe 101 입니다. 
 
 # 사용된 스택
+![ㄴㅅㅁ차](https://github.com/codestates/Recipe_101-client-/blob/master/images/project_stack.png)
