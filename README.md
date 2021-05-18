@@ -16,3 +16,18 @@ Recipe 101 입니다.
 
 # 사용된 스택
 ![ㄴㅅㅁ차](https://github.com/codestates/Recipe_101-client-/blob/master/images/project_stack.png)
+
+
+# Architecture
+
+
+
+
+
+# 만든이 
+
+|공인택|내용|
+|------|---|
+|임지택|테스트2|
+|방경태|테스트2|
+|김세주|테스트2|
