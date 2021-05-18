@@ -38,3 +38,6 @@ Recipe 101 입니다.
 |[임지택](https://github.com/jtlim0414)|**Front-end**|
 |[방경태](https://github.com/triple486)|**Front-end**|
 |[김세주](https://github.com/sejuda)|**Front-end**|
+
+# 더 상세한 것은
+[위키를 찾아주세요 ](https://github.com/sejuda)
