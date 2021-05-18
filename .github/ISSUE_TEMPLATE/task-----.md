@@ -30,5 +30,5 @@ assignees: ''
 ### Labels
 * Estimated time: E: 1h
 * Group : client, server
-* Sprint: Sprint__NUMBER__
+* Week: week__NUMBER__
 * Urgency: High, Middle, Low
