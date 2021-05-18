@@ -1,17 +1,22 @@
+import {mount, route} from 'navi';
+import {Router} from 'react-navi';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import LoginPage from './Auth/LoginPage';
+import RegisterPage from './Auth/RegisterPage';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+const routes = mount({
+  "/": route({
+    title: 'Login',
+    view: <LoginPage />
+  }),
+  "/register" : route({
+    title: 'Register',
+    view: <RegisterPage />
+  })
+})
+
+ReactDOM.render(<Router routes={routes} />,document.getElementById('root'));
+
