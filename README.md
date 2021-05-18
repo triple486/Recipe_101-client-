@@ -21,12 +21,20 @@ Recipe 101 입니다.
 # Architecture
 
 
+### Front-end
 
+![front_flow](https://github.com/codestates/Recipe_101-client-/blob/master/images/Recipe-101-front-flow.png)
+
+
+
+
+### Back-end
+![back_flow](https://github.com/codestates/Recipe_101-client-/blob/master/images/back_flow.png)
 
 
 # 만든이 
-|[공인택]()|**Back-end**|
+|[공인택](https://github.com/karuiner)|**Back-end**|
 |----|----|
-|[임지택]()|**Front-end**|
-|[방경태]()|**Front-end**|
-|[김세주]()|**Front-end**|
+|[임지택](https://github.com/jtlim0414)|**Front-end**|
+|[방경태](https://github.com/triple486)|**Front-end**|
+|[김세주](https://github.com/sejuda)|**Front-end**|
