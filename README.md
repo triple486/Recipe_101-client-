@@ -1,5 +1,6 @@
 ![github badge](http://img.shields.io/badge/-Project-black?style=flat-square)![github badge](http://img.shields.io/badge/-Recipe_101-lightgreen?style=flat-square)
 
+# Recipe 101
 
 요리를 하기위해 요리의 레시피를 검색 해본적이 있나요?
 
@@ -13,4 +14,4 @@ Recipe 101 에는 다양한 유저들이 제공하는 많은 레시피가 존재
 
 Recipe 101 입니다. 
 
-### 사용된 스택
+# 사용된 스택
