@@ -40,4 +40,4 @@ Recipe 101 입니다.
 |[김세주](https://github.com/sejuda)|**Front-end**|
 
 # 더 상세한 것은
-[위키를 찾아주세요 ](https://github.com/sejuda)
+[위키를 찾아주세요 ](https://github.com/codestates/Recipe_101-client-/wiki)
