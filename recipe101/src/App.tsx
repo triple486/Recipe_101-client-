@@ -1,12 +1,10 @@
 import { useState } from 'react'
 import ReactDOM from 'react-dom';
-import { Switch, Route, Redirect, withRouter } from "react-router-dom";
+import { Switch, Route, withRouter } from "react-router-dom";
+import BaseModalWrapper from './components/modal/BaseModalWrapper';
+import RegisterPage from './components/modal/RegisterPage';
 
 import './index.css'; 
-import RegisterPage from './components/modal/RegisterPage';
-import Modal from './components/modal/Modal';
-import { BtnOpenModal, BackDrop } from './ui/Modal';
-import BaseModalWrapper from './components/modal/BaseModalWrapper';
 
 interface AppProps {
   show: boolean;
