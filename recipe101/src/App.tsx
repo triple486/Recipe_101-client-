@@ -6,6 +6,7 @@ import RegisterPage from "./components/modal/RegisterPage";
 
 import "./index.css";
 
+
 const App = () => {
   return (
     <>
