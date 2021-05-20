@@ -1,27 +1,21 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import ReactDOM from "react-dom";
+import { Switch, Route, withRouter } from "react-router-dom";
+import BaseModalWrapper from "./components/modal/BaseModalWrapper";
+import RegisterPage from "./components/modal/RegisterPage";
 
-function App() {
+import "./index.css";
+
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx script</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React!
-        </a>
-      </header>
-
-    </div>
+    <>
+      <Switch>
+        <Route exact path="/" component={BaseModalWrapper} />
+        <Route exact path="/register" component={RegisterPage} />
+      </Switch>
+    </>
   );
-}
+};
 
-export default App;
+export default withRouter(App);
