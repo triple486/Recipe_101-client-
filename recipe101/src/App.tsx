@@ -1,14 +1,10 @@
-import { useState } from 'react'
-import ReactDOM from 'react-dom';
+import { useState } from "react";
+import ReactDOM from "react-dom";
 import { Switch, Route, withRouter } from "react-router-dom";
-import BaseModalWrapper from './components/modal/BaseModalWrapper';
-import RegisterPage from './components/modal/RegisterPage';
+import BaseModalWrapper from "./components/modal/BaseModalWrapper";
+import RegisterPage from "./components/modal/RegisterPage";
 
-import './index.css'; 
-
-interface AppProps {
-  show: boolean;
-}
+import "./index.css";
 
 const App = () => {
   return (
@@ -19,8 +15,6 @@ const App = () => {
       </Switch>
     </>
   );
+};
 
-}
-
-
-export default withRouter(App)
+export default withRouter(App);
