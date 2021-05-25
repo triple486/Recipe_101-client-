@@ -36,7 +36,7 @@ const tokenReducer = (
       return action.payload;
 
     case DELETE:
-      return action.payload;
+      return state;
 
     default:
       return state;
