@@ -8,15 +8,9 @@ import {
   Redirect,
 } from "react-router-dom";
 import styled from "styled-components";
-import Addrecipe from "./components/addrecipe";
-import Resister from "./components/Resister";
-import Searchbar from "./components/Searchbar";
+import Addrecipe from "./components/Addrecipe";
 import Landingpage from "./components/Landingpage";
 import Mypage from "./components/Mypage";
-import Modal from "./components/Modal";
-import Login from "./components/Login";
-
-import Searchresult from "./components/Searchresult";
 
 const Main = styled.div`
   * {

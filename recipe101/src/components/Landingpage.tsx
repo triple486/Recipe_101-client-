@@ -19,8 +19,17 @@ import Searchresult from "./Searchresult";
 
 const Frame = styled.div`
   flex: 1 0 0;
-  height: 100%;
+  min-height: 100%;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  border: solid 1px red;
+`;
+
+const MainBody = styled.div`
+  min-height: 100%;
+  width: 100%;
+  flex: 1;
   border: solid 1px red;
 `;
 
@@ -33,10 +42,10 @@ function Landingpage() {
       {isSearch ? (
         <Searchresult></Searchresult>
       ) : (
-        <div>
+        <MainBody>
           <Mainslide></Mainslide>
           <Maingrid></Maingrid>
-        </div>
+        </MainBody>
       )}
       <Switch>
         <Route path={"/login"}>

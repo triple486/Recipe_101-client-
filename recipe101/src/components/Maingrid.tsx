@@ -1,3 +1,5 @@
+import styled from "styled-components";
+
 function Maingrid() {
   return <div></div>;
 }

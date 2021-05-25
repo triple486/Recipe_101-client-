@@ -1,10 +1,25 @@
-import { useHistory, useLocation, Link, Redirect } from "react-router-dom";
+import {
+  Route,
+  Switch,
+  useHistory,
+  useLocation,
+  Link,
+  Redirect,
+} from "react-router-dom";
+import styled from "styled-components";
+
+const Frame = styled.div`
+  height:100px;
+  width: 100%
+  display: flex
+
+`;
 
 function Comp({ search }: { search: any }) {
   let history = useHistory();
   let location = useLocation();
   return (
-    <div>
+    <Frame>
       <button
         onClick={() => {
           history.push("/addrecipe");
@@ -40,7 +55,7 @@ function Comp({ search }: { search: any }) {
       >
         back
       </button>
-    </div>
+    </Frame>
   );
 }
 
