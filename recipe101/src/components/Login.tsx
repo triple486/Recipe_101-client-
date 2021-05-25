@@ -1,5 +1,6 @@
 import { Route, Switch, useHistory, useLocation, Link } from "react-router-dom";
 import styled from "styled-components";
+import Modal from "./Modal";
 const Frame = styled.div`
   height: 40%;
   width: 40%;
@@ -7,19 +8,27 @@ const Frame = styled.div`
   border: solid 1px red;
 `;
 
-function Login({ login }: { login: any }) {
+function Login() {
   let history = useHistory();
   return (
-    <Frame>
-      <button
-        onClick={() => {
-          login[1](false);
-          history.push("/");
-        }}
-      >
-        back
-      </button>
-    </Frame>
+    <Modal>
+      <Frame>
+        <button
+          onClick={() => {
+            history.push("/");
+          }}
+        >
+          back
+        </button>
+        <button
+          onClick={() => {
+            history.push("/resister");
+          }}
+        >
+          resister
+        </button>
+      </Frame>
+    </Modal>
   );
 }
 

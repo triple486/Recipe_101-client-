@@ -45,33 +45,15 @@ function App() {
 
   return (
     <Main>
-      <Searchbar
-        Search={[isSearch, isSearchf]}
-        login={[isLogin, isLoginf]}
-      ></Searchbar>
       <Switch>
-        <Route exact path="/">
-          {isSearch ? (
-            <Searchresult></Searchresult>
-          ) : (
-            <Landingpage></Landingpage>
-          )}
-          {isLogin ? (
-            <Modal>
-              <Login login={[isLogin, isLoginf]}></Login>
-            </Modal>
-          ) : null}
-          {isResister ? (
-            <Modal>
-              <Resister></Resister>
-            </Modal>
-          ) : null}
-        </Route>
         <Route exact path="/addrecipe">
           <Addrecipe></Addrecipe>
         </Route>
         <Route exact path="/mypage">
           <Mypage></Mypage>
+        </Route>
+        <Route path="/">
+          <Landingpage></Landingpage>
         </Route>
       </Switch>
     </Main>

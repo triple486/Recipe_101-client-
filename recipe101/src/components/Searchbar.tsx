@@ -1,6 +1,6 @@
 import { useHistory, useLocation, Link, Redirect } from "react-router-dom";
 
-function Comp({ Search, login }: { Search: any; login: any }) {
+function Comp({ search }: { search: any }) {
   let history = useHistory();
   let location = useLocation();
   return (
@@ -21,21 +21,20 @@ function Comp({ Search, login }: { Search: any; login: any }) {
       </button>
       <button
         onClick={() => {
-          Search[1](!Search[0]);
+          search[1](!search[0]);
         }}
       >
         search
       </button>
       <button
         onClick={() => {
-          login[1](!login[0]);
+          history.push("/login");
         }}
       >
         로그인
       </button>
       <button
         onClick={() => {
-          Search[1](false);
           history.push("/");
         }}
       >
