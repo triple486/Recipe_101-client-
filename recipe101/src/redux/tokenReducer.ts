@@ -18,24 +18,25 @@ type TokenAction =
   | ReturnType<typeof storeToken>
   | ReturnType<typeof deleteToken>;
 
-type tokenState = {
-  token: string;
-};
+// type tokenState = {
+//   token: string;
+// };
 
-const initialState: tokenState = {
-  token: "",
-};
+// const initialState: tokenState = {
+//   token: "",
+// };
 
 const tokenReducer = (
-  state: tokenState = initialState,
-  Action: TokenAction
+  //  state: tokenState = initialState, // 디폴트 문자열을 확인하기 힘듬
+  state = "",
+  action: TokenAction
 ) => {
-  switch (Action.type) {
+  switch (action.type) {
     case STORE:
-      return Action.payload;
+      return action.payload;
 
     case DELETE:
-      return Action.payload;
+      return action.payload;
 
     default:
       return state;
