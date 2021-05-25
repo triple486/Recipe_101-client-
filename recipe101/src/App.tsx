@@ -35,14 +35,6 @@ const Main = styled.div`
 `;
 
 function App() {
-  let location = useLocation();
-  let history = useHistory();
-  let [active, activef] = useState(false);
-  let [search, searchf] = useState(false);
-  let [isSearch, isSearchf] = useState(false);
-  let [isLogin, isLoginf] = useState(false);
-  let [isResister, isResisterf] = useState(false);
-
   return (
     <Main>
       <Switch>

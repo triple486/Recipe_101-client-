@@ -1,4 +1,6 @@
 import { Route, Switch, useHistory, useLocation, Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { storeToken } from "../redux/tokenReducer";
 import styled from "styled-components";
 import Modal from "./Modal";
 const Frame = styled.div`
@@ -9,6 +11,7 @@ const Frame = styled.div`
 `;
 
 function Login() {
+  const dispatch = useDispatch();
   let history = useHistory();
   return (
     <Modal>
@@ -26,6 +29,14 @@ function Login() {
           }}
         >
           resister
+        </button>
+
+        <button
+          onClick={() => {
+            dispatch(storeToken("itis dummy token"));
+          }}
+        >
+          storetoken
         </button>
       </Frame>
     </Modal>

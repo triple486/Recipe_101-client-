@@ -1,5 +1,8 @@
+import { useSelector } from "react-redux";
+import { RootState } from "../redux/reducers";
 function Comp() {
-  return <div>mypage</div>;
+  let dummytoken = useSelector((state: RootState) => state.tokenReducer);
+  return <div>{"dummy token :" + dummytoken}</div>;
 }
 
 export default Comp;
