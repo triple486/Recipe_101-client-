@@ -1,12 +1,6 @@
 import { useHistory, useLocation, Link, Redirect } from "react-router-dom";
 
-function Comp({
-  isSearch,
-  isSearchf,
-}: {
-  isSearch: boolean;
-  isSearchf: Function;
-}) {
+function Comp({ Search, login }: { Search: any; login: any }) {
   let history = useHistory();
   let location = useLocation();
   return (
@@ -27,17 +21,21 @@ function Comp({
       </button>
       <button
         onClick={() => {
-          isSearchf(!isSearch);
+          Search[1](!Search[0]);
         }}
       >
         search
       </button>
-      <Link to={{ pathname: "/login", state: { background: location } }}>
-        로그인
-      </Link>
       <button
         onClick={() => {
-          isSearchf(false);
+          login[1](!login[0]);
+        }}
+      >
+        로그인
+      </button>
+      <button
+        onClick={() => {
+          Search[1](false);
           history.push("/");
         }}
       >

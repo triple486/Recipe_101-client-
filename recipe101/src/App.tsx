@@ -26,6 +26,10 @@ const Main = styled.div`
     z-index: 0;
   }
   dispaly: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+
   height: 100vh;
   width: 100vw;
 `;
@@ -36,33 +40,41 @@ function App() {
   let [active, activef] = useState(false);
   let [search, searchf] = useState(false);
   let [isSearch, isSearchf] = useState(false);
+  let [isLogin, isLoginf] = useState(false);
+  let [isResister, isResisterf] = useState(false);
+
   return (
-    <>
-      <Main>
-        <Searchbar isSearch={isSearch} isSearchf={isSearchf}></Searchbar>
-        <Switch>
-          <Route exact path="/">
-            {isSearch ? (
-              <Searchresult></Searchresult>
-            ) : (
-              <Landingpage></Landingpage>
-            )}
-            <Route exact path="/login">
-              <Login></Login>
-            </Route>
-            <Route exact path="/Resister">
+    <Main>
+      <Searchbar
+        Search={[isSearch, isSearchf]}
+        login={[isLogin, isLoginf]}
+      ></Searchbar>
+      <Switch>
+        <Route exact path="/">
+          {isSearch ? (
+            <Searchresult></Searchresult>
+          ) : (
+            <Landingpage></Landingpage>
+          )}
+          {isLogin ? (
+            <Modal>
+              <Login login={[isLogin, isLoginf]}></Login>
+            </Modal>
+          ) : null}
+          {isResister ? (
+            <Modal>
               <Resister></Resister>
-            </Route>
-          </Route>
-          <Route exact path="/addrecipe">
-            <Addrecipe></Addrecipe>
-          </Route>
-          <Route exact path="/mypage">
-            <Mypage></Mypage>
-          </Route>
-        </Switch>
-      </Main>
-    </>
+            </Modal>
+          ) : null}
+        </Route>
+        <Route exact path="/addrecipe">
+          <Addrecipe></Addrecipe>
+        </Route>
+        <Route exact path="/mypage">
+          <Mypage></Mypage>
+        </Route>
+      </Switch>
+    </Main>
   );
 }
 

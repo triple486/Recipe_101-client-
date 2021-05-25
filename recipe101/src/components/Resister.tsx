@@ -1,7 +1,7 @@
 import Modal from "./Modal";
 
 function Resister() {
-  return <Modal>resister</Modal>;
+  return <div>{"resister"}</div>;
 }
 
 export default Resister;

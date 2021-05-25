@@ -5,6 +5,8 @@ import Mainslide from "./Mainslide";
 
 const Frame = styled.div`
   flex: 1 0 0;
+  height: 100%;
+  width: 100%;
   border: solid 1px red;
 `;
 
