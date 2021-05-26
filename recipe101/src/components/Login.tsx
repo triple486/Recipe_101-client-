@@ -6,6 +6,8 @@ import axios from "axios";
 import React, { useState } from "react";
 import Modal from "./Modal";
 import Input from "./Input";
+import kakaobutton from "../icon/kakao_login_medium_narrow.png";
+
 const Frame = styled.div`
   height: 40%;
   width: 40%;
@@ -16,6 +18,11 @@ const Frame = styled.div`
 `;
 const Line = styled.div`
   flex: 1 0 0;
+`;
+
+const Kakaobutton = styled.img`
+  border-radius: 12px;
+  height: 60%;
 `;
 
 function Login() {
@@ -70,6 +77,18 @@ function Login() {
           >
             cancel
           </button>
+        </Line>
+        <Line>
+          <Kakaobutton
+            src={kakaobutton}
+            onClick={() => {
+              let url =
+                `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_REST_API_KEY}` +
+                `&redirect_uri=${process.env.REACT_APP_REDIRECT_URI}` +
+                `&response_type=code`;
+              window.location.assign(url);
+            }}
+          ></Kakaobutton>
         </Line>
         <Line>
           <Link to={"/resister"}> 아직 계정이 없으십니까?</Link>

@@ -29,6 +29,7 @@ const Main = styled.div`
 `;
 
 function App() {
+  console.log(process.env);
   return (
     <Main>
       <Switch>
