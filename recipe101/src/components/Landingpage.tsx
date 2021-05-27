@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import {
   Route,
   Switch,
@@ -8,6 +9,7 @@ import {
   Redirect,
   useRouteMatch,
 } from "react-router-dom";
+import { storeToken } from "../redux/tokenReducer";
 import styled from "styled-components";
 import Maingrid from "./Maingrid";
 import Mainslide from "./Mainslide";
@@ -16,7 +18,8 @@ import Login from "./Login";
 import Resister from "./Resister";
 import Searchbar from "./Searchbar";
 import Searchresult from "./Searchresult";
-
+import axios from "axios";
+//axios.defaults.withCredentials = true;
 const Frame = styled.div`
   flex: 1 0 0;
   min-height: 100%;
@@ -35,7 +38,21 @@ const MainBody = styled.div`
 
 function Landingpage() {
   let [isSearch, isSearchf] = useState(false);
+  const dispatch = useDispatch();
   let { path, url } = useRouteMatch();
+  let history = useHistory();
+  const nurl = new URL(window.location.href);
+  const target = nurl.pathname;
+  const code = nurl.searchParams.get("code");
+  if (code) {
+    axios
+      .post(process.env.REACT_APP_SERVER_URL + target, { code })
+      .then((res) => {
+        dispatch(storeToken(res.data.data.accessToken));
+        history.push("/");
+      })
+      .catch();
+  }
   return (
     <Frame>
       <Searchbar search={[isSearch, isSearchf]}></Searchbar>

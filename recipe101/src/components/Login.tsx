@@ -1,21 +1,55 @@
 import { Route, Switch, useHistory, useLocation, Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { storeToken } from "../redux/tokenReducer";
+import { updateLogin, updateUserInfo } from "../redux/userReducer";
 import styled from "styled-components";
 import axios from "axios";
 import React, { useState } from "react";
 import Modal from "./Modal";
 import Input from "./Input";
+import CancelButton from "./CancelButton";
+import kakaobutton from "../icon/kakao_login_medium_narrow.png";
+
 const Frame = styled.div`
-  height: 40%;
-  width: 40%;
+  height: 320px;
+  width: 400px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  background: white;
   border: solid 1px red;
 `;
 const Line = styled.div`
   flex: 1 0 0;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+`;
+
+const Kakaobutton = styled.img`
+  border-radius: 12px;
+  display: flex;
+  height: 70%;
+
+  border: solid 1px black;
+  box-shadow: 0px 0px 1px 1px black;
+`;
+
+const Loginbutton = styled.button`
+  border-radius: 12px;
+  width: 163.45px;
+  height: 70%;
+  font-size: 15px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  border: solid 1px black;
+  box-shadow: 0px 0px 1px 1px black;
+`;
+const TextBox = styled.span`
+  font-size: 15px;
+  display: flex;
 `;
 
 function Login() {
@@ -32,6 +66,9 @@ function Login() {
         namef("");
         passwordf("");
         dispatch(storeToken(res.data.data.accessToken));
+        dispatch(updateLogin(true));
+        dispatch(updateUserInfo(res.data.data.userinfo));
+
         history.push("/");
       })
       .catch((err) => {});
@@ -40,6 +77,7 @@ function Login() {
   return (
     <Modal>
       <Frame>
+        <CancelButton to={"/"} />
         <Input
           label={"username"}
           type={"text"}
@@ -53,23 +91,25 @@ function Login() {
           func={passwordf}
         ></Input>
         <Line>
-          <button
+          <Loginbutton
             onClick={() => {
               Tologin();
             }}
           >
-            ok
-          </button>
-          <button
+            <TextBox>로그인</TextBox>
+          </Loginbutton>
+        </Line>
+        <Line>
+          <Kakaobutton
+            src={kakaobutton}
             onClick={() => {
-              namef("");
-              passwordf("");
-
-              history.push("/");
+              let url =
+                `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_REST_API_KEY}` +
+                `&redirect_uri=${process.env.REACT_APP_REDIRECT_URI}` +
+                `&response_type=code`;
+              window.location.assign(url);
             }}
-          >
-            cancel
-          </button>
+          ></Kakaobutton>
         </Line>
         <Line>
           <Link to={"/resister"}> 아직 계정이 없으십니까?</Link>
