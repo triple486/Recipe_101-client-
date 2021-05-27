@@ -1,14 +1,8 @@
-import {
-  Route,
-  Switch,
-  useHistory,
-  useLocation,
-  Link,
-  Redirect,
-} from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/reducers";
+import SearchInput from "./SearchInput";
 
 const Frame = styled.div`
   height: 100px;
@@ -30,26 +24,39 @@ const Box = styled.div`
   height: 100%;
   width: 100px;
   display: flex;
+  vertical-align: middle;
   flex: 0 0 1;
 `;
 
 const LongBox = styled.div`
   height: 100%;
   display: flex;
-
+  flex-direction: column;
   flex: 1 0 0;
 `;
 
-function Comp({ search }: { search: any }) {
+const Search = styled.div`
+  flex: 2 0 0;
+`;
+
+function Comp() {
   let history = useHistory();
   let location = useLocation();
   let user = useSelector((state: RootState) => state.userReducer);
   return (
     <Frame>
       <Body>
-        <Box>로고</Box>
-        <LongBox></LongBox>
-        <Box> 레시피 추가</Box>
+        <Box>{`Recipe 101`}</Box>
+        <LongBox>
+          <SearchInput></SearchInput>
+        </LongBox>
+        <Box
+          onClick={() => {
+            history.push("/addrecipe");
+          }}
+        >
+          {"레시피 추가"}
+        </Box>
         <Box
           onClick={() => {
             if (user.isLogin) {
