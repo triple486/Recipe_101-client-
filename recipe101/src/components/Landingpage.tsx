@@ -13,7 +13,8 @@ import { storeToken } from "../redux/tokenReducer";
 import styled from "styled-components";
 import Maingrid from "./Maingrid";
 import Mainslide from "./Mainslide";
-
+import { useSelector } from "react-redux";
+import { RootState } from "../redux/reducers";
 import Login from "./Login";
 import Resister from "./Resister";
 import Searchbar from "./Searchbar";
@@ -53,10 +54,13 @@ function Landingpage() {
       })
       .catch();
   }
+
+  let data = useSelector((state: RootState) => state.searchReducer);
+
   return (
     <Frame>
-      <Searchbar search={[isSearch, isSearchf]}></Searchbar>
-      {isSearch ? (
+      <Searchbar></Searchbar>
+      {data.isSearch ? (
         <Searchresult></Searchresult>
       ) : (
         <MainBody>

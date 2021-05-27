@@ -5,8 +5,8 @@ import Modal from "./Modal";
 import CancelButton from "./CancelButton";
 import Input from "./Input";
 const Frame = styled.div`
-  height: 40%;
-  width: 40%;
+  height: 360px;
+  width: 400px;
   display: flex;
   border: solid 1px red;
   flex-direction: column;
