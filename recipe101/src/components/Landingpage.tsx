@@ -46,7 +46,7 @@ function Landingpage() {
   const code = nurl.searchParams.get("code");
   if (code) {
     axios
-      .post(process.env.REACT_APP_SERVER_URL2 + target, { code })
+      .post(process.env.REACT_APP_SERVER_URL + target, { code })
       .then((res) => {
         dispatch(storeToken(res.data.data.accessToken));
         history.push("/");
