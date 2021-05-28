@@ -7,29 +7,37 @@ export const updateLogin = (item: boolean) => {
     payload: item,
   };
 };
+type userinfoState = {
+  username: string;
+  phone: string;
+  email: string;
+  userimage: string;
+};
 
-export const updateUserInfo = (item: object) => {
+export const updateUserInfo = (item: userinfoState) => {
   return {
     type: USERINFO,
     payload: item,
   };
 };
-type TokenAction =
+type UserAction =
   | ReturnType<typeof updateLogin>
   | ReturnType<typeof updateUserInfo>;
 
-// type tokenState = {
-//   token: string;
-// };
+type UserState = {
+  isLogin: boolean;
+  userInfo: userinfoState;
+};
 
-// const initialState: tokenState = {
-//   token: "",
-// };
+const initialState: UserState = {
+  isLogin: false,
+  userInfo: { userimage: "", username: "", phone: "", email: "" },
+};
 
 const loginReducer = (
-  //  state: tokenState = initialState, // 디폴트 문자열을 확인하기 힘듬
-  state = { isLogin: false, userInfo: {} },
-  action: TokenAction
+  state: UserState = initialState, // 디폴트 문자열을 확인하기 힘듬
+  // state = { isLogin: false, userInfo: {} },
+  action: UserAction
 ) => {
   switch (action.type) {
     case LOGIN:
