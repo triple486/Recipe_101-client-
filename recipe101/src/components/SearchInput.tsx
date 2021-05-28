@@ -42,18 +42,14 @@ export default function () {
   let dispatch = useDispatch();
   function searchfunction() {
     let url = `${process.env.REACT_APP_SERVER_URL}/search/${type}/${input}`;
-    console.log(url);
     dispatch(isFail(false));
     axios
       .get(url)
       .then((rst) => {
-        console.log(rst.data);
         dispatch(searchRecipe(rst.data.data.recipe));
-
         dispatch(isSearch(true));
       })
       .catch((err) => {
-        console.log(err);
         dispatch(isSearch(true));
         dispatch(isFail(true));
       });

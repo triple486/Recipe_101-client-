@@ -2,7 +2,7 @@ const UPDATE = "search/UPDATE" as const;
 const STATUS = "search/STATUS" as const;
 const SUCCESS = "search/SUCCESS" as const;
 
-export const searchRecipe = (item: Object[]) => {
+export const searchRecipe = (item: any[]) => {
   return {
     type: UPDATE,
     payload: item,
@@ -31,7 +31,7 @@ type SearchAction =
 type searchState = {
   isSearch: boolean;
   isFail: boolean;
-  search: Object[];
+  search: any[];
 };
 
 const initialState: searchState = {

@@ -38,7 +38,6 @@ const MainBody = styled.div`
 `;
 
 function Landingpage() {
-  let [isSearch, isSearchf] = useState(false);
   const dispatch = useDispatch();
   let { path, url } = useRouteMatch();
   let history = useHistory();
@@ -56,11 +55,11 @@ function Landingpage() {
   }
 
   let data = useSelector((state: RootState) => state.searchReducer);
-
+  let isSearch = data.isSearch;
   return (
     <Frame>
       <Searchbar></Searchbar>
-      {data.isSearch ? (
+      {isSearch ? (
         <Searchresult></Searchresult>
       ) : (
         <MainBody>
