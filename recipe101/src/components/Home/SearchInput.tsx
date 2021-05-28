@@ -10,7 +10,7 @@ import {
 import styled from "styled-components";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { isSearch, isFail, searchRecipe } from "../redux/searchReducer";
+import { isSearch, isFail, searchRecipe } from "../../redux/searchReducer";
 const Search = styled.div`
   flex: 2 0 0;
   display: flex;
@@ -39,6 +39,7 @@ const Button = styled.button`
 export default function () {
   let [type, typef] = useState("username");
   let [input, inputf] = useState("");
+  let history = useHistory();
   let dispatch = useDispatch();
   function searchfunction() {
     let url = `${process.env.REACT_APP_SERVER_URL}/search/${type}/${input}`;
@@ -52,6 +53,9 @@ export default function () {
       .catch((err) => {
         dispatch(isSearch(true));
         dispatch(isFail(true));
+      })
+      .finally(() => {
+        history.push("/search");
       });
   }
 

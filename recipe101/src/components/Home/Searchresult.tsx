@@ -1,7 +1,7 @@
-import Recipepage from "./Recipepage";
+import Recipepage from "../Recipepage";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
-import { RootState } from "../redux/reducers";
+import { RootState } from "../../redux/reducers";
 import { useState } from "react";
 import {
   Route,
@@ -46,15 +46,7 @@ function FailResult() {
 }
 
 function Result({ search }: { search: any[] }) {
-  return (
-    <>
-      {search.length ? (
-        <YesResult search={search}></YesResult>
-      ) : (
-        <NoResult></NoResult>
-      )}
-    </>
-  );
+  return <>{search.length ? <YesResult></YesResult> : <NoResult></NoResult>}</>;
 }
 
 const Box2 = styled.div`
@@ -76,10 +68,11 @@ const Selecter = styled.select`
   width: 50px;
 `;
 
-function YesResult({ search }: { search: any[] }) {
+function YesResult() {
   let width = window.innerWidth > 1300 ? 1300 : window.innerWidth;
   let height = window.innerHeight - 100;
-
+  let { search } = useSelector((state: RootState) => state.searchReducer);
+  let history = useHistory();
   let w = Math.floor(width / 400) * 100;
   let h = Math.floor(height / 150) * 50;
   let k = Math.ceil(search.length / 12);
@@ -87,23 +80,38 @@ function YesResult({ search }: { search: any[] }) {
   for (let i = 0; i < k; i++) {
     pn.push(i + 1);
   }
-  let [dataset, datasetf] = useState(search.slice(0, 12));
-  let [num, numf] = useState(1);
-  function change(i: number) {
-    numf(i + 1);
-    datasetf(search.slice(i * 12, (i + 1) * 12));
-  }
+
+  let match = useRouteMatch();
 
   return (
     <Box2>
-      <Header>
+      {/* <Header>
         <Selecter onChange={(e) => change(e.target.selectedIndex)}>
           {pn.map((x: number) => {
             return <option key={x}>{x}</option>;
           })}
         </Selecter>
       </Header>
-      <Recipepage data={dataset} width={w} height={h} num={num}></Recipepage>
+      <Recipepage data={dataset} width={w} height={h} num={num}></Recipepage> */}
+      <Header>
+        <Selecter
+          onChange={(e) =>
+            history.push(`${match.path}/${e.target.selectedIndex + 1}`)
+          }
+        >
+          {pn.map((x: number) => {
+            return <option key={x}>{x}</option>;
+          })}
+        </Selecter>
+      </Header>
+      <Switch>
+        <Route path={`${match.path}/:id`}>
+          <Recipepage data={search} width={w} height={h}></Recipepage>
+        </Route>
+        <Route path={`${match.path}`}>
+          <Redirect to={`${match.path}/${1}`} />
+        </Route>
+      </Switch>
     </Box2>
   );
 }

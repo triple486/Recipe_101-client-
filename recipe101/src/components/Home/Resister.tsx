@@ -2,8 +2,8 @@ import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { useState } from "react";
 import Modal from "./Modal";
-import CancelButton from "./CancelButton";
-import Input from "./Input";
+import CancelButton from "../CancelButton";
+import Input from "../Input";
 const Frame = styled.div`
   height: 360px;
   width: 400px;
@@ -86,57 +86,55 @@ export default function Resister() {
 
   let history = useHistory();
   return (
-    <Modal>
-      <Frame>
-        <CancelButton to={"/"}></CancelButton>
-        <Line err={validcheck["username"]}>
-          <Input
-            label={"username"}
-            type={"text"}
-            value={name}
-            func={namef}
-            bfunc={validation("username")}
-          ></Input>
-        </Line>
-        <Line err={validcheck["password"]}>
-          <Input
-            label={"password"}
-            type={"password"}
-            value={password}
-            func={passwordf}
-            bfunc={validation("password")}
-          ></Input>
-        </Line>
-        <Line err={validcheck["email"]}>
-          <Input
-            label={"email"}
-            type={"email"}
-            value={email}
-            func={emailf}
-            bfunc={validation("email")}
-          ></Input>
-        </Line>
-        <Line err={validcheck["phone"]}>
-          <Input
-            label={"phone"}
-            type={"text"}
-            value={phone}
-            func={phonef}
-            bfunc={validation("phone")}
-          ></Input>
-        </Line>
-        <Line></Line>
-        <Line>
-          <Button
-            onClick={() => {
-              history.push("/login");
-            }}
-          >
-            로그인 창으로
-          </Button>
-          <Button onClick={() => {}}>회원 가입</Button>
-        </Line>
-      </Frame>
-    </Modal>
+    <Frame>
+      <CancelButton to={"/"}></CancelButton>
+      <Line err={validcheck["username"]}>
+        <Input
+          label={"username"}
+          type={"text"}
+          value={name}
+          func={namef}
+          bfunc={validation("username")}
+        ></Input>
+      </Line>
+      <Line err={validcheck["password"]}>
+        <Input
+          label={"password"}
+          type={"password"}
+          value={password}
+          func={passwordf}
+          bfunc={validation("password")}
+        ></Input>
+      </Line>
+      <Line err={validcheck["email"]}>
+        <Input
+          label={"email"}
+          type={"email"}
+          value={email}
+          func={emailf}
+          bfunc={validation("email")}
+        ></Input>
+      </Line>
+      <Line err={validcheck["phone"]}>
+        <Input
+          label={"phone"}
+          type={"text"}
+          value={phone}
+          func={phonef}
+          bfunc={validation("phone")}
+        ></Input>
+      </Line>
+      <Line></Line>
+      <Line>
+        <Button
+          onClick={() => {
+            history.push("/login");
+          }}
+        >
+          로그인 창으로
+        </Button>
+        <Button onClick={() => {}}>회원 가입</Button>
+      </Line>
+    </Frame>
   );
 }

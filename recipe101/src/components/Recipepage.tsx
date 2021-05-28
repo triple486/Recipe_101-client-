@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import Recipecard from "./Recipecard";
+import { useSelector } from "react-redux";
+import { RootState } from "../redux/reducers";
 import {
   Route,
   Switch,
@@ -34,13 +36,17 @@ export default function ({
   data,
   width,
   height,
-  num,
 }: {
   data: any[];
   width: number;
   height: number;
-  num: number;
 }) {
+  let { id } = useParams<{ id?: string }>();
+  let nid = Number(id) - 1;
+  console.log(nid);
+  let { search } = useSelector((state: RootState) => state.searchReducer);
+  data = search.slice(nid * 12, (nid + 1) * 12);
+  console.log(data, nid);
   let data1 = data.slice(0, 4),
     data2 = data.slice(4, 8),
     data3 = data.slice(8, 12);

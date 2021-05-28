@@ -10,7 +10,7 @@ import {
 import Login from "./Login";
 import Resister from "./Resister";
 
-const Modal = styled.div`
+const Frame = styled.div`
   height: 100vh;
   width: 100vw;
   z-index: 2;
@@ -21,5 +21,20 @@ const Modal = styled.div`
   justify-content: center;
   align-items: center;
 `;
+
+function Modal() {
+  return (
+    <Frame>
+      <Switch>
+        <Route path={"/login"}>
+          <Login></Login>
+        </Route>
+        <Route path={"/resister"}>
+          <Resister></Resister>
+        </Route>
+      </Switch>
+    </Frame>
+  );
+}
 
 export default Modal;

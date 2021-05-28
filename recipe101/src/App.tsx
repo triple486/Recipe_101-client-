@@ -9,7 +9,7 @@ import {
 } from "react-router-dom";
 import styled from "styled-components";
 import Addrecipe from "./components/Addrecipe";
-import Landingpage from "./components/Landingpage";
+import Home from "./components/Home";
 import Mypage from "./components/Mypage";
 
 const Main = styled.div`
@@ -29,20 +29,12 @@ const Main = styled.div`
 `;
 
 function App() {
-  console.log(process.env);
   return (
     <Main>
       <Switch>
-        <Route exact path="/addrecipe">
-          <Addrecipe></Addrecipe>
-        </Route>
-        <Route exact path="/mypage">
-          <Mypage></Mypage>
-        </Route>
-
-        <Route path="/">
-          <Landingpage></Landingpage>
-        </Route>
+        <Route exact path="/Addrecipe" component={Addrecipe}></Route>
+        <Route exact path="/Mypage" component={Mypage}></Route>
+        <Route path="/" component={Home}></Route>
       </Switch>
     </Main>
   );

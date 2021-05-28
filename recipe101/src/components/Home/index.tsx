@@ -9,14 +9,12 @@ import {
   Redirect,
   useRouteMatch,
 } from "react-router-dom";
-import { storeToken } from "../redux/tokenReducer";
+import { storeToken } from "../../redux/tokenReducer";
 import styled from "styled-components";
-import Maingrid from "./Maingrid";
-import Mainslide from "./Mainslide";
+import Main from "./Main";
 import { useSelector } from "react-redux";
-import { RootState } from "../redux/reducers";
-import Login from "./Login";
-import Resister from "./Resister";
+import { RootState } from "../../redux/reducers";
+import Modal from "./Modal";
 import Searchbar from "./Searchbar";
 import Searchresult from "./Searchresult";
 import axios from "axios";
@@ -55,26 +53,16 @@ function Landingpage() {
   }
 
   let data = useSelector((state: RootState) => state.searchReducer);
+  let Modalon = useSelector((state: RootState) => state.modalReducer);
   let isSearch = data.isSearch;
   return (
     <Frame>
       <Searchbar></Searchbar>
-      {isSearch ? (
-        <Searchresult></Searchresult>
-      ) : (
-        <MainBody>
-          <Mainslide></Mainslide>
-          <Maingrid></Maingrid>
-        </MainBody>
-      )}
       <Switch>
-        <Route path={"/login"}>
-          <Login></Login>
-        </Route>
-        <Route path={"/resister"}>
-          <Resister></Resister>
-        </Route>
+        <Route path={"/search"} component={Searchresult}></Route>
+        <Route path={"/"} component={Main}></Route>
       </Switch>
+      {Modalon ? <Modal></Modal> : null}
     </Frame>
   );
 }

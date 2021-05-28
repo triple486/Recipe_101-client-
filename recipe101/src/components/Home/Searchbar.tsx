@@ -1,8 +1,10 @@
 import { useHistory, useLocation } from "react-router-dom";
 import styled from "styled-components";
-import { useSelector } from "react-redux";
-import { RootState } from "../redux/reducers";
+import { useSelector, useDispatch } from "react-redux";
+import { isOn } from "../../redux/modalReducer";
+import { RootState } from "../../redux/reducers";
 import SearchInput from "./SearchInput";
+import Modal from "./Modal";
 
 const Frame = styled.div`
   height: 100px;
@@ -42,6 +44,7 @@ const Search = styled.div`
 function Comp() {
   let history = useHistory();
   let location = useLocation();
+  let dispatch = useDispatch();
   let user = useSelector((state: RootState) => state.userReducer);
   return (
     <Frame>
@@ -62,6 +65,7 @@ function Comp() {
             if (user.isLogin) {
               history.push("/mypage");
             } else {
+              dispatch(isOn(true));
               history.push("/login");
             }
           }}

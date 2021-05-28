@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import { Route, Switch, useHistory, useLocation, Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { isOn } from "../redux/modalReducer";
 const CancelButton = styled.button`
   height: 20px;
   width: 20px;
@@ -19,10 +21,12 @@ const CancelLine = styled.div`
 
 export default function ({ to }: { to: string }) {
   let history = useHistory();
+  let dispatch = useDispatch();
   return (
     <CancelLine>
       <CancelButton
         onClick={() => {
+          dispatch(isOn(false));
           history.push(to);
         }}
       >
