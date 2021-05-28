@@ -39,6 +39,7 @@ function App() {
         <Route exact path="/mypage">
           <Mypage></Mypage>
         </Route>
+
         <Route path="/">
           <Landingpage></Landingpage>
         </Route>
