@@ -200,17 +200,23 @@ function Addrecipe() {
             <ImageUpload
               name={"foodimg"}
               func={(files: any) => {
-                let reader = new FileReader();
-                let file = files[0];
-                reader.onloadend = () => {
-                  imagef({
-                    file: file,
-                    imgpath: reader.result,
-                    isin: true,
-                  });
-                };
-                dispatch(setFoodImage(file));
-                reader.readAsDataURL(file);
+                // let reader = new FileReader();
+                // let file = files[0];
+                // reader.onloadend = () => {
+                //   imagef({
+                //     file: file,
+                //     imgpath: reader.result,
+                //     isin: true,
+                //   });
+                // };
+                // dispatch(setFoodImage(file));
+                // reader.readAsDataURL(file);
+                imagef({
+                  file: files[0],
+                  imgpath: URL.createObjectURL(files[0]),
+                  isin: true,
+                });
+                dispatch(setFoodImage(files[0]));
               }}
             />
           )}
