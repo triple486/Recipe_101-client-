@@ -30,6 +30,12 @@ type Recipe = {
   stepTip: string;
 };
 
+type StepImage = {
+  isin?: boolean;
+  imgpath?: string | ArrayBuffer | null;
+  file?: File;
+};
+
 export const setRecipe = (item: Recipe) => {
   return {
     type: STEP,
@@ -101,7 +107,7 @@ type addRecipeState = {
   Ingredient: Ingredient[];
   Recipe: Recipe[];
   FoodImage: any;
-  StepImage: any[];
+  StepImage: StepImage[];
 };
 
 const initialState: addRecipeState = {
@@ -131,7 +137,7 @@ const searchReducer = (
       return { ...state, StepImage: [...state.StepImage, action.payload] };
 
     case FIMG:
-      return { ...state, FIMG: action.payload };
+      return { ...state, FoodImage: action.payload };
 
     case DOSTEP:
       return {

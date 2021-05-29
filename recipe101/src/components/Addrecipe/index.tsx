@@ -1,11 +1,7 @@
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../redux/reducers";
-import {
-  setFoodinfo,
-  setIngredient,
-  setRecipe,
-} from "../../redux/addrecipeReducer";
+import { setFoodinfo, setFoodImage } from "../../redux/addrecipeReducer";
 import CancelButton from "../CancelButton";
 import Input from "../Input";
 import ImageUpload from "../ImageUpload";
@@ -130,22 +126,26 @@ const Dummy = styled.div`
   flex: 1 0 0;
 `;
 
+const ImgBox2 = styled.div`
+  flex: 1 0 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+`;
+const ImgBox3 = styled.div`
+  flex: 1 0 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+`;
+
 const RecipeAddButton = styled.button`
   width: 100%;
   max-width: 1200px;
   height: 30px;
 `;
-interface itemobj {
-  name: string;
-  type: string;
-  cap: string;
-}
-
-interface stepobj {
-  name: string;
-  type: string;
-  cap: string;
-}
 
 //foodName, summary, nation, ,cookingTime, calorie, qnt, level
 function Addrecipe() {
@@ -153,13 +153,10 @@ function Addrecipe() {
   let data = useSelector((state: RootState) => state.addrecipeReducer);
   let history = useHistory();
   let dispatch = useDispatch();
-  let [foodimage, foodimagef] = useState<any>("");
   let [imageon, setimageon] = useState<boolean>(false);
 
   let [isinputigr, setinputigr] = useState<boolean>(false);
   let [isinputstep, setinputstep] = useState<boolean>(false);
-
-  console.log(data);
 
   function inputf(type: string) {
     let sdata: any = {};
@@ -169,6 +166,11 @@ function Addrecipe() {
     };
   }
 
+  let [image, imagef] = useState<{
+    file?: File;
+    imgpath?: string | ArrayBuffer | null;
+    isin?: boolean;
+  }>({ isin: false });
   return (
     <Frame>
       <CancelFrame>
@@ -176,24 +178,41 @@ function Addrecipe() {
       </CancelFrame>
       <DataFrame>
         <ImgBox>
-          {foodimage === "" ? (
-            <ImageUpload
-              func={(x: any) => {
-                foodimagef(x);
-                setimageon(true);
-              }}
-            />
-          ) : (
+          {image.isin ? (
             <ShowBox>
-              <Image src={URL.createObjectURL(foodimage[0])}></Image>
+              <ImgBox2>
+                <ImgBox3>
+                  <Image
+                    src={typeof image.imgpath === "string" ? image.imgpath : ""}
+                  ></Image>
+                </ImgBox3>
+              </ImgBox2>
               <Button
                 onClick={() => {
-                  foodimagef("");
+                  imagef({ isin: false });
+                  dispatch(setFoodImage(""));
                 }}
               >
                 취소
               </Button>
             </ShowBox>
+          ) : (
+            <ImageUpload
+              name={"foodimg"}
+              func={(files: any) => {
+                let reader = new FileReader();
+                let file = files[0];
+                reader.onloadend = () => {
+                  imagef({
+                    file: file,
+                    imgpath: reader.result,
+                    isin: true,
+                  });
+                };
+                dispatch(setFoodImage(file));
+                reader.readAsDataURL(file);
+              }}
+            />
           )}
         </ImgBox>
         <TextBox>
@@ -266,7 +285,13 @@ function Addrecipe() {
       <StepFrame>
         <StepInput func={setinputstep}></StepInput>
       </StepFrame>
-      <RecipeAddButton onClick={() => {}}>{"레시피 추가"}</RecipeAddButton>
+      <RecipeAddButton
+        onClick={() => {
+          console.log(data);
+        }}
+      >
+        {"레시피 추가"}
+      </RecipeAddButton>
       {isinputigr ? <ItemModal func={setinputigr}></ItemModal> : null}
       {isinputstep ? <StepModal func={setinputstep}></StepModal> : null}
     </Frame>

@@ -29,10 +29,16 @@ const InnerBox = styled.div`
   font-size: 24px;
 `;
 
-export default function ({ func }: { func: any }) {
+export default function ({
+  func,
+  name = "test",
+}: {
+  func: any;
+  name?: string;
+}) {
   return (
     <ImgBox>
-      <ImgLabel htmlFor={"ImgButton"}>
+      <ImgLabel htmlFor={name}>
         <InnerBox>{"업로드"}</InnerBox>
       </ImgLabel>
       <ImgInput
@@ -40,7 +46,7 @@ export default function ({ func }: { func: any }) {
         onChange={(e) => {
           func(e.target.files);
         }}
-        id={"ImgButton"}
+        id={name}
       ></ImgInput>
     </ImgBox>
   );

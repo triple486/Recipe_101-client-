@@ -77,11 +77,13 @@ const CancelButton = styled.button`
 `;
 
 function RecipeStep({
+  id = 0,
   num = 0,
   desc = "",
   tip = "",
   img = "",
 }: {
+  id?: number;
   num?: number;
   desc?: string;
   tip?: string;
@@ -105,8 +107,8 @@ function RecipeStep({
       </Tipbox>
       <CancelButton
         onClick={() => {
-          dispatch(deleteOneStepImage(num - 1));
-          dispatch(deleteOneRecipe(num - 1));
+          dispatch(deleteOneStepImage(id));
+          dispatch(deleteOneRecipe(id));
         }}
       />
     </StepLine>
@@ -114,7 +116,9 @@ function RecipeStep({
 }
 
 export default function ({ func }: { func: Function }) {
-  let { Recipe } = useSelector((state: RootState) => state.addrecipeReducer);
+  let { Recipe, StepImage } = useSelector(
+    (state: RootState) => state.addrecipeReducer
+  );
   return (
     <Frame>
       <StepBox>
@@ -123,9 +127,11 @@ export default function ({ func }: { func: Function }) {
             return (
               <RecipeStep
                 key={i}
+                id={i}
                 num={x.cookingNo}
                 desc={x.cookingDc}
                 tip={x.stepTip}
+                img={StepImage[i].imgpath}
               ></RecipeStep>
             );
           }),

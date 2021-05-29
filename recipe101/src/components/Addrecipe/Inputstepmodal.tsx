@@ -2,6 +2,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../redux/reducers";
+import StepImageUpload from "../ImageUpload";
 import { setRecipe, setStepImage } from "../../redux/addrecipeReducer";
 
 const Modal = styled.div`
@@ -24,6 +25,7 @@ const InputArea = styled.div`
   z-index: 2;
   flex-direction: row;
   background: white;
+  border: solid 2px black;
 `;
 const Inputline = styled.div`
   flex: 1 0 0;
@@ -81,52 +83,6 @@ const BoxBox = styled.div`
   flex-direction: column;
 `;
 
-const ImgBox = styled.div`
-  height: 100%;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: solid 1px red;
-`;
-const ImgInput = styled.input`
-  height: 1px;
-  width: 1px;
-  margin: -1;
-  overflow: hidden;
-`;
-const ImgLabel = styled.label`
-  display: inline-box;
-  height: 50px;
-  width: 100px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 10px;
-  border: solid 1px black;
-`;
-const InnerBox = styled.div`
-  display: flex;
-  font-size: 24px;
-`;
-
-function StepImageUpload({ func }: { func: any }) {
-  return (
-    <ImgBox>
-      <ImgLabel htmlFor={"ImgButton"}>
-        <InnerBox>{"업로드"}</InnerBox>
-      </ImgLabel>
-      <ImgInput
-        type={"file"}
-        onChange={(e) => {
-          func(e.target.files);
-        }}
-        id={"ImgButton"}
-      ></ImgInput>
-    </ImgBox>
-  );
-}
-
 function Textfield({
   label,
   func = () => {},
@@ -148,6 +104,22 @@ function Textfield({
   );
 }
 
+const IMGBox3 = styled.div`
+  flex: 1 0 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+`;
+
+const IMGBox4 = styled.div`
+  flex: 1 0 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+`;
+
 export default function ItemInput({ func }: { func: Function }) {
   let dispatch = useDispatch();
   let { Recipe } = useSelector((state: RootState) => state.addrecipeReducer);
@@ -155,8 +127,12 @@ export default function ItemInput({ func }: { func: Function }) {
     cookingDc: "",
     stepTip: "",
   });
-  let [image, imagef] = useState<any>("");
-  let imageurl = image === "" ? "" : URL.createObjectURL(image[0]);
+  let [image, imagef] = useState<{
+    file?: File;
+    imgpath?: string | ArrayBuffer | null;
+    isin?: boolean;
+  }>({ isin: false });
+
   function inputf(type: string) {
     let sdata: any = {};
     return (v: string) => {
@@ -168,19 +144,39 @@ export default function ItemInput({ func }: { func: Function }) {
     <Modal>
       <InputArea>
         <ImgBox2>
-          {imageurl === "" ? (
-            <StepImageUpload func={imagef} />
-          ) : (
+          {image.isin ? (
             <BoxBox>
-              <StepImage src={imageurl}></StepImage>
+              <IMGBox4>
+                <IMGBox3>
+                  <StepImage
+                    src={typeof image.imgpath === "string" ? image.imgpath : ""}
+                  ></StepImage>
+                </IMGBox3>
+              </IMGBox4>
               <button
                 onClick={() => {
-                  imagef("");
+                  imagef({ isin: false });
                 }}
               >
                 취소
               </button>
             </BoxBox>
+          ) : (
+            <StepImageUpload
+              func={(files: any) => {
+                let reader = new FileReader();
+                let file = files[0];
+
+                reader.onloadend = () => {
+                  imagef({
+                    file: file,
+                    imgpath: reader.result,
+                    isin: true,
+                  });
+                };
+                reader.readAsDataURL(file);
+              }}
+            />
           )}
         </ImgBox2>
 
@@ -197,7 +193,7 @@ export default function ItemInput({ func }: { func: Function }) {
             </InputButton>
             <InputButton
               onClick={() => {
-                dispatch(setRecipe({ cookingNo: Recipe.length, ...data }));
+                dispatch(setRecipe({ cookingNo: Recipe.length + 1, ...data }));
                 dispatch(setStepImage(image));
                 func(false);
               }}
