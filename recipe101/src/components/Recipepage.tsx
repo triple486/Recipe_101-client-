@@ -43,10 +43,8 @@ export default function ({
 }) {
   let { id } = useParams<{ id?: string }>();
   let nid = Number(id) - 1;
-  console.log(nid);
   let { search } = useSelector((state: RootState) => state.searchReducer);
   data = search.slice(nid * 12, (nid + 1) * 12);
-  console.log(data, nid);
   let data1 = data.slice(0, 4),
     data2 = data.slice(4, 8),
     data3 = data.slice(8, 12);

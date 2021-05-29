@@ -9,21 +9,18 @@ import {
 } from "react-router-dom";
 import styled from "styled-components";
 import Addrecipe from "./components/Addrecipe";
+import Detailedrecipe from "./components/Detailedrecipe";
 import Home from "./components/Home";
 import Mypage from "./components/Mypage";
 
 const Main = styled.div`
   * {
-    padding: 0;
-    margin: 0;
     box-sizing: border-box;
-    z-index: 0;
   }
   dispaly: flex;
   position: fixed;
   top: 0;
   left: 0;
-
   height: 100vh;
   width: 100vw;
 `;
@@ -32,6 +29,7 @@ function App() {
   return (
     <Main>
       <Switch>
+        <Route exact path="/recipe/:id" component={Detailedrecipe}></Route>
         <Route exact path="/Addrecipe" component={Addrecipe}></Route>
         <Route exact path="/Mypage" component={Mypage}></Route>
         <Route path="/" component={Home}></Route>

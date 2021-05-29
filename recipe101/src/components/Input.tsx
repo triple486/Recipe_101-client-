@@ -5,14 +5,10 @@ const Inputbox = styled.div`
   display: flex;
   width: 100%;
   flex-direction: row;
-  padding-left: 20px;
-  padding-right: 20px;
   align-items: center;
 `;
 const Label = styled.label`
   flex: 4 0 0;
-  padding-top: 10px;
-  padding-bottom: 16px;
   font-size: 20px;
   font-weight: 500;
   text-align: right;
@@ -28,43 +24,38 @@ const Box = styled.span`
 `;
 
 export default function ({
-  label,
+  label = "",
   value,
-  type,
-  func,
+  type = "text",
+  func = () => {},
   bfunc = () => {},
+  placeholder,
+  size = 16,
 }: {
-  label: string;
-  value: string;
-  type: string;
-  func: Function;
+  label?: string;
+  value?: string;
+  type?: string;
+  func?: Function;
   bfunc?: Function;
+  placeholder?: string;
+  size?: number;
 }) {
   return (
     <>
-      {label === "image" ? (
-        <Inputbox>
-          <Box></Box>
-          <Label>{`${label}`}</Label>
-          <Box></Box>
-          <Input type={type} onChange={(e) => func(e.target.files)} />
-          <Box></Box>
-        </Inputbox>
-      ) : (
-        <Inputbox>
-          <Box></Box>
-          <Label>{`${label}`}</Label>
-          <Box></Box>
-          <Input
-            value={value}
-            type={type}
-            onChange={(e) => func(e.target.value)}
-            onBlur={(e) => bfunc(e.target.value)}
-            size={16}
-          />
-          <Box></Box>
-        </Inputbox>
-      )}
+      <Inputbox>
+        <Box></Box>
+        <Label>{`${label}`}</Label>
+        <Box></Box>
+        <Input
+          value={value}
+          type={type}
+          onChange={(e) => func(e.target.value)}
+          onBlur={(e) => bfunc(e.target.value)}
+          size={size}
+          placeholder={placeholder || ""}
+        />
+        <Box></Box>
+      </Inputbox>
     </>
   );
 }

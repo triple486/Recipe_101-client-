@@ -41,7 +41,7 @@ function Recipecard({
   height: number;
 }) {
   return (
-    <Frame width={width} height={height}>
+    <Frame width={width} height={height} onClick={() => {}}>
       <Image src={data.food_img} height={height}></Image>
       <Desc>
         <Box>{data.food_name}</Box>
