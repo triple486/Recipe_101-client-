@@ -1,9 +1,4 @@
-import { useState } from "react";
 import styled from "styled-components";
-import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "../../redux/reducers";
-import StepImageUpload from "../ImageUpload";
-import { setRecipe, setStepImage } from "../../redux/addrecipeReducer";
 import CancelButton from "../CancelButton";
 const Modal = styled.div`
   height: 100vh;

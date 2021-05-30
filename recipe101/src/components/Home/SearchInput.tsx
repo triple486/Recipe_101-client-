@@ -47,6 +47,7 @@ export default function () {
     axios
       .get(url)
       .then((rst) => {
+        inputf("");
         dispatch(searchRecipe(rst.data.data.recipe));
         dispatch(isSearch(true));
       })

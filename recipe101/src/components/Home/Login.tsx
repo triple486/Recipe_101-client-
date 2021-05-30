@@ -1,10 +1,10 @@
-import { Route, Switch, useHistory, useLocation, Link } from "react-router-dom";
+import { useHistory, useLocation, Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { storeToken } from "../../redux/tokenReducer";
 import { updateLogin, updateUserInfo } from "../../redux/userReducer";
 import styled from "styled-components";
 import axios from "axios";
-import React, { useState } from "react";
+import { useState } from "react";
 import { isOn } from "../../redux/modalReducer";
 import Input from "../Input";
 import CancelButton from "../CancelButton";
@@ -54,6 +54,9 @@ const TextBox = styled.span`
 
 function Login() {
   const dispatch = useDispatch();
+  let location = useLocation();
+  let path = location.pathname.slice(0, -6);
+  console.log(path, location.pathname);
   let history = useHistory();
   const [name, namef] = useState("");
   const [password, passwordf] = useState("");
@@ -69,7 +72,7 @@ function Login() {
         dispatch(updateLogin(true));
         dispatch(updateUserInfo(res.data.data.userinfo));
         dispatch(isOn(false));
-        history.push("/");
+        history.push(path.length ? path : "/");
       })
       .catch((err) => {});
   };
@@ -79,7 +82,7 @@ function Login() {
       <CancelButton
         Cancel={() => {
           dispatch(isOn(false));
-          history.push("/");
+          history.push(path.length ? path : "/");
         }}
       />
       <Input label={"username"} type={"text"} value={name} func={namef}></Input>
@@ -111,7 +114,9 @@ function Login() {
         ></Kakaobutton>
       </Line>
       <Line>
-        <Link to={"/resister"}> 아직 계정이 없으십니까?</Link>
+        <Link to={path.length ? path + "/resister" : "/resister"}>
+          아직 계정이 없으십니까?
+        </Link>
       </Line>
     </Frame>
   );

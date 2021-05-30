@@ -1,10 +1,9 @@
-import { useHistory, useLocation } from "react-router-dom";
+import { useHistory, useLocation, useRouteMatch } from "react-router-dom";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { isOn } from "../../redux/modalReducer";
 import { RootState } from "../../redux/reducers";
 import SearchInput from "./SearchInput";
-import Modal from "./Modal";
 
 const Frame = styled.div`
   height: 100px;
@@ -26,9 +25,11 @@ const Box = styled.div`
   height: 100%;
   width: 100px;
   display: flex;
-  vertical-align: middle;
+  justify-content: center;
+  align-items: center;
   flex: 0 0 1;
 `;
+const TextBox = styled.div``;
 
 const LongBox = styled.div`
   height: 100%;
@@ -44,12 +45,19 @@ const Search = styled.div`
 function Comp() {
   let history = useHistory();
   let location = useLocation();
+
   let dispatch = useDispatch();
   let user = useSelector((state: RootState) => state.userReducer);
   return (
     <Frame>
       <Body>
-        <Box>{`Recipe 101`}</Box>
+        <Box
+          onClick={() => {
+            history.push("/");
+          }}
+        >
+          <TextBox>{"recipe 101"}</TextBox>
+        </Box>
         <LongBox>
           <SearchInput></SearchInput>
         </LongBox>
@@ -58,7 +66,7 @@ function Comp() {
             history.push("/addrecipe");
           }}
         >
-          {"레시피 추가"}
+          <TextBox>{"레시피 추가"}</TextBox>
         </Box>
         <Box
           onClick={() => {
@@ -66,11 +74,19 @@ function Comp() {
               history.push("/mypage");
             } else {
               dispatch(isOn(true));
-              history.push("/login");
+              history.push(
+                location.pathname === "/"
+                  ? "/login"
+                  : location.pathname + "/login"
+              );
             }
           }}
         >
-          {user.isLogin ? "마이페이지" : "로그인"}
+          {user.isLogin ? (
+            <TextBox>{"마이페이지"}</TextBox>
+          ) : (
+            <TextBox>{"로그인"}</TextBox>
+          )}
         </Box>
       </Body>
     </Frame>

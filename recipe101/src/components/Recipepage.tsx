@@ -2,16 +2,7 @@ import styled from "styled-components";
 import Recipecard from "./Recipecard";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/reducers";
-import {
-  Route,
-  Switch,
-  useHistory,
-  useLocation,
-  Link,
-  Redirect,
-  useParams,
-  useRouteMatch,
-} from "react-router-dom";
+import { useParams } from "react-router-dom";
 const Frame = styled.div`
   height: 100%;
   width: 100%;

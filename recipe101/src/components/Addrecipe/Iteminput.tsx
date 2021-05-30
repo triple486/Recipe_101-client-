@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
-import {} from "../../redux/addrecipeReducer";
 import { RootState } from "../../redux/reducers";
 import { deleteOneIngredient } from "../../redux/addrecipeReducer";
 const Frame = styled.div`

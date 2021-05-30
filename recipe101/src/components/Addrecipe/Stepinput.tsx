@@ -2,7 +2,6 @@ import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../redux/reducers";
 import {
-  deleteOneIngredient,
   deleteOneRecipe,
   deleteOneStepImage,
 } from "../../redux/addrecipeReducer";

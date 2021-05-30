@@ -1,12 +1,5 @@
 import styled from "styled-components";
-import {
-  Route,
-  Switch,
-  useHistory,
-  useLocation,
-  Link,
-  Redirect,
-} from "react-router-dom";
+import { Route, Switch, useLocation } from "react-router-dom";
 import Login from "./Login";
 import Resister from "./Resister";
 
@@ -23,9 +16,23 @@ const Frame = styled.div`
 `;
 
 function Modal() {
+  let location = useLocation();
+  console.log(location.pathname);
   return (
     <Frame>
       <Switch>
+        <Route path={"/search/:id/login"}>
+          <Login></Login>
+        </Route>
+        <Route path={"/search/:id/resister"}>
+          <Resister></Resister>
+        </Route>
+        <Route path={"/search/login"}>
+          <Login></Login>
+        </Route>
+        <Route path={"/search/resister"}>
+          <Resister></Resister>
+        </Route>
         <Route path={"/login"}>
           <Login></Login>
         </Route>

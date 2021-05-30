@@ -1,4 +1,4 @@
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { useState } from "react";
 import { isOn } from "../../redux/modalReducer";
@@ -29,6 +29,8 @@ const Button = styled.button`
 `;
 
 export default function Resister() {
+  let location = useLocation();
+  let path = location.pathname.slice(0, -9);
   const [name, namef] = useState("");
   const [password, passwordf] = useState("");
   const [email, emailf] = useState("");
@@ -90,7 +92,7 @@ export default function Resister() {
       <CancelButton
         Cancel={() => {
           dispatch(isOn(false));
-          history.push("/");
+          history.push(path.length ? path : "/");
         }}
       ></CancelButton>
       <Line err={validcheck["username"]}>
@@ -133,7 +135,7 @@ export default function Resister() {
       <Line>
         <Button
           onClick={() => {
-            history.push("/login");
+            history.push(path.length ? path + "/login" : "/login");
           }}
         >
           로그인 창으로

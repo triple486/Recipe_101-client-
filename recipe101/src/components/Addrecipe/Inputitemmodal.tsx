@@ -2,7 +2,6 @@ import { useState } from "react";
 import styled from "styled-components";
 import Input from "../Input";
 import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
 import { setIngredient } from "../../redux/addrecipeReducer";
 const Modal = styled.div`
   height: 100vh;
@@ -42,7 +41,7 @@ export default function ItemInput({ func }: { func: Function }) {
     type: "",
     cap: "",
   });
-  let history = useHistory();
+
   function inputf(type: string) {
     let sdata: any = {};
     return (v: string) => {

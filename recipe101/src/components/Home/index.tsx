@@ -1,14 +1,5 @@
-import { useState } from "react";
 import { useDispatch } from "react-redux";
-import {
-  Route,
-  Switch,
-  useHistory,
-  useLocation,
-  Link,
-  Redirect,
-  useRouteMatch,
-} from "react-router-dom";
+import { Route, Switch, useHistory } from "react-router-dom";
 import { storeToken } from "../../redux/tokenReducer";
 import styled from "styled-components";
 import Main from "./Main";
@@ -18,26 +9,20 @@ import Modal from "./Modal";
 import Searchbar from "./Searchbar";
 import Searchresult from "./Searchresult";
 import axios from "axios";
-//axios.defaults.withCredentials = true;
+
 const Frame = styled.div`
   flex: 1 0 0;
   min-height: 100%;
   width: 100%;
   display: flex;
   flex-direction: column;
-  border: solid 1px red;
-`;
-
-const MainBody = styled.div`
-  min-height: 100%;
-  width: 100%;
-  flex: 1;
+  justify-content: center;
+  align-items: center;
   border: solid 1px red;
 `;
 
 function Landingpage() {
   const dispatch = useDispatch();
-  let { path, url } = useRouteMatch();
   let history = useHistory();
   const nurl = new URL(window.location.href);
   const target = nurl.pathname;
@@ -52,9 +37,7 @@ function Landingpage() {
       .catch();
   }
 
-  let data = useSelector((state: RootState) => state.searchReducer);
   let Modalon = useSelector((state: RootState) => state.modalReducer);
-  let isSearch = data.isSearch;
   return (
     <Frame>
       <Searchbar></Searchbar>

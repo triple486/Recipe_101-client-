@@ -2,18 +2,16 @@ import Recipepage from "../Recipepage";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/reducers";
-import { useState } from "react";
 import {
   Route,
   Switch,
   useHistory,
-  useLocation,
-  Link,
   Redirect,
   useRouteMatch,
 } from "react-router-dom";
 const Frame = styled.div`
   flex: 1 0 0;
+  width: 100%;
   border: solid 1px blue;
   display: flex;
   flex-direction: column;

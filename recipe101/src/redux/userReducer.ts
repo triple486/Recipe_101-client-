@@ -1,5 +1,6 @@
 const LOGIN = "login/UPDATE" as const;
 const USERINFO = "userinfo/UPDATE" as const;
+const INIT = "initial/INIT" as const;
 
 export const updateLogin = (item: boolean) => {
   return {
@@ -8,10 +9,10 @@ export const updateLogin = (item: boolean) => {
   };
 };
 type userinfoState = {
-  username: string;
-  phone: string;
-  email: string;
-  userimage: string;
+  username?: string;
+  phone?: string;
+  email?: string;
+  userimage?: string;
 };
 
 export const updateUserInfo = (item: userinfoState) => {
@@ -20,8 +21,17 @@ export const updateUserInfo = (item: userinfoState) => {
     payload: item,
   };
 };
+
+export const init = (item?: any) => {
+  return {
+    type: INIT,
+    payload: item,
+  };
+};
+
 type UserAction =
   | ReturnType<typeof updateLogin>
+  | ReturnType<typeof init>
   | ReturnType<typeof updateUserInfo>;
 
 type UserState = {
@@ -45,6 +55,9 @@ const loginReducer = (
 
     case USERINFO:
       return { ...state, userInfo: { ...state.userInfo, ...action.payload } };
+
+    case INIT:
+      return initialState;
 
     default:
       return state;
