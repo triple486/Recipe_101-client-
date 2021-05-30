@@ -9,18 +9,6 @@ import axios from "axios";
 import Imageupload from "../ImageUpload";
 import { storeToken } from "../../redux/tokenReducer";
 
-const Modal = styled.div`
-  height: 100vh;
-  width: 100vw;
-  z-index: 2;
-  top: 0;
-  left: 0;
-  position: fixed;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
 const Frame = styled.div`
   height: 380px;
   width: 760px;
