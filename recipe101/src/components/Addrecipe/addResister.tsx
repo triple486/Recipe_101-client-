@@ -98,12 +98,8 @@ export default function Resister({
   data: FormData | undefined;
   func: Function;
 }) {
-  let history = useHistory();
   const dispatch = useDispatch();
-  const [name, namef] = useState("");
-  const [password, passwordf] = useState("");
-  const [email, emailf] = useState("");
-  const [phone, phonef] = useState("");
+
   const [validcheck, validcheckf] = useState({
     username: false,
     password: false,
@@ -199,7 +195,7 @@ export default function Resister({
                     });
                   }}
                 >
-                  {"취소"}{" "}
+                  {"취소"}
                 </Imagecancel>
               </IMGBox>
             ) : (
