@@ -1,17 +1,24 @@
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../redux/reducers";
-import { setFoodinfo, setFoodImage } from "../../redux/addrecipeReducer";
+import {
+  setFoodinfo,
+  setFoodImage,
+  initial,
+} from "../../redux/addrecipeReducer";
 import CancelButton from "../CancelButton";
 import Input from "../Input";
 import ImageUpload from "../ImageUpload";
 import { useState } from "react";
 import ItemInput from "./Iteminput";
 import StepInput from "./Stepinput";
-import { Route, Switch, useHistory } from "react-router-dom";
-import Resister from "../Home/Resister";
+import { useHistory } from "react-router-dom";
+import Resister from "./addResister";
 import ItemModal from "./Inputitemmodal";
 import StepModal from "./Inputstepmodal";
+import Message from "./messagebox";
+import axios from "axios";
+axios.defaults.withCredentials = true;
 const Frame = styled.div`
   height: 100vh;
   width: 100vw;
@@ -151,12 +158,14 @@ const RecipeAddButton = styled.button`
 function Addrecipe() {
   let user = useSelector((state: RootState) => state.userReducer);
   let data = useSelector((state: RootState) => state.addrecipeReducer);
+  let accessToken = useSelector((state: RootState) => state.tokenReducer);
   let history = useHistory();
   let dispatch = useDispatch();
-  let [imageon, setimageon] = useState<boolean>(false);
-
+  let [isresister, setresister] = useState<boolean>(false);
+  let [Tdata, setTdata] = useState<FormData>();
   let [isinputigr, setinputigr] = useState<boolean>(false);
   let [isinputstep, setinputstep] = useState<boolean>(false);
+  let [ismessage, setmessage] = useState<boolean>(false);
 
   function inputf(type: string) {
     let sdata: any = {};
@@ -166,31 +175,33 @@ function Addrecipe() {
     };
   }
 
-  let [image, imagef] = useState<{
-    file?: File;
-    imgpath?: string | ArrayBuffer | null;
-    isin?: boolean;
-  }>({ isin: false });
   return (
     <Frame>
       <CancelFrame>
-        <CancelButton to={"/"}></CancelButton>
+        <CancelButton
+          Cancel={() => {
+            history.push("/");
+          }}
+        ></CancelButton>
       </CancelFrame>
       <DataFrame>
         <ImgBox>
-          {image.isin ? (
+          {data.FoodImage.isin ? (
             <ShowBox>
               <ImgBox2>
                 <ImgBox3>
                   <Image
-                    src={typeof image.imgpath === "string" ? image.imgpath : ""}
+                    src={
+                      typeof data.FoodImage.imgpath === "string"
+                        ? data.FoodImage.imgpath
+                        : ""
+                    }
                   ></Image>
                 </ImgBox3>
               </ImgBox2>
               <Button
                 onClick={() => {
-                  imagef({ isin: false });
-                  dispatch(setFoodImage(""));
+                  dispatch(setFoodImage({ isin: false }));
                 }}
               >
                 취소
@@ -200,23 +211,13 @@ function Addrecipe() {
             <ImageUpload
               name={"foodimg"}
               func={(files: any) => {
-                // let reader = new FileReader();
-                // let file = files[0];
-                // reader.onloadend = () => {
-                //   imagef({
-                //     file: file,
-                //     imgpath: reader.result,
-                //     isin: true,
-                //   });
-                // };
-                // dispatch(setFoodImage(file));
-                // reader.readAsDataURL(file);
-                imagef({
-                  file: files[0],
-                  imgpath: URL.createObjectURL(files[0]),
-                  isin: true,
-                });
-                dispatch(setFoodImage(files[0]));
+                dispatch(
+                  setFoodImage({
+                    file: files[0],
+                    imgpath: URL.createObjectURL(files[0]),
+                    isin: true,
+                  })
+                );
               }}
             />
           )}
@@ -227,25 +228,29 @@ function Addrecipe() {
               <Input
                 label={"요리 명"}
                 type={"text"}
-                bfunc={inputf("foodName")}
+                value={data.Food_info.foodName}
+                func={inputf("foodName")}
                 placeholder={"ex) 미역국, 감자국, ..."}
               ></Input>
               <Input
                 label={"조리 시간"}
                 type={"text"}
-                bfunc={inputf("cookingTime")}
+                value={data.Food_info.cookingTime}
+                func={inputf("cookingTime")}
                 placeholder={"ex) 10분, 20분, 30분, ..."}
               ></Input>
               <Input
                 label={"요리 국적"}
                 type={"text"}
-                bfunc={inputf("nation")}
+                value={data.Food_info.nation}
+                func={inputf("nation")}
                 placeholder={"ex) 한국, 미국, 퓨전, ..."}
               ></Input>
               <Input
                 label={"요리 종류"}
                 type={"text"}
-                bfunc={inputf("type")}
+                value={data.Food_info.type}
+                func={inputf("type")}
                 placeholder={"ex) 밥, 국, 튀김, ..."}
               ></Input>
             </TextColumn>
@@ -254,19 +259,22 @@ function Addrecipe() {
               <Input
                 label={"난이도"}
                 type={"text"}
-                bfunc={inputf("level")}
+                value={data.Food_info.level}
+                func={inputf("level")}
                 placeholder={"ex) 초보 환영, 보통, 어려움, ..."}
               ></Input>
               <Input
                 label={"양"}
                 type={"text"}
-                bfunc={inputf("qnt")}
+                value={data.Food_info.qnt}
+                func={inputf("qnt")}
                 placeholder={"ex) 1인분, 2인분, 3인분, ..."}
               ></Input>
               <Input
                 label={"칼로리"}
                 type={"text"}
-                bfunc={inputf("calorie")}
+                value={data.Food_info.calorie}
+                func={inputf("calorie")}
                 placeholder={"ex) 100Kcal, 200Kcal, 300Kcal, ..."}
               ></Input>
               <Dummy></Dummy>
@@ -293,13 +301,62 @@ function Addrecipe() {
       </StepFrame>
       <RecipeAddButton
         onClick={() => {
-          console.log(data);
+          let rdata = new FormData();
+          if (data.FoodImage.file) {
+            rdata.append("foodImage", data.FoodImage.file);
+          }
+          rdata.append("Food_info", JSON.stringify(data.Food_info));
+          rdata.append("Ingredients", JSON.stringify([...data.Ingredient]));
+          rdata.append("Recipe", JSON.stringify(data.Recipe));
+          data.StepImage.forEach((x) => {
+            rdata.append("stepImages", x.file);
+          });
+
+          setTdata(rdata);
+
+          if (user.isLogin) {
+            const config = {
+              headers: {
+                "content-type": "multipart/form-data",
+                authorization: "bearer " + accessToken,
+              },
+            };
+            axios
+              .post(process.env.REACT_APP_SERVER_URL + "/recipe", rdata, config)
+              .then((rst) => {
+                dispatch(initial());
+                console.log(rst);
+              })
+              .catch((err) => {
+                console.log("fail");
+              });
+          } else {
+            setmessage(true);
+          }
         }}
       >
         {"레시피 추가"}
       </RecipeAddButton>
       {isinputigr ? <ItemModal func={setinputigr}></ItemModal> : null}
       {isinputstep ? <StepModal func={setinputstep}></StepModal> : null}
+      {ismessage ? (
+        <Message
+          cancel={() => {
+            setmessage(false);
+          }}
+          message={
+            "레시피 추가에는 회원가입된 계정을 필요로 합니다. 회원가입을 진행 하시겠습니까?"
+          }
+          button={() => {
+            setmessage(false);
+            setresister(true);
+          }}
+          buttonMessage={"가입 진행"}
+        ></Message>
+      ) : null}
+      {isresister ? (
+        <Resister data={Tdata} func={setresister}></Resister>
+      ) : null}
     </Frame>
   );
 }

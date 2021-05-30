@@ -164,18 +164,6 @@ export default function ItemInput({ func }: { func: Function }) {
           ) : (
             <StepImageUpload
               func={(files: any) => {
-                // let reader = new FileReader();
-                // let file = files[0];
-
-                // reader.onloadend = () => {
-                //   imagef({
-                //     file: file,
-                //     imgpath: reader.result,
-                //     isin: true,
-                //   });
-                // };
-                // reader.readAsDataURL(file);
-
                 imagef({
                   file: files[0],
                   imgpath: URL.createObjectURL(files[0]),

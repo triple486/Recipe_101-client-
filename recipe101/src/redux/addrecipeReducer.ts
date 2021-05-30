@@ -1,11 +1,12 @@
 const IGRS = "input/IGRS" as const;
-const DOIGRS = "input/DOIGRS" as const;
+const DOIGRS = "delete/DOIGRS" as const;
 const INFO = "input/INFO" as const;
 const STEP = "input/STEP" as const;
-const DOSTEP = "input/DOSTEP" as const;
+const DOSTEP = "delete/DOSTEP" as const;
 const FIMG = "input/FIMG" as const;
 const SIMG = "input/SIMG" as const;
-const DOSIMG = "input/DOSIMG" as const;
+const DOSIMG = "delete/DOSIMG" as const;
+const INIT = "init/INIT" as const;
 type Ingredient = {
   name: string;
   type: string;
@@ -30,7 +31,7 @@ type Recipe = {
   stepTip: string;
 };
 
-type StepImage = {
+type Image = {
   isin?: boolean;
   imgpath?: string | ArrayBuffer | null;
   file?: File;
@@ -71,7 +72,7 @@ export const deleteOneIngredient = (item: number) => {
   };
 };
 
-export const setFoodImage = (item: any) => {
+export const setFoodImage = (item: Image) => {
   return {
     type: FIMG,
     payload: item,
@@ -91,6 +92,12 @@ export const deleteOneStepImage = (item: number) => {
     payload: item,
   };
 };
+export const initial = (item?: any) => {
+  return {
+    type: INIT,
+    payload: item,
+  };
+};
 
 type addrecipeAction =
   | ReturnType<typeof setRecipe>
@@ -100,21 +107,22 @@ type addrecipeAction =
   | ReturnType<typeof setStepImage>
   | ReturnType<typeof deleteOneIngredient>
   | ReturnType<typeof deleteOneRecipe>
+  | ReturnType<typeof initial>
   | ReturnType<typeof deleteOneStepImage>;
 
 type addRecipeState = {
   Food_info: Food_info;
   Ingredient: Ingredient[];
   Recipe: Recipe[];
-  FoodImage: any;
-  StepImage: StepImage[];
+  FoodImage: Image;
+  StepImage: Image[];
 };
 
 const initialState: addRecipeState = {
   Food_info: {},
   Ingredient: [],
   Recipe: [],
-  FoodImage: "",
+  FoodImage: { isin: false },
   StepImage: [],
 };
 
@@ -138,6 +146,9 @@ const searchReducer = (
 
     case FIMG:
       return { ...state, FoodImage: action.payload };
+
+    case INIT:
+      return initialState;
 
     case DOSTEP:
       return {

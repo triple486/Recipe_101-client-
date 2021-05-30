@@ -29,9 +29,9 @@ function App() {
   return (
     <Main>
       <Switch>
-        <Route exact path="/recipe/:id" component={Detailedrecipe}></Route>
-        <Route exact path="/Addrecipe" component={Addrecipe}></Route>
-        <Route exact path="/Mypage" component={Mypage}></Route>
+        <Route path="/recipe/:id" component={Detailedrecipe}></Route>
+        <Route path="/Addrecipe" component={Addrecipe}></Route>
+        <Route path="/Mypage" component={Mypage}></Route>
         <Route path="/" component={Home}></Route>
       </Switch>
     </Main>

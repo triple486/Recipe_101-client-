@@ -9,7 +9,7 @@ import { isOn } from "../../redux/modalReducer";
 import Input from "../Input";
 import CancelButton from "../CancelButton";
 import kakaobutton from "../../icon/kakao_login_medium_narrow.png";
-
+axios.defaults.withCredentials = true;
 const Frame = styled.div`
   height: 320px;
   width: 400px;
@@ -59,7 +59,7 @@ function Login() {
   const [password, passwordf] = useState("");
 
   const Tologin = () => {
-    let cmd = `https://server.recipe101.tk/signin`;
+    let cmd = `${process.env.REACT_APP_SERVER_URL}/signin`;
     return axios
       .post(cmd, { username: name, password: password })
       .then((res) => {
@@ -76,7 +76,12 @@ function Login() {
 
   return (
     <Frame>
-      <CancelButton to={"/"} />
+      <CancelButton
+        Cancel={() => {
+          dispatch(isOn(false));
+          history.push("/");
+        }}
+      />
       <Input label={"username"} type={"text"} value={name} func={namef}></Input>
       <Input
         label={"password"}

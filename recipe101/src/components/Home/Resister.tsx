@@ -1,8 +1,9 @@
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { useState } from "react";
-import Modal from "./Modal";
+import { isOn } from "../../redux/modalReducer";
 import CancelButton from "../CancelButton";
+import { useDispatch } from "react-redux";
 import Input from "../Input";
 const Frame = styled.div`
   height: 360px;
@@ -82,12 +83,16 @@ export default function Resister() {
     };
   }
 
-  function errprint() {}
-
   let history = useHistory();
+  let dispatch = useDispatch();
   return (
     <Frame>
-      <CancelButton to={"/"}></CancelButton>
+      <CancelButton
+        Cancel={() => {
+          dispatch(isOn(false));
+          history.push("/");
+        }}
+      ></CancelButton>
       <Line err={validcheck["username"]}>
         <Input
           label={"username"}
