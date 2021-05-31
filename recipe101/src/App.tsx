@@ -9,7 +9,7 @@ import {
 } from "react-router-dom";
 import styled from "styled-components";
 import Addrecipe from "./components/Addrecipe";
-import Detailedrecipe from "./components/Detailedrecipe";
+import Detailedrecipe from "./components/Recipe/Detailedrecipe";
 import Home from "./components/Home";
 import Mypage from "./components/Mypage";
 

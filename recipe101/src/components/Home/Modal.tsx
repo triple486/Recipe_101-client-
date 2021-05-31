@@ -21,6 +21,12 @@ function Modal() {
   return (
     <Frame>
       <Switch>
+        <Route path={"/recipe/:id/login"}>
+          <Login></Login>
+        </Route>
+        <Route path={"/recipe/:id/resister"}>
+          <Resister></Resister>
+        </Route>
         <Route path={"/search/:id/login"}>
           <Login></Login>
         </Route>

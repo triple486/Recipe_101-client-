@@ -1,12 +1,5 @@
 import { useState } from "react";
-import {
-  Route,
-  Switch,
-  useHistory,
-  useLocation,
-  Link,
-  Redirect,
-} from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
 import { useDispatch } from "react-redux";
@@ -41,6 +34,7 @@ export default function () {
   let [input, inputf] = useState("");
   let history = useHistory();
   let dispatch = useDispatch();
+  console.log(type, input);
   function searchfunction() {
     let url = `${process.env.REACT_APP_SERVER_URL}/search/${type}/${input}`;
     dispatch(isFail(false));

@@ -1,0 +1,19 @@
+.Outline {
+  border: solid 3px black;
+  margin-top: 10px;
+  padding: 20px;
+  margin: 40px;
+  margin-top: 50px;
+}
+
+.Logo {
+  text-align: left;
+}
+
+.Recipeaddbutton {
+  float: right;
+}
+
+.Logout {
+  float: right;
+}
