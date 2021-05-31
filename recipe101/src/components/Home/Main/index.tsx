@@ -9,7 +9,6 @@ const Frame = styled.div`
   width: 100%;
   max-width: 1200px;
   flex: 1 0 0;
-  border: solid 1px red;
 `;
 
 export default function () {

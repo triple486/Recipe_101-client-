@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { StructuredType } from "typescript";
-import { Link, withRouter, useHistory } from "react-router-dom";
+import { Link, withRouter, useHistory, Switch, Route } from "react-router-dom";
 import "../../css/Mypage/MypageMain.css";
 import Modify from "./Modify";
 import PickedRecipe from "./PickedRecipe";
 import AddedRecipe from "./AddedRecipe";
+import PageModify from "./PageModify";
 import MyReview from "./MyReview";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -40,7 +41,7 @@ function MypageMain() {
               history.push("/");
             }}
           >
-            로그아웃
+            돌아가기
           </button>
         </div>
         <Modify></Modify>

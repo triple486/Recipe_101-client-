@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/reducers";
 import { StructuredType } from "typescript";
-import { Link, withRouter, Route, useHistory } from "react-router-dom";
+import { Link, withRouter, Route, useHistory, Switch } from "react-router-dom";
 
 import { updateLogin } from "../../redux/userReducer";
 import PageModify from "./PageModify";
@@ -21,6 +21,7 @@ export default function Modify() {
   // const [user.is, userLoginf] = useState(true)
   return (
     <>
+      <Switch></Switch>
       <div className="Outline">
         <h1 className="text">Modify</h1>
         <div>
@@ -35,7 +36,7 @@ export default function Modify() {
 
         <button
           onClick={() => {
-            history.push("/PageModify");
+            history.push("/mypage/modify");
           }}
         >
           modify
@@ -52,7 +53,6 @@ export default function Modify() {
           log out
         </button>
       </div>
-      <Route exact path="/PageModify" component={PageModify} />
     </>
   );
 }

@@ -14,7 +14,9 @@ function Recipegrid({
 }) {
   return (
     <div className="recipegrid_frame">
-      <img className="recipegrid_img" src={data.food_img}></img>
+      <div className="recipegrid_img_box">
+        <img className="recipegrid_img" src={data.food_img}></img>
+      </div>
       <div className="recipegrid_desc">
         <div className="recipegrid_data food_name">{data.food_name}</div>
         <div className="recipegrid_data level">{data.level}</div>

@@ -16,7 +16,6 @@ const Frame = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  border: solid 1px red;
 `;
 
 const InnerFrame = styled.div`
@@ -27,7 +26,6 @@ const InnerFrame = styled.div`
   align-items: center;
   overflow-y: scroll;
   flex-direction: column;
-  border: solid 1px red;
 `;
 
 function Landingpage() {
