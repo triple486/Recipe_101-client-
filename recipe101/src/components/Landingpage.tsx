@@ -19,22 +19,24 @@ import Login from "./Login";
 import Resister from "./Resister";
 import Searchbar from "./Searchbar";
 import Searchresult from "./Searchresult";
+import Mainintro from "./Mainintro";
 import axios from "axios";
 //axios.defaults.withCredentials = true;
 const Frame = styled.div`
   flex: 1 0 0;
   min-height: 100%;
-  width: 100%;
+  // width: 100%;
   display: flex;
   flex-direction: column;
   border: solid 1px red;
 `;
 
 const MainBody = styled.div`
-  min-height: 100%;
+  height: 100%;
   width: 100%;
   flex: 1;
   border: solid 1px red;
+  overflow-y: scroll;
 `;
 
 function Landingpage() {
@@ -65,6 +67,7 @@ function Landingpage() {
         <MainBody>
           <Mainslide></Mainslide>
           <Maingrid></Maingrid>
+          <Mainintro></Mainintro>
         </MainBody>
       )}
       <Switch>

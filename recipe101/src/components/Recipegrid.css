@@ -1,0 +1,26 @@
+.recipegrid_frame {
+  display: flex;
+  flex: 0 0 1;
+  width: 300px;
+  height: 300px;
+  padding: 20px;
+  flex-direction: column;
+  border: solid 1px black;
+}
+  
+.recipegrid_img {
+  height: calc(300 * 0.8px);
+  width: 100%;
+}
+
+.recipegrid_desc {
+  height: 20%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+  
+.recipegrid_data {
+  flex: 1 0 1;
+}

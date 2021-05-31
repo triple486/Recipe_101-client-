@@ -1,0 +1,26 @@
+.mainintro_frame {
+  width: 1368px;
+  margin: 0 auto;
+}
+
+.mainintro_img {
+  display: inline-block;
+  width: 50%;
+  height: 600px;
+  border: 1px solid black;
+  box-sizing: border-box;
+  text-align: center;
+  line-height: 600px;
+  background-color: red;
+}
+
+.mainintro_desc {
+  display: inline-block;
+  width: 50%;
+  height: 600px;
+  border: 1px solid black;
+  box-sizing: border-box;
+  text-align: center;
+  line-height: 600px;
+  background-color: blue;
+}

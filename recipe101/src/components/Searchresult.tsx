@@ -19,6 +19,7 @@ const Frame = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  overflow-y: scroll;
 `;
 const Box = styled.div`
   height: 100%;
