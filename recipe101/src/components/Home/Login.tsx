@@ -19,6 +19,7 @@ const Frame = styled.div`
   background: white;
   border: solid 1px red;
 `;
+
 const Line = styled.div`
   flex: 1 0 0;
   display: flex;
@@ -30,7 +31,7 @@ const Line = styled.div`
 const Kakaobutton = styled.img`
   border-radius: 12px;
   display: flex;
-  height: 70%;
+  height: 80%;
 
   border: solid 1px black;
   box-shadow: 0px 0px 1px 1px black;
@@ -38,8 +39,10 @@ const Kakaobutton = styled.img`
 
 const Loginbutton = styled.button`
   border-radius: 12px;
-  width: 163.45px;
-  height: 70%;
+  width: 160px;
+  height: 80%;
+  margin: 0;
+  padding: 0;
   font-size: 15px;
   align-items: center;
   justify-content: center;

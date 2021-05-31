@@ -75,8 +75,8 @@ interface useinfo {
 }
 
 const IMG = styled.img`
-  height: 340px;
-  width: 360px;
+  height: inherit;
+  width: inherit;
 `;
 
 const IMGBox = styled.div`

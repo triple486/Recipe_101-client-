@@ -17,6 +17,7 @@ const ImgBox = styled.div`
 
 const Image = styled.img`
   height: inherit;
+  width: inherit;
 `;
 const DataBox = styled.div`
   flex: 3 0 0;
