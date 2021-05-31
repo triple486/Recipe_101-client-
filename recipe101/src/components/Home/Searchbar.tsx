@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { isOn } from "../../redux/modalReducer";
 import { RootState } from "../../redux/reducers";
 import SearchInput from "./SearchInput";
-
+// import "../../css/index.css";
 const Frame = styled.div`
   height: 100px;
   width: 100%;
