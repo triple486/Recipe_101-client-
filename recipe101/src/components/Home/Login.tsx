@@ -60,7 +60,7 @@ function Login() {
   let history = useHistory();
   const [name, namef] = useState("");
   const [password, passwordf] = useState("");
-
+  let [err, seterr] = useState("");
   const Tologin = () => {
     let cmd = `${process.env.REACT_APP_SERVER_URL}/signin`;
     return axios
@@ -74,7 +74,9 @@ function Login() {
         dispatch(isOn(false));
         history.push(path.length ? path : "/");
       })
-      .catch((err) => {});
+      .catch((err) => {
+        seterr(err.response.data.message);
+      });
   };
 
   return (
@@ -92,6 +94,7 @@ function Login() {
         value={password}
         func={passwordf}
       ></Input>
+      <Line>{err.length ? err : null}</Line>
       <Line>
         <Loginbutton
           onClick={() => {
@@ -101,6 +104,7 @@ function Login() {
           <TextBox>로그인</TextBox>
         </Loginbutton>
       </Line>
+
       <Line>
         <Kakaobutton
           src={kakaobutton}
