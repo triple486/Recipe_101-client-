@@ -4,7 +4,7 @@ import styled from "styled-components";
 import Recipegrid from "./Recipegrid";
 
 const Frame = styled.div`
-  // height: 100%;
+  height: 100%;
   // width: 100%;
   display: flex;
   flex-direction: column;

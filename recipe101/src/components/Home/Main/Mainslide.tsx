@@ -5,6 +5,7 @@ import "../../../css/Home/Mainslide.css";
 import Recipeslide from "./Recipeslide";
 
 const Frame = styled.div`
+  height: 100%;
   // width: 100%;
   border: solid 1px green;
 `;

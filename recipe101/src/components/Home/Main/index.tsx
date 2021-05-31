@@ -5,12 +5,10 @@ import Mainintro from "./Mainintro";
 //import Maindesc from "./Maindesc";
 
 const Frame = styled.div`
-  min-height: 100%;
+  height: 100%;
   width: 100%;
   max-width: 1200px;
-  flex: 1;
-  position: relative;
-  overflow: hidden;
+  flex: 1 0 0;
   border: solid 1px red;
 `;
 

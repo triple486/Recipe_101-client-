@@ -23,7 +23,6 @@ const Main = styled.div`
   left: 0;
   height: 100vh;
   width: 100vw;
-  overflow-y: scroll;
 `;
 
 function App() {
