@@ -104,7 +104,7 @@ function YesResult() {
       </Header>
       <Switch>
         <Route path={`${match.path}/:id`}>
-          <Recipepage data={search} width={w} height={h}></Recipepage>
+          <Recipepage width={w} height={h}></Recipepage>
         </Route>
         <Route path={`${match.path}`}>
           <Redirect to={`${match.path}/${1}`} />

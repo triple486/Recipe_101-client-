@@ -1,17 +1,17 @@
 import styled from "styled-components";
+import { useHistory } from "react-router-dom";
 
-const Frame = styled.div<{ width: number; height: number }>`
+const Frame = styled.div`
   display: flex;
-  flex: 0 0 1;
-  width: ${(props) => props.width}px;
-  height: ${(props) => props.height}px;
+  width: 100%;
+  height: 100%;
   padding: 20px;
   flex-direction: column;
   border: solid 1px black;
 `;
 
-const Image = styled.img<{ height: number }>`
-  height: ${(props) => Math.floor(props.height * 0.8)}px;
+const Image = styled.img`
+  height: ${Math.floor((window.innerHeight - 150) / 3) - 80}px;
   width: 100%;
 `;
 const Desc = styled.div`
@@ -27,8 +27,6 @@ const Box = styled.div`
 
 function Recipecard({
   data,
-  width,
-  height,
 }: {
   data: {
     food_id: number;
@@ -37,12 +35,16 @@ function Recipecard({
     level: string;
     cooking_time: string;
   };
-  width: number;
-  height: number;
 }) {
+  let history = useHistory();
+
   return (
-    <Frame width={width} height={height} onClick={() => {}}>
-      <Image src={data.food_img} height={height}></Image>
+    <Frame
+      onClick={() => {
+        history.push(`/recipe/${data.food_id}`);
+      }}
+    >
+      <Image src={data.food_img}></Image>
       <Desc>
         <Box>{data.food_name}</Box>
         <Box>{data.level}</Box>

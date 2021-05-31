@@ -1,35 +1,48 @@
+import React, { useState } from "react";
+import { StructuredType } from "typescript";
+import { Link, withRouter, useHistory } from "react-router-dom";
+import "../../css/Mypage/MypageMain.css";
+import Modify from "./Modify";
+import PickedRecipe from "./PickedRecipe";
+import AddedRecipe from "./AddedRecipe";
+import MyReview from "./MyReview";
 import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "../../redux/reducers";
-import { init } from "../../redux/userReducer";
-import axios from "axios";
-import { updateSourceFile } from "typescript";
-function Mypage() {
-  let dispatch = useDispatch();
-  let Accesstoken = useSelector((state: RootState) => state.tokenReducer);
-  let user = useSelector((state: RootState) => state.userReducer);
 
+import { updateLogin } from "../../redux/userReducer";
+
+// 중괄호 안 ctrl + spacebar 눌러서 확인
+function MypageMain() {
+  let history = useHistory();
+  const [active, activef] = useState(false);
+  const [AccessToken, TokenGetFunc] = useState("");
+  // const [userInfo, userInfof] = useState({
+  //   userName: "",
+  //   email: "",
+  //   phone: "",
+  //   createdAt: "",
+  // });
   return (
-    <div>
-      <div>{"Access token :" + Accesstoken}</div>
-      <div>{"is login :" + `${user.isLogin}`}</div>
-      <div>{"user info :" + `${user.userInfo}`}</div>
-      <button
-        onClick={() => {
-          axios
-            .get(process.env.REACT_APP_SERVER_URL + "/signout")
-            .then((res) => {
-              dispatch(init());
-              console.log("logout");
-            })
-            .catch((err) => {
-              console.log(err);
-            });
-        }}
-      >
-        {"logout"}
-      </button>
-    </div>
+    <>
+      <div className="Outline">
+        <h1 className="Logo">Recipe 101</h1>
+        <div>
+          <button className="Recipeaddbutton">레시피 추가</button>
+          <button
+            className="Logout"
+            onClick={() => {
+              history.push("/");
+            }}
+          >
+            로그아웃
+          </button>
+        </div>
+        <Modify></Modify>
+        <PickedRecipe></PickedRecipe>
+        <AddedRecipe></AddedRecipe>
+        <MyReview></MyReview>
+      </div>
+    </>
   );
 }
 
-export default Mypage;
+export default MypageMain;

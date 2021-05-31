@@ -181,7 +181,7 @@ function Addrecipe() {
       <CancelFrame>
         <CancelButton
           Cancel={() => {
-            history.push("/");
+            history.goBack();
           }}
         ></CancelButton>
       </CancelFrame>

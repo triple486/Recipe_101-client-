@@ -1,0 +1,47 @@
+.Outline {
+  border: solid 3px black;
+  margin-top: 10px;
+  padding: 20px;
+  margin: 40px;
+  margin-top: 50px;
+  display: block;
+  flex-wrap: wrap;
+}
+
+.Logo {
+  text-align: center;
+}
+
+.text {
+  text-align: left;
+}
+.content {
+  border: solid 3px blue;
+  display: flex;
+
+  flex-direction: row;
+  justify-content: space-evenly;
+  margin: 10px;
+}
+
+.content-pic {
+  cursor: pointer;
+  border: solid 3px red;
+  width: 350px;
+
+  height: 200px;
+  margin: 20px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.content-title {
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+.bottom-desc {
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}

@@ -9,7 +9,7 @@ import {
 } from "react-router-dom";
 import styled from "styled-components";
 import Addrecipe from "./components/Addrecipe";
-import Detailedrecipe from "./components/Detailedrecipe";
+import Detailedrecipe from "./components/Recipe/Detailedrecipe";
 import Home from "./components/Home";
 import Mypage from "./components/Mypage";
 
@@ -23,7 +23,6 @@ const Main = styled.div`
   left: 0;
   height: 100vh;
   width: 100vw;
-  overflow-y: scroll;
 `;
 
 function App() {

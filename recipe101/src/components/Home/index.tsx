@@ -8,16 +8,25 @@ import { RootState } from "../../redux/reducers";
 import Modal from "./Modal";
 import Searchbar from "./Searchbar";
 import Searchresult from "./Searchresult";
+import DetailRecipe from "../Recipe/Detailedrecipe";
 import axios from "axios";
 
 const Frame = styled.div`
-  flex: 1 0 0;
-  min-height: 100%;
+  height: 100%;
   width: 100%;
   display: flex;
   flex-direction: column;
+  border: solid 1px red;
+`;
+
+const InnerFrame = styled.div`
+  height: 100%;
+  width: 100%;
+  display: flex;
   justify-content: center;
   align-items: center;
+  overflow-y: scroll;
+  flex-direction: column;
   border: solid 1px red;
 `;
 
@@ -41,10 +50,13 @@ function Landingpage() {
   return (
     <Frame>
       <Searchbar></Searchbar>
-      <Switch>
-        <Route path={"/search"} component={Searchresult}></Route>
-        <Route path={"/"} component={Main}></Route>
-      </Switch>
+      <InnerFrame>
+        <Switch>
+          <Route path={"/recipe/:id"} component={DetailRecipe}></Route>
+          <Route path={"/search"} component={Searchresult}></Route>
+          <Route path={"/"} component={Main}></Route>
+        </Switch>
+      </InnerFrame>
       {Modalon ? <Modal></Modal> : null}
     </Frame>
   );
