@@ -10,13 +10,17 @@
 }
 
 .recipegrid_img {
-  height: fit-content;
-  width: fit-content;
+  height: inherit;
+  width: inherit;
+  display: flex;
 }
 
 .recipegrid_img_box {
   flex: 4 0 0;
   width: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .recipegrid_desc {
