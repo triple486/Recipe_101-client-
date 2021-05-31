@@ -15,10 +15,12 @@ import axios from "axios";
 import { useState } from "react";
 
 const Frame = styled.div`
+  height: 100%;
   width: 100%;
   display: flex;
   padding: 0;
   margin: 0;
+  overflow-y: scroll;
   justify-content: center;
 `;
 const InnerFrame = styled.div`

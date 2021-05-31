@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import styled from "styled-components";
 import { StructuredType } from "typescript";
 import { Link, withRouter, useHistory } from "react-router-dom";
 import "../../css/Mypage/MypageMain.css";
@@ -9,6 +10,12 @@ import MyReview from "./MyReview";
 import { useSelector, useDispatch } from "react-redux";
 
 import { updateLogin } from "../../redux/userReducer";
+
+const Frame = styled.div`
+  height: 100%;
+  width: 100%;
+  overflow-y: scroll;
+`;
 
 // 중괄호 안 ctrl + spacebar 눌러서 확인
 function MypageMain() {
@@ -22,7 +29,7 @@ function MypageMain() {
   //   createdAt: "",
   // });
   return (
-    <>
+    <Frame>
       <div className="Outline">
         <h1 className="Logo">Recipe 101</h1>
         <div>
@@ -41,7 +48,7 @@ function MypageMain() {
         <AddedRecipe></AddedRecipe>
         <MyReview></MyReview>
       </div>
-    </>
+    </Frame>
   );
 }
 
