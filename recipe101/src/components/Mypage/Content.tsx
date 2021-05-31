@@ -1,7 +1,7 @@
 import React from "react";
 import { StructuredType } from "typescript";
 import { Link, withRouter } from "react-router-dom";
-import "../../ui_mypage/MypageMain.css";
+import "../../css/Mypage/MypageMain.css";
 
 // 중괄호 안 ctrl + spacebar 눌러서 확인
 function Content() {

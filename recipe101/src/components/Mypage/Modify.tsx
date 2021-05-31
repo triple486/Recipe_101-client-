@@ -7,7 +7,7 @@ import { Link, withRouter, Route, useHistory } from "react-router-dom";
 import { updateLogin } from "../../redux/userReducer";
 import PageModify from "./PageModify";
 import axios from "axios";
-import "../../ui_mypage/Modify.css";
+import "../../css/Mypage/Modify.css";
 import Input from "./Input";
 import { userInfo } from "os";
 

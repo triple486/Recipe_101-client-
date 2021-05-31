@@ -2,8 +2,8 @@ import React from "react";
 import { StructuredType } from "typescript";
 import { Link, withRouter } from "react-router-dom";
 import Content from "./Content";
-import "../../ui_mypage/MypageMain.css";
-import "../../ui_mypage/PickedRecipe.css";
+import "../../css/Mypage/MypageMain.css";
+import "../../css/Mypage/PickedRecipe.css";
 // interface PickedRecipeProps {
 //   pagename: string;
 //   mark: string;

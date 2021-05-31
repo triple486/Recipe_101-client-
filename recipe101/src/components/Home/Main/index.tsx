@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import Mainslide from "./Mainslide";
 import Maingrid from "./Maingrid";
-import Maindesc from "./Maindesc";
+import Mainintro from "./Mainintro";
+//import Maindesc from "./Maindesc";
 
 const Frame = styled.div`
   min-height: 100%;
@@ -18,10 +19,11 @@ export default function () {
     <Frame>
       <Mainslide></Mainslide>
       <Maingrid></Maingrid>
+      <Mainintro></Mainintro>
+      {/* <Maindesc></Maindesc>
       <Maindesc></Maindesc>
       <Maindesc></Maindesc>
-      <Maindesc></Maindesc>
-      <Maindesc></Maindesc>
+      <Maindesc></Maindesc> */}
     </Frame>
   );
 }

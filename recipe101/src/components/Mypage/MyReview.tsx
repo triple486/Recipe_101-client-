@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { StructuredType } from "typescript";
 import { Link, withRouter } from "react-router-dom";
-import "../../ui_mypage/MypageMain.css";
+import "../../css/Mypage/MypageMain.css";
 import Content from "./Content";
 import axios from "axios";
 
