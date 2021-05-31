@@ -13,6 +13,8 @@ import {
 } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
+import StepBox from "./StepBox";
+import LabelBox from "./LabelBox";
 
 const Frame = styled.div`
   height: 100%;
@@ -28,7 +30,8 @@ const InnerFrame = styled.div`
   width: 100%;
   max-width: 1200px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  flex-wrap: wrap;
   align-items: center;
 `;
 interface Boxset {
@@ -45,7 +48,9 @@ const BoxFrame = styled.div<Boxset>`
 
 const MinBoxFrame = styled.div<Boxset>`
   min-height: ${({ h }) => (h ? h : 100)}px;
+  flex: 1 0 1;
   width: 100%;
+  position: releative;
   display: flex;
   flex-direction: ${({ c }) => (c ? "column" : "row")};
   border: solid 1px red;
@@ -76,6 +81,7 @@ const BasicDataBox = styled.div`
 interface Lineset {
   f?: number;
   c?: boolean;
+  line?: boolean;
 }
 
 const Line = styled.div<Lineset>`
@@ -117,6 +123,22 @@ const TextBox = styled.div<{ s?: number; w?: number }>`
   ${({ w }) => (w ? `font-weight: ${w};` : null)}
 `;
 
+const Modal = styled.div`
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+const IMG = styled.img`
+  max-height: 100%;
+  max width : 100%;
+
+`;
+
 interface Food_info {
   id: number;
   userName: string;
@@ -149,11 +171,16 @@ interface Recipe_info {
   Ingredients?: Ingredients[];
   Recipes?: Recipe[];
 }
+interface Image_extend {
+  isEx?: boolean;
+  image?: string;
+}
 
 function Detailedrecipe() {
   let { id } = useParams<{ id?: string }>();
   let history = useHistory();
   let [data, setdata] = useState<Recipe_info>({});
+  let [iex, setiex] = useState<Image_extend>({ isEx: false });
   if (!data.food_info) {
     axios
       .get(process.env.REACT_APP_SERVER_URL + `/recipe/${id}`)
@@ -162,10 +189,27 @@ function Detailedrecipe() {
         setdata({ ...rst.data.data });
       });
   }
-  console.log(data.Recipes);
+
+  function Eximage() {
+    return (
+      <Modal
+        onClick={() => {
+          setiex({ ...iex, isEx: false });
+        }}
+      >
+        <IMG src={iex.image}></IMG>
+      </Modal>
+    );
+  }
+
+  function timecutter(x: string) {
+    return x.length ? x.split("T")[0].split("-").join(" / ") : x;
+  }
+
   return (
     <Frame>
       <InnerFrame>
+        {iex.isEx ? <Eximage></Eximage> : null}
         {/* <NaviBar></NaviBar> */}
         <ButtonLine>
           <Button
@@ -187,76 +231,112 @@ function Detailedrecipe() {
 
             <Line>
               <Line>
-                <TextBox>{data.food_info?.userName}</TextBox>
+                <LabelBox
+                  l={"작성자"}
+                  v={data.food_info?.userName || ""}
+                ></LabelBox>
               </Line>
               <Line>
-                <TextBox>{data.food_info?.level}</TextBox>
-              </Line>
-            </Line>
-            <Line>
-              <Line>
-                <TextBox>{data.food_info?.nation}</TextBox>
-              </Line>
-              <Line>
-                <TextBox>{data.food_info?.qnt}</TextBox>
+                <LabelBox
+                  l={"요리 국적"}
+                  v={data.food_info?.nation || ""}
+                ></LabelBox>
               </Line>
             </Line>
             <Line>
               <Line>
-                <TextBox>{data.food_info?.type}</TextBox>
+                <LabelBox l={"분류"} v={data.food_info?.type || ""}></LabelBox>
               </Line>
               <Line>
-                <TextBox>{data.food_info?.cookingTime}</TextBox>
+                <LabelBox l={"분량"} v={data.food_info?.qnt || ""}></LabelBox>
               </Line>
             </Line>
             <Line>
               <Line>
-                <TextBox>{data.food_info?.createdAt}</TextBox>
+                <LabelBox
+                  l={"난이도"}
+                  v={data.food_info?.level || ""}
+                ></LabelBox>
               </Line>
               <Line>
-                <TextBox>{data.food_info?.updatedAt}</TextBox>
+                <LabelBox
+                  l={"조리 시간"}
+                  v={data.food_info?.level || ""}
+                ></LabelBox>
+              </Line>
+            </Line>
+            <Line>
+              <Line>
+                <LabelBox
+                  l={"작성 일자"}
+                  v={timecutter(data.food_info?.createdAt || "")}
+                ></LabelBox>
+              </Line>
+              <Line>
+                <LabelBox
+                  l={"수정 일자"}
+                  v={timecutter(data.food_info?.updatedAt || "")}
+                ></LabelBox>
               </Line>
             </Line>
           </BasicDataBox>
         </BoxFrame>
-        <BoxFrame h={200}>
+        <MinBoxFrame h={200}>
           <Line c={true}>
             <Line>
-              <TextBox>{"설명"}</TextBox>
+              <TextBox s={20}>{"간단한 설명"}</TextBox>
             </Line>
             <Line f={4}>
               <TextBox>{data.food_info?.summary}</TextBox>
             </Line>
           </Line>
-        </BoxFrame>
+        </MinBoxFrame>
         <MinBoxFrame h={400} c={true}>
-          <Line>
+          <BoxFrame>
             <Line>
-              <TextBox>{"주재료"}</TextBox>
+              <TextBox s={30}>{"주 재료"}</TextBox>
             </Line>
             <Line>
-              <TextBox>{"부재료"}</TextBox>
+              <TextBox s={30}>{"부 재료"}</TextBox>
             </Line>
             <Line>
-              <TextBox>{"양념"}</TextBox>
+              <TextBox s={30}>{"양념"}</TextBox>
             </Line>
-          </Line>
-          <Line f={4}>
-            <Line>{"1"}</Line>
-            <Line>{"2"}</Line>
-            <Line>{"3"}</Line>
-          </Line>
+          </BoxFrame>
+          <MinBoxFrame h={300}>
+            <Line c={true}>
+              {data.Ingredients?.filter((x) => x.type === "주재료").map(
+                (x, i) => {
+                  return <Line key={i}>{`${x.name} - ${x.cap}`}</Line>;
+                }
+              )}
+            </Line>
+            <Line c={true}>
+              {data.Ingredients?.filter((x) => x.type === "부재료").map(
+                (x, i) => {
+                  return <Line key={i}>{`${x.name} - ${x.cap}`}</Line>;
+                }
+              )}
+            </Line>
+            <Line c={true}>
+              {data.Ingredients?.filter((x) => x.type === "양념").map(
+                (x, i) => {
+                  return <Line key={i}>{`${x.name} - ${x.cap}`}</Line>;
+                }
+              )}
+            </Line>
+          </MinBoxFrame>
         </MinBoxFrame>
         <MinBoxFrame h={500} c={true}>
           {data.Recipes?.map((x, i) => {
             return (
               <FLine key={i}>
-                <TextBox>{`${x.cookingNo} : ${x.cookingDc} - ${x.stepTip}`}</TextBox>
+                <StepBox data={x} func={setiex}></StepBox>
               </FLine>
             );
           })}
         </MinBoxFrame>
-        <BoxFrame h={200}>{"코멘트 입력창"}</BoxFrame>
+        <MinBoxFrame h={200}>{"코멘트 입력창"}</MinBoxFrame>
         <MinBoxFrame h={0} c={true}>
           <FLine>
             <TextBox>{"1"}</TextBox>

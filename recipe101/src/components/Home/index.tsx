@@ -8,7 +8,6 @@ import { RootState } from "../../redux/reducers";
 import Modal from "./Modal";
 import Searchbar from "./Searchbar";
 import Searchresult from "./Searchresult";
-import DetailRecipe from "../Recipe/Detailedrecipe";
 import axios from "axios";
 
 const Frame = styled.div`
@@ -16,7 +15,6 @@ const Frame = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  border: solid 1px red;
 `;
 
 const InnerFrame = styled.div`
@@ -25,9 +23,7 @@ const InnerFrame = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow-y: scroll;
   flex-direction: column;
-  border: solid 1px red;
 `;
 
 function Landingpage() {
@@ -52,7 +48,6 @@ function Landingpage() {
       <Searchbar></Searchbar>
       <InnerFrame>
         <Switch>
-          <Route path={"/recipe/:id"} component={DetailRecipe}></Route>
           <Route path={"/search"} component={Searchresult}></Route>
           <Route path={"/"} component={Main}></Route>
         </Switch>

@@ -4,12 +4,7 @@ import { Link, withRouter } from "react-router-dom";
 import Content from "./Content";
 import "../../css/Mypage/MypageMain.css";
 import "../../css/Mypage/PickedRecipe.css";
-// interface PickedRecipeProps {
-//   pagename: string;
-//   mark: string;
-// }
 
-// 중괄호 안 ctrl + spacebar 눌러서 확인
 function PickedRecipe() {
   return (
     <>

@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { StructuredType } from "typescript";
-import { Link, withRouter, useHistory } from "react-router-dom";
+import { Link, withRouter, useHistory, Switch, Route } from "react-router-dom";
 import "../../css/Mypage/MypageMain.css";
 import Modify from "./Modify";
 import PickedRecipe from "./PickedRecipe";
 import AddedRecipe from "./AddedRecipe";
+import PageModify from "./PageModify";
 import MyReview from "./MyReview";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -20,14 +21,7 @@ const Frame = styled.div`
 // 중괄호 안 ctrl + spacebar 눌러서 확인
 function MypageMain() {
   let history = useHistory();
-  const [active, activef] = useState(false);
-  const [AccessToken, TokenGetFunc] = useState("");
-  // const [userInfo, userInfof] = useState({
-  //   userName: "",
-  //   email: "",
-  //   phone: "",
-  //   createdAt: "",
-  // });
+
   return (
     <Frame>
       <div className="Outline">
@@ -40,7 +34,7 @@ function MypageMain() {
               history.push("/");
             }}
           >
-            로그아웃
+            돌아가기
           </button>
         </div>
         <Modify></Modify>

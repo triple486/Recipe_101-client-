@@ -19,6 +19,7 @@ const Frame = styled.div`
   background: white;
   border: solid 1px red;
 `;
+
 const Line = styled.div`
   flex: 1 0 0;
   display: flex;
@@ -30,7 +31,7 @@ const Line = styled.div`
 const Kakaobutton = styled.img`
   border-radius: 12px;
   display: flex;
-  height: 70%;
+  height: 80%;
 
   border: solid 1px black;
   box-shadow: 0px 0px 1px 1px black;
@@ -38,8 +39,10 @@ const Kakaobutton = styled.img`
 
 const Loginbutton = styled.button`
   border-radius: 12px;
-  width: 163.45px;
-  height: 70%;
+  width: 160px;
+  height: 80%;
+  margin: 0;
+  padding: 0;
   font-size: 15px;
   align-items: center;
   justify-content: center;
@@ -60,7 +63,7 @@ function Login() {
   let history = useHistory();
   const [name, namef] = useState("");
   const [password, passwordf] = useState("");
-
+  let [err, seterr] = useState("");
   const Tologin = () => {
     let cmd = `${process.env.REACT_APP_SERVER_URL}/signin`;
     return axios
@@ -74,7 +77,9 @@ function Login() {
         dispatch(isOn(false));
         history.push(path.length ? path : "/");
       })
-      .catch((err) => {});
+      .catch((err) => {
+        seterr(err.response.data.message);
+      });
   };
 
   return (
@@ -92,6 +97,7 @@ function Login() {
         value={password}
         func={passwordf}
       ></Input>
+      <Line>{err.length ? err : null}</Line>
       <Line>
         <Loginbutton
           onClick={() => {
@@ -101,6 +107,7 @@ function Login() {
           <TextBox>로그인</TextBox>
         </Loginbutton>
       </Line>
+
       <Line>
         <Kakaobutton
           src={kakaobutton}
