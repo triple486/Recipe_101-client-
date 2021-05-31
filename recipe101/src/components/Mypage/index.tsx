@@ -21,14 +21,7 @@ const Frame = styled.div`
 // 중괄호 안 ctrl + spacebar 눌러서 확인
 function MypageMain() {
   let history = useHistory();
-  const [active, activef] = useState(false);
-  const [AccessToken, TokenGetFunc] = useState("");
-  // const [userInfo, userInfof] = useState({
-  //   userName: "",
-  //   email: "",
-  //   phone: "",
-  //   createdAt: "",
-  // });
+
   return (
     <Frame>
       <div className="Outline">

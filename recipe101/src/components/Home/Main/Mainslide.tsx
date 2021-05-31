@@ -81,6 +81,7 @@ function Mainslide() {
     <Frame>
       <Innerframe>
         <DataArea
+          onClick={() => {}}
           onAnimationIteration={(e) => {
             let n = next + 1 < Recipes.length ? next + 1 : 0;
             setdata(Recipes[next]);

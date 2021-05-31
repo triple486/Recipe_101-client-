@@ -47,16 +47,12 @@ function PageModify() {
   console.log("userInfo : ", userInfo);
   let usehistory = useHistory();
 
-  // console.log(accessToken);
-
   const [newImage, setNewImage] = useState("");
   const [newUsername, setNewUsername] = useState("");
   const [newPhone, setNewPhone] = useState("");
   const [newEmail, setNewEmail] = useState("");
 
   const onEdit = () => {
-    // console.log(newImage);
-
     let data = new FormData();
     data.append("userImage", newImage[0]);
     data.append("userName", newUsername);
@@ -125,8 +121,6 @@ function PageModify() {
                 label={"image"}
                 type={"file"}
                 value={newImage}
-                // 기존 밸류를 원래 아이디의 정보로 넣고
-                // 온체인지로 변경
                 func={setNewImage}
                 placeholder={""}
               ></Input>
@@ -161,17 +155,7 @@ function PageModify() {
           >
             cancel
           </button>
-          <button
-            onClick={onEdit}
-            // onClick={() => {
-            // let data = new FormData();
-            // data.append("")
-
-            //   usehistory.push("/");
-            // }}
-          >
-            적용하기
-          </button>
+          <button onClick={onEdit}>적용하기</button>
         </form>
       </div>
     </>
