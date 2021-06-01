@@ -17,7 +17,10 @@ import StepBox from "./StepBox";
 import LabelBox from "./LabelBox";
 
 import Comment from "./Comment";
+import CommentBox from "./CommentBox";
+import Message from "../Addrecipe/messagebox";
 
+axios.defaults.withCredentials = true;
 const Frame = styled.div`
   height: 100%;
   width: 100%;
@@ -199,11 +202,21 @@ interface Recipe {
   stepImage: string;
   stepTip: string;
 }
+interface Commentf {
+  id: number;
+  userName: string;
+  comment: string;
+  createdAt: string;
+  score: number;
+}
+
 interface Recipe_info {
   food_info?: Food_info;
   Ingredients?: Ingredients[];
   Recipes?: Recipe[];
+  Comment?: Commentf[];
 }
+
 interface Image_extend {
   isEx?: boolean;
   image?: string;
@@ -212,14 +225,27 @@ interface Image_extend {
 function Detailedrecipe() {
   let { id } = useParams<{ id?: string }>();
   let history = useHistory();
+  let user = useSelector((state: RootState) => state.userReducer);
+  let accessToken = useSelector((state: RootState) => state.tokenReducer);
   let [data, setdata] = useState<Recipe_info>({});
   let [iex, setiex] = useState<Image_extend>({ isEx: false });
-  if (!data.food_info) {
+  let [mkc, setc] = useState(false);
+  let [call, setcall] = useState(false);
+  let [add, setadd] = useState(true);
+  let [del, setdel] = useState(0);
+  if (!data.food_info || mkc) {
     axios
       .get(process.env.REACT_APP_SERVER_URL + `/recipe/${id}`)
       .then((rst) => {
         console.log(rst);
         setdata({ ...rst.data.data });
+        setc(false);
+        if (
+          rst.data.data.Comment ||
+          rst.data.data.Comment.userName === user.userInfo.username
+        ) {
+          setadd(false);
+        }
       });
   }
 
@@ -238,7 +264,7 @@ function Detailedrecipe() {
   function timecutter(x: string) {
     return x.length ? x.split("T")[0].split("-").join(" / ") : x;
   }
-
+  console.log(data.Comment);
   return (
     <Frame>
       <InnerFrame>
@@ -391,17 +417,59 @@ function Detailedrecipe() {
           })}
         </MinBoxFrame>
         <MinBoxFrame h={200}>
-          <Comment h={200}></Comment>
+          <Comment
+            n={data.Comment?.length || 0}
+            h={200}
+            func={setc}
+            data={{ id: data.food_info?.id }}
+            add={add}
+          ></Comment>
         </MinBoxFrame>
         <MinBoxFrame h={0} c={true}>
-          <FLine></FLine>
-          <FLine>
-            <TextBox>{"2"}</TextBox>
-          </FLine>
-          <FLine>
-            <TextBox>{"3"}</TextBox>
-          </FLine>
+          {data.Comment?.map((x, i) => {
+            return (
+              <FLine h={200} key={i}>
+                <CommentBox
+                  h={200}
+                  data={x}
+                  func={(z: any) => {
+                    setcall(true);
+                    setdel(x.id);
+                  }}
+                ></CommentBox>
+              </FLine>
+            );
+          })}
         </MinBoxFrame>
+        {call ? (
+          <Message
+            cancel={() => {
+              setcall(false);
+            }}
+            message={"감상평을 지우시겠습니까?"}
+            button={() => {
+              const config = {
+                headers: {
+                  authorization: "bearer " + accessToken,
+                },
+              };
+
+              axios
+                .delete(
+                  process.env.REACT_APP_SERVER_URL + `/comment/${del}`,
+                  config
+                )
+                .then((rst) => {
+                  setcall(true);
+                  console.log("완료");
+                })
+                .catch((err) => {
+                  console.log("실패");
+                });
+            }}
+            buttonMessage={"확인"}
+          ></Message>
+        ) : null}
       </InnerFrame>
     </Frame>
   );

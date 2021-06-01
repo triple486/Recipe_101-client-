@@ -24,8 +24,8 @@ const NumberFrame = styled.div`
   justify-content: center;
   align-items: center;
 `;
-const NumberBox = styled.div`
-  font-size: 100px;
+const NumberBox = styled.div<{ r: number }>`
+  font-size: ${({ r }) => 100 * r}px;
   font-weight: 700;
 `;
 
@@ -45,7 +45,17 @@ const Box = styled.div<{ k: number; y: number }>`
   ${({ k, y }) => (k < y ? "background-color: Gold;" : null)};
 `;
 
-export default function ({ v, f }: { v: number; f: Function }) {
+export default function ({
+  v,
+  f,
+  r = 1,
+  fix = false,
+}: {
+  r?: number;
+  v: number;
+  f?: Function;
+  fix?: boolean;
+}) {
   let [t, sett] = useState(false);
   let x = Array(5).fill(0);
   return (
@@ -53,7 +63,7 @@ export default function ({ v, f }: { v: number; f: Function }) {
       <Frame>
         <InnerFrame
           onMouseLeave={() => {
-            if (!t) {
+            if (!t && f) {
               f(0);
             }
           }}
@@ -65,10 +75,14 @@ export default function ({ v, f }: { v: number; f: Function }) {
                 y={v}
                 key={i}
                 onClick={() => {
-                  sett(!t);
+                  if (!fix) {
+                    sett(!t);
+                  }
                 }}
                 onMouseOver={() => {
-                  f(i + 1);
+                  if (!t && !fix && f) {
+                    f(i + 1);
+                  }
                 }}
               ></Box>
             );
@@ -76,7 +90,7 @@ export default function ({ v, f }: { v: number; f: Function }) {
         </InnerFrame>
       </Frame>
       <NumberFrame>
-        <NumberBox>{v}</NumberBox>
+        <NumberBox r={r}>{v}</NumberBox>
       </NumberFrame>
     </OuterFrame>
   );
