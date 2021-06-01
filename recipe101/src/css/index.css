@@ -1,7 +1,12 @@
 /* 공통 영역 */
 @font-face {
   font-family: "Nanum_pen";
-  src: url("../Nanum_Pen_Script/NanumPenScript-Regular.ttf");
+  src: url("../font/Nanum_Pen_Script/NanumPenScript-Regular.ttf");
+}
+
+@font-face {
+  font-family: "Noto";
+  src: url("../font/Noto_Sans_KR/NotoSansKR-Regular.otf");
 }
 
 .pnanum {

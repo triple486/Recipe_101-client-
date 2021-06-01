@@ -16,6 +16,8 @@ import { useState } from "react";
 import StepBox from "./StepBox";
 import LabelBox from "./LabelBox";
 
+import Comment from "./Comment";
+
 const Frame = styled.div`
   height: 100%;
   width: 100%;
@@ -107,14 +109,28 @@ const FLine = styled.div<Flineset>`
 `;
 
 const ButtonLine = styled.div`
-  height: 20px;
+  height: 40px;
   width: 100%;
   display: flex;
+  justify-content: space-between;
+  align-items: center;
   flex-direction: row-reverse;
 `;
-const Button = styled.button`
-  height: 20px;
+const DateBox = styled.div`
+  height: 40px;
+  width: 240px;
   display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+`;
+
+const Button = styled.button`
+  height: 40px;
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
 `;
 
 const TextBox = styled.div<{ s?: number; w?: number }>`
@@ -138,6 +154,21 @@ const IMG = styled.img`
   max width : 100%;
 
 `;
+const ItemBox = styled.div`
+  height: 40px;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+`;
+
+const ScoreBox = styled.div`
+  height: 200px;
+  width: 200px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+`;
 
 interface Food_info {
   id: number;
@@ -151,6 +182,8 @@ interface Food_info {
   qnt: string;
   level: string;
   imgUrl: string;
+  store: number;
+  score: number;
   createdAt: string;
   updatedAt: string;
 }
@@ -217,8 +250,20 @@ function Detailedrecipe() {
               history.goBack();
             }}
           >
-            {"돌아가기"}
+            <TextBox>{"돌아가기"}</TextBox>
           </Button>
+          <DateBox>
+            <LabelBox
+              l={"작성 일자"}
+              v={timecutter(data.food_info?.createdAt || "")}
+              s={1}
+            ></LabelBox>
+            <LabelBox
+              l={"수정 일자"}
+              v={timecutter(data.food_info?.updatedAt || "")}
+              s={1}
+            ></LabelBox>
+          </DateBox>
         </ButtonLine>
         <BoxFrame h={400}>
           <Img src={data.food_info?.imgUrl}></Img>
@@ -267,16 +312,10 @@ function Detailedrecipe() {
             </Line>
             <Line>
               <Line>
-                <LabelBox
-                  l={"작성 일자"}
-                  v={timecutter(data.food_info?.createdAt || "")}
-                ></LabelBox>
+                <LabelBox l={"저장"} v={`${data.food_info?.store}`}></LabelBox>
               </Line>
               <Line>
-                <LabelBox
-                  l={"수정 일자"}
-                  v={timecutter(data.food_info?.updatedAt || "")}
-                ></LabelBox>
+                <LabelBox l={"평점"} v={`${data.food_info?.score}`}></LabelBox>
               </Line>
             </Line>
           </BasicDataBox>
@@ -307,21 +346,36 @@ function Detailedrecipe() {
             <Line c={true}>
               {data.Ingredients?.filter((x) => x.type === "주재료").map(
                 (x, i) => {
-                  return <Line key={i}>{`${x.name} - ${x.cap}`}</Line>;
+                  return (
+                    <ItemBox key={i}>
+                      <TextBox>{x.name}</TextBox>
+                      <TextBox>{x.cap}</TextBox>
+                    </ItemBox>
+                  );
                 }
               )}
             </Line>
             <Line c={true}>
               {data.Ingredients?.filter((x) => x.type === "부재료").map(
                 (x, i) => {
-                  return <Line key={i}>{`${x.name} - ${x.cap}`}</Line>;
+                  return (
+                    <ItemBox key={i}>
+                      <TextBox>{x.name}</TextBox>
+                      <TextBox>{x.cap}</TextBox>
+                    </ItemBox>
+                  );
                 }
               )}
             </Line>
             <Line c={true}>
               {data.Ingredients?.filter((x) => x.type === "양념").map(
                 (x, i) => {
-                  return <Line key={i}>{`${x.name} - ${x.cap}`}</Line>;
+                  return (
+                    <ItemBox key={i}>
+                      <TextBox>{x.name}</TextBox>
+                      <TextBox>{x.cap}</TextBox>
+                    </ItemBox>
+                  );
                 }
               )}
             </Line>
@@ -336,11 +390,11 @@ function Detailedrecipe() {
             );
           })}
         </MinBoxFrame>
-        <MinBoxFrame h={200}>{"코멘트 입력창"}</MinBoxFrame>
+        <MinBoxFrame h={200}>
+          <Comment h={200}></Comment>
+        </MinBoxFrame>
         <MinBoxFrame h={0} c={true}>
-          <FLine>
-            <TextBox>{"1"}</TextBox>
-          </FLine>
+          <FLine></FLine>
           <FLine>
             <TextBox>{"2"}</TextBox>
           </FLine>

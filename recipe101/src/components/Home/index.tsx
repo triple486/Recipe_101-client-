@@ -9,6 +9,8 @@ import Modal from "./Modal";
 import Searchbar from "./Searchbar";
 import Searchresult from "./Searchresult";
 import axios from "axios";
+import Mypage from "../Mypage";
+import PageModify from "../Mypage/PageModify";
 
 const Frame = styled.div`
   height: 100%;
@@ -49,6 +51,8 @@ function Landingpage() {
       <InnerFrame>
         <Switch>
           <Route path={"/search"} component={Searchresult}></Route>
+          <Route path="/Mypage/Modify" component={PageModify}></Route>
+          <Route path="/Mypage" component={Mypage}></Route>
           <Route path={"/"} component={Main}></Route>
         </Switch>
       </InnerFrame>

@@ -15,33 +15,43 @@ import { updateLogin } from "../../redux/userReducer";
 const Frame = styled.div`
   height: 100%;
   width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   overflow-y: scroll;
 `;
 
+const InnerFrame = styled.div`
+  height: 100%;
+  width: 100%;
+  max-width: 1200px;
+`;
 // 중괄호 안 ctrl + spacebar 눌러서 확인
 function MypageMain() {
   let history = useHistory();
 
   return (
     <Frame>
-      <div className="Outline">
-        <h1 className="Logo">Recipe 101</h1>
-        <div>
-          <button className="Recipeaddbutton">레시피 추가</button>
-          <button
-            className="Logout"
-            onClick={() => {
-              history.push("/");
-            }}
-          >
-            돌아가기
-          </button>
+      <InnerFrame>
+        <div className="Outline">
+          <h1 className="Logo">Recipe 101</h1>
+          <div>
+            <button className="Recipeaddbutton">레시피 추가</button>
+            <button
+              className="Logout"
+              onClick={() => {
+                history.push("/");
+              }}
+            >
+              돌아가기
+            </button>
+          </div>
+          <Modify></Modify>
+          <PickedRecipe></PickedRecipe>
+          <AddedRecipe></AddedRecipe>
+          <MyReview></MyReview>
         </div>
-        <Modify></Modify>
-        <PickedRecipe></PickedRecipe>
-        <AddedRecipe></AddedRecipe>
-        <MyReview></MyReview>
-      </div>
+      </InnerFrame>
     </Frame>
   );
 }
