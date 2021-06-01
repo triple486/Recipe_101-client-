@@ -10,6 +10,7 @@ const Frame = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
+  border-bottom: solid 1px black;
 `;
 
 const Body = styled.div`
