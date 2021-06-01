@@ -1,0 +1,9 @@
+/* 공통 영역 */
+@font-face {
+  font-family: "Nanum_pen";
+  src: url("../Nanum_Pen_Script/NanumPenScript-Regular.ttf");
+}
+
+.pnanum {
+  font-family: "Nanum_pen";
+}

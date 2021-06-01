@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import "../../../css/Home/Recipegrid.css";
-
+import { useHistory } from "react-router-dom";
 function Recipegrid({
   data,
 }: {
@@ -12,9 +12,17 @@ function Recipegrid({
     cooking_time: string;
   };
 }) {
+  let history = useHistory();
   return (
-    <div className="recipegrid_frame">
-      <img className="recipegrid_img" src={data.food_img}></img>
+    <div
+      className="recipegrid_frame"
+      onClick={() => {
+        history.push(`/recipe/${data.food_id}`);
+      }}
+    >
+      <div className="recipegrid_img_box">
+        <img className="recipegrid_img" src={data.food_img}></img>
+      </div>
       <div className="recipegrid_desc">
         <div className="recipegrid_data food_name">{data.food_name}</div>
         <div className="recipegrid_data level">{data.level}</div>

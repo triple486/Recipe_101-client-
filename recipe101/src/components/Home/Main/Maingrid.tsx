@@ -4,8 +4,8 @@ import styled from "styled-components";
 import Recipegrid from "./Recipegrid";
 
 const Frame = styled.div`
-  height: 100%;
-  // width: 100%;
+  height: ${Math.floor((window.innerHeight - 100) * 0.8)}px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   border: solid 1px green;
@@ -19,9 +19,11 @@ const Line = styled.div`
 `;
 
 const Body = styled.div`
+  height: 100%;
   width: 100%;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  flex-wrap: wrap;
 `;
 
 function Maingrid() {
@@ -45,7 +47,10 @@ function Maingrid() {
   return (
     <Frame>
       <Body>
-        <Line>
+        {recipes.map((x, i) => {
+          return <Recipegrid key={i} data={x}></Recipegrid>;
+        })}
+        {/* <Line>
           {data1.map((x, i) => {
             return (
               // Recipecard 컴포넌트와 같은 형식으로 새로 만들어서 불러준다
@@ -62,7 +67,7 @@ function Maingrid() {
           {data3.map((x, i) => {
             return <Recipegrid key={i} data={x}></Recipegrid>;
           })}
-        </Line>
+        </Line> */}
       </Body>
     </Frame>
   );

@@ -7,11 +7,17 @@ const Frame = styled.div`
   height: 100%;
   padding: 20px;
   flex-direction: column;
+`;
+const InnerFrame = styled.div`
+  display: flex;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
   border: solid 1px black;
 `;
 
 const Image = styled.img`
-  height: ${Math.floor((window.innerHeight - 150) / 3) - 80}px;
+  height: ${Math.floor((window.innerHeight - 200) / 3) - 80}px;
   width: 100%;
 `;
 const Desc = styled.div`
@@ -39,17 +45,19 @@ function Recipecard({
   let history = useHistory();
 
   return (
-    <Frame
-      onClick={() => {
-        history.push(`/recipe/${data.food_id}`);
-      }}
-    >
-      <Image src={data.food_img}></Image>
-      <Desc>
-        <Box>{data.food_name}</Box>
-        <Box>{data.level}</Box>
-        <Box>{data.cooking_time}</Box>
-      </Desc>
+    <Frame>
+      <InnerFrame
+        onClick={() => {
+          history.push(`/recipe/${data.food_id}`);
+        }}
+      >
+        <Image src={data.food_img}></Image>
+        <Desc>
+          <Box>{data.food_name}</Box>
+          <Box>{data.level}</Box>
+          <Box>{data.cooking_time}</Box>
+        </Desc>
+      </InnerFrame>
     </Frame>
   );
 }

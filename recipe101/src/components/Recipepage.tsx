@@ -16,7 +16,7 @@ const BoxFrame = styled.div`
   display: flex;
 `;
 
-export default function ({ width, height }: { width: number; height: number }) {
+export default function () {
   let { id } = useParams<{ id?: string }>();
   let nid = Number(id) - 1;
   let { search } = useSelector((state: RootState) => state.searchReducer);

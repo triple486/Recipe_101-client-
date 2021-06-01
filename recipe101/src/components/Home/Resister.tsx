@@ -94,6 +94,7 @@ export default function Resister() {
     email: false,
     phone: false,
   });
+  let [err, seterr] = useState("");
 
   function validation(type: string) {
     const email = new RegExp(
@@ -210,7 +211,7 @@ export default function Resister() {
           <Line err={validcheck["phone"]}>
             <Input label={"phone"} bfunc={validation("phone")}></Input>
           </Line>
-          <Line></Line>
+          <Line>{err.length ? err : null}</Line>
           <Line>
             <Button
               onClick={() => {
@@ -244,6 +245,7 @@ export default function Resister() {
                     dispatch(storeToken(res.data.data.accessToken));
                   })
                   .catch((err) => {
+                    seterr(err.response.data.message);
                     console.log("fail");
                   });
               }}
