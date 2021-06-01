@@ -12,10 +12,12 @@ import Addrecipe from "./components/Addrecipe";
 import Detailedrecipe from "./components/Recipe/Detailedrecipe";
 import Home from "./components/Home";
 import Mypage from "./components/Mypage";
+import './index.css';
 
 const Main = styled.div`
   * {
     box-sizing: border-box;
+    font-family: 'NanumSquareRound';
   }
   dispaly: flex;
   position: fixed;
