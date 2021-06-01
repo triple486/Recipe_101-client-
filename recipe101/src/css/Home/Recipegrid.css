@@ -13,6 +13,8 @@
   height: inherit;
   width: inherit;
   display: flex;
+  border-radius: 5px;
+  border: solid 5px rgb(165, 91, 42);
 }
 
 .recipegrid_img_box {

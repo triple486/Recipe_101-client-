@@ -30,7 +30,7 @@ export default function ({
   func = () => {},
   bfunc = () => {},
   placeholder,
-  size = 16,
+  size = 12,
 }: {
   label?: string;
   value?: string;

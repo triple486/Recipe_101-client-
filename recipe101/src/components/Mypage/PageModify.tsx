@@ -38,11 +38,22 @@ const Imgbox = styled.div`
   height: 100px;
   width: 100px;
 `;
+const Frame = styled.div`
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+`;
+
+const InnerFrame = styled.div`
+  height: 100%;
+  width: 100%;
+  max-width: 1200px;
+`;
 
 function PageModify() {
   let accessToken = useSelector((state: RootState) => state.tokenReducer);
   let user = useSelector((state: RootState) => state.userReducer);
-  let server = "https://server.recipe101.tk";
   let userInfo = user.userInfo;
   console.log("userInfo : ", userInfo);
   let usehistory = useHistory();
@@ -76,7 +87,7 @@ function PageModify() {
       uploadData.phone !== ""
     ) {
       axios
-        .patch("https://server.recipe101.tk/user", data, {
+        .patch(process.env.REACT_APP_SERVER_URL + "/user", data, {
           headers: {
             Authorization: "Bearer " + accessToken,
           },
@@ -92,73 +103,78 @@ function PageModify() {
     }
   };
   return (
-    <>
-      <div className="Outline">
-        <h1 className="text">Modify</h1>
-        <form onSubmit={(e) => e.preventDefault()} id="editUserInfo">
-          <h2>회원정보 수정</h2>
-          {newImage.length ? (
-            <Imgbox>
-              <ImageInput
+    <Frame>
+      <InnerFrame>
+        <div className="Outline">
+          <h1 className="text">Modify</h1>
+          <form onSubmit={(e) => e.preventDefault()} id="editUserInfo">
+            <h2>회원정보 수정</h2>
+            {newImage.length ? (
+              <Imgbox>
+                <ImageInput
+                  src={
+                    newImage.length
+                      ? URL.createObjectURL(newImage[0])
+                      : newImage
+                  }
+                ></ImageInput>
+              </Imgbox>
+            ) : (
+              <Img
                 src={
-                  newImage.length ? URL.createObjectURL(newImage[0]) : newImage
+                  userInfo.userimage
+                    ? process.env.REACT_APP_SERVER_URL +
+                      `/image/${userInfo.userimage}`
+                    : ""
                 }
-              ></ImageInput>
-            </Imgbox>
-          ) : (
-            <Img
-              src={
-                userInfo.userimage
-                  ? `${server}/image/${userInfo.userimage}`
-                  : ""
-              }
-            ></Img>
-          )}
+              ></Img>
+            )}
 
-          <InputArea>
-            <TextInput>
-              <Input
-                label={"image"}
-                type={"file"}
-                value={newImage}
-                func={setNewImage}
-                placeholder={""}
-              ></Input>
-              <Input
-                label={"username"}
-                type={"text"}
-                value={newUsername}
-                func={setNewUsername}
-                placeholder={userInfo.username || ""}
-              ></Input>
-              <Input
-                label={"phone"}
-                type={"text"}
-                value={newPhone}
-                func={setNewPhone}
-                placeholder={userInfo.phone || ""}
-              ></Input>
-              <Input
-                label={"email"}
-                type={"text"}
-                value={newEmail}
-                func={setNewEmail}
-                placeholder={userInfo.email || ""}
-              ></Input>
-            </TextInput>
-          </InputArea>
+            <InputArea>
+              <TextInput>
+                <Input
+                  label={"image"}
+                  type={"file"}
+                  value={newImage}
+                  func={setNewImage}
+                  placeholder={""}
+                ></Input>
+                <Input
+                  label={"username"}
+                  type={"text"}
+                  value={newUsername}
+                  func={setNewUsername}
+                  placeholder={userInfo.username || ""}
+                ></Input>
+                <Input
+                  label={"phone"}
+                  type={"text"}
+                  value={newPhone}
+                  func={setNewPhone}
+                  placeholder={userInfo.phone || ""}
+                ></Input>
+                <Input
+                  label={"email"}
+                  type={"text"}
+                  value={newEmail}
+                  func={setNewEmail}
+                  placeholder={userInfo.email || ""}
+                ></Input>
+              </TextInput>
+            </InputArea>
 
-          <button
-            onClick={() => {
-              usehistory.push("/Mypage");
-            }}
-          >
-            cancel
-          </button>
-          <button onClick={onEdit}>적용하기</button>
-        </form>
-      </div>
-    </>
+            <button
+              onClick={() => {
+                usehistory.push("/Mypage");
+              }}
+            >
+              cancel
+            </button>
+            <button onClick={onEdit}>적용하기</button>
+          </form>
+        </div>
+      </InnerFrame>
+    </Frame>
   );
 }
 export default PageModify;

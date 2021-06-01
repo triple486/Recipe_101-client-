@@ -19,6 +19,8 @@ const Image = styled.img`
   height: 300px;
   width: 300px;
   display: flex;
+  border-radius: 10px;
+  border: solid 10px brown;
 `;
 const DataBox = styled.div`
   flex: 3 0 0;
