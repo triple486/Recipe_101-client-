@@ -6,7 +6,6 @@ import { Link, withRouter, Route, useHistory } from "react-router-dom";
 import "../../css/Mypage/MypageMain.css";
 import axios from "axios";
 import "../../css/Mypage/Modify.css";
-
 import Input from "./Input";
 import styled from "styled-components";
 import Modify from "./Modify";
@@ -51,27 +50,52 @@ const InnerFrame = styled.div`
   max-width: 1200px;
 `;
 
+const InnerBox = styled.div`
+  display: flex;
+  font-size: 24px;
+`;
+
+const ImgInput = styled.input`
+  height: 1px;
+  width: 1px;
+  margin: -1;
+  overflow: hidden;
+`;
+const ImgLabel = styled.label<{ image: string }>`
+  display: inline-box;
+  height: 100px;
+  width: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background-image: url(${({ image }) => image});
+  background-size: cover;
+  border: solid 1px black;
+`;
+
 function PageModify() {
   let accessToken = useSelector((state: RootState) => state.tokenReducer);
   let user = useSelector((state: RootState) => state.userReducer);
   let userInfo = user.userInfo;
-  console.log("userInfo : ", userInfo);
   let usehistory = useHistory();
 
-  const [newImage, setNewImage] = useState("");
+  const [newImage, setNewImage] = useState<File>();
   const [newUsername, setNewUsername] = useState("");
   const [newPhone, setNewPhone] = useState("");
   const [newEmail, setNewEmail] = useState("");
+  const [url, seturl] = useState(
+    process.env.REACT_APP_SERVER_URL + "/image/default.png"
+  );
 
   const onEdit = () => {
     let data = new FormData();
-    data.append("userImage", newImage[0]);
+    if (newImage) {
+      data.append("userImage", newImage);
+    }
     data.append("userName", newUsername);
     data.append("phone", newPhone);
     data.append("email", newEmail);
-
-    console.log(data.getAll("userImage"));
-    console.log(data.get("userImage"));
 
     const uploadData = {
       usermage: newImage,
@@ -93,8 +117,6 @@ function PageModify() {
           },
         })
         .then((res) => {
-          console.log("res : ", res);
-
           usehistory.push("/");
         })
         .catch((e) => console.log(e));
@@ -109,12 +131,12 @@ function PageModify() {
           <h1 className="text">Modify</h1>
           <form onSubmit={(e) => e.preventDefault()} id="editUserInfo">
             <h2>회원정보 수정</h2>
-            {newImage.length ? (
+            {/* {newImage ? (
               <Imgbox>
                 <ImageInput
                   src={
-                    newImage.length
-                      ? URL.createObjectURL(newImage[0])
+                    newImage
+                      ? URL.createObjectURL(newImage)
                       : newImage
                   }
                 ></ImageInput>
@@ -128,17 +150,30 @@ function PageModify() {
                     : ""
                 }
               ></Img>
-            )}
+            )} */}
+
+            <ImgLabel image={url} htmlFor={"aaaaa"}>
+              <ImgInput
+                type={"file"}
+                onChange={(e) => {
+                  if (e.target.files) {
+                    seturl(URL.createObjectURL(e.target.files[0]));
+                    setNewImage(e.target.files[0]);
+                  }
+                }}
+                id={"aaaaa"}
+              ></ImgInput>
+            </ImgLabel>
 
             <InputArea>
               <TextInput>
-                <Input
+                {/* <Input
                   label={"image"}
                   type={"file"}
                   value={newImage}
                   func={setNewImage}
                   placeholder={""}
-                ></Input>
+                ></Input> */}
                 <Input
                   label={"username"}
                   type={"text"}
