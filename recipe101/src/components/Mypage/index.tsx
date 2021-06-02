@@ -1,108 +1,83 @@
-import React, { useState } from "react";
 import styled from "styled-components";
-import { StructuredType } from "typescript";
-import { Link, withRouter, useHistory, Switch, Route } from "react-router-dom";
-import "../../css/Mypage/MypageMain.css";
-import Modify from "./Modify";
-import PickedRecipe from "./PickedRecipe";
-import AddedRecipe from "./AddedRecipe";
-import PageModify from "./PageModify";
-import MyReview from "./MyReview";
-import { useSelector, useDispatch } from "react-redux";
-import axios from "axios";
+import { useHistory, Switch, Route, useLocation } from "react-router-dom";
+import Main from "./Main";
+// import Profile from "./Pages/Profile";
+import Password from "./Pages/Password";
+import Profile from "./PageModify";
+import Comment from "./Pages/AddedComment";
+import Recipe from "./Pages/AddedRecipe";
+import Store from "./Pages/StoreRecipe";
+import Subscribe from "./Pages/Subscribe";
 
-import { RootState } from "../../redux/reducers";
-import {
-  Init,
-  isLoad,
-  LoadComments,
-  LoadRecipes,
-  LoadStores,
-} from "../../redux/mypageReducer";
-axios.defaults.withCredentials = true;
 const Frame = styled.div`
   height: 100%;
   width: 100%;
   display: flex;
+  flex-direction: row;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
   overflow-y: scroll;
 `;
 
-const InnerFrame = styled.div`
+const Header = styled.div`
+  height: 100px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  border-bottom: solid 1px black;
+`;
+const InnerHeader = styled.div`
   height: 100%;
   width: 100%;
   max-width: 1200px;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
 `;
-// 중괄호 안 ctrl + spacebar 눌러서 확인
 
-function MypageMain() {
+const Button = styled.button`
+  height: 30px;
+  width: 90px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+const TextBox = styled.div`
+  display: flex;
+`;
+
+export default function Mypage() {
   let history = useHistory();
-  let dispatch = useDispatch();
-
-  let user = useSelector((state: RootState) => state.userReducer);
-  let data = useSelector((state: RootState) => state.mypageReducer);
-  let accessToken = useSelector((state: RootState) => state.tokenReducer);
-  const config = {
-    headers: {
-      authorization: "bearer " + accessToken,
-    },
-  };
-  if (!data.isLoad) {
-    axios
-      .all([
-        axios.get(process.env.REACT_APP_SERVER_URL + `/store`, config),
-        axios.get(
-          process.env.REACT_APP_SERVER_URL +
-            `/comment/user/${user.userInfo.username}`,
-          config
-        ),
-        axios.get(
-          process.env.REACT_APP_SERVER_URL +
-            `/search/username/${user.userInfo.username}`,
-          config
-        ),
-      ])
-      .then((rst) => {
-        dispatch(LoadStores(rst[0].data.data));
-        dispatch(LoadComments(rst[1].data.data));
-        dispatch(LoadRecipes(rst[2].data.data.recipe));
-        dispatch(isLoad(true));
-      });
-  }
-  console.log(data);
+  let location = useLocation();
   return (
     <Frame>
-      <InnerFrame>
-        <div className="Outline">
-          <h1 className="Logo">Recipe 101</h1>
-          <div>
-            {/* <button className="Recipeaddbutton">레시피 추가</button> */}
-            <button
-              onClick={() => {
-                console.log(data);
-              }}
-            >
-              테스트
-            </button>
-            <button
-              className="Logout"
-              onClick={() => {
+      <Header>
+        <InnerHeader>
+          <Button
+            onClick={() => {
+              if (location.pathname === "/mypage") {
                 history.push("/");
-                dispatch(Init());
-              }}
-            >
-              돌아가기
-            </button>
-          </div>
-          <Modify></Modify>
-          <PickedRecipe></PickedRecipe>
-          <AddedRecipe></AddedRecipe>
-          <MyReview></MyReview>
-        </div>
-      </InnerFrame>
+              } else {
+                history.push("/mypage");
+              }
+            }}
+          >
+            <TextBox>{`돌아가기`}</TextBox>
+          </Button>
+        </InnerHeader>
+      </Header>
+      <Switch>
+        <Route path={"/mypage/subscribe"} component={Subscribe}></Route>
+        <Route path={"/mypage/addedrecipe"} component={Recipe}></Route>
+        <Route path={"/mypage/addedcomment"} component={Comment}></Route>
+        <Route path={"/mypage/storerecipe"} component={Store}></Route>
+        <Route path={"/mypage/password"} component={Password}></Route>
+        <Route path={"/mypage/profile"} component={Profile}></Route>
+        <Route path={"/mypage/"} component={Main}></Route>
+      </Switch>
     </Frame>
   );
 }
-
-export default MypageMain;

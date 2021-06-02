@@ -45,7 +45,7 @@ const Box = styled.div<{ k: number; y: number }>`
   ${({ k, y }) => (k < y ? "background-color: Gold;" : null)};
 `;
 
-export default function ({
+export default function Starscore({
   v,
   f,
   r = 1,

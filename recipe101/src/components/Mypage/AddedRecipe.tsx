@@ -1,12 +1,9 @@
-import React from "react";
-
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { RootState } from "../../redux/reducers";
-import { Link, withRouter } from "react-router-dom";
 import "../../css/Mypage/MypageMain.css";
 import "../../css/Mypage/PickedRecipe.css";
 import Content from "./Content";
-import axios from "axios";
+
 import styled from "styled-components";
 
 const Frame = styled.div`

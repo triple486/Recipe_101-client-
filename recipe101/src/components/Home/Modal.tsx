@@ -6,7 +6,7 @@ import Resister from "./Resister";
 const Frame = styled.div`
   height: 100vh;
   width: 100vw;
-  z-index: 2;
+  // z-index: 2;
   top: 0;
   left: 0;
   position: fixed;

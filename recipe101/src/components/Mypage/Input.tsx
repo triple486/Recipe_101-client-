@@ -27,7 +27,7 @@ const Box = styled.span`
   flex: 1 0 0;
 `;
 
-export default function ({
+export default function InputComp({
   label,
   value,
   type,

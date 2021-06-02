@@ -1,5 +1,4 @@
-import React from "react";
-import { Link, withRouter } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import "../../css/Mypage/MypageMain.css";
 import styled from "styled-components";
 
@@ -13,21 +12,6 @@ interface data {
   comment?: string;
   cookingTime?: string;
   score?: number;
-}
-
-interface comment {
-  id: number;
-  foodName: string;
-  comment: string;
-  score: number;
-}
-
-interface store {
-  id: number;
-  foodName: string;
-  imgUrl: string;
-  level: string;
-  cookingTime: string;
 }
 
 const Frame = styled.div`
@@ -59,6 +43,7 @@ const TextBox = styled.div`
   display: flex;
 `;
 function Content({ data }: { data: data }) {
+  let history = useHistory();
   return (
     <>
       {data.comment ? (
@@ -77,7 +62,11 @@ function Content({ data }: { data: data }) {
           </Line>
         </Frame2>
       ) : (
-        <Frame>
+        <Frame
+          onClick={() => {
+            history.push(`/recipe/${data.id}`);
+          }}
+        >
           <Img className="content-pic" src={data.imgUrl} />
           <div className="content-title">{data.foodName}</div>
           <div className="bottom-desc">

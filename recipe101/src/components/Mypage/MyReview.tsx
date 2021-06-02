@@ -1,7 +1,4 @@
-import React, { useState } from "react";
-
-import { Link, withRouter } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { RootState } from "../../redux/reducers";
 import "../../css/Mypage/MypageMain.css";
 import Content from "./Content";

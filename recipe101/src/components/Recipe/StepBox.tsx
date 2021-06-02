@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components";
 
 const Frame = styled.div`
@@ -60,7 +59,7 @@ interface Recipe {
   stepImage: string;
   stepTip: string;
 }
-export default function ({
+export default function StepBox({
   data,
   func = () => {},
 }: {

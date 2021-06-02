@@ -31,7 +31,7 @@ const InnerBox = styled.div`
   font-size: 24px;
 `;
 
-export default function ({
+export default function ImageUpload({
   func,
   name = "test",
 }: {

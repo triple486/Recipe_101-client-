@@ -42,7 +42,7 @@ const Button = styled.button`
 
 const dummy = () => {};
 
-export default function ({
+export default function Messageboxcomp({
   cancel = dummy,
   button = dummy,
   message = "",
