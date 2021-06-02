@@ -19,7 +19,7 @@ const InnerFrame = styled.div`
   flex: 1 0 0;
 `;
 
-export default function () {
+export default function Main() {
   return (
     <Frame>
       <InnerFrame>

@@ -29,12 +29,11 @@ const Button = styled.button`
   width: 50px;
 `;
 
-export default function () {
+export default function SearchInput() {
   let [type, typef] = useState("username");
   let [input, inputf] = useState("");
   let history = useHistory();
   let dispatch = useDispatch();
-  console.log(type, input);
   function searchfunction() {
     let url = `${process.env.REACT_APP_SERVER_URL}/search/${type}/${input}`;
     dispatch(isFail(false));

@@ -16,7 +16,7 @@ const BoxFrame = styled.div`
   display: flex;
 `;
 
-export default function () {
+export default function Recipepage() {
   let { id } = useParams<{ id?: string }>();
   let nid = Number(id) - 1;
   let { search } = useSelector((state: RootState) => state.searchReducer);

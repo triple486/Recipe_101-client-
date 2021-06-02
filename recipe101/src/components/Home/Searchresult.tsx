@@ -2,14 +2,7 @@ import Recipepage from "../Recipepage";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/reducers";
-import {
-  Route,
-  Switch,
-  useHistory,
-  Redirect,
-  useRouteMatch,
-  Link,
-} from "react-router-dom";
+import { Route, Switch, Redirect, useRouteMatch, Link } from "react-router-dom";
 import { useState } from "react";
 const Frame = styled.div`
   flex: 1 0 0;
@@ -57,13 +50,7 @@ const Box2 = styled.div`
   flex-direction: column;
   flex: 1 0 0;
 `;
-const ResultWindow = styled.div`
-  flex: 1 0 0;
-`;
-const Header = styled.div`
-  height: 50px;
-  width: 100%;
-`;
+
 const Footer = styled.div`
   height: 100px;
   width: 100%;
@@ -79,22 +66,14 @@ const FooterBox = styled.div`
   justify-content: space-evenly;
   align-items: center;
 `;
-const Selecter = styled.select`
-  width: 50px;
-`;
 
 const InnerBox = styled.div`
   display: flex;
 `;
 
 function YesResult() {
-  let width = window.innerWidth > 1300 ? 1300 : window.innerWidth;
-  let height = window.innerHeight - 200;
   let { search } = useSelector((state: RootState) => state.searchReducer);
   let [q, setq] = useState(1);
-  let history = useHistory();
-  let w = Math.floor(width / 400) * 100;
-  let h = Math.floor(height / 150) * 50;
   let k = Math.ceil(search.length / 12);
   let pn: number[] = [];
   for (let i = 0; i < 10 * Math.ceil(k / 10); i++) {

@@ -70,7 +70,7 @@ const Tbox = styled.div`
 
 const TextBox = styled.div``;
 
-export default function ({
+export default function Comment({
   h,
   n,
   func,

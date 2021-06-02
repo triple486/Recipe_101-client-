@@ -1,16 +1,7 @@
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/reducers";
-import {
-  Route,
-  Switch,
-  useHistory,
-  useLocation,
-  Link,
-  Redirect,
-  useParams,
-  useRouteMatch,
-} from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
 import StepBox from "./StepBox";
@@ -58,16 +49,6 @@ const MinBoxFrame = styled.div<Boxset>`
   position: releative;
   display: flex;
   flex-direction: ${({ c }) => (c ? "column" : "row")};
-  border: solid 1px red;
-`;
-
-const NaviBar = styled.div`
-  height: 200px;
-  width: 100px;
-  position: fixed;
-  right: 2%;
-  top: 50px;
-  z-order: 2;
   border: solid 1px red;
 `;
 
@@ -160,14 +141,6 @@ const IMG = styled.img`
 const ItemBox = styled.div`
   height: 40px;
   width: 100%;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-`;
-
-const ScoreBox = styled.div`
-  height: 200px;
-  width: 200px;
   display: flex;
   justify-content: space-around;
   align-items: center;

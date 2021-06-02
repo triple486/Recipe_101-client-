@@ -1,4 +1,4 @@
-import { useHistory, useLocation, useRouteMatch } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { isOn } from "../../redux/modalReducer";
@@ -37,10 +37,6 @@ const LongBox = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1 0 0;
-`;
-
-const Search = styled.div`
-  flex: 2 0 0;
 `;
 
 function Comp() {

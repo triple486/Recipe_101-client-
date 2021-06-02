@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import Starscore from "./Starscore";
-import { useState } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/reducers";
@@ -33,13 +32,6 @@ const MessageBox = styled.div`
 
   display: flex;
   flex-direction: column;
-`;
-const AddButton = styled.button<{ l: number }>`
-  height: ${({ l }) => l}px;
-  width: ${({ l }) => l}px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 `;
 
 const LineBox = styled.div`
@@ -85,7 +77,7 @@ interface Commentf {
   createdAt: string;
   score: number;
 }
-export default function ({
+export default function CommentBox({
   h = 100,
   r = 1,
   data,

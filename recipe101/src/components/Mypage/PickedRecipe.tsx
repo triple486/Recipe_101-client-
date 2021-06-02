@@ -1,8 +1,5 @@
-import React from "react";
-import { StructuredType } from "typescript";
-import { Link, withRouter } from "react-router-dom";
 import Content from "./Content";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { RootState } from "../../redux/reducers";
 import "../../css/Mypage/MypageMain.css";
 import "../../css/Mypage/PickedRecipe.css";
