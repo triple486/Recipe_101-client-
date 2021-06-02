@@ -218,38 +218,24 @@ function Detailedrecipe() {
         setdata({ ...rst.data.data });
         setc(false);
 
-        return axios.get(process.env.REACT_APP_SERVER_URL + "/store", {
-          headers: {
-            authorization: "bearer " + accessToken,
-          },
-        });
-      })
-      .then((rst) => {
-        if (rst.data.data.accessToken) {
-          dispatch(storeToken(rst.data.data.accessToken));
-          return axios.get(process.env.REACT_APP_SERVER_URL + "/store", {
-            headers: {
-              authorization: "bearer " + rst.data.data.accessToken,
-            },
-          });
-        } else {
-          rst.data.data.forEach((x: any) => {
-            if (x.id && x.id === data.food_info?.id) {
-              setstore(true);
-            }
-          });
-        }
-      })
-      .then((rst) => {
-        if (rst) {
-          rst.data.data.forEach((x: any) => {
-            if (x.id && x.id === data.food_info?.id) {
-              setstore(true);
-            }
-          });
-        }
+        return;
       });
   }
+
+  axios
+    .get(process.env.REACT_APP_SERVER_URL + "/store", {
+      headers: {
+        authorization: "bearer " + accessToken,
+      },
+    })
+    .then((rst) => {
+      rst.data.data.forEach((x: any) => {
+        if (x.id && x.id === data.food_info?.id) {
+          setstore(true);
+        }
+      });
+    });
+
   if (data.Comment) {
     data.Comment.forEach((x, i) => {
       if (x.userName === user.userInfo.username) {
