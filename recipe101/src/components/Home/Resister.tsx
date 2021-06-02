@@ -8,6 +8,7 @@ import Input from "../Input";
 import axios from "axios";
 import Imageupload from "../ImageUpload";
 import { storeToken } from "../../redux/tokenReducer";
+import { updateLogin, updateUserInfo } from "../../redux/userReducer";
 
 const Frame = styled.div`
   height: 380px;
@@ -150,6 +151,7 @@ export default function Resister() {
   }
   let history = useHistory();
   let dispatch = useDispatch();
+
   return (
     <Frame>
       <CancelButton
@@ -203,13 +205,25 @@ export default function Resister() {
             <Input label={"username"} bfunc={validation("username")}></Input>
           </Line>
           <Line err={validcheck["password"]}>
-            <Input label={"password"} bfunc={validation("password")}></Input>
+            <Input
+              label={"password"}
+              type={"password"}
+              bfunc={validation("password")}
+            ></Input>
           </Line>
           <Line err={validcheck["email"]}>
-            <Input label={"email"} bfunc={validation("email")}></Input>
+            <Input
+              label={"email"}
+              type={"email"}
+              bfunc={validation("email")}
+            ></Input>
           </Line>
           <Line err={validcheck["phone"]}>
-            <Input label={"phone"} bfunc={validation("phone")}></Input>
+            <Input
+              label={"phone"}
+              type={"phone"}
+              bfunc={validation("phone")}
+            ></Input>
           </Line>
           <Line>{err.length ? err : null}</Line>
           <Line>
@@ -243,10 +257,25 @@ export default function Resister() {
                   )
                   .then((res) => {
                     dispatch(storeToken(res.data.data.accessToken));
+
+                    const config = {
+                      headers: {
+                        authorization: "bearer " + res.data.data.accessToken,
+                      },
+                    };
+                    return axios.get(
+                      process.env.REACT_APP_SERVER_URL + "/user",
+                      config
+                    );
+                  })
+                  .then((res) => {
+                    dispatch(updateLogin(true));
+                    dispatch(updateUserInfo(res.data.data.userinfo));
+                    dispatch(isOn(false));
+                    history.push(path.length ? path : "/");
                   })
                   .catch((err) => {
-                    seterr(err.response.data.message);
-                    console.log("fail");
+                    seterr(err.response.data ? err.response.data.message : "");
                   });
               }}
             >

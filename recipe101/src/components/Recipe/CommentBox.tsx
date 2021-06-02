@@ -17,6 +17,7 @@ const InnerFrame = styled.div`
   display: flex;
   flex-direction: row;
   border: solid 3px black;
+  background-color: white;
 `;
 
 const ScoreBox = styled.div<{ l: number }>`
@@ -97,7 +98,6 @@ export default function CommentBox({
       h = t.getHours(),
       mn = t.getMinutes(),
       s = t.getSeconds();
-    console.log(y, m, d, h, mn, s);
     return `${y}년 ${m}월 ${d}일 ${h}시 ${mn}분 ${s}초`;
   }
   return (

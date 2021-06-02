@@ -13,6 +13,15 @@ const Frame = styled.div`
   justify-content: center;
   align-items: center;
 `;
+const InnerFrame = styled.div`
+  flex: 1 0 0;
+  width: 100%;
+  border: solid 1px blue;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
 const Box = styled.div`
   height: 100%;
   max-width: 1200px;
@@ -43,7 +52,6 @@ function Result({ search }: { search: any[] }) {
 }
 
 const Box2 = styled.div`
-  height: 100%;
   max-width: 1200px;
   width: 100%;
   display: flex;
@@ -97,25 +105,17 @@ function YesResult() {
 
   return (
     <Box2>
-      {/* <Header>
-        <Selecter
-          onChange={(e) =>
-            history.push(`${match.path}/${e.target.selectedIndex + 1}`)
-          }
-        >
-          {pn.map((x: number) => {
-            return <option key={x}>{x}</option>;
-          })}
-        </Selecter>
-      </Header> */}
-      <Switch>
-        <Route path={`${match.path}/:id`}>
-          <Recipepage></Recipepage>
-        </Route>
-        <Route path={`${match.path}`}>
-          <Redirect to={`${match.path}/${1}`} />
-        </Route>
-      </Switch>
+      <InnerFrame>
+        <Switch>
+          <Route path={`${match.path}/:id`}>
+            <Recipepage></Recipepage>
+          </Route>
+          <Route path={`${match.path}`}>
+            <Redirect to={`${match.path}/${1}`} />
+          </Route>
+        </Switch>
+      </InnerFrame>
+
       <Footer>
         <FooterBox>
           {pn.length > 10

@@ -7,11 +7,12 @@ const Frame = styled.div`
   height: 100%;
   width: 100%;
   display: flex;
+  flex-direction: row;
   flex-wrap: wrap;
 `;
 
 const BoxFrame = styled.div`
-  height: 33%;
+  height: 200px;
   width: 25%;
   display: flex;
 `;
@@ -21,7 +22,6 @@ export default function Recipepage() {
   let nid = Number(id) - 1;
   let { search } = useSelector((state: RootState) => state.searchReducer);
   let data = search.slice(nid * 12, (nid + 1) * 12);
-
   return (
     <Frame>
       {data.map((x, i) => {

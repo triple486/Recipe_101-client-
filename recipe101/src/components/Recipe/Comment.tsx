@@ -17,6 +17,7 @@ const InnerFrame = styled.div`
   width: 95%;
   display: flex;
   flex-direction: row;
+  background-color: white;
   border: solid 3px black;
 `;
 
@@ -87,7 +88,6 @@ export default function Comment({
   let [text, settext] = useState("");
   let user = useSelector((state: RootState) => state.userReducer);
   let accessToken = useSelector((state: RootState) => state.tokenReducer);
-
   return (
     <Frame>
       <InnerFrame>

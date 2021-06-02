@@ -1,12 +1,12 @@
 import styled from "styled-components";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/reducers";
 import { useHistory, useParams } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
 import StepBox from "./StepBox";
 import LabelBox from "./LabelBox";
-
+import { storeToken } from "../../redux/tokenReducer";
 import Comment from "./Comment";
 import CommentBox from "./CommentBox";
 import Message from "../Addrecipe/messagebox";
@@ -20,6 +20,7 @@ const Frame = styled.div`
   margin: 0;
   overflow-y: scroll;
   justify-content: center;
+  background-color: #ffe894e6;
 `;
 const InnerFrame = styled.div`
   height: 100%;
@@ -198,28 +199,63 @@ interface Image_extend {
 function Detailedrecipe() {
   let { id } = useParams<{ id?: string }>();
   let history = useHistory();
+  let dispatch = useDispatch();
   let user = useSelector((state: RootState) => state.userReducer);
   let accessToken = useSelector((state: RootState) => state.tokenReducer);
   let [data, setdata] = useState<Recipe_info>({});
   let [iex, setiex] = useState<Image_extend>({ isEx: false });
   let [mkc, setc] = useState(false);
   let [call, setcall] = useState(false);
+  let [call2, setcall2] = useState(false);
   let [add, setadd] = useState(true);
   let [del, setdel] = useState(0);
+  let [store, setstore] = useState(false);
+
   if (!data.food_info || mkc) {
     axios
       .get(process.env.REACT_APP_SERVER_URL + `/recipe/${id}`)
       .then((rst) => {
-        console.log(rst);
         setdata({ ...rst.data.data });
         setc(false);
-        if (
-          rst.data.data.Comment ||
-          rst.data.data.Comment.userName === user.userInfo.username
-        ) {
-          setadd(false);
+
+        return axios.get(process.env.REACT_APP_SERVER_URL + "/store", {
+          headers: {
+            authorization: "bearer " + accessToken,
+          },
+        });
+      })
+      .then((rst) => {
+        if (rst.data.data.accessToken) {
+          dispatch(storeToken(rst.data.data.accessToken));
+          return axios.get(process.env.REACT_APP_SERVER_URL + "/store", {
+            headers: {
+              authorization: "bearer " + rst.data.data.accessToken,
+            },
+          });
+        } else {
+          rst.data.data.forEach((x: any) => {
+            if (x.id && x.id === data.food_info?.id) {
+              setstore(true);
+            }
+          });
+        }
+      })
+      .then((rst) => {
+        if (rst) {
+          rst.data.data.forEach((x: any) => {
+            if (x.id && x.id === data.food_info?.id) {
+              setstore(true);
+            }
+          });
         }
       });
+  }
+  if (data.Comment) {
+    data.Comment.forEach((x, i) => {
+      if (x.userName === user.userInfo.username) {
+        setadd(false);
+      }
+    });
   }
 
   function Eximage() {
@@ -237,7 +273,6 @@ function Detailedrecipe() {
   function timecutter(x: string) {
     return x.length ? x.split("T")[0].split("-").join(" / ") : x;
   }
-  console.log(data.Comment);
   return (
     <Frame>
       <InnerFrame>
@@ -251,6 +286,71 @@ function Detailedrecipe() {
           >
             <TextBox>{"돌아가기"}</TextBox>
           </Button>
+
+          {store ? (
+            <Button
+              onClick={() => {
+                axios
+                  .delete(
+                    process.env.REACT_APP_SERVER_URL +
+                      `/store/${data.food_info?.id}`,
+                    {
+                      headers: {
+                        authorization: "bearer " + accessToken,
+                      },
+                    }
+                  )
+                  .then((rst) => {
+                    setstore(false);
+                  });
+              }}
+            >
+              <TextBox>{"구독 취소"}</TextBox>
+            </Button>
+          ) : (
+            <Button
+              onClick={() => {
+                axios
+                  .post(
+                    process.env.REACT_APP_SERVER_URL + "/store",
+                    { id: data.food_info?.id },
+                    {
+                      headers: {
+                        authorization: "bearer " + accessToken,
+                      },
+                    }
+                  )
+                  .then((rst) => {
+                    setstore(true);
+                  });
+              }}
+            >
+              <TextBox>{"구독 하기"}</TextBox>
+            </Button>
+          )}
+          {user.userInfo.username === data.food_info?.userName ? (
+            <Button
+              onClick={() => {
+                axios
+                  .delete(
+                    process.env.REACT_APP_SERVER_URL +
+                      `/recipe/${data.food_info?.id}`,
+
+                    {
+                      headers: {
+                        authorization: "bearer " + accessToken,
+                      },
+                    }
+                  )
+                  .then((rst) => {
+                    setcall2(true);
+                  });
+              }}
+            >
+              <TextBox>{"삭제하기"}</TextBox>
+            </Button>
+          ) : null}
+
           <DateBox>
             <LabelBox
               l={"작성 일자"}
@@ -438,6 +538,33 @@ function Detailedrecipe() {
                 })
                 .catch((err) => {
                   console.log("실패");
+                });
+            }}
+            buttonMessage={"확인"}
+          ></Message>
+        ) : null}
+
+        {call2 ? (
+          <Message
+            cancel={() => {
+              setcall(false);
+            }}
+            message={"레시피를 지우시겠습니까?"}
+            button={() => {
+              axios
+                .delete(
+                  process.env.REACT_APP_SERVER_URL +
+                    `/recipe/${data.food_info?.id}`,
+
+                  {
+                    headers: {
+                      authorization: "bearer " + accessToken,
+                    },
+                  }
+                )
+                .then((rst) => {
+                  setcall2(false);
+                  history.goBack();
                 });
             }}
             buttonMessage={"확인"}
