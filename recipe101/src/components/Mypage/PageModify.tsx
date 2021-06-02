@@ -1,14 +1,12 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/reducers";
-import { StructuredType } from "typescript";
-import { Link, withRouter, Route, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import "../../css/Mypage/MypageMain.css";
 import axios from "axios";
 import "../../css/Mypage/Modify.css";
 import Input from "./Input";
 import styled from "styled-components";
-import Modify from "./Modify";
 axios.defaults.withCredentials = true;
 const InputArea = styled.div`
   display: flex;
@@ -17,26 +15,12 @@ const InputArea = styled.div`
   flex-direction: row;
 `;
 
-const ImageInput = styled.img`
-  width: 100%;
-  height: 100%;
-  flex: 1 0 0;
-  display: block;
-`;
 const TextInput = styled.div`
   flex: 1 0 0;
   display: flex;
   flex-direction: column;
 `;
 
-const Img = styled.img`
-  height: 100px;
-  width: 100px;
-`;
-const Imgbox = styled.div`
-  height: 100px;
-  width: 100px;
-`;
 const Frame = styled.div`
   height: 100%;
   width: 100%;
@@ -48,11 +32,6 @@ const InnerFrame = styled.div`
   height: 100%;
   width: 100%;
   max-width: 1200px;
-`;
-
-const InnerBox = styled.div`
-  display: flex;
-  font-size: 24px;
 `;
 
 const ImgInput = styled.input`

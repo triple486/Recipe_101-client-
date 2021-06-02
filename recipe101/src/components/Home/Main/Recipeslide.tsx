@@ -30,17 +30,6 @@ const DataBox = styled.div`
   justify-content: space-around;
   align-items: center;
 `;
-const Box = styled.div`
-  flex: 1 0 1;
-`;
-
-function welcomeChobo(input?: string) {
-  if (input === "초보환영") {
-    return "초보 환영";
-  } else {
-    return input;
-  }
-}
 
 interface recipe {
   food_id?: number;

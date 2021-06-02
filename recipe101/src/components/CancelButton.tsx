@@ -17,7 +17,7 @@ const CancelLine = styled.div`
   flex-direction: row-reverse;
 `;
 const dummy = () => {};
-export default function ({ Cancel = dummy }: { Cancel: Function }) {
+export default function Canclebutton({ Cancel = dummy }: { Cancel: Function }) {
   return (
     <CancelLine>
       <CancelButton onClick={(e) => Cancel(e)}>

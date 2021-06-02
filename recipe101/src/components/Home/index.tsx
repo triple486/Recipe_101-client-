@@ -9,18 +9,17 @@ import Modal from "./Modal";
 import Searchbar from "./Searchbar";
 import Searchresult from "./Searchresult";
 import axios from "axios";
-import Mypage from "../Mypage";
-import PageModify from "../Mypage/PageModify";
 
 const Frame = styled.div`
   height: 100%;
   width: 100%;
   display: flex;
   flex-direction: column;
+  background-color: #ffe894e6;
 `;
 
 const InnerFrame = styled.div`
-  height: 100%;
+  flex: 1 0 0;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -51,8 +50,6 @@ function Landingpage() {
       <InnerFrame>
         <Switch>
           <Route path={"/search"} component={Searchresult}></Route>
-          <Route path="/Mypage/Modify" component={PageModify}></Route>
-          <Route path="/Mypage" component={Mypage}></Route>
           <Route path={"/"} component={Main}></Route>
         </Switch>
       </InnerFrame>

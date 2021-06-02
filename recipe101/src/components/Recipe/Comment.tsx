@@ -17,6 +17,7 @@ const InnerFrame = styled.div`
   width: 95%;
   display: flex;
   flex-direction: row;
+  background-color: white;
   border: solid 3px black;
 `;
 
@@ -70,7 +71,7 @@ const Tbox = styled.div`
 
 const TextBox = styled.div``;
 
-export default function ({
+export default function Comment({
   h,
   n,
   func,
@@ -87,7 +88,6 @@ export default function ({
   let [text, settext] = useState("");
   let user = useSelector((state: RootState) => state.userReducer);
   let accessToken = useSelector((state: RootState) => state.tokenReducer);
-
   return (
     <Frame>
       <InnerFrame>
