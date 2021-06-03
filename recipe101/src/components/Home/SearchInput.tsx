@@ -4,8 +4,13 @@ import styled from "styled-components";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { isSearch, isFail, searchRecipe } from "../../redux/searchReducer";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch, faUser, faUtensils, faCarrot } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faSearch,
+  faUser,
+  faUtensils,
+  faCarrot,
+} from "@fortawesome/free-solid-svg-icons";
 import "../../css/SearchInput.css";
 
 const Search = styled.div`
@@ -27,11 +32,14 @@ const SearchBox = styled.div`
 const SelectBox = styled.div`
   display: inline-block;
   margin: 7px 10px 0 10px;
+
   vertical-align: top;
 `;
 
-const Select = styled.select`
-  height: 50px;
+const Select = styled.div<{ type: string; name: string }>`
+  display: inline-block;
+  ${({ type, name }) => (type === name ? `background-color:green;` : "")}
+  border-radius: 50%;
 `;
 const Input = styled.input`
   // height: 50px;
@@ -39,27 +47,27 @@ const Input = styled.input`
   // text-align: right;
   // text-indent: -5em;
   // background: #B17D55;
-    // position: absolute;
-    top: 0;
-    left: 0;
-    width: 350px;
-    height: 40px;
-    line-height: 30px;
-    outline: 0;
-    border: 0;
-    // display: none;
-    font-size: 1em;
-    // border-radius: 20px;
-    padding-left: 13px;
-    padding-right: 20px;
+  // position: absolute;
+  top: 0;
+  left: 0;
+  width: 350px;
+  height: 40px;
+  line-height: 30px;
+  outline: 0;
+  border: 0;
+  // display: none;
+  font-size: 1em;
+  // border-radius: 20px;
+  padding-left: 13px;
+  padding-right: 20px;
 
-    vertical-align: top;
+  vertical-align: top;
 `;
 
 const Button = styled.button`
   height: 50px;
   width: 50px;
-  background: #B17D55;
+  background: #b17d55;
 `;
 
 export default function () {
@@ -68,6 +76,12 @@ export default function () {
   let history = useHistory();
   let dispatch = useDispatch();
   console.log(type, input);
+
+  function selecter(type: string) {
+    return () => {
+      typef(type);
+    };
+  }
   function searchfunction() {
     let url = `${process.env.REACT_APP_SERVER_URL}/search/${type}/${input}`;
     dispatch(isFail(false));
@@ -113,9 +127,28 @@ export default function () {
           <option>{"재료명"}</option>
         </Select> */}
         <SelectBox>
-          <FontAwesomeIcon icon={faUser} onClick={searchfunction} className='search_icon user' />
-          <FontAwesomeIcon icon={faUtensils} onClick={searchfunction} className='search_icon food' />
-          <FontAwesomeIcon icon={faCarrot} onClick={searchfunction} className='search_icon item' />
+          <Select type={type} name={"username"}>
+            <FontAwesomeIcon
+              icon={faUser}
+              onClick={selecter("username")}
+              className="search_icon user"
+            />
+          </Select>
+
+          <Select type={type} name={"foodname"}>
+            <FontAwesomeIcon
+              icon={faUtensils}
+              onClick={selecter("foodname")}
+              className="search_icon food"
+            />
+          </Select>
+          <Select type={type} name={"itemname"}>
+            <FontAwesomeIcon
+              icon={faCarrot}
+              onClick={selecter("itemname")}
+              className="search_icon item"
+            />
+          </Select>
         </SelectBox>
         <Input
           value={input}
@@ -123,8 +156,12 @@ export default function () {
             inputf(e.target.value);
           }}
         ></Input>
-        <FontAwesomeIcon icon={faSearch} onClick={searchfunction} className='search_icon search' />
-        
+        <FontAwesomeIcon
+          icon={faSearch}
+          onClick={searchfunction}
+          className="search_icon search"
+        />
+
         {/* <Button onClick={searchfunction}>{"검색"}</Button> */}
       </SearchBox>
     </Search>
