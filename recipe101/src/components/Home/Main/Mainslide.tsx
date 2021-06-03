@@ -7,15 +7,19 @@ import img from "../../../Assets/Images/food-2068217_1920-turned.jpg";
 const slide = keyframes`
 0% {
   margin-left:100%;
+  width:100%
 }
 20% {
   margin-left:0%;
+  width:100%
 }
 80% {
   margin-left:0;
+  width:100%
 }
 100% {
   margin-left:-100%;
+  width:100%
 } 
 
 `;
@@ -24,11 +28,13 @@ const Frame = styled.div`
   height: 816px;
   width: 100%;
   display: flex;
+  overflow: hidden;
   justify-content: center;
   align-items: center;
   flex-direction: row;
   background-image: url(${img});
 `;
+
 const Innerframe = styled.div`
   height: 100%;
   width: 100%;
@@ -41,6 +47,7 @@ const DataArea = styled.div`
   flex: 16 0 0;
   overflow: hidden;
   animation: ${slide} 4s infinite linear normal;
+  background-image: url(${img});
   // border: solid 1px red;
 `;
 const SelectArea = styled.div`
