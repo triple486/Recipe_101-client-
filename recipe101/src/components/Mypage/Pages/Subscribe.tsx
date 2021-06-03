@@ -23,7 +23,7 @@ const InnerFrame = styled.div`
   padding: 10px;
   flex-wrap: wrap;
   justify-content: center;
-  border: solid 3px Black;
+  border: solid 3px white;
 `;
 
 const BoxFrame = styled.div`
@@ -42,7 +42,7 @@ const BoxInnerFrame = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  border: solid 2px black;
+  border: solid 2px white;
 `;
 
 const Box = styled.div`
@@ -62,6 +62,28 @@ const TextBox = styled.div`
   font-size: 30px;
   font-weight: 700;
   margin-bottom: 10px;
+`;
+
+const Button = styled.div`
+background-color: #b17d55;
+  border: solid 1px #dfdfdf;
+  color: white;
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 14px;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  cursor: pointer;
+
+  &:hover {
+    border: solid 1px white;
+    background-color: white;
+    opacity: 0.7;
+    color: black;
+
 `;
 interface follow {
   id: number;
@@ -122,7 +144,7 @@ export default function Profile() {
                   <Box>{`${x.recipes} 개`}</Box>
                   <Box>{"구독 날짜"}</Box>
                   <Box>{time(x.createdAt)}</Box>
-                  <button
+                  <Button
                     onClick={() => {
                       axios
                         .delete(
@@ -136,7 +158,7 @@ export default function Profile() {
                     }}
                   >
                     {"구독 취소 "}
-                  </button>
+                  </Button>
                 </BoxInnerFrame>
               </BoxFrame>
             );

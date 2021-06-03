@@ -35,14 +35,14 @@ const Header = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  border-bottom: solid 1px black;
+  border-bottom: solid 1px white;
 `;
 const InnerHeader = styled.div`
   height: 100%;
   width: 100%;
   max-width: 1200px;
   display: flex;
-  flex-direction: row-reverse;
+  flex-direction: row;
   align-items: center;
 `;
 
@@ -70,6 +70,11 @@ const Button = styled.button`
 const TextBox = styled.div`
   display: flex;
 `;
+const Title = styled.div`
+  display: flex;
+  width: 900px;
+  margin-left: 80px;
+`;
 
 export default function Mypage() {
   let history = useHistory();
@@ -95,6 +100,9 @@ export default function Mypage() {
     <Frame>
       <Header>
         <InnerHeader>
+          <Title>
+            <h1>마이페이지</h1>
+          </Title>
           <Button
             onClick={() => {
               if (location.pathname === "/mypage") {

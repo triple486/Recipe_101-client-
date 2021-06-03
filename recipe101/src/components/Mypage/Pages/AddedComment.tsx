@@ -26,7 +26,7 @@ const InnerFrame = styled.div`
   margin-top: 30px;
   margin-bottom: 30px;
   overflow-y: scroll;
-  border: solid 3px Black;
+  border: solid 3px white;
 `;
 const BoxFrame = styled.div`
   height: 200px;
@@ -45,6 +45,8 @@ const FoodName = styled.div`
 `;
 
 const TextBox = styled.div`
+  margin-top: 30px;
+  margin-left: 30px;
   height: 50px;
   display: flex;
   font-size: 30px;

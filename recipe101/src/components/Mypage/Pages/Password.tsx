@@ -24,12 +24,12 @@ const InnerFrame = styled.div`
   align-items: center;
 `;
 const PasswordBoard = styled.div`
-  height: 40%;
+  height: 60%;
   width: 20%;
   min-width: 300px;
   display: flex;
   flex-direction: column;
-  border: solid 3px black;
+  border: solid 3px white;
 `;
 const Line = styled.div<{ c?: boolean }>`
   flex: 1 0 0;
@@ -39,16 +39,30 @@ const Line = styled.div<{ c?: boolean }>`
   ${({ c }) => (c ? `background-color: red;` : "")}
 `;
 const PasswordInput = styled.input`
-  width: 60%;
-  height: 40%;
+  width: 80%;
+  height: 60%;
   display: flex;
 `;
 const Button = styled.button`
-  width: 60%;
-  height: 40%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+background-color: #b17d55;
+border: solid 1px #dfdfdf;
+color: white;
+padding: 5px 10px;
+text-align: center;
+text-decoration: none;
+display: inline-block;
+font-size: 16px;
+margin: 4px 14px;
+-webkit-transition-duration: 0.4s; /* Safari */
+transition-duration: 0.4s;
+cursor: pointer;
+
+&:hover {
+  border: solid 1px white;
+  background-color: white;
+  opacity: 0.7;
+  color: black;
+
 `;
 
 const TextBox = styled.div`

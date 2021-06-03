@@ -29,7 +29,7 @@ const ContentBox = styled.div`
   flex-direction: column;
   // justify-content: center;
   // align-items: center;
-  border: solid 1px black;
+  border: solid 1px white;
 `;
 const UpperLine = styled.div`
   display: flex;
@@ -37,10 +37,25 @@ const UpperLine = styled.div`
   align-items: center;
 `;
 const Button = styled.button`
-  display: flex;
-  margin-right: 10px;
-  justify-content: center;
-  align-items: center;
+  background-color: #b17d55;
+  border: solid 1px #dfdfdf;
+  color: white;
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 14px;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  cursor: pointer;
+
+  &:hover {
+    border: solid 1px white;
+    background-color: white;
+    opacity: 0.7;
+    color: black;
+  }
 `;
 const TextBox = styled.div`
   display: flex;
@@ -48,7 +63,7 @@ const TextBox = styled.div`
 
 const ContentNameBox = styled.div`
   display: flex;
-  padding: 10px;
+  padding: 20px;
   font-size: 20px;
   font-weight: 700;
 `;
