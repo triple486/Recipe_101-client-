@@ -9,7 +9,7 @@ import Modal from "./Modal";
 import Searchbar from "./Searchbar";
 import Searchresult from "./Searchresult";
 import axios from "axios";
-
+import BottomSide from "../Home/Main/BottomSide";
 const Frame = styled.div`
   height: 100%;
   width: 100%;
@@ -26,6 +26,13 @@ const InnerFrame = styled.div`
   align-items: center;
   flex-direction: column;
 `;
+
+// const BottomSide = styled.div`
+//   background-color: white;
+//   width: 100%;
+//   height: 100px;
+//   color: black;
+// `;
 
 function Landingpage() {
   const dispatch = useDispatch();
