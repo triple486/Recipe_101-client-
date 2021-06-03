@@ -112,7 +112,7 @@ export default function CommentBox({
               <TextBox2>{data?.userName}</TextBox2>
               <TextBox2>{time(data?.createdAt || "")}</TextBox2>
             </InfoBox>
-            {user.isLogin && user.userInfo.username === data?.userName ? (
+            {user.isLogin && user.userInfo.userName === data?.userName ? (
               <Button onClick={() => func()}>
                 <TextBox>{"삭제"}</TextBox>
               </Button>

@@ -10,12 +10,14 @@ const Frame = styled.div`
   height: ${window.innerHeight - 100}px;
   width: 100%;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
 `;
 
 const InnerFrame = styled.div`
   width: 100%;
+  height: 100%;
   max-width: 1200px;
   display: flex;
   flex-direction: row;
@@ -23,6 +25,7 @@ const InnerFrame = styled.div`
   justify-content: center;
   margin-top: 30px;
   margin-bottom: 30px;
+  overflow-y: scroll;
   border: solid 3px Black;
 `;
 const BoxFrame = styled.div`
@@ -56,7 +59,11 @@ interface comment {
   createdAt: string;
   score: number;
 }
-
+const TextLine = styled.div`
+  height: 50px;
+  width: 1200px;
+  display: flex;
+`;
 export default function Profile() {
   let user = useSelector((state: RootState) => state.userReducer);
   let accessToken = useSelector((state: RootState) => state.tokenReducer);
@@ -72,7 +79,7 @@ export default function Profile() {
     axios
       .get(
         process.env.REACT_APP_SERVER_URL +
-          `/comment/user/${user.userInfo.username}`,
+          `/comment/user/${user.userInfo.userName}`,
         config
       )
       .then((rst) => {
@@ -82,12 +89,15 @@ export default function Profile() {
 
   return (
     <Frame>
+      <TextLine>
+        <TextBox>작성한 감상평들</TextBox>
+      </TextLine>
       <InnerFrame>
         {data && data.length ? (
           data.map((x, i) => {
             let ndata = { ...x };
-            if (user.userInfo.username) {
-              ndata = { ...ndata, userName: user.userInfo.username };
+            if (user.userInfo.userName) {
+              ndata = { ...ndata, userName: user.userInfo.userName };
             }
             return (
               <BoxFrame key={i}>

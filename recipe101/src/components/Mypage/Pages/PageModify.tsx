@@ -1,17 +1,17 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import { RootState } from "../../redux/reducers";
+import { RootState } from "../../../redux/reducers";
 import { useHistory } from "react-router-dom";
-import "../../css/Mypage/MypageMain.css";
+import "../../../css/Mypage/MypageMain.css";
 import axios from "axios";
-import "../../css/Mypage/Modify.css";
-import Input from "./Input";
+import "../../../css/Mypage/Modify.css";
+import Input from "../Input";
 import styled from "styled-components";
 axios.defaults.withCredentials = true;
 const InputArea = styled.div`
   display: flex;
   width: 40%;
-  flex: 1 0 0;
+  flex: 1 0 1;
   flex-direction: row;
 `;
 
@@ -42,6 +42,7 @@ const ImgInput = styled.input`
 `;
 const ImgLabel = styled.label<{ image: string }>`
   display: inline-box;
+  flex: 1 0 1;
   height: 100px;
   width: 100px;
   display: flex;
@@ -51,6 +52,13 @@ const ImgLabel = styled.label<{ image: string }>`
   background-image: url(${({ image }) => image});
   background-size: cover;
   border: solid 1px black;
+`;
+const InputBox = styled.div`
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 `;
 
 function PageModify() {
@@ -110,80 +118,47 @@ function PageModify() {
           <h1 className="text">Modify</h1>
           <form onSubmit={(e) => e.preventDefault()} id="editUserInfo">
             <h2>회원정보 수정</h2>
-            {/* {newImage ? (
-              <Imgbox>
-                <ImageInput
-                  src={
-                    newImage
-                      ? URL.createObjectURL(newImage)
-                      : newImage
-                  }
-                ></ImageInput>
-              </Imgbox>
-            ) : (
-              <Img
-                src={
-                  userInfo.userimage
-                    ? process.env.REACT_APP_SERVER_URL +
-                      `/image/${userInfo.userimage}`
-                    : ""
-                }
-              ></Img>
-            )} */}
-
-            <ImgLabel image={url} htmlFor={"aaaaa"}>
-              <ImgInput
-                type={"file"}
-                onChange={(e) => {
-                  if (e.target.files) {
-                    seturl(URL.createObjectURL(e.target.files[0]));
-                    setNewImage(e.target.files[0]);
-                  }
-                }}
-                id={"aaaaa"}
-              ></ImgInput>
-            </ImgLabel>
-
-            <InputArea>
-              <TextInput>
-                {/* <Input
-                  label={"image"}
+            <InputBox>
+              <ImgLabel image={url} htmlFor={"aaaaa"}>
+                <ImgInput
                   type={"file"}
-                  value={newImage}
-                  func={setNewImage}
-                  placeholder={""}
-                ></Input> */}
-                <Input
-                  label={"username"}
-                  type={"text"}
-                  value={newUsername}
-                  func={setNewUsername}
-                  placeholder={userInfo.username || ""}
-                ></Input>
-                <Input
-                  label={"phone"}
-                  type={"text"}
-                  value={newPhone}
-                  func={setNewPhone}
-                  placeholder={userInfo.phone || ""}
-                ></Input>
-                <Input
-                  label={"email"}
-                  type={"text"}
-                  value={newEmail}
-                  func={setNewEmail}
-                  placeholder={userInfo.email || ""}
-                ></Input>
-              </TextInput>
-            </InputArea>
+                  onChange={(e) => {
+                    if (e.target.files) {
+                      seturl(URL.createObjectURL(e.target.files[0]));
+                      setNewImage(e.target.files[0]);
+                    }
+                  }}
+                  id={"aaaaa"}
+                ></ImgInput>
+              </ImgLabel>
 
-            <button
-              onClick={() => {
-                usehistory.push("/Mypage");
-              }}
-            >
-              cancel
-            </button>
+              <InputArea>
+                <TextInput>
+                  <Input
+                    label={"username"}
+                    type={"text"}
+                    value={newUsername}
+                    func={setNewUsername}
+                    placeholder={userInfo.userName || ""}
+                  ></Input>
+                  <Input
+                    label={"phone"}
+                    type={"text"}
+                    value={newPhone}
+                    func={setNewPhone}
+                    placeholder={userInfo.phone || ""}
+                  ></Input>
+                  <Input
+                    label={"email"}
+                    type={"text"}
+                    value={newEmail}
+                    func={setNewEmail}
+                    placeholder={userInfo.email || ""}
+                  ></Input>
+                </TextInput>
+              </InputArea>
+            </InputBox>
+
             <button onClick={onEdit}>적용하기</button>
           </form>
         </div>

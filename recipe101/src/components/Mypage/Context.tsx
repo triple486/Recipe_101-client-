@@ -53,15 +53,16 @@ const TextBox3 = styled.div`
 
 function ContextProfile() {
   let user = useSelector((state: RootState) => state.userReducer);
+  let history = useHistory();
   return (
     <Frame>
       <ProfileImageBox>
-        <ProfileImage src={user.userInfo.userimage} />
+        <ProfileImage src={user.userInfo.userImage} />
       </ProfileImageBox>
       <ProfiledataBox>
         <ProfiledataLine>
           <TextBox>{"유저 네임"}</TextBox>
-          <TextBox3>{user.userInfo.username}</TextBox3>
+          <TextBox3>{user.userInfo.userName}</TextBox3>
         </ProfiledataLine>
         <ProfiledataLine>
           <TextBox>{"이메일"}</TextBox>
@@ -70,6 +71,15 @@ function ContextProfile() {
         <ProfiledataLine>
           <TextBox>{"전화 번호"}</TextBox>
           <TextBox3>{user.userInfo.phone}</TextBox3>
+        </ProfiledataLine>
+        <ProfiledataLine>
+          <button
+            onClick={() => {
+              history.push("/mypage/profile");
+            }}
+          >
+            수정
+          </button>
         </ProfiledataLine>
       </ProfiledataBox>
     </Frame>
@@ -104,46 +114,46 @@ function ContextPassword() {
   );
 }
 function ContextDefault({ type }: { type: string }) {
-  let history = useHistory();
+  let user = useSelector((state: RootState) => state.userReducer);
   return (
     <Frame>
       {type === "작성한 감상평들" ? (
-        <button
-          onClick={() => {
-            history.push("/mypage/addedcomment");
-          }}
-        >
-          test
-        </button>
+        <DummyBox>
+          <TextBox2>{"작성한 감상평 수 :"}</TextBox2>
+          <TextBox2>
+            <Link to={"/mypage/addedcomment"}>{user.userInfo.comment}</Link>
+            {"개"}
+          </TextBox2>
+        </DummyBox>
       ) : null}
 
       {type === "담아온 레시피" ? (
-        <button
-          onClick={() => {
-            history.push("/mypage/storerecipe");
-          }}
-        >
-          test
-        </button>
+        <DummyBox>
+          <TextBox2>{"담아온 레시피 수 :"}</TextBox2>
+          <TextBox2>
+            <Link to={"/mypage/storerecipe"}>{user.userInfo.userStore}</Link>
+            {"개"}
+          </TextBox2>
+        </DummyBox>
       ) : null}
 
       {type === "작성한 레시피" ? (
-        <button
-          onClick={() => {
-            history.push("/mypage/addedrecipe");
-          }}
-        >
-          test
-        </button>
+        <DummyBox>
+          <TextBox2>{"작성한 레시피 수 :"}</TextBox2>
+          <TextBox2>
+            <Link to={"/mypage/addedrecipe"}>{user.userInfo.foodInfo}</Link>
+            {"개"}
+          </TextBox2>
+        </DummyBox>
       ) : null}
       {type === "구독한 유저들" ? (
-        <button
-          onClick={() => {
-            history.push("/mypage/subscribe");
-          }}
-        >
-          test
-        </button>
+        <DummyBox>
+          <TextBox2>{"구독한 유저들 수 :"}</TextBox2>
+          <TextBox2>
+            <Link to={"/mypage/subscribe"}>{user.userInfo.follow}</Link>
+            {"개"}
+          </TextBox2>
+        </DummyBox>
       ) : null}
     </Frame>
   );
