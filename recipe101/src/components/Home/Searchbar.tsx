@@ -6,10 +6,13 @@ import { RootState } from "../../redux/reducers";
 import SearchInput from "./SearchInput";
 // import "../../css/index.css";
 const Frame = styled.div`
-  height: 100px;
+  height: 70px;
   width: 100%;
   display: flex;
   justify-content: center;
+  background: #B17D55;
+  border-bottom: 1px solid white;
+  color: white;
 `;
 
 const Body = styled.div`
@@ -21,21 +24,31 @@ const Body = styled.div`
   flex-direction: row;
 `;
 
-const Box = styled.div`
+const Box1 = styled.div`
   height: 100%;
   width: 100px;
   display: flex;
   justify-content: center;
   align-items: center;
-  flex: 0 0 1;
+  flex: 2 0 0;
 `;
+
+const Box2 = styled.div`
+  height: 100%;
+  width: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1 0 0;
+`;
+
 const TextBox = styled.div``;
 
 const LongBox = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
-  flex: 1 0 0;
+  flex: 6 0 0;
 `;
 
 const Search = styled.div`
@@ -51,24 +64,24 @@ function Comp() {
   return (
     <Frame>
       <Body>
-        <Box
+        <Box1
           onClick={() => {
             history.push("/");
           }}
         >
           <TextBox>{"recipe 101"}</TextBox>
-        </Box>
+        </Box1>
         <LongBox>
           <SearchInput></SearchInput>
         </LongBox>
-        <Box
+        <Box2
           onClick={() => {
             history.push("/addrecipe");
           }}
         >
           <TextBox>{"레시피 추가"}</TextBox>
-        </Box>
-        <Box
+        </Box2>
+        <Box2
           onClick={() => {
             if (user.isLogin) {
               history.push("/mypage");
@@ -87,7 +100,7 @@ function Comp() {
           ) : (
             <TextBox>{"로그인"}</TextBox>
           )}
-        </Box>
+        </Box2>
       </Body>
     </Frame>
   );

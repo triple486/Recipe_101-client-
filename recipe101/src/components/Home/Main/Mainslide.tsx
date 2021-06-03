@@ -2,6 +2,8 @@ import axios from "axios";
 import { useState } from "react";
 import styled, { keyframes } from "styled-components";
 import Recipeslide from "./Recipeslide";
+import img from '../../../Assets/Images/food-2068217_1920-turned.jpg'
+
 const slide = keyframes`
 0% {
   margin-left:0;
@@ -12,45 +14,46 @@ const slide = keyframes`
 `;
 
 const Frame = styled.div`
-  height: ${Math.floor((window.innerHeight - 100) * 0.6)}px;
+  height: 816px;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: row;
+  background-image: url(${img})
 `;
 const Innerframe = styled.div`
-  height: 80%;
+  height: 100%;
   width: 100%;
   display: flex;
   flex-direction: column;
-  border: solid 1px red;
+  // border: solid 1px red;
 `;
 
 const DataArea = styled.div`
   flex: 16 0 0;
   animation: ${slide} 4s infinite linear normal;
-  border: solid 1px red;
+  // border: solid 1px red;
 `;
 const SelectArea = styled.div`
   flex: 2 0 0;
   display: flex;
-  felx-direction: row;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
-  border: solid 1px red;
+  // border: solid 1px red;
 `;
 
 const SelectBox = styled.button<{ isOn: boolean }>`
-  height: 50%;
-  width: 2%;
+  height: 10%;
+  width: 1%;
   margin: 10px;
-  border-radius: 50%;
-  border: solid 1px red;
-  ${(props) => props.isOn && `background :green; `}
+  // border-radius: 50%;
+  // border: solid 1px red;
+  ${(props) => props.isOn && `width: 2%; `}
 
   &:hover {
-    background: yellow;
+    height: 20%;
   }
 `;
 interface recipe {
