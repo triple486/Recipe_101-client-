@@ -2,15 +2,22 @@ import axios from "axios";
 import { useState } from "react";
 import styled, { keyframes } from "styled-components";
 import Recipeslide from "./Recipeslide";
-import img from '../../../Assets/Images/food-2068217_1920-turned.jpg'
+import img from "../../../Assets/Images/food-2068217_1920-turned.jpg";
 
 const slide = keyframes`
 0% {
+  margin-left:100%;
+}
+20% {
+  margin-left:0%;
+}
+80% {
   margin-left:0;
 }
 100% {
-  margin-left:0;
+  margin-left:-100%;
 } 
+
 `;
 
 const Frame = styled.div`
@@ -20,7 +27,7 @@ const Frame = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: row;
-  background-image: url(${img})
+  background-image: url(${img});
 `;
 const Innerframe = styled.div`
   height: 100%;
@@ -32,6 +39,7 @@ const Innerframe = styled.div`
 
 const DataArea = styled.div`
   flex: 16 0 0;
+  overflow: hidden;
   animation: ${slide} 4s infinite linear normal;
   // border: solid 1px red;
 `;
