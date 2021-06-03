@@ -1,5 +1,7 @@
 const LOGIN = "login/UPDATE" as const;
 const USERINFO = "userinfo/UPDATE" as const;
+const INIT = "initial/INIT" as const;
+const RECIPE = "select/RECIPE" as const;
 
 export const updateLogin = (item: boolean) => {
   return {
@@ -8,10 +10,10 @@ export const updateLogin = (item: boolean) => {
   };
 };
 type userinfoState = {
-  username: string;
-  phone: string;
-  email: string;
-  userimage: string;
+  username?: string;
+  phone?: string;
+  email?: string;
+  userimage?: string;
 };
 
 export const updateUserInfo = (item: userinfoState) => {
@@ -20,18 +22,37 @@ export const updateUserInfo = (item: userinfoState) => {
     payload: item,
   };
 };
+
+export const selectRecipe = (item?: number) => {
+  return {
+    type: RECIPE,
+    payload: item,
+  };
+};
+
+export const init = (item?: any) => {
+  return {
+    type: INIT,
+    payload: item,
+  };
+};
+
 type UserAction =
   | ReturnType<typeof updateLogin>
+  | ReturnType<typeof init>
+  | ReturnType<typeof selectRecipe>
   | ReturnType<typeof updateUserInfo>;
 
 type UserState = {
   isLogin: boolean;
   userInfo: userinfoState;
+  selectRecipeId?: number;
 };
 
 const initialState: UserState = {
   isLogin: false,
   userInfo: { userimage: "", username: "", phone: "", email: "" },
+  selectRecipeId: undefined,
 };
 
 const loginReducer = (
@@ -45,6 +66,12 @@ const loginReducer = (
 
     case USERINFO:
       return { ...state, userInfo: { ...state.userInfo, ...action.payload } };
+
+    case RECIPE:
+      return { ...state, selectRecipeId: action.payload };
+
+    case INIT:
+      return initialState;
 
     default:
       return state;

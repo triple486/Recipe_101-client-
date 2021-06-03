@@ -1,0 +1,45 @@
+.recipegrid_frame {
+  display: flex;
+  flex: 0 0 1;
+  width: calc(25% - 60px);
+  height: 400px;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border: 1px solid white;
+  margin: 30px;
+  box-shadow: 10px 10px 10px white;
+  color: white;
+}
+
+.recipegrid_img {
+  height: inherit;
+  width: inherit;
+  display: flex;
+  border: 1px solid white;
+}
+
+.recipegrid_img_box {
+  flex: 4 0 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 7%;
+}
+
+.recipegrid_desc {
+  height: 20%;
+  display: flex;
+  flex: 1 0 0;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  font-size: 1.7em;
+  letter-spacing: 1px;
+  padding-bottom: 8%;
+}
+
+.recipegrid_data {
+  flex: 1 0 1;
+}
