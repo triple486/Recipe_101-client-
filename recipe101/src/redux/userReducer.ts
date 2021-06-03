@@ -10,10 +10,16 @@ export const updateLogin = (item: boolean) => {
   };
 };
 type userinfoState = {
-  username?: string;
+  userName?: string;
   phone?: string;
   email?: string;
-  userimage?: string;
+  userImage?: string;
+  comment?: number;
+  createdAt?: string;
+  updatedAt?: string;
+  foodInfo?: number;
+  follow?: number;
+  userStore?: number;
 };
 
 export const updateUserInfo = (item: userinfoState) => {
@@ -51,7 +57,7 @@ type UserState = {
 
 const initialState: UserState = {
   isLogin: false,
-  userInfo: { userimage: "", username: "", phone: "", email: "" },
+  userInfo: { userImage: "", userName: "", phone: "", email: "" },
   selectRecipeId: undefined,
 };
 

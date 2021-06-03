@@ -86,7 +86,7 @@ export default function Profile() {
     axios
       .get(
         process.env.REACT_APP_SERVER_URL +
-          `/search/username/${user.userInfo.username}`,
+          `/search/username/${user.userInfo.userName}`,
         config
       )
       .then((rst) => {

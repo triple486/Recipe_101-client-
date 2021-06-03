@@ -51,12 +51,12 @@ function MypageMain() {
         axios.get(process.env.REACT_APP_SERVER_URL + `/store`, config),
         axios.get(
           process.env.REACT_APP_SERVER_URL +
-            `/comment/user/${user.userInfo.username}`,
+            `/comment/user/${user.userInfo.userName}`,
           config
         ),
         axios.get(
           process.env.REACT_APP_SERVER_URL +
-            `/search/username/${user.userInfo.username}`,
+            `/search/username/${user.userInfo.userName}`,
           config
         ),
       ])

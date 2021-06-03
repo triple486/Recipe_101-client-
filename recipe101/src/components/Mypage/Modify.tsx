@@ -18,7 +18,7 @@ export default function Modify() {
       <div className="Outline">
         <h1 className="text">Modify</h1>
         <div>
-          <span>username : {userInfo.username}</span>
+          <span>username : {userInfo.userName}</span>
         </div>
         <div>
           <span>email : {userInfo.email}</span>

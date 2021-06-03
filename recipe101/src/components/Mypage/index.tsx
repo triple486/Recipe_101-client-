@@ -2,13 +2,18 @@ import styled from "styled-components";
 import { useHistory, Switch, Route, useLocation } from "react-router-dom";
 import Main from "./Main";
 // import Profile from "./Pages/Profile";
+import { RootState } from "../../redux/reducers";
+import { useSelector, useDispatch } from "react-redux";
+import { updateUserInfo } from "../../redux/userReducer";
 import Password from "./Pages/Password";
-import Profile from "./PageModify";
+import Profile from "./Pages/PageModify";
 import Comment from "./Pages/AddedComment";
 import Recipe from "./Pages/AddedRecipe";
 import Store from "./Pages/StoreRecipe";
 import Subscribe from "./Pages/Subscribe";
-
+import axios from "axios";
+import { useState } from "react";
+axios.defaults.withCredentials = true;
 const Frame = styled.div`
   height: 100%;
   width: 100%;
@@ -52,6 +57,23 @@ const TextBox = styled.div`
 export default function Mypage() {
   let history = useHistory();
   let location = useLocation();
+  let dispatch = useDispatch();
+  let [load, setload] = useState(false);
+  let accessToken = useSelector((state: RootState) => state.tokenReducer);
+  let user = useSelector((state: RootState) => state.userReducer);
+  const config = {
+    headers: {
+      authorization: "bearer " + accessToken,
+    },
+  };
+  if (!load) {
+    axios
+      .get(process.env.REACT_APP_SERVER_URL + `/user`, config)
+      .then((rst) => {
+        dispatch(updateUserInfo(rst.data.data.userinfo));
+        setload(true);
+      });
+  }
   return (
     <Frame>
       <Header>
