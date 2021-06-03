@@ -32,6 +32,7 @@ const ContentBox = styled.div`
   border: solid 1px white;
 `;
 const UpperLine = styled.div`
+  background-color: #ebd1a9;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -66,6 +67,8 @@ const ContentNameBox = styled.div`
   padding: 20px;
   font-size: 20px;
   font-weight: 700;
+  background-color: #ebd1a9;
+  color: black;
 `;
 
 export default function Main() {
