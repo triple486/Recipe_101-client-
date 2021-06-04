@@ -65,12 +65,6 @@ const Input = styled.input`
   vertical-align: top;
 `;
 
-const Button = styled.button`
-  height: 50px;
-  width: 50px;
-  background: #b17d55;
-`;
-
 export default function SearchInput() {
   let [type, typef] = useState("username");
   let [input, inputf] = useState("");
@@ -157,7 +151,7 @@ export default function SearchInput() {
             inputf(e.target.value);
           }}
           onKeyPress={(e) => {
-            if(e.key === 'Enter'){
+            if (e.key === "Enter") {
               searchfunction();
             }
           }}

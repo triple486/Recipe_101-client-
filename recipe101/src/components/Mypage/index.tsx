@@ -12,7 +12,7 @@ import Recipe from "./Pages/AddedRecipe";
 import Store from "./Pages/StoreRecipe";
 import Subscribe from "./Pages/Subscribe";
 import axios from "axios";
-import { useState } from "react";
+import { useEffect } from "react";
 axios.defaults.withCredentials = true;
 const Frame = styled.div`
   background-color: #b17d55;
@@ -26,7 +26,6 @@ const Frame = styled.div`
   flex-wrap: wrap;
   overflow-y: scroll;
 `;
-const button = styled.div``;
 
 const Header = styled.div`
   height: 100px;
@@ -80,23 +79,22 @@ export default function Mypage() {
   let history = useHistory();
   let location = useLocation();
   let dispatch = useDispatch();
-  let [load, setload] = useState(false);
   let accessToken = useSelector((state: RootState) => state.tokenReducer);
-  let user = useSelector((state: RootState) => state.userReducer);
   const config = {
     headers: {
       authorization: "bearer " + accessToken,
     },
   };
-  if (!load) {
+
+  useEffect(() => {
     axios
       .get(process.env.REACT_APP_SERVER_URL + `/user`, config)
       .then((rst) => {
         console.log(rst);
         dispatch(updateUserInfo(rst.data.data.userinfo));
-        setload(true);
       });
-  }
+    return;
+  });
   return (
     <Frame>
       <Header>

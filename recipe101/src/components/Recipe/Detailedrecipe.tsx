@@ -1,16 +1,14 @@
 import styled from "styled-components";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { RootState } from "../../redux/reducers";
 import { useHistory, useParams } from "react-router-dom";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import StepBox from "./StepBox";
 import LabelBox from "./LabelBox";
-import { storeToken } from "../../redux/tokenReducer";
 import Comment from "./Comment";
 import CommentBox from "./CommentBox";
 import Message from "../Addrecipe/messagebox";
-import { updateUserInfo } from "../../redux/userReducer";
 
 axios.defaults.withCredentials = true;
 const Frame = styled.div`
@@ -250,7 +248,7 @@ function Detailedrecipe() {
     return () => {
       setget(false);
     };
-  }, []);
+  });
 
   function Eximage() {
     return (

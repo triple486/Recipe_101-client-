@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { RootState } from "../../../redux/reducers";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import axios from "axios";
 import { useState } from "react";
 axios.defaults.withCredentials = true;
