@@ -5,6 +5,8 @@ import searchReducer from "./searchReducer";
 import modalReducer from "./modalReducer";
 import addrecipeReducer from "./addrecipeReducer";
 import mypageReducer from "./mypageReducer";
+import newReducer from "./newReducer";
+
 const rootReducer = combineReducers({
   tokenReducer,
   userReducer,
@@ -12,6 +14,7 @@ const rootReducer = combineReducers({
   modalReducer,
   addrecipeReducer,
   mypageReducer,
+  newReducer,
 });
 
 export default rootReducer;

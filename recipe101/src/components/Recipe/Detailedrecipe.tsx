@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/reducers";
 import { useHistory, useParams } from "react-router-dom";
 import axios from "axios";
@@ -9,6 +9,7 @@ import LabelBox from "./LabelBox";
 import Comment from "./Comment";
 import CommentBox from "./CommentBox";
 import Message from "../Addrecipe/messagebox";
+import { getdata, isLoad } from "../../redux/newReducer";
 
 axios.defaults.withCredentials = true;
 const Frame = styled.div`
@@ -198,10 +199,10 @@ interface Image_extend {
 function Detailedrecipe() {
   let { id } = useParams<{ id?: string }>();
   let history = useHistory();
+  let dispatch = useDispatch();
   let user = useSelector((state: RootState) => state.userReducer);
   let accessToken = useSelector((state: RootState) => state.tokenReducer);
-  let [getdata, setget] = useState(false);
-  let [data, setdata] = useState<Recipe_info>({});
+  let data = useSelector((state: RootState) => state.newReducer);
   let [iex, setiex] = useState<Image_extend>({ isEx: false });
   let [mkc, setc] = useState(false);
   let [call, setcall] = useState(false);
@@ -210,46 +211,40 @@ function Detailedrecipe() {
   let [add, setadd] = useState(true);
   let [del, setdel] = useState(0);
   let [store, setstore] = useState(false);
-
   useEffect(() => {
-    if (!getdata) {
+    if (!data.isLoad) {
       axios
         .get(process.env.REACT_APP_SERVER_URL + `/recipe/${id}`)
         .then((rst) => {
-          setget(true);
-          setdata({ ...rst.data.data });
+          dispatch(getdata(rst.data.data));
+          dispatch(isLoad(true));
           setc(false);
-        });
-
-      if (user.isLogin) {
-        axios
-          .get(process.env.REACT_APP_SERVER_URL + "/store", {
-            headers: {
-              authorization: "bearer " + accessToken,
-            },
-          })
-          .then((rst) => {
-            rst.data.data.forEach((x: any) => {
-              if (x.id && x.id === data.food_info?.id) {
-                setstore(true);
-              }
-            });
+          let data = rst.data.data;
+          data.Comment.forEach((x: any, i: any) => {
+            if (x.userName === user.userInfo.userName) {
+              setadd(false);
+            }
           });
-      }
-
-      if (data.Comment) {
-        data.Comment.forEach((x, i) => {
-          if (x.userName === user.userInfo.userName) {
-            setadd(false);
+          if (user.isLogin) {
+            axios
+              .get(process.env.REACT_APP_SERVER_URL + "/store", {
+                headers: {
+                  authorization: "bearer " + accessToken,
+                },
+              })
+              .then((rst) => {
+                rst.data.data.forEach((x: any) => {
+                  if (x.id === data.food_info?.id) {
+                    setstore(true);
+                  }
+                });
+              });
           }
         });
-      }
     }
-    return () => {
-      setget(false);
-    };
-  });
 
+    return () => {};
+  }, [add]);
   function Eximage() {
     return (
       <Modal
@@ -273,6 +268,7 @@ function Detailedrecipe() {
         <ButtonLine>
           <Button
             onClick={() => {
+              setadd(true);
               history.goBack();
             }}
           >
@@ -504,7 +500,7 @@ function Detailedrecipe() {
           <Comment
             n={data.Comment?.length || 0}
             h={200}
-            func={setc}
+            func={setadd}
             data={{ id: data.food_info?.id }}
             add={add}
           ></Comment>
