@@ -129,23 +129,6 @@ export default function Comment({
             axios
               .post(process.env.REACT_APP_SERVER_URL + `/comment`, body, config)
               .then((rst) => {
-                if (rst.data.data.accessToken) {
-                  dispatch(storeToken(rst.data.data.accessToken));
-                  const config = {
-                    headers: {
-                      authorization: "bearer " + rst.data.data.accessToken,
-                    },
-                  };
-                  return axios.post(
-                    process.env.REACT_APP_SERVER_URL + `/comment`,
-                    body,
-                    config
-                  );
-                } else {
-                  return rst;
-                }
-              })
-              .then((rst) => {
                 func(true);
                 sety(0);
                 settext(text);

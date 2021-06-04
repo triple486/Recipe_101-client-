@@ -301,23 +301,6 @@ function Detailedrecipe() {
                     }
                   )
                   .then((rst) => {
-                    if (rst.data.data.accessToken) {
-                      dispatch(storeToken(rst.data.data.accessToken));
-                      return axios.delete(
-                        process.env.REACT_APP_SERVER_URL +
-                          `/store/${data.food_info?.id}`,
-                        {
-                          headers: {
-                            authorization:
-                              "bearer " + rst.data.data.accessToken,
-                          },
-                        }
-                      );
-                    } else {
-                      return rst;
-                    }
-                  })
-                  .then((rst) => {
                     setstore(false);
                   });
               }}
@@ -337,23 +320,6 @@ function Detailedrecipe() {
                       },
                     }
                   )
-                  .then((rst) => {
-                    if (rst.data.data.accessToken) {
-                      dispatch(storeToken(rst.data.data.accessToken));
-                      return axios.post(
-                        process.env.REACT_APP_SERVER_URL + "/store",
-                        { id: data.food_info?.id },
-                        {
-                          headers: {
-                            authorization:
-                              "bearer " + rst.data.data.accessToken,
-                          },
-                        }
-                      );
-                    } else {
-                      return rst;
-                    }
-                  })
                   .then((rst) => {
                     setstore(true);
                   });
@@ -425,24 +391,6 @@ function Detailedrecipe() {
                             },
                           }
                         )
-                        .then((rst) => {
-                          if (rst.data.data.accessToken) {
-                            dispatch(storeToken(rst.data.data.accessToken));
-                            return axios.get(
-                              process.env.REACT_APP_SERVER_URL +
-                                `/subscribe/${data.food_info?.id}`,
-
-                              {
-                                headers: {
-                                  authorization:
-                                    "bearer " + rst.data.data.accessToken,
-                                },
-                              }
-                            );
-                          } else {
-                            return rst;
-                          }
-                        })
                         .then((rst) => {
                           console.log(rst);
                         });
@@ -634,23 +582,6 @@ function Detailedrecipe() {
                   }
                 )
                 .then((rst) => {
-                  if (rst.data.data.accessToken) {
-                    dispatch(storeToken(rst.data.data.accessToken));
-                    return axios.delete(
-                      process.env.REACT_APP_SERVER_URL +
-                        `/recipe/${data.food_info?.id}`,
-
-                      {
-                        headers: {
-                          authorization: "bearer " + rst.data.data.accessToken,
-                        },
-                      }
-                    );
-                  } else {
-                    return rst;
-                  }
-                })
-                .then((rst) => {
                   setcall2(false);
                   history.goBack();
                 });
@@ -675,22 +606,6 @@ function Detailedrecipe() {
                     },
                   }
                 )
-                .then((rst) => {
-                  if (rst.data.data.accessToken) {
-                    dispatch(storeToken(rst.data.data.accessToken));
-                    return axios.post(
-                      process.env.REACT_APP_SERVER_URL + `/subscribe`,
-                      { username: data.food_info?.userName },
-                      {
-                        headers: {
-                          authorization: "bearer " + rst.data.data.accessToken,
-                        },
-                      }
-                    );
-                  } else {
-                    return rst;
-                  }
-                })
                 .then((rst) => {
                   setcall3(false);
                 });
