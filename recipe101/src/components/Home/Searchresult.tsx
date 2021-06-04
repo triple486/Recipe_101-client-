@@ -1,8 +1,9 @@
 import Recipepage from "../Recipepage";
 import styled from "styled-components";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/reducers";
 import { Route, Switch, Redirect, useRouteMatch, Link } from "react-router-dom";
+import { searchRecipe } from "../../redux/searchReducer";
 import { useState } from "react";
 const Frame = styled.div`
   flex: 1 0 0;
@@ -78,8 +79,14 @@ const FooterBox = styled.div`
 const InnerBox = styled.div`
   display: flex;
 `;
+const SortBox = styled.div`
+  height: 20px;
+  width: 100%;
+  display: flex; ;
+`;
 
 function YesResult() {
+  let dispatch = useDispatch();
   let { search } = useSelector((state: RootState) => state.searchReducer);
   let [q, setq] = useState(1);
   let k = Math.ceil(search.length / 12);
@@ -105,6 +112,33 @@ function YesResult() {
 
   return (
     <Box2>
+      <SortBox>
+        <select
+          onChange={(e) => {
+            let n = e.target.selectedIndex;
+            if (n === 0) {
+              let nsearch = search.sort((a, b) => {
+                return a.food_name.toUpperCase() <= b.food_name.toUpperCase()
+                  ? -1
+                  : 1;
+              });
+              dispatch(searchRecipe(nsearch));
+            } else if (n === 1) {
+              let nsearch = search.sort((a, b) => {
+                let at = new Date(a.createdAt),
+                  bt = new Date(b.createdAt);
+                return at <= bt ? -1 : 1;
+              });
+              dispatch(searchRecipe(nsearch));
+            } else {
+            }
+          }}
+        >
+          <option>이름순</option>
+          <option>시간순</option>
+          <option>평점순</option>
+        </select>
+      </SortBox>
       <InnerFrame>
         <Switch>
           <Route path={`${match.path}/:id`}>
