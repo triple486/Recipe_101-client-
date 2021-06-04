@@ -32,6 +32,7 @@ const MessageBox = styled.div`
   flex: 1 0 0;
 
   display: flex;
+  color: black;
   flex-direction: column;
 `;
 
