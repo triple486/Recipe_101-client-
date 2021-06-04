@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/reducers";
 import { useHistory, useParams } from "react-router-dom";
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import StepBox from "./StepBox";
 import LabelBox from "./LabelBox";
 import { storeToken } from "../../redux/tokenReducer";
@@ -200,9 +200,9 @@ interface Image_extend {
 function Detailedrecipe() {
   let { id } = useParams<{ id?: string }>();
   let history = useHistory();
-  let dispatch = useDispatch();
   let user = useSelector((state: RootState) => state.userReducer);
   let accessToken = useSelector((state: RootState) => state.tokenReducer);
+  let [getdata, setget] = useState(false);
   let [data, setdata] = useState<Recipe_info>({});
   let [iex, setiex] = useState<Image_extend>({ isEx: false });
   let [mkc, setc] = useState(false);
@@ -213,50 +213,44 @@ function Detailedrecipe() {
   let [del, setdel] = useState(0);
   let [store, setstore] = useState(false);
 
-  if (!data.food_info || mkc) {
-    axios
-      .get(process.env.REACT_APP_SERVER_URL + `/recipe/${id}`)
-      .then((rst) => {
-        setdata({ ...rst.data.data });
-        setc(false);
-
-        return;
-      });
-  }
-
-  axios
-    .get(process.env.REACT_APP_SERVER_URL + "/store", {
-      headers: {
-        authorization: "bearer " + accessToken,
-      },
-    })
-    .then((rst) => {
-      if (rst.data.data.accessToken) {
-        dispatch(storeToken(rst.data.data.accessToken));
-        return axios.get(process.env.REACT_APP_SERVER_URL + "/store", {
-          headers: {
-            authorization: "bearer " + rst.data.data.accessToken,
-          },
+  useEffect(() => {
+    if (!getdata) {
+      axios
+        .get(process.env.REACT_APP_SERVER_URL + `/recipe/${id}`)
+        .then((rst) => {
+          setget(true);
+          setdata({ ...rst.data.data });
+          setc(false);
         });
-      } else {
-        return rst;
-      }
-    })
-    .then((rst) => {
-      rst.data.data.forEach((x: any) => {
-        if (x.id && x.id === data.food_info?.id) {
-          setstore(true);
-        }
-      });
-    });
 
-  if (data.Comment) {
-    data.Comment.forEach((x, i) => {
-      if (x.userName === user.userInfo.userName) {
-        setadd(false);
+      if (user.isLogin) {
+        axios
+          .get(process.env.REACT_APP_SERVER_URL + "/store", {
+            headers: {
+              authorization: "bearer " + accessToken,
+            },
+          })
+          .then((rst) => {
+            rst.data.data.forEach((x: any) => {
+              if (x.id && x.id === data.food_info?.id) {
+                setstore(true);
+              }
+            });
+          });
       }
-    });
-  }
+
+      if (data.Comment) {
+        data.Comment.forEach((x, i) => {
+          if (x.userName === user.userInfo.userName) {
+            setadd(false);
+          }
+        });
+      }
+    }
+    return () => {
+      setget(false);
+    };
+  }, []);
 
   function Eximage() {
     return (

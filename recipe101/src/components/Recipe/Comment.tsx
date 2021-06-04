@@ -85,7 +85,6 @@ export default function Comment({
   data: { id?: number };
   add: boolean;
 }) {
-  let dispatch = useDispatch();
   let [y, sety] = useState(0);
   let [text, settext] = useState("");
   let user = useSelector((state: RootState) => state.userReducer);
