@@ -51,7 +51,7 @@ const ImgLabel = styled.label<{ image: string }>`
   border-radius: 50%;
   background-image: url(${({ image }) => image});
   background-size: cover;
-  border: solid 1px black;
+  border: solid 1px white;
 `;
 const InputBox = styled.div`
   height: 100%;
@@ -59,6 +59,27 @@ const InputBox = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+`;
+const Button = styled.div`
+background-color: #b17d55;
+  border: solid 1px #dfdfdf;
+  color: white;
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 14px;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  cursor: pointer;
+
+  &:hover {
+    border: solid 1px white;
+    background-color: white;
+    opacity: 0.7;
+    color: black;
+
 `;
 
 function PageModify() {
@@ -115,7 +136,7 @@ function PageModify() {
     <Frame>
       <InnerFrame>
         <div className="Outline">
-          <h1 className="text">Modify</h1>
+          {/* <h1 className="text">Modify</h1> */}
           <form onSubmit={(e) => e.preventDefault()} id="editUserInfo">
             <h2>회원정보 수정</h2>
             <InputBox>
@@ -159,7 +180,7 @@ function PageModify() {
               </InputArea>
             </InputBox>
 
-            <button onClick={onEdit}>적용하기</button>
+            <Button onClick={onEdit}>적용하기</Button>
           </form>
         </div>
       </InnerFrame>

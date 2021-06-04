@@ -13,7 +13,7 @@ const InnerFrame = styled.div`
   width: 100%;
   height: 100%;
   flex-direction: column;
-  border: solid 1px black;
+  border: solid 1px white;
 `;
 
 const Image = styled.img`

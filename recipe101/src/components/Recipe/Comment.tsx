@@ -114,7 +114,7 @@ export default function Comment({
           onClick={() => {
             let body = {
               id: data?.id,
-              userName: user.userInfo.username,
+              userName: user.userInfo.userName,
               comment: text,
               score: y,
             };

@@ -238,7 +238,7 @@ function Detailedrecipe() {
 
   if (data.Comment) {
     data.Comment.forEach((x, i) => {
-      if (x.userName === user.userInfo.username) {
+      if (x.userName === user.userInfo.userName) {
         setadd(false);
       }
     });
@@ -314,7 +314,7 @@ function Detailedrecipe() {
               <TextBox>{"구독 하기"}</TextBox>
             </Button>
           )}
-          {user.userInfo.username === data.food_info?.userName ? (
+          {user.userInfo.userName === data.food_info?.userName ? (
             <Button
               onClick={() => {
                 axios

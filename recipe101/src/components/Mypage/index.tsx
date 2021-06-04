@@ -15,6 +15,8 @@ import axios from "axios";
 import { useState } from "react";
 axios.defaults.withCredentials = true;
 const Frame = styled.div`
+  background-color: #b17d55;
+  color: white;
   height: 100%;
   width: 100%;
   display: flex;
@@ -24,6 +26,7 @@ const Frame = styled.div`
   flex-wrap: wrap;
   overflow-y: scroll;
 `;
+const button = styled.div``;
 
 const Header = styled.div`
   height: 100px;
@@ -32,26 +35,45 @@ const Header = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  border-bottom: solid 1px black;
+  border-bottom: solid 1px white;
 `;
 const InnerHeader = styled.div`
   height: 100%;
   width: 100%;
   max-width: 1200px;
   display: flex;
-  flex-direction: row-reverse;
+  flex-direction: row;
   align-items: center;
 `;
 
 const Button = styled.button`
-  height: 30px;
-  width: 90px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  background-color: #b17d55;
+  border: solid 1px #dfdfdf;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  cursor: pointer;
+
+  &:hover {
+    border: solid 1px white;
+    background-color: white;
+    opacity: 0.7;
+    color: black;
+  }
 `;
 const TextBox = styled.div`
   display: flex;
+`;
+const Title = styled.div`
+  display: flex;
+  width: 900px;
+  margin-left: 80px;
 `;
 
 export default function Mypage() {
@@ -78,6 +100,9 @@ export default function Mypage() {
     <Frame>
       <Header>
         <InnerHeader>
+          <Title>
+            <h1>마이페이지</h1>
+          </Title>
           <Button
             onClick={() => {
               if (location.pathname === "/mypage") {

@@ -2,7 +2,6 @@ import styled from "styled-components";
 import "../../../css/Home/Mainintro.css";
 
 const Frame = styled.div`
-  height: ${Math.floor((window.innerHeight - 100) * 0.8)}px;
   width: 100%;
   display: flex;
   justify-content: center;

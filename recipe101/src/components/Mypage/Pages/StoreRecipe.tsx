@@ -26,7 +26,7 @@ const InnerFrame = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border: solid 3px Black;
+  border: solid 3px white;
 `;
 const InnerFrame2 = styled.div`
   flex: 1 0 0;
