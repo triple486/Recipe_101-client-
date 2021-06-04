@@ -19,8 +19,9 @@ const ImgBox = styled.div`
 const Image = styled.img`
   height: 670px;
   width: 670px;
-  display: flex;
-  object-fit: contain;
+  display: block;
+  object-fit: cover;
+  border: solid 5px #6f3838;
   &:hover {
     cursor: pointer;
   }
@@ -51,21 +52,29 @@ function Recipeslide({ data }: { data: recipe }) {
   return (
     <Frame>
       <ImgBox>
-        <Image src={data.food_img} alt={data.food_name} onClick={() => {
-        history.push(`/recipe/${data.food_id}`);
-      }}/>
-      </ImgBox>
-      <DataBox>
-        <div
-          className='recipeslide_desc food_name'
+        <Image
+          src={data.food_img}
+          alt={data.food_name}
           onClick={() => {
             history.push(`/recipe/${data.food_id}`);
           }}
-        >{data.food_name}</div>
-        <div className='recipeslide_desc summary'>{data.summary}</div>
-        <div className='recipeslide_desc level'>난이도: {data.level}</div>
-        <div className='recipeslide_desc cooking_time'>조리 시간: {data.cooking_time}</div>
-        <div className='recipeslide_desc nation'>요리 국적: {data.nation}</div>
+        />
+      </ImgBox>
+      <DataBox>
+        <div
+          className="recipeslide_desc food_name"
+          onClick={() => {
+            history.push(`/recipe/${data.food_id}`);
+          }}
+        >
+          {data.food_name}
+        </div>
+        <div className="recipeslide_desc summary">{data.summary}</div>
+        <div className="recipeslide_desc level">난이도: {data.level}</div>
+        <div className="recipeslide_desc cooking_time">
+          조리 시간: {data.cooking_time}
+        </div>
+        <div className="recipeslide_desc nation">요리 국적: {data.nation}</div>
       </DataBox>
     </Frame>
   );
