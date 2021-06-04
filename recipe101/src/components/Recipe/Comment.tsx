@@ -2,8 +2,9 @@ import styled from "styled-components";
 import Starscore from "./Starscore";
 import { useState } from "react";
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../redux/reducers";
+import { storeToken } from "../../redux/tokenReducer";
 axios.defaults.withCredentials = true;
 const Frame = styled.div`
   flex: 1 0 0;
@@ -84,6 +85,7 @@ export default function Comment({
   data: { id?: number };
   add: boolean;
 }) {
+  let dispatch = useDispatch();
   let [y, sety] = useState(0);
   let [text, settext] = useState("");
   let user = useSelector((state: RootState) => state.userReducer);
@@ -126,6 +128,23 @@ export default function Comment({
 
             axios
               .post(process.env.REACT_APP_SERVER_URL + `/comment`, body, config)
+              .then((rst) => {
+                if (rst.data.data.accessToken) {
+                  dispatch(storeToken(rst.data.data.accessToken));
+                  const config = {
+                    headers: {
+                      authorization: "bearer " + rst.data.data.accessToken,
+                    },
+                  };
+                  return axios.post(
+                    process.env.REACT_APP_SERVER_URL + `/comment`,
+                    body,
+                    config
+                  );
+                } else {
+                  return rst;
+                }
+              })
               .then((rst) => {
                 func(true);
                 sety(0);

@@ -10,6 +10,7 @@ import { storeToken } from "../../redux/tokenReducer";
 import Comment from "./Comment";
 import CommentBox from "./CommentBox";
 import Message from "../Addrecipe/messagebox";
+import { updateUserInfo } from "../../redux/userReducer";
 
 axios.defaults.withCredentials = true;
 const Frame = styled.div`
@@ -207,6 +208,7 @@ function Detailedrecipe() {
   let [mkc, setc] = useState(false);
   let [call, setcall] = useState(false);
   let [call2, setcall2] = useState(false);
+  let [call3, setcall3] = useState(false);
   let [add, setadd] = useState(true);
   let [del, setdel] = useState(0);
   let [store, setstore] = useState(false);
@@ -227,6 +229,18 @@ function Detailedrecipe() {
       headers: {
         authorization: "bearer " + accessToken,
       },
+    })
+    .then((rst) => {
+      if (rst.data.data.accessToken) {
+        dispatch(storeToken(rst.data.data.accessToken));
+        return axios.get(process.env.REACT_APP_SERVER_URL + "/store", {
+          headers: {
+            authorization: "bearer " + rst.data.data.accessToken,
+          },
+        });
+      } else {
+        return rst;
+      }
     })
     .then((rst) => {
       rst.data.data.forEach((x: any) => {
@@ -287,6 +301,23 @@ function Detailedrecipe() {
                     }
                   )
                   .then((rst) => {
+                    if (rst.data.data.accessToken) {
+                      dispatch(storeToken(rst.data.data.accessToken));
+                      return axios.delete(
+                        process.env.REACT_APP_SERVER_URL +
+                          `/store/${data.food_info?.id}`,
+                        {
+                          headers: {
+                            authorization:
+                              "bearer " + rst.data.data.accessToken,
+                          },
+                        }
+                      );
+                    } else {
+                      return rst;
+                    }
+                  })
+                  .then((rst) => {
                     setstore(false);
                   });
               }}
@@ -306,6 +337,23 @@ function Detailedrecipe() {
                       },
                     }
                   )
+                  .then((rst) => {
+                    if (rst.data.data.accessToken) {
+                      dispatch(storeToken(rst.data.data.accessToken));
+                      return axios.post(
+                        process.env.REACT_APP_SERVER_URL + "/store",
+                        { id: data.food_info?.id },
+                        {
+                          headers: {
+                            authorization:
+                              "bearer " + rst.data.data.accessToken,
+                          },
+                        }
+                      );
+                    } else {
+                      return rst;
+                    }
+                  })
                   .then((rst) => {
                     setstore(true);
                   });
@@ -364,6 +412,43 @@ function Detailedrecipe() {
                 <LabelBox
                   l={"작성자"}
                   v={data.food_info?.userName || ""}
+                  func={() => {
+                    if (user.userInfo.userName !== data.food_info?.userName) {
+                      axios
+                        .get(
+                          process.env.REACT_APP_SERVER_URL +
+                            `/subscribe/${data.food_info?.id}`,
+
+                          {
+                            headers: {
+                              authorization: "bearer " + accessToken,
+                            },
+                          }
+                        )
+                        .then((rst) => {
+                          if (rst.data.data.accessToken) {
+                            dispatch(storeToken(rst.data.data.accessToken));
+                            return axios.get(
+                              process.env.REACT_APP_SERVER_URL +
+                                `/subscribe/${data.food_info?.id}`,
+
+                              {
+                                headers: {
+                                  authorization:
+                                    "bearer " + rst.data.data.accessToken,
+                                },
+                              }
+                            );
+                          } else {
+                            return rst;
+                          }
+                        })
+                        .then((rst) => {
+                          console.log(rst);
+                        });
+                      setcall3(true);
+                    }
+                  }}
                 ></LabelBox>
               </Line>
               <Line>
@@ -549,11 +634,68 @@ function Detailedrecipe() {
                   }
                 )
                 .then((rst) => {
+                  if (rst.data.data.accessToken) {
+                    dispatch(storeToken(rst.data.data.accessToken));
+                    return axios.delete(
+                      process.env.REACT_APP_SERVER_URL +
+                        `/recipe/${data.food_info?.id}`,
+
+                      {
+                        headers: {
+                          authorization: "bearer " + rst.data.data.accessToken,
+                        },
+                      }
+                    );
+                  } else {
+                    return rst;
+                  }
+                })
+                .then((rst) => {
                   setcall2(false);
                   history.goBack();
                 });
             }}
             buttonMessage={"확인"}
+          ></Message>
+        ) : null}
+        {call3 ? (
+          <Message
+            cancel={() => {
+              setcall(false);
+            }}
+            message={"해당 유저를 구독하겠습니까?"}
+            button={() => {
+              axios
+                .post(
+                  process.env.REACT_APP_SERVER_URL + `/subscribe`,
+                  { username: data.food_info?.userName },
+                  {
+                    headers: {
+                      authorization: "bearer " + accessToken,
+                    },
+                  }
+                )
+                .then((rst) => {
+                  if (rst.data.data.accessToken) {
+                    dispatch(storeToken(rst.data.data.accessToken));
+                    return axios.post(
+                      process.env.REACT_APP_SERVER_URL + `/subscribe`,
+                      { username: data.food_info?.userName },
+                      {
+                        headers: {
+                          authorization: "bearer " + rst.data.data.accessToken,
+                        },
+                      }
+                    );
+                  } else {
+                    return rst;
+                  }
+                })
+                .then((rst) => {
+                  setcall3(false);
+                });
+            }}
+            buttonMessage={"예"}
           ></Message>
         ) : null}
       </InnerFrame>
