@@ -2,6 +2,7 @@ import styled from "styled-components";
 import Mainslide from "./Mainslide";
 import Maingrid from "./Maingrid";
 import Mainintro from "./Mainintro";
+import BottomSide from "./BottomSide";
 //import Maindesc from "./Maindesc";
 const Frame = styled.div`
   height: 100%;
@@ -20,12 +21,19 @@ const InnerFrame = styled.div`
   margin: 0 auto;
 `;
 
-export default function () {
+export default function Main() {
   return (
     <Frame>
       <Mainslide></Mainslide>
       <Maingrid></Maingrid>
       <Mainintro></Mainintro>
+      <BottomSide></BottomSide>
+      {/* <InnerFrame>
+        <Mainslide></Mainslide>
+        <Maingrid></Maingrid>
+        <Mainintro></Mainintro>
+        <BottomSide></BottomSide>
+      </InnerFrame> */}
     </Frame>
   );
 }

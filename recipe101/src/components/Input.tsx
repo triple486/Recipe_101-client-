@@ -23,14 +23,14 @@ const Box = styled.span`
   flex: 1 0 0;
 `;
 
-export default function ({
+export default function InputComp({
   label = "",
   value,
   type = "text",
   func = () => {},
   bfunc = () => {},
   placeholder,
-  size = 16,
+  size = 12,
 }: {
   label?: string;
   value?: string;

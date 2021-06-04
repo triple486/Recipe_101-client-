@@ -1,19 +1,10 @@
-import React, { useState } from "react";
-import {
-  Route,
-  Switch,
-  useHistory,
-  useLocation,
-  Link,
-  Redirect,
-} from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import styled from "styled-components";
 import Addrecipe from "./components/Addrecipe";
 import Detailedrecipe from "./components/Recipe/Detailedrecipe";
 import Home from "./components/Home";
 import Mypage from "./components/Mypage";
 import './index.css';
-import PageModify from "./components/Mypage/PageModify";
 
 const Main = styled.div`
   * {
@@ -34,7 +25,6 @@ function App() {
       <Switch>
         <Route path="/recipe/:id" component={Detailedrecipe}></Route>
         <Route path="/Addrecipe" component={Addrecipe}></Route>
-        <Route path="/Mypage/Modify" component={PageModify}></Route>
         <Route path="/Mypage" component={Mypage}></Route>
         <Route path="/" component={Home}></Route>
       </Switch>

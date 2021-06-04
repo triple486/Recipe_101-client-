@@ -22,14 +22,16 @@ const ImgLabel = styled.label`
   justify-content: center;
   align-items: center;
   border-radius: 10px;
+  opacity: 0.6;
   border: solid 1px black;
 `;
+
 const InnerBox = styled.div`
   display: flex;
   font-size: 24px;
 `;
 
-export default function ({
+export default function ImageUpload({
   func,
   name = "test",
 }: {

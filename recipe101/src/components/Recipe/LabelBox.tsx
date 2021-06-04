@@ -24,7 +24,7 @@ const Text = styled.div<{ s?: number; w?: number }>`
   ${({ w }) => (w ? `font-weight: ${w};` : null)}
 `;
 
-export default function ({
+export default function LabelBox({
   l,
   v,
   s,

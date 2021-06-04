@@ -1,4 +1,3 @@
-import styled from "styled-components";
 import "../../../css/Home/Recipegrid.css";
 import { useHistory } from "react-router-dom";
 function Recipegrid({
@@ -21,7 +20,7 @@ function Recipegrid({
       }}
     >
       <div className="recipegrid_img_box">
-        <img className="recipegrid_img" src={data.food_img}></img>
+        <img className="recipegrid_img" src={data.food_img} alt={"text"}></img>
       </div>
       <div className="recipegrid_desc">
         <div className="recipegrid_data food_name">{data.food_name}</div>

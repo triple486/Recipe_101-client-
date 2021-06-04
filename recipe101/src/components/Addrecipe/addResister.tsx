@@ -1,4 +1,3 @@
-import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { storeToken } from "../../redux/tokenReducer";
 import styled from "styled-components";
@@ -115,7 +114,7 @@ export default function Resister({
   });
   function validation(type: string) {
     const email = new RegExp(
-      /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i
     );
     const username = new RegExp(/^[A-za-z0-9]{5,15}/g);
     const password = new RegExp(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/);

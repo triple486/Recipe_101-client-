@@ -71,7 +71,7 @@ const Button = styled.button`
   background: #b17d55;
 `;
 
-export default function () {
+export default function SearchInput() {
   let [type, typef] = useState("username");
   let [input, inputf] = useState("");
   let history = useHistory();

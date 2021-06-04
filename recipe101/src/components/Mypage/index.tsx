@@ -1,49 +1,130 @@
-import React, { useState } from "react";
 import styled from "styled-components";
-import { StructuredType } from "typescript";
-import { Link, withRouter, useHistory, Switch, Route } from "react-router-dom";
-import "../../css/Mypage/MypageMain.css";
-import Modify from "./Modify";
-import PickedRecipe from "./PickedRecipe";
-import AddedRecipe from "./AddedRecipe";
-import PageModify from "./PageModify";
-import MyReview from "./MyReview";
+import { useHistory, Switch, Route, useLocation } from "react-router-dom";
+import Main from "./Main";
+// import Profile from "./Pages/Profile";
+import { RootState } from "../../redux/reducers";
 import { useSelector, useDispatch } from "react-redux";
-
-import { updateLogin } from "../../redux/userReducer";
-
+import { updateUserInfo } from "../../redux/userReducer";
+import Password from "./Pages/Password";
+import Profile from "./Pages/PageModify";
+import Comment from "./Pages/AddedComment";
+import Recipe from "./Pages/AddedRecipe";
+import Store from "./Pages/StoreRecipe";
+import Subscribe from "./Pages/Subscribe";
+import axios from "axios";
+import { useState } from "react";
+axios.defaults.withCredentials = true;
 const Frame = styled.div`
+  background-color: #b17d55;
+  color: white;
   height: 100%;
   width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
   overflow-y: scroll;
 `;
+const button = styled.div``;
 
-// 중괄호 안 ctrl + spacebar 눌러서 확인
-function MypageMain() {
+const Header = styled.div`
+  height: 100px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  border-bottom: solid 1px white;
+`;
+const InnerHeader = styled.div`
+  height: 100%;
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`;
+
+const Button = styled.button`
+  background-color: #b17d55;
+  border: solid 1px #dfdfdf;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  cursor: pointer;
+
+  &:hover {
+    border: solid 1px white;
+    background-color: white;
+    opacity: 0.7;
+    color: black;
+  }
+`;
+const TextBox = styled.div`
+  display: flex;
+`;
+const Title = styled.div`
+  display: flex;
+  width: 900px;
+  margin-left: 80px;
+`;
+
+export default function Mypage() {
   let history = useHistory();
-
+  let location = useLocation();
+  let dispatch = useDispatch();
+  let [load, setload] = useState(false);
+  let accessToken = useSelector((state: RootState) => state.tokenReducer);
+  let user = useSelector((state: RootState) => state.userReducer);
+  const config = {
+    headers: {
+      authorization: "bearer " + accessToken,
+    },
+  };
+  if (!load) {
+    axios
+      .get(process.env.REACT_APP_SERVER_URL + `/user`, config)
+      .then((rst) => {
+        dispatch(updateUserInfo(rst.data.data.userinfo));
+        setload(true);
+      });
+  }
   return (
     <Frame>
-      <div className="Outline">
-        <h1 className="Logo">Recipe 101</h1>
-        <div>
-          <button className="Recipeaddbutton">레시피 추가</button>
-          <button
-            className="Logout"
+      <Header>
+        <InnerHeader>
+          <Title>
+            <h1>마이페이지</h1>
+          </Title>
+          <Button
             onClick={() => {
-              history.push("/");
+              if (location.pathname === "/mypage") {
+                history.push("/");
+              } else {
+                history.push("/mypage");
+              }
             }}
           >
-            돌아가기
-          </button>
-        </div>
-        <Modify></Modify>
-        <PickedRecipe></PickedRecipe>
-        <AddedRecipe></AddedRecipe>
-        <MyReview></MyReview>
-      </div>
+            <TextBox>{`돌아가기`}</TextBox>
+          </Button>
+        </InnerHeader>
+      </Header>
+      <Switch>
+        <Route path={"/mypage/subscribe"} component={Subscribe}></Route>
+        <Route path={"/mypage/addedrecipe"} component={Recipe}></Route>
+        <Route path={"/mypage/addedcomment"} component={Comment}></Route>
+        <Route path={"/mypage/storerecipe"} component={Store}></Route>
+        <Route path={"/mypage/password"} component={Password}></Route>
+        <Route path={"/mypage/profile"} component={Profile}></Route>
+        <Route path={"/mypage/"} component={Main}></Route>
+      </Switch>
     </Frame>
   );
 }
-
-export default MypageMain;

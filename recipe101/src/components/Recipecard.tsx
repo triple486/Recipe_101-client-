@@ -13,12 +13,14 @@ const InnerFrame = styled.div`
   width: 100%;
   height: 100%;
   flex-direction: column;
-  border: solid 1px black;
+  border: solid 1px white;
 `;
 
 const Image = styled.img`
-  height: ${Math.floor((window.innerHeight - 200) / 3) - 80}px;
+  height: 100%;
   width: 100%;
+  display: block;
+  object-fit: fill;
 `;
 const Desc = styled.div`
   height: 20%;
@@ -35,27 +37,31 @@ function Recipecard({
   data,
 }: {
   data: {
-    food_id: number;
+    id?: number;
+    food_id?: number;
     food_img: string;
+    imgUrl: string;
     food_name: string;
+    foodName: string;
     level: string;
     cooking_time: string;
+    cookingTime: string;
   };
 }) {
   let history = useHistory();
-
+  console.log(data);
   return (
     <Frame>
       <InnerFrame
         onClick={() => {
-          history.push(`/recipe/${data.food_id}`);
+          history.push(`/recipe/${data.food_id || data.id}`);
         }}
       >
-        <Image src={data.food_img}></Image>
+        <Image src={data.food_img || data.imgUrl}></Image>
         <Desc>
-          <Box>{data.food_name}</Box>
+          <Box>{data.food_name || data.foodName}</Box>
           <Box>{data.level}</Box>
-          <Box>{data.cooking_time}</Box>
+          <Box>{data.cooking_time || data.cookingTime}</Box>
         </Desc>
       </InnerFrame>
     </Frame>

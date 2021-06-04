@@ -114,7 +114,7 @@ function RecipeStep({
   );
 }
 
-export default function ({ func }: { func: Function }) {
+export default function Stepinput({ func }: { func: Function }) {
   let { Recipe, StepImage } = useSelector(
     (state: RootState) => state.addrecipeReducer
   );

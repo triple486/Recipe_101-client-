@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components";
 import "../../../css/Home/Mainintro.css";
 import img from './armando-ascorve-morales-ypZI_CA91M0-unsplash.jpg'

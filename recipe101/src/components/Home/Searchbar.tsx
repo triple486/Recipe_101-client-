@@ -1,9 +1,10 @@
-import { useHistory, useLocation, useRouteMatch } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { isOn } from "../../redux/modalReducer";
 import { RootState } from "../../redux/reducers";
 import SearchInput from "./SearchInput";
+import LOGO from "../../icon/logo.png";
 // import "../../css/index.css";
 const Frame = styled.div`
   height: 70px;
@@ -48,16 +49,32 @@ const TextBox = styled.div`
   }
   font-weight: 700;
 `;
+////////////////////////////////////////////// resolve conflict
+// const Box2 = styled.div`
+//   height: 100%;
+//   width: 200px;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   flex: 0 0 1;
+// `;
 
+const Logo = styled.img`
+  width: 250px;
+  display: block;
+  flex: 0 0 1;
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+// const TextBox = styled.div``;
+//////////////////////////////////////////////
 const LongBox = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
   flex: 6 0 0;
-`;
-
-const Search = styled.div`
-  flex: 2 0 0;
 `;
 
 function Comp() {
@@ -69,12 +86,20 @@ function Comp() {
   return (
     <Frame>
       <Body>
-        <Box1
+        {/* <Box1
           onClick={() => {
             history.push("/");
           }}
         >
           <TextBox>{"recipe 101"}</TextBox>
+        </Box1> */}
+        <Box1>
+          <Logo
+            onClick={() => {
+              history.push("/");
+            }}
+            src={LOGO}
+          ></Logo>
         </Box1>
         <LongBox>
           <SearchInput></SearchInput>

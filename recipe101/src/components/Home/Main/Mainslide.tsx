@@ -90,7 +90,6 @@ function Mainslide() {
   let url = `${process.env.REACT_APP_SERVER_URL}/recommend/10`;
   if (!Recipes.length) {
     axios.get(url).then((rst) => {
-      console.log(rst);
       setRecipes(rst.data.data.recipe);
       setdata(rst.data.data.recipe[0]);
       setnext(1);
