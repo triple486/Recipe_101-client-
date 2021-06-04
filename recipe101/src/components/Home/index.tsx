@@ -5,6 +5,8 @@ import styled from "styled-components";
 import Main from "./Main";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/reducers";
+import { updateLogin, updateUserInfo } from "../../redux/userReducer";
+import { isOn } from "../../redux/modalReducer";
 import Modal from "./Modal";
 import Searchbar from "./Searchbar";
 import Searchresult from "./Searchresult";
@@ -44,7 +46,11 @@ function Landingpage() {
     axios
       .post(process.env.REACT_APP_SERVER_URL + target, { code })
       .then((res) => {
+        console.log(res);
         dispatch(storeToken(res.data.data.accessToken));
+        dispatch(updateLogin(true));
+        dispatch(updateUserInfo(res.data.data.userinfo));
+        dispatch(isOn(false));
         history.push("/");
       })
       .catch();

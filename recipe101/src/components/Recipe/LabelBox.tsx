@@ -29,11 +29,13 @@ export default function LabelBox({
   v,
   s,
   w,
+  func,
 }: {
   l: string;
   v: string;
   s?: number;
   w?: number;
+  func?: Function;
 }) {
   return (
     <Frame>
@@ -44,7 +46,15 @@ export default function LabelBox({
         <Label s={s} w={w}>
           {":"}
         </Label>
-        <Text s={s} w={w}>
+        <Text
+          s={s}
+          w={w}
+          onClick={() => {
+            if (func !== undefined) {
+              func();
+            }
+          }}
+        >
           {v}
         </Text>
       </InnerFrame>
