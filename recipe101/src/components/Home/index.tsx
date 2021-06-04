@@ -24,7 +24,7 @@ const InnerFrame = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background: #B17D55;
+  background-color: #b17d55;
 `;
 
 function Landingpage() {

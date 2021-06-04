@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import styled, { keyframes } from "styled-components";
 import Recipeslide from "./Recipeslide";
+<<<<<<< HEAD
 import img from '../../../Assets/Images/food-2068217_1920-turned.jpg'
 
 const slide = keyframes`
@@ -11,17 +12,49 @@ const slide = keyframes`
 100% {
   margin-left:0;
 } 
+=======
+import img from "../../../Assets/Images/food-2068217_1920-turned.jpg";
+
+const slide = keyframes`
+0% {
+  margin-left:100%;
+  width:100%
+}
+10% {
+  margin-left:0%;
+  width:100%
+}
+90% {
+  margin-left:0;
+  width:100%
+}
+100% {
+  margin-left:-100%;
+  width:100%
+} 
+
+>>>>>>> kyungtaebang
 `;
 
 const Frame = styled.div`
   height: 816px;
   width: 100%;
   display: flex;
+<<<<<<< HEAD
   justify-content: center;
   align-items: center;
   flex-direction: row;
   background-image: url(${img})
 `;
+=======
+  overflow: hidden;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  background-image: url(${img});
+`;
+
+>>>>>>> kyungtaebang
 const Innerframe = styled.div`
   height: 100%;
   width: 100%;
@@ -32,8 +65,17 @@ const Innerframe = styled.div`
 
 const DataArea = styled.div`
   flex: 16 0 0;
+<<<<<<< HEAD
   animation: ${slide} 4s infinite linear normal;
   // border: solid 1px red;
+=======
+  overflow: hidden;
+  animation: ${slide} 4s infinite linear normal;
+  background-image: url(${img});
+  border-left: solid 1px white;
+  border-right: solid 1px white;
+  border-bottom: solid 1px white;
+>>>>>>> kyungtaebang
 `;
 const SelectArea = styled.div`
   flex: 2 0 0;
