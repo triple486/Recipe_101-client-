@@ -6,7 +6,6 @@ import img from "../../../Assets/Images/food-2068217_1920-turned.jpg";
 
 const slide = keyframes`
 0% {
-<<<<<<< HEAD
   margin-left:100%;
   width:100%
 }
@@ -21,21 +20,6 @@ const slide = keyframes`
 100% {
   margin-left:-100%;
   width:100%
-=======
-  transform:translate(100%,0)
-}
-25% {
-  transform:translate(0,0)
-
-}
-75% {
-  transform:translate(0,0)
-
-}
-100% {
-  transform:translate(-100%,0)
-
->>>>>>> 0e991397075b50b9c72d1bac05dc9ef2fdd94437
 } 
 
 `;
