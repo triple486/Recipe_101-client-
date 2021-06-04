@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import { ContextProfile, ContextPassword, ContextDefault } from "./Context";
 import { useHistory } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { RootState } from "../../redux/reducers";
+import { useSelector, useDispatch } from "react-redux";
 import { init } from "../../redux/userReducer";
 import axios from "axios";
 const InnerFrame = styled.div`
@@ -62,7 +63,7 @@ export default function Main() {
     "작성한 감상평들",
     "구독한 유저들",
   ];
-
+  let accessToken = useSelector((state: RootState) => state.tokenReducer);
   let dispatch = useDispatch();
   let history = useHistory();
   return (
@@ -76,8 +77,16 @@ export default function Main() {
                 {x === "프로필" ? (
                   <Button
                     onClick={() => {
+                      const config = {
+                        headers: {
+                          authorization: "bearer " + accessToken,
+                        },
+                      };
                       axios
-                        .get(process.env.REACT_APP_SERVER_URL + `/signout`)
+                        .get(
+                          process.env.REACT_APP_SERVER_URL + `/signout`,
+                          config
+                        )
                         .then((rst) => {
                           dispatch(init());
                           history.push("/");

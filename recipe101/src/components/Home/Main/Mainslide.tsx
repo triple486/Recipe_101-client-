@@ -4,11 +4,21 @@ import styled, { keyframes } from "styled-components";
 import Recipeslide from "./Recipeslide";
 const slide = keyframes`
 0% {
-  margin-left:0;
+  transform:translate(100%,0)
+}
+25% {
+  transform:translate(0,0)
+
+}
+75% {
+  transform:translate(0,0)
+
 }
 100% {
-  margin-left:0;
+  transform:translate(-100%,0)
+
 } 
+
 `;
 
 const Frame = styled.div`
@@ -23,13 +33,14 @@ const Innerframe = styled.div`
   height: 80%;
   width: 100%;
   display: flex;
+  overflow: hidden;
   flex-direction: column;
   border: solid 1px red;
 `;
 
 const DataArea = styled.div`
   flex: 16 0 0;
-  animation: ${slide} 4s infinite linear normal;
+  animation: ${slide} 10s infinite linear normal;
   border: solid 1px red;
 `;
 const SelectArea = styled.div`

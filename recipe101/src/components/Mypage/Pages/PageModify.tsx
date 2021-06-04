@@ -77,26 +77,24 @@ function PageModify() {
 
   const onEdit = () => {
     let data = new FormData();
+    let k = 0;
     if (newImage) {
       data.append("userImage", newImage);
+      k++;
     }
-    data.append("userName", newUsername);
-    data.append("phone", newPhone);
-    data.append("email", newEmail);
-
-    const uploadData = {
-      usermage: newImage,
-      userName: newUsername,
-      phone: newPhone,
-      email: newEmail,
-    };
-
-    if (
-      Object.keys(uploadData).length > 0 &&
-      uploadData.userName !== "" &&
-      uploadData.email !== "" &&
-      uploadData.phone !== ""
-    ) {
+    if (newUsername.length) {
+      data.append("userName", newUsername);
+      k++;
+    }
+    if (newPhone.length) {
+      data.append("phone", newPhone);
+      k++;
+    }
+    if (newEmail.length) {
+      data.append("email", newEmail);
+      k++;
+    }
+    if (k) {
       axios
         .patch(process.env.REACT_APP_SERVER_URL + "/user", data, {
           headers: {
@@ -108,7 +106,7 @@ function PageModify() {
         })
         .catch((e) => console.log(e));
     } else {
-      alert("error!");
+      alert("입력된 값이 없습니다.");
     }
   };
   return (

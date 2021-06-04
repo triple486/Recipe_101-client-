@@ -70,6 +70,7 @@ export default function Mypage() {
     axios
       .get(process.env.REACT_APP_SERVER_URL + `/user`, config)
       .then((rst) => {
+        console.log(rst);
         dispatch(updateUserInfo(rst.data.data.userinfo));
         setload(true);
       });
