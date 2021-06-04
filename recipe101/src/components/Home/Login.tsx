@@ -59,7 +59,6 @@ function Login() {
   const dispatch = useDispatch();
   let location = useLocation();
   let path = location.pathname.slice(0, -6);
-  console.log(path, location.pathname);
   let history = useHistory();
   const [name, namef] = useState("");
   const [password, passwordf] = useState("");

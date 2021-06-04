@@ -2,8 +2,9 @@ import styled from "styled-components";
 import Starscore from "./Starscore";
 import { useState } from "react";
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../redux/reducers";
+import { storeToken } from "../../redux/tokenReducer";
 axios.defaults.withCredentials = true;
 const Frame = styled.div`
   flex: 1 0 0;
