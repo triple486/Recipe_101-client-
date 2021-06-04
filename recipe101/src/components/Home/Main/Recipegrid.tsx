@@ -24,8 +24,8 @@ function Recipegrid({
       </div>
       <div className="recipegrid_desc">
         <div className="recipegrid_data food_name">{data.food_name}</div>
-        <div className="recipegrid_data level">{data.level}</div>
-        <div className="recipegrid_data cooking_time">{data.cooking_time}</div>
+        {/* <div className="recipegrid_data level">{data.level}</div>
+        <div className="recipegrid_data cooking_time">{data.cooking_time}</div> */}
       </div>
     </div>
   );

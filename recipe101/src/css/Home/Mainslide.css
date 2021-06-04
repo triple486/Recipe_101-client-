@@ -3,7 +3,7 @@
 .slideshow {
   margin: 50px auto;
   overflow: hidden;
-  max-width: 1000px;
+  /* max-width: 1000px; */
 }
 
 .slideshowSlider {

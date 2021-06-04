@@ -4,13 +4,14 @@ import Addrecipe from "./components/Addrecipe";
 import Detailedrecipe from "./components/Recipe/Detailedrecipe";
 import Home from "./components/Home";
 import Mypage from "./components/Mypage";
+import './index.css';
 
 const Main = styled.div`
   * {
     box-sizing: border-box;
-    font-family: Noto;
+    font-family: 'Noto Sans KR';
   }
-  dispaly: flex;
+  display: flex;
   position: fixed;
   top: 0;
   left: 0;

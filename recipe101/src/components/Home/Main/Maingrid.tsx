@@ -4,11 +4,13 @@ import styled from "styled-components";
 import Recipegrid from "./Recipegrid";
 
 const Frame = styled.div`
-  height: ${Math.floor((window.innerHeight - 100) * 0.8)}px;
+  // height: 100%;
   width: 100%;
   display: flex;
   flex-direction: column;
-  border: solid 1px green;
+  margin: 150px auto 200px auto;
+  max-width: 1500px;
+  // border: 1px solid white;
 `;
 
 const Body = styled.div`

@@ -11,6 +11,7 @@ const Frame = styled.div`
   justify-content: center;
   border-bottom: solid 1px black;
   background-color: white;
+
 `;
 
 const Body = styled.div`
@@ -21,6 +22,9 @@ const Body = styled.div`
   display: flex;
 
   flex-direction: row;
+  max-width: 1500px;
+  // flex: 1 0 0;
+  margin: 0 auto;
 `;
 
 const Box = styled.div`

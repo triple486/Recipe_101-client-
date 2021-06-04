@@ -25,6 +25,7 @@ const InnerFrame = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  background-color: #b17d55;
 `;
 
 // const BottomSide = styled.div`

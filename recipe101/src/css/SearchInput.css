@@ -1,0 +1,17 @@
+.search_icon {
+  color: black;
+  /* background: white; */
+  margin: 5px 7px;
+  width: 20px!important;
+  height: 20px;
+}
+
+.search_icon:hover {
+  cursor: pointer;
+}
+
+.search_icon.search {
+  margin: 7px 10px 5px 5px;
+  width: 2.5em;
+  height: 1.5em;
+}
