@@ -9,11 +9,11 @@ const slide = keyframes`
   margin-left:100%;
   width:100%
 }
-20% {
+10% {
   margin-left:0%;
   width:100%
 }
-80% {
+90% {
   margin-left:0;
   width:100%
 }
@@ -48,7 +48,9 @@ const DataArea = styled.div`
   overflow: hidden;
   animation: ${slide} 4s infinite linear normal;
   background-image: url(${img});
-  // border: solid 1px red;
+  border-left: solid 1px white;
+  border-right: solid 1px white;
+  border-bottom: solid 1px white;
 `;
 const SelectArea = styled.div`
   flex: 2 0 0;

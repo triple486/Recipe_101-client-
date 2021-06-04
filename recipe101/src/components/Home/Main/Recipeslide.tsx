@@ -21,7 +21,9 @@ const Image = styled.img`
   width: 670px;
   display: flex;
   object-fit: contain;
-  margin-top: 5%;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const DataBox = styled.div`

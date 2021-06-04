@@ -31,14 +31,15 @@ const SearchBox = styled.div`
 
 const SelectBox = styled.div`
   display: inline-block;
-  margin: 7px 10px 0 10px;
+  margin: 2px 10px 0 10px;
 
   vertical-align: top;
 `;
 
 const Select = styled.div<{ type: string; name: string }>`
   display: inline-block;
-  ${({ type, name }) => (type === name ? `background-color:green;` : "")}
+  border: 1px solid transparent;
+  ${({ type, name }) => (type === name ? `border-color:black;` : "")}
   border-radius: 50%;
 `;
 const Input = styled.input`
@@ -48,8 +49,8 @@ const Input = styled.input`
   // text-indent: -5em;
   // background: #B17D55;
   // position: absolute;
-  top: 0;
-  left: 0;
+  // top: 0;
+  // left: 0;
   width: 350px;
   height: 40px;
   line-height: 30px;
@@ -154,6 +155,11 @@ export default function () {
           value={input}
           onChange={(e) => {
             inputf(e.target.value);
+          }}
+          onKeyPress={(e) => {
+            if(e.key === 'Enter'){
+              searchfunction();
+            }
           }}
         ></Input>
         <FontAwesomeIcon

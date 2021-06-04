@@ -12,6 +12,10 @@
   color: white;
 }
 
+.recipegrid_frame:hover {
+  cursor: pointer;
+}
+
 .recipegrid_img {
   height: inherit;
   width: inherit;

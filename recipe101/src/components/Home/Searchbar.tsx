@@ -42,7 +42,12 @@ const Box2 = styled.div`
   flex: 1 0 0;
 `;
 
-const TextBox = styled.div``;
+const TextBox = styled.div`
+  &:hover {
+    cursor: pointer;
+  }
+  font-weight: 700;
+`;
 
 const LongBox = styled.div`
   height: 100%;
