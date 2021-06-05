@@ -4,7 +4,7 @@ import { storeToken } from "../../redux/tokenReducer";
 import styled from "styled-components";
 import Main from "./Main";
 import { useSelector } from "react-redux";
-import rootReducer, { RootState } from "../../redux/reducers";
+import { RootState } from "../../redux/reducers";
 import { updateLogin, updateUserInfo } from "../../redux/userReducer";
 import { isOn } from "../../redux/modalReducer";
 import Modal from "./Modal";

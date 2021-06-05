@@ -147,50 +147,6 @@ const ItemBox = styled.div`
   align-items: center;
 `;
 
-interface Food_info {
-  id: number;
-  userName: string;
-  foodName: string;
-  summary: string;
-  nation: string;
-  type: string;
-  cookingTime: string;
-  calorie: string;
-  qnt: string;
-  level: string;
-  imgUrl: string;
-  store: number;
-  score: number;
-  createdAt: string;
-  updatedAt: string;
-}
-
-interface Ingredients {
-  name: string;
-  type: string;
-  cap: string;
-}
-interface Recipe {
-  cookingNo: number;
-  cookingDc: string;
-  stepImage: string;
-  stepTip: string;
-}
-interface Commentf {
-  id: number;
-  userName: string;
-  comment: string;
-  createdAt: string;
-  score: number;
-}
-
-interface Recipe_info {
-  food_info?: Food_info;
-  Ingredients?: Ingredients[];
-  Recipes?: Recipe[];
-  Comment?: Commentf[];
-}
-
 interface Image_extend {
   isEx?: boolean;
   image?: string;
@@ -204,7 +160,6 @@ function Detailedrecipe() {
   let accessToken = useSelector((state: RootState) => state.tokenReducer);
   let data = useSelector((state: RootState) => state.newReducer);
   let [iex, setiex] = useState<Image_extend>({ isEx: false });
-  let [mkc, setc] = useState(false);
   let [call, setcall] = useState(false);
   let [call2, setcall2] = useState(false);
   let [call3, setcall3] = useState(false);
@@ -218,7 +173,7 @@ function Detailedrecipe() {
         .then((rst) => {
           dispatch(getdata(rst.data.data));
           dispatch(isLoad(true));
-          setc(false);
+
           let data = rst.data.data;
           data.Comment.forEach((x: any, i: any) => {
             if (x.userName === user.userInfo.userName) {
@@ -244,7 +199,15 @@ function Detailedrecipe() {
     }
 
     return () => {};
-  }, [add]);
+  }, [
+    add,
+    accessToken,
+    data.isLoad,
+    dispatch,
+    id,
+    user.isLogin,
+    user.userInfo.userName,
+  ]);
   function Eximage() {
     return (
       <Modal
@@ -274,48 +237,50 @@ function Detailedrecipe() {
           >
             <TextBox>{"돌아가기"}</TextBox>
           </Button>
+          {user.isLogin ? (
+            store ? (
+              <Button
+                onClick={() => {
+                  axios
+                    .delete(
+                      process.env.REACT_APP_SERVER_URL +
+                        `/store/${data.food_info?.id}`,
+                      {
+                        headers: {
+                          authorization: "bearer " + accessToken,
+                        },
+                      }
+                    )
+                    .then((rst) => {
+                      setstore(false);
+                    });
+                }}
+              >
+                <TextBox>{"구독 취소"}</TextBox>
+              </Button>
+            ) : (
+              <Button
+                onClick={() => {
+                  axios
+                    .post(
+                      process.env.REACT_APP_SERVER_URL + "/store",
+                      { id: data.food_info?.id },
+                      {
+                        headers: {
+                          authorization: "bearer " + accessToken,
+                        },
+                      }
+                    )
+                    .then((rst) => {
+                      setstore(true);
+                    });
+                }}
+              >
+                <TextBox>{"구독 하기"}</TextBox>
+              </Button>
+            )
+          ) : null}
 
-          {store ? (
-            <Button
-              onClick={() => {
-                axios
-                  .delete(
-                    process.env.REACT_APP_SERVER_URL +
-                      `/store/${data.food_info?.id}`,
-                    {
-                      headers: {
-                        authorization: "bearer " + accessToken,
-                      },
-                    }
-                  )
-                  .then((rst) => {
-                    setstore(false);
-                  });
-              }}
-            >
-              <TextBox>{"구독 취소"}</TextBox>
-            </Button>
-          ) : (
-            <Button
-              onClick={() => {
-                axios
-                  .post(
-                    process.env.REACT_APP_SERVER_URL + "/store",
-                    { id: data.food_info?.id },
-                    {
-                      headers: {
-                        authorization: "bearer " + accessToken,
-                      },
-                    }
-                  )
-                  .then((rst) => {
-                    setstore(true);
-                  });
-              }}
-            >
-              <TextBox>{"구독 하기"}</TextBox>
-            </Button>
-          )}
           {user.userInfo.userName === data.food_info?.userName ? (
             <Button
               onClick={() => {

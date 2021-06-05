@@ -2,7 +2,7 @@ import styled from "styled-components";
 import Starscore from "./Starscore";
 import { useState } from "react";
 import axios from "axios";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { RootState } from "../../redux/reducers";
 axios.defaults.withCredentials = true;
 const Frame = styled.div`
@@ -84,7 +84,6 @@ export default function Comment({
   data: { id?: number };
   add: boolean;
 }) {
-  let dispatch = useDispatch();
   let [y, sety] = useState(0);
   let [text, settext] = useState("");
   let user = useSelector((state: RootState) => state.userReducer);
