@@ -26,8 +26,8 @@ export default function Recipepage() {
     <Frame>
       {data.map((x, i) => {
         return (
-          <BoxFrame>
-            <Recipecard key={i} data={x}></Recipecard>
+          <BoxFrame key={i}>
+            <Recipecard data={x}></Recipecard>
           </BoxFrame>
         );
       })}

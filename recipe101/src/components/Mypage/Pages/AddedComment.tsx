@@ -3,7 +3,7 @@ import { RootState } from "../../../redux/reducers";
 import { useSelector } from "react-redux";
 import Comment from "../../Recipe/CommentBox";
 import Message from "../../Addrecipe/messagebox";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 axios.defaults.withCredentials = true;
 const Frame = styled.div`
