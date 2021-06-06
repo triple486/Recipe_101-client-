@@ -4,7 +4,8 @@ import Main from "./Main";
 // import Profile from "./Pages/Profile";
 import { RootState } from "../../redux/reducers";
 import { useSelector, useDispatch } from "react-redux";
-import { updateUserInfo } from "../../redux/userReducer";
+import { updateUserInfo, updateLogin } from "../../redux/userReducer";
+import { storeToken } from "../../redux/tokenReducer";
 import Password from "./Pages/Password";
 import Profile from "./Pages/PageModify";
 import Comment from "./Pages/AddedComment";
@@ -79,22 +80,38 @@ export default function Mypage() {
   let history = useHistory();
   let location = useLocation();
   let dispatch = useDispatch();
-  let accessToken = useSelector((state: RootState) => state.tokenReducer);
-  const config = {
-    headers: {
-      authorization: "bearer " + accessToken,
-    },
-  };
+  // let accessToken = useSelector((state: RootState) => state.tokenReducer);
+  // const config = {
+  //   headers: {
+  //     authorization: "bearer " + accessToken,
+  //   },
+  // };
 
   useEffect(() => {
     axios
-      .get(process.env.REACT_APP_SERVER_URL + `/user`, config)
+      .get(process.env.REACT_APP_SERVER_URL + "/refresh")
+      .then((res) => {
+        dispatch(storeToken(res.data.data.accessToken));
+        dispatch(updateLogin(true));
+        // dispatch(updateUserInfo(res.data.data.userinfo));
+        const config = {
+          headers: {
+            authorization: "bearer " + res.data.data.accessToken,
+          },
+        };
+        return axios.get(process.env.REACT_APP_SERVER_URL + `/user`, config);
+      })
+      //   .catch();
+      // axios
+      //   .get(process.env.REACT_APP_SERVER_URL + `/user`, config)
       .then((rst) => {
-        console.log(rst);
         dispatch(updateUserInfo(rst.data.data.userinfo));
-      });
+        // });
+      })
+      .catch();
+
     return;
-  });
+  }, []);
   return (
     <Frame>
       <Header>

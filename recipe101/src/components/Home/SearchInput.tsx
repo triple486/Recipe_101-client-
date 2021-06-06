@@ -4,6 +4,9 @@ import styled from "styled-components";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { isSearch, isFail, searchRecipe } from "../../redux/searchReducer";
+import { updateLogin, updateUserInfo } from "../../redux/userReducer";
+import { storeToken } from "../../redux/tokenReducer";
+import { useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faSearch,
@@ -78,14 +81,17 @@ export default function SearchInput() {
     };
   }
   function searchfunction() {
-    let url = `${process.env.REACT_APP_SERVER_URL}/search/${type}/${input}`;
     dispatch(isFail(false));
+    let url = `${process.env.REACT_APP_SERVER_URL}/search/${type}/${input}`;
     axios
       .get(url)
       .then((rst) => {
         inputf("");
         dispatch(searchRecipe(rst.data.data.recipe));
         dispatch(isSearch(true));
+        sessionStorage.setItem("isSearch", type);
+        sessionStorage.setItem("type", type);
+        sessionStorage.setItem("input", input);
       })
       .catch((err) => {
         dispatch(isSearch(true));
@@ -95,32 +101,40 @@ export default function SearchInput() {
         history.push("/search");
       });
   }
+  useEffect(() => {
+    sessionStorage.getItem("isSearch");
+    let type = sessionStorage.getItem("type") || undefined;
+    let input = sessionStorage.getItem("input") || undefined;
+    let url = `${process.env.REACT_APP_SERVER_URL}/search/${type}/${input}`;
+
+    axios
+      .get(process.env.REACT_APP_SERVER_URL + "/refresh")
+      .then((res) => {
+        dispatch(storeToken(res.data.data.accessToken));
+        dispatch(updateLogin(true));
+        dispatch(updateUserInfo(res.data.data.userinfo));
+        if (sessionStorage.getItem("isSearch")) {
+          axios
+            .get(url)
+            .then((rst) => {
+              inputf("");
+              dispatch(searchRecipe(rst.data.data.recipe));
+              dispatch(isSearch(true));
+            })
+            .catch((err) => {
+              dispatch(isSearch(true));
+              dispatch(isFail(true));
+            });
+        }
+      })
+      .catch();
+
+    return;
+  }, []);
 
   return (
     <Search>
       <SearchBox>
-        {/* <Select
-          onChange={(e) => {
-            switch (e.target.selectedIndex) {
-              case 0:
-                typef("username");
-                break;
-
-              case 1:
-                typef("foodname");
-
-                break;
-              case 2:
-                typef("itemname");
-
-                break;
-            }
-          }}
-        >
-          <option>{"작성자"}</option>
-          <option>{"요리명"}</option>
-          <option>{"재료명"}</option>
-        </Select> */}
         <SelectBox>
           <Select type={type} name={"username"}>
             <FontAwesomeIcon

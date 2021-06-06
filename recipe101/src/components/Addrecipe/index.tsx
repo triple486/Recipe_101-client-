@@ -232,28 +232,28 @@ function Addrecipe() {
               <Input
                 label={"요리 명"}
                 type={"text"}
-                value={data.Food_info.foodName}
+                value={data.Food_info.foodName || ""}
                 func={inputf("foodName")}
                 placeholder={"ex) 미역국, 감자국, ..."}
               ></Input>
               <Input
                 label={"조리 시간"}
                 type={"text"}
-                value={data.Food_info.cookingTime}
+                value={data.Food_info.cookingTime || ""}
                 func={inputf("cookingTime")}
                 placeholder={"ex) 10분, 20분, 30분, ..."}
               ></Input>
               <Input
                 label={"요리 국적"}
                 type={"text"}
-                value={data.Food_info.nation}
+                value={data.Food_info.nation || ""}
                 func={inputf("nation")}
                 placeholder={"ex) 한국, 미국, 퓨전, ..."}
               ></Input>
               <Input
                 label={"요리 종류"}
                 type={"text"}
-                value={data.Food_info.type}
+                value={data.Food_info.type || ""}
                 func={inputf("type")}
                 placeholder={"ex) 밥, 국, 튀김, ..."}
               ></Input>
@@ -263,21 +263,21 @@ function Addrecipe() {
               <Input
                 label={"난이도"}
                 type={"text"}
-                value={data.Food_info.level}
+                value={data.Food_info.level || ""}
                 func={inputf("level")}
                 placeholder={"ex) 초보 환영, 보통, 어려움, ..."}
               ></Input>
               <Input
                 label={"양"}
                 type={"text"}
-                value={data.Food_info.qnt}
+                value={data.Food_info.qnt || ""}
                 func={inputf("qnt")}
                 placeholder={"ex) 1인분, 2인분, 3인분, ..."}
               ></Input>
               <Input
                 label={"칼로리"}
                 type={"text"}
-                value={data.Food_info.calorie}
+                value={data.Food_info.calorie || ""}
                 func={inputf("calorie")}
                 placeholder={"ex) 100Kcal, 200Kcal, 300Kcal, ..."}
               ></Input>

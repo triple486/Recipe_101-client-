@@ -9,7 +9,7 @@ import axios from "axios";
 import Imageupload from "../ImageUpload";
 import { storeToken } from "../../redux/tokenReducer";
 import { updateLogin, updateUserInfo } from "../../redux/userReducer";
-
+axios.defaults.withCredentials = true;
 const Frame = styled.div`
   height: 380px;
   width: 760px;
@@ -82,6 +82,7 @@ interface useinfo {
 export default function Resister() {
   let location = useLocation();
   let path = location.pathname.slice(0, -9);
+  console.log("path", path);
   const [userinfo, setuserinfo] = useState<useinfo>({
     username: "",
     email: "",
@@ -225,7 +226,7 @@ export default function Resister() {
               bfunc={validation("phone")}
             ></Input>
           </Line>
-          <Line>{err.length ? err : null}</Line>
+          <Line>{err && err.length ? err : null}</Line>
           <Line>
             <Button
               onClick={() => {
@@ -272,10 +273,14 @@ export default function Resister() {
                     dispatch(updateLogin(true));
                     dispatch(updateUserInfo(res.data.data.userinfo));
                     dispatch(isOn(false));
-                    history.push(path.length ? path : "/");
+                    history.push(path && path.length ? path : "/");
                   })
                   .catch((err) => {
-                    seterr(err.response.data ? err.response.data.message : "");
+                    seterr(
+                      err.response && err.response.data
+                        ? err.response.data.message
+                        : ""
+                    );
                   });
               }}
             >
