@@ -123,7 +123,7 @@ function PageModify() {
           },
         })
         .then((res) => {
-          usehistory.push("/");
+          usehistory.push("/mypage");
         })
         .catch((e) => console.log(e));
     } else {
