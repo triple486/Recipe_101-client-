@@ -9,9 +9,7 @@ import {
   useRouteMatch,
   Link,
   useHistory,
-  useParams,
 } from "react-router-dom";
-import { searchRecipe } from "../../redux/searchReducer";
 import { useState } from "react";
 const Frame = styled.div`
   flex: 1 0 0;

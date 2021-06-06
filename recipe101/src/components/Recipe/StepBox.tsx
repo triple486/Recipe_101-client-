@@ -50,7 +50,7 @@ const Text = styled.div`
 `;
 
 const IMG = styled.img`
-  max-height: 100%;
+  max-height: 80%;
   max-width: 100%;
   object-fit: cover;
   display: block;
@@ -69,6 +69,7 @@ export default function StepBox({
   data?: Recipe;
   func?: Function;
 }) {
+  console.log(data);
   return (
     <Frame>
       <Box>
@@ -79,7 +80,7 @@ export default function StepBox({
           func({ isEx: true, image: data?.stepImage });
         }}
       >
-        <IMG src={data?.stepImage}></IMG>
+        <IMG src={data?.stepImage} alt={""}></IMG>
       </Box>
       <LongBox>
         <HLongBox>
