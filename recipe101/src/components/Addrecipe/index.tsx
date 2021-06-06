@@ -167,6 +167,7 @@ function Addrecipe() {
   let [isinputigr, setinputigr] = useState<boolean>(false);
   let [isinputstep, setinputstep] = useState<boolean>(false);
   let [ismessage, setmessage] = useState<boolean>(false);
+  let [ismessage2, setmessage2] = useState<boolean>(false);
 
   function inputf(type: string) {
     let sdata: any = {};
@@ -326,7 +327,7 @@ function Addrecipe() {
               .post(process.env.REACT_APP_SERVER_URL + "/recipe", rdata, config)
               .then((rst) => {
                 dispatch(initial());
-                console.log(rst);
+                setmessage2(true);
               })
               .catch((err) => {
                 console.log("fail");
@@ -353,6 +354,19 @@ function Addrecipe() {
             setresister(true);
           }}
           buttonMessage={"가입 진행"}
+        ></Message>
+      ) : null}
+      {ismessage2 ? (
+        <Message
+          cancel={() => {
+            setmessage2(false);
+          }}
+          message={"레시피가 추가되었습니다. 홈화면으로 돌아가시겠습니까?"}
+          button={() => {
+            history.push("/");
+            setmessage2(false);
+          }}
+          buttonMessage={"예"}
         ></Message>
       ) : null}
       {isresister ? (
