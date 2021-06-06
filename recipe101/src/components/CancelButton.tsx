@@ -4,10 +4,17 @@ const CancelButton = styled.button`
   height: 20px;
   width: 20px;
   display: flex;
-  border-radius: 50%;
+  // border-radius: 50%;
   padding: 2px;
-  background-color: grey;
-  border: solid 1px black;
+  // background-color: grey;
+  // border: solid 1px black;
+  &:before {
+    content: 'x';
+    font-size: 20px;
+    vertical-align: top;
+    line-height: 12px;
+    margin-left: 1px;
+  }
 `;
 
 const CancelLine = styled.div`
