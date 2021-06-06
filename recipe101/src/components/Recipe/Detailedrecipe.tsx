@@ -112,9 +112,9 @@ const MinBoxFrame5 = styled.div<Boxset>`
   position: releative;
   display: flex;
   flex-direction: ${({ c }) => (c ? "column" : "row")};
-  border-bottom: solid ${({ h }) => (h ? 1 : 0)} white;
-  border-left: solid ${({ h }) => (h ? 1 : 0)} white;
-  border-right: solid ${({ h }) => (h ? 1 : 0)} white;
+  border-bottom: solid ${({ h }) => (h ? 1 : 0)}px white;
+  border-left: solid ${({ h }) => (h ? 1 : 0)}px white;
+  border-right: solid ${({ h }) => (h ? 1 : 0)}px white;
 `;
 
 const Img = styled.img`
@@ -522,10 +522,10 @@ function Detailedrecipe() {
         </BoxFrame>
         <MinBoxFrame1 h={200}>
           <Line1 c={true}>
-            <Line1>
+            <Line1 f={2}>
               <TextBox s={20}>{"간단한 설명"}</TextBox>
             </Line1>
-            <Line1 f={4}>
+            <Line1 f={3}>
               <TextBox>{data.food_info?.summary}</TextBox>
             </Line1>
           </Line1>
@@ -599,7 +599,7 @@ function Detailedrecipe() {
             add={add}
           ></Comment>
         </MinBoxFrame4>
-        <MinBoxFrame5 h={0} c={true}>
+        <MinBoxFrame5 h={data.Comment?.length || 0} c={true}>
           {data.Comment?.map((x, i) => {
             return (
               <FLine1 h={200} key={i}>
