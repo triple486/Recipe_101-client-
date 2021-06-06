@@ -9,6 +9,7 @@ import {
   useRouteMatch,
   Link,
   useHistory,
+  useParams,
 } from "react-router-dom";
 import { searchRecipe } from "../../redux/searchReducer";
 import { useState } from "react";
@@ -98,8 +99,12 @@ const SortBox = styled.div`
   width: 100%;
   display: flex; ;
 `;
-
+const Slink = styled(Link)<{ iscolor: boolean }>`
+  text-decoration: none;
+  color: ${({ iscolor }) => (iscolor ? "red" : "white")};
+`;
 function YesResult() {
+  let [id, setid] = useState<number>(1);
   let dispatch = useDispatch();
   let history = useHistory();
   let { search } = useSelector((state: RootState) => state.searchReducer);
@@ -111,18 +116,15 @@ function YesResult() {
   }
 
   let match = useRouteMatch();
-  const Linkbox = function ({
-    num,
-    func = () => {},
-  }: {
-    num: number | string;
-    func?: Function;
-  }) {
-    return (
-      <InnerBox onClick={() => func()}>
-        <Link to={`${match.path}/${num}`}>{num}</Link>
+  const Linkbox = function ({ num }: { num: number }) {
+    let p = id === num;
+    return num > 0 ? (
+      <InnerBox>
+        <Slink to={`${match.path}/${num}`} iscolor={p}>
+          {num}
+        </Slink>
       </InnerBox>
-    );
+    ) : null;
   };
   const LinkButton = function ({ num, back }: { num: number; back: boolean }) {
     return (
@@ -133,6 +135,7 @@ function YesResult() {
             history.push(`${match.path}/${num - 10 > 0 ? num - 10 : 1}`);
           } else {
             setq(num + 10 < k ? num + 10 : num);
+
             history.push(`${match.path}/${num + 10 < k ? num + 10 : num}`);
           }
         }}
@@ -141,13 +144,12 @@ function YesResult() {
       </FbuttonBox>
     );
   };
-
   return (
     <Box2>
       <InnerFrame>
         <Switch>
           <Route path={`${match.path}/:id`}>
-            <Recipepage></Recipepage>
+            <Recipepage func={setid}></Recipepage>
           </Route>
           <Route path={`${match.path}`}>
             <Redirect to={`${match.path}/${1}`} />
@@ -159,7 +161,7 @@ function YesResult() {
         <LinkButton key={-1} num={q} back={true}></LinkButton>
         <FooterBox>
           {pn.slice(q - 1, q + 9).map((x, i) => {
-            return <Linkbox key={i} num={x > k ? "" : x}></Linkbox>;
+            return <Linkbox key={i} num={x > k ? 0 : x}></Linkbox>;
           })}
         </FooterBox>
         <LinkButton key={11} num={q} back={false}></LinkButton>
