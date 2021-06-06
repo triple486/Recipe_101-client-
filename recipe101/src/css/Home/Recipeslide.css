@@ -4,7 +4,7 @@
 
 .recipeslide_desc.food_name {
   height: 20%;
-  font-size: 6em;
+  font-size: 3.8em;
   font-weight: 500;
   text-decoration: underline;
   text-underline-offset: 0.3em;
@@ -21,9 +21,21 @@
   padding-top: 7%;
 }
 
+.recipeslide_desc.summary2 {
+  height: 45%;
+  font-size: 2.5em;
+  padding-top: 20%;
+}
+
 .recipeslide_desc.level {
   height: 10%;
   font-size: 2em;
+}
+
+.recipeslide_desc.level2 {
+  height: 10%;
+  font-size: 2em;
+  padding-top: 5%;
 }
 
 .recipeslide_desc.cooking_time {
@@ -31,7 +43,19 @@
   font-size: 2em;
 }
 
+.recipeslide_desc.cooking_time2 {
+  height: 10%;
+  font-size: 2em;
+  padding-top: 4%;
+}
+
 .recipeslide_desc.nation {
   height: 15%;
   font-size: 2em;
+}
+
+.recipeslide_desc.nation2 {
+  height: 15%;
+  font-size: 2em;
+  padding-top: 3.2%;
 }

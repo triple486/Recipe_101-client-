@@ -2,7 +2,7 @@
   /* max-width: 1200px; */
   width: 100%;
   margin: 0 auto;
-  padding: 0 30px;
+  padding: 0 20px;
 }
 
 .mainintro_img_box {
@@ -17,7 +17,6 @@
   justify-content: center;
   align-items: center;
   margin: 10px;
-  box-shadow: 10px 10px 10px white;
 }
 
 .mainintro_desc {
@@ -33,7 +32,6 @@
   /* background-color: blue; */
   vertical-align: top;
   margin: 10px;
-  box-shadow: 10px 10px 10px white;
   color: white;
 }
 

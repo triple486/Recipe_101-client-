@@ -47,7 +47,7 @@ const Innerframe = styled.div`
 const DataArea = styled.div`
   flex: 16 0 0;
   overflow: hidden;
-  animation: ${slide} 12s infinite linear normal;
+  animation: ${slide} 6s infinite linear normal;
   background-image: url(${img});
   border-left: solid 1px white;
   border-right: solid 1px white;
