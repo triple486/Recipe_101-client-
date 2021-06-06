@@ -10,6 +10,8 @@ import Comment from "./Comment";
 import CommentBox from "./CommentBox";
 import Message from "../Addrecipe/messagebox";
 import { getdata, isLoad } from "../../redux/newReducer";
+import { updateLogin, updateUserInfo } from "../../redux/userReducer";
+import { storeToken } from "../../redux/tokenReducer";
 
 axios.defaults.withCredentials = true;
 const Frame = styled.div`
@@ -167,6 +169,15 @@ function Detailedrecipe() {
   let [del, setdel] = useState(0);
   let [store, setstore] = useState(false);
   useEffect(() => {
+    axios
+      .get(process.env.REACT_APP_SERVER_URL + "/refresh")
+      .then((res) => {
+        dispatch(storeToken(res.data.data.accessToken));
+        dispatch(updateLogin(true));
+        dispatch(updateUserInfo(res.data.data.userinfo));
+      })
+      .catch();
+
     if (!data.isLoad) {
       axios
         .get(process.env.REACT_APP_SERVER_URL + `/recipe/${id}`)
@@ -333,20 +344,6 @@ function Detailedrecipe() {
                   v={data.food_info?.userName || ""}
                   func={() => {
                     if (user.userInfo.userName !== data.food_info?.userName) {
-                      axios
-                        .get(
-                          process.env.REACT_APP_SERVER_URL +
-                            `/subscribe/${data.food_info?.id}`,
-
-                          {
-                            headers: {
-                              authorization: "bearer " + accessToken,
-                            },
-                          }
-                        )
-                        .then((rst) => {
-                          console.log(rst);
-                        });
                       setcall3(true);
                     }
                   }}
