@@ -22,7 +22,7 @@ const Frame = styled.div`
   margin: 0;
   overflow-y: scroll;
   justify-content: center;
-  background-color: #B17D55;
+  background-color: #b17d55;
 `;
 const InnerFrame = styled.div`
   height: 100%;
@@ -475,7 +475,11 @@ function Detailedrecipe() {
                   l={"작성자"}
                   v={data.food_info?.userName || ""}
                   func={() => {
-                    if (user.userInfo.userName !== data.food_info?.userName) {
+                    console.log(user.isLogin);
+                    if (
+                      user.isLogin &&
+                      user.userInfo.userName !== data.food_info?.userName
+                    ) {
                       setcall3(true);
                     }
                   }}
@@ -674,7 +678,7 @@ function Detailedrecipe() {
         {call3 ? (
           <Message
             cancel={() => {
-              setcall(false);
+              setcall3(false);
             }}
             message={"해당 유저를 구독하겠습니까?"}
             button={() => {
