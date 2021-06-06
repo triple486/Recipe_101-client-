@@ -11,7 +11,7 @@ const Frame = styled.div`
   flex-direction: column;
   border: 1px solid white;
   margin: 30px;
-  box-shadow: 10px 10px 10px white;
+  // box-shadow: 5px 5px 5px white;
   color: white;
   // display: flex;
   // width: 100%;
@@ -36,6 +36,9 @@ const Image = styled.img`
   // width: 100%;
   // display: block;
   // object-fit: fill;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const ImageBox = styled.div`
@@ -65,6 +68,9 @@ const Desc = styled.div`
 `;
 const Box = styled.div`
   flex: 1 0 1;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 function Recipecard({
@@ -85,19 +91,21 @@ function Recipecard({
   let history = useHistory();
   console.log(data);
   return (
-    <Frame
-      onClick={() => {
-        history.push(`/recipe/${data.food_id || data.id}`);
-      }}
-    >
+    <Frame>
       {/* <InnerFrame */}
         
       {/* > */}
       <ImageBox>
-        <Image src={data.food_img || data.imgUrl}></Image>
+        <Image src={data.food_img || data.imgUrl}
+          onClick={() => {
+          history.push(`/recipe/${data.food_id || data.id}`);
+        }}></Image>
       </ImageBox>
       <Desc>
-        <Box>{data.food_name || data.foodName}</Box>
+        <Box onClick={() => {
+          history.push(`/recipe/${data.food_id || data.id}`);
+        }}>{data.food_name || data.foodName}
+        </Box>
         {/* <Box>{data.level}</Box>
         <Box>{data.cooking_time || data.cookingTime}</Box> */}
       </Desc>

@@ -20,7 +20,7 @@ const Frame = styled.div`
   margin: 0;
   overflow-y: scroll;
   justify-content: center;
-  background-color: #ffe894e6;
+  background-color: #B17D55;
 `;
 const InnerFrame = styled.div`
   height: 100%;
@@ -40,7 +40,7 @@ const BoxFrame = styled.div<Boxset>`
   width: 100%;
   display: flex;
   flex-direction: ${({ c }) => (c ? "column" : "row")};
-  border: solid 1px red;
+  border: solid 1px white;
 `;
 
 const MinBoxFrame = styled.div<Boxset>`
@@ -50,7 +50,7 @@ const MinBoxFrame = styled.div<Boxset>`
   position: releative;
   display: flex;
   flex-direction: ${({ c }) => (c ? "column" : "row")};
-  border: solid 1px red;
+  border: solid 1px white;
 `;
 
 const Img = styled.img`
@@ -62,7 +62,7 @@ const BasicDataBox = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
-  border: solid 1px red;
+  border: solid 1px white;
 `;
 
 interface Lineset {
@@ -77,7 +77,7 @@ const Line = styled.div<Lineset>`
   flex-direction: ${({ c }) => (c ? "column" : "row")};
   justify-content: center;
   align-items: center;
-  border: solid 1px red;
+  border: solid 1px white;
 `;
 interface Flineset {
   h?: number;
@@ -90,7 +90,7 @@ const FLine = styled.div<Flineset>`
   flex-direction: ${({ c }) => (c ? "column" : "row")};
   justify-content: center;
   align-items: center;
-  border: solid 1px red;
+  border: solid 1px white;
 `;
 
 const ButtonLine = styled.div`

@@ -68,7 +68,7 @@ const Box2 = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1 0 0;
-  margin: 20px auto 10px;
+  margin: 20px auto 30px;
 `;
 
 const Footer = styled.div`
@@ -96,11 +96,18 @@ const FbuttonBox = styled.div`
 `;
 const InnerBox = styled.div`
   display: flex;
+  color: white;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 const SortBox = styled.div`
   height: 20px;
   width: 100%;
-  display: flex; ;
+  display: flex;
+`;
+const LinkNumber = styled.div`
+  color: white;
 `;
 
 function YesResult() {
@@ -124,7 +131,9 @@ function YesResult() {
   }) {
     return (
       <InnerBox onClick={() => func()}>
-        <Link to={`${match.path}/${num}`}>{num}</Link>
+        <Link to={`${match.path}/${num}`} style={{ textDecoration:'none'}}>
+          <LinkNumber>{num}</LinkNumber>
+        </Link>
       </InnerBox>
     );
   };

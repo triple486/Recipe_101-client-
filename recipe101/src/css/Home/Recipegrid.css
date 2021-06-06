@@ -8,12 +8,8 @@
   flex-direction: column;
   border: 1px solid white;
   margin: 30px;
-  box-shadow: 10px 10px 10px white;
+  /* box-shadow: 10px 10px 10px white; */
   color: white;
-}
-
-.recipegrid_frame:hover {
-  cursor: pointer;
 }
 
 .recipegrid_img {
@@ -21,6 +17,10 @@
   width: 80%;
   display: flex;
   border: 1px solid white;
+}
+
+.recipegrid_img:hover {
+  cursor: pointer;
 }
 
 .recipegrid_img_box {
@@ -46,4 +46,8 @@
 
 .recipegrid_data {
   flex: 1 0 1;
+}
+
+.recipegrid_data.food_name:hover {
+  cursor: pointer;
 }
