@@ -4,7 +4,8 @@ import Main from "./Main";
 // import Profile from "./Pages/Profile";
 import { RootState } from "../../redux/reducers";
 import { useSelector, useDispatch } from "react-redux";
-import { updateUserInfo } from "../../redux/userReducer";
+import { updateUserInfo, updateLogin } from "../../redux/userReducer";
+import { storeToken } from "../../redux/tokenReducer";
 import Password from "./Pages/Password";
 import Profile from "./Pages/PageModify";
 import Comment from "./Pages/AddedComment";
@@ -87,6 +88,14 @@ export default function Mypage() {
   };
 
   useEffect(() => {
+    axios
+      .get(process.env.REACT_APP_SERVER_URL + "/refresh")
+      .then((res) => {
+        dispatch(storeToken(res.data.data.accessToken));
+        dispatch(updateLogin(true));
+        dispatch(updateUserInfo(res.data.data.userinfo));
+      })
+      .catch();
     axios
       .get(process.env.REACT_APP_SERVER_URL + `/user`, config)
       .then((rst) => {
