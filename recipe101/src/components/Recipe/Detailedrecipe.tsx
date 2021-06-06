@@ -431,7 +431,7 @@ function Detailedrecipe() {
                     });
                 }}
               >
-                <TextBox>{"구독 하기"}</TextBox>
+                <TextBox>{"구독하기"}</TextBox>
               </Button>
             )
           ) : null}
