@@ -8,16 +8,18 @@ import { useState } from "react";
 const Frame = styled.div`
   flex: 1 0 0;
   width: 100%;
-  border: solid 1px blue;
-  display: flex;
+  // border: solid 1px blue;
+  // display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  height: 100%;
+  overflow-y: scroll;
 `;
 const InnerFrame = styled.div`
   flex: 1 0 0;
   width: 100%;
-  border: solid 1px blue;
+  // border: solid 1px blue;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -25,13 +27,14 @@ const InnerFrame = styled.div`
 `;
 const Box = styled.div`
   height: 100%;
-  max-width: 1200px;
+  max-width: 1500px;
   width: 100%;
   display: flex;
   flex: 1 0 0;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin: 0 auto;
 `;
 
 const TextBox = styled.div`
@@ -53,11 +56,12 @@ function Result({ search }: { search: any[] }) {
 }
 
 const Box2 = styled.div`
-  max-width: 1200px;
+  max-width: 1500px;
   width: 100%;
   display: flex;
   flex-direction: column;
   flex: 1 0 0;
+  margin: 20px auto 10px;
 `;
 
 const Footer = styled.div`
@@ -112,7 +116,7 @@ function YesResult() {
 
   return (
     <Box2>
-      <SortBox>
+      {/* <SortBox>
         <select
           onChange={(e) => {
             let n = e.target.selectedIndex;
@@ -138,7 +142,7 @@ function YesResult() {
           <option>시간순</option>
           <option>평점순</option>
         </select>
-      </SortBox>
+      </SortBox> */}
       <InnerFrame>
         <Switch>
           <Route path={`${match.path}/:id`}>
