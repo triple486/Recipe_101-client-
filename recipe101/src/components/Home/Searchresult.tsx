@@ -14,16 +14,18 @@ import { useState } from "react";
 const Frame = styled.div`
   flex: 1 0 0;
   width: 100%;
-  border: solid 1px blue;
-  display: flex;
+  // border: solid 1px blue;
+  // display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  height: 100%;
+  overflow-y: scroll;
 `;
 const InnerFrame = styled.div`
   flex: 1 0 0;
   width: 100%;
-  border: solid 1px blue;
+  // border: solid 1px blue;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -31,13 +33,14 @@ const InnerFrame = styled.div`
 `;
 const Box = styled.div`
   height: 100%;
-  max-width: 1200px;
+  max-width: 1500px;
   width: 100%;
   display: flex;
   flex: 1 0 0;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin: 0 auto;
 `;
 
 const TextBox = styled.div`
@@ -59,11 +62,12 @@ function Result({ search }: { search: any[] }) {
 }
 
 const Box2 = styled.div`
-  max-width: 1200px;
+  max-width: 1500px;
   width: 100%;
   display: flex;
   flex-direction: column;
   flex: 1 0 0;
+  margin: 20px auto 30px;
 `;
 
 const Footer = styled.div`
@@ -91,15 +95,31 @@ const FbuttonBox = styled.div`
 `;
 const InnerBox = styled.div`
   display: flex;
+  color: white;
+  &:hover {
+    cursor: pointer;
+  }
+`;
+const InnerBox2 = styled.div`
+  display: flex;
+  color: white;
+  &:hover {
+    cursor: pointer;
+  }
+  font-weight: 700;
 `;
 const SortBox = styled.div`
   height: 20px;
   width: 100%;
-  display: flex; ;
+  display: flex;
+`;
+const LinkNumber = styled.div`
+  color: white;
 `;
 const Slink = styled(Link)<{ iscolor: boolean }>`
-  text-decoration: none;
-  color: ${({ iscolor }) => (iscolor ? "red" : "white")};
+  text-decoration: ${({ iscolor }) => (iscolor ? "underline" : "none")};
+  font-weight: ${({ iscolor }) => (iscolor ? "700" : "400")};
+  color: white;
 `;
 function YesResult() {
   let [id, setid] = useState<number>(1);
@@ -114,6 +134,24 @@ function YesResult() {
   }
 
   let match = useRouteMatch();
+
+  // const Linkbox = function ({
+  //   num,
+  //   func = () => {},
+  // }: {
+  //   num: number | string;
+  //   func?: Function;
+  // }) {
+  //   return (
+  //     <InnerBox onClick={() => func()}>
+  //       <Link to={`${match.path}/${num}`} style={{ textDecoration:'none'}}>
+  //         <LinkNumber>{num}</LinkNumber>
+  //       </Link>
+  //     </InnerBox>
+  //   ) : null;
+  // };
+
+
   const Linkbox = function ({ num }: { num: number }) {
     let p = id === num;
     return num > 0 ? (
@@ -138,7 +176,7 @@ function YesResult() {
           }
         }}
       >
-        {back ? <InnerBox>이전</InnerBox> : <InnerBox>이후</InnerBox>}
+        {back ? <InnerBox2>이전</InnerBox2> : <InnerBox2>다음</InnerBox2>}
       </FbuttonBox>
     );
   };

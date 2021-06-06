@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import "../../../css/Home/Recipeslide.css";
 import { useHistory } from "react-router-dom";
+import { text } from "@fortawesome/fontawesome-svg-core";
+import ReactDOM from 'react-dom';
 
 const Frame = styled.div`
   display: flex;
@@ -21,7 +23,7 @@ const Image = styled.img`
   width: 670px;
   display: block;
   object-fit: cover;
-  border: solid 5px #6f3838;
+  border: solid 1px white;
   &:hover {
     cursor: pointer;
   }
@@ -49,6 +51,7 @@ interface recipe {
 
 function Recipeslide({ data }: { data: recipe }) {
   let history = useHistory();
+  let foodName = data.food_name;
   return (
     <Frame>
       <ImgBox>
