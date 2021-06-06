@@ -28,9 +28,7 @@ export default function Recipepage({ func = () => {} }: { func?: Function }) {
     <Frame>
       {data.map((x, i) => {
         return (
-          <BoxFrame key={i}>
-            <Recipecard data={x}></Recipecard>
-          </BoxFrame>
+          <Recipecard key={i} data={x}></Recipecard>
         );
       })}
     </Frame>

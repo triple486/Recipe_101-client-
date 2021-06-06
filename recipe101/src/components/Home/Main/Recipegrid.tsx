@@ -13,17 +13,20 @@ function Recipegrid({
 }) {
   let history = useHistory();
   return (
-    <div
-      className="recipegrid_frame"
-      onClick={() => {
-        history.push(`/recipe/${data.food_id}`);
-      }}
-    >
+    <div className="recipegrid_frame">
       <div className="recipegrid_img_box">
-        <img className="recipegrid_img" src={data.food_img} alt={"text"}></img>
+        <img className="recipegrid_img" src={data.food_img} alt={"text"}
+          onClick={() => {
+            history.push(`/recipe/${data.food_id}`);
+          }}
+        ></img>
       </div>
       <div className="recipegrid_desc">
-        <div className="recipegrid_data food_name">{data.food_name}</div>
+        <div className="recipegrid_data food_name"
+          onClick={() => {
+            history.push(`/recipe/${data.food_id}`);
+          }}
+        >{data.food_name}</div>
         {/* <div className="recipegrid_data level">{data.level}</div>
         <div className="recipegrid_data cooking_time">{data.cooking_time}</div> */}
       </div>

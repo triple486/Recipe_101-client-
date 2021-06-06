@@ -60,12 +60,13 @@ const TextBox = styled.div`
 // `;
 
 const Logo = styled.img`
-  width: 250px;
+  width: 160px;
   display: block;
   flex: 0 0 1;
   &:hover {
     cursor: pointer;
   }
+  margin-left: 8px;
 `;
 
 // const TextBox = styled.div``;

@@ -1,13 +1,13 @@
 import styled from "styled-components";
 import logo2 from "../../../icon/logo2.png";
-// import "../../css/index.css";
+import '../../../css/Home/Bottomside.css';
 const Frame = styled.div`
   flex: 1 0 1;
   height: 80px;
   width: 100%;
   display: flex;
   justify-content: center;
-  border-bottom: solid 1px black;
+  // border-bottom: solid 1px black;
   background-color: white;
 `;
 
@@ -31,8 +31,20 @@ const Box = styled.div`
   display: flex;
   justify-content: center;
   align-items: left;
-  flex: 0 0 1;
+  flex: calc(10 / 4) 0 0;
   flex-direction: column;
+  text-align: center;
+`;
+
+const Box1 = styled.div`
+  background-color: white;
+  height: 100%;
+  width: 250px;
+  display: flex;
+  // justify-content: center;
+  align-items: center;
+  flex: 2.7 0 0;
+  margin-left: 21px;
 `;
 
 const Box2 = styled.div`
@@ -42,13 +54,15 @@ const Box2 = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  flex: 0 0 1;
+  flex: 2.3 0 0;
+  flex-direction: column;
+  // margin-right: 20px;
 `;
 
 const Logo = styled.img`
   margin-left: 10px;
   background-color: white;
-  width: 250px;
+  width: 160px;
   display: block;
   flex: 0 0 1;
 `;
@@ -57,28 +71,36 @@ const TextBox = styled.div`
   text-decoration: none;
   color: #b17d55;
   background-color: white;
-  margin-left: 15px;
+  // margin-left: 15px;
 `;
 const TextBox1 = styled.div`
-  margin-top: 40px;
   color: #b17d55;
   background-color: white;
+  margin-left: 8px;
 `;
 const TextBox2 = styled.div`
   color: #b17d55;
   background-color: white;
+  flex: 2.5 0 0;
 `;
 
 const LongBox = styled.div`
   background-color: white;
-  width: 240px;
   height: 100%;
+  width: 250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: calc(10 / 4) 0 0;
+  flex-direction: column;
+  margin-right: 20px;
 `;
+
 const Innerbox = styled.div`
   background-color: white;
 
   display: flex;
-  width: 500px;
+  // width: 500px;
   flex-direction: row;
 `;
 
@@ -86,52 +108,46 @@ export default function BottomSide() {
   return (
     <Frame>
       <Body>
-        <Box2>
+        <Box1>
           <Logo src={logo2}></Logo>
+          <TextBox1>{"Copyright © 2021 recipe101"}</TextBox1>
+        </Box1>
+        <Box2>
+          <TextBox>
+            <a className='bottomside_link' href="https://github.com/codestates/Recipe_101-client-">
+              {"Repository"}
+            </a>
+          </TextBox>
         </Box2>
         <LongBox>
-          <TextBox1>{"Copyright © 2021 recipe101"}</TextBox1>
+          <TextBox>
+            <a className='bottomside_link' href="https://github.com/codestates/Recipe_101-client-/wiki">
+              {"recipe101 wiki"}
+            </a>
+          </TextBox>
         </LongBox>
-        <Box>
-          <TextBox>
-            <a href="https://github.com/codestates/Recipe_101-client-">
-              <TextBox>{"Repository"}</TextBox>
-            </a>
-          </TextBox>
-          <TextBox>
-            <a href="https://github.com/codestates/Recipe_101-client-/wiki">
-              <TextBox>{"recipe101 wiki"}</TextBox>
-            </a>
-          </TextBox>
-        </Box>
         <Box>
           <TextBox>{"Github"}</TextBox>
           <Innerbox>
             <TextBox2>
-              <a href="https://github.com/karuiner">
-                <TextBox>{"공인택"}</TextBox>
+              <a className='bottomside_link' href="https://github.com/karuiner">
+                {"공인택"}
               </a>
             </TextBox2>
-            <TextBox>
-              <TextBox2>
-                <a href="https://github.com/sejuda">
-                  <TextBox>{"김세주"}</TextBox>
-                </a>
-              </TextBox2>
-            </TextBox>
             <TextBox2>
-              <TextBox>
-                <a href="https://github.com/triple486">
-                  <TextBox>{"방경태"}</TextBox>
-                </a>
-              </TextBox>
+              <a className='bottomside_link' href="https://github.com/sejuda">
+                {"김세주"}
+              </a>
             </TextBox2>
             <TextBox2>
-              <TextBox>
-                <a href="https://github.com/jtlim0414">
-                  <TextBox>{"임지택"}</TextBox>
-                </a>
-              </TextBox>
+              <a className='bottomside_link' href="https://github.com/triple486">
+                {"방경태"}
+              </a>
+            </TextBox2>
+            <TextBox2>
+              <a className='bottomside_link' href="https://github.com/jtlim0414">
+                {"임지택"}
+              </a>
             </TextBox2>
           </Innerbox>
         </Box>
