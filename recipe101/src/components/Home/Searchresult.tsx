@@ -2,7 +2,14 @@ import Recipepage from "../Recipepage";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/reducers";
-import { Route, Switch, Redirect, useRouteMatch, Link } from "react-router-dom";
+import {
+  Route,
+  Switch,
+  Redirect,
+  useRouteMatch,
+  Link,
+  useHistory,
+} from "react-router-dom";
 import { searchRecipe } from "../../redux/searchReducer";
 import { useState } from "react";
 const Frame = styled.div`
@@ -76,6 +83,13 @@ const FooterBox = styled.div`
   align-items: center;
 `;
 
+const FbuttonBox = styled.div`
+  height: 30px;
+  width: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 const InnerBox = styled.div`
   display: flex;
 `;
@@ -87,6 +101,7 @@ const SortBox = styled.div`
 
 function YesResult() {
   let dispatch = useDispatch();
+  let history = useHistory();
   let { search } = useSelector((state: RootState) => state.searchReducer);
   let [q, setq] = useState(1);
   let k = Math.ceil(search.length / 12);
@@ -109,36 +124,26 @@ function YesResult() {
       </InnerBox>
     );
   };
+  const LinkButton = function ({ num, back }: { num: number; back: boolean }) {
+    return (
+      <FbuttonBox
+        onClick={() => {
+          if (back) {
+            setq(num - 10 > 0 ? num - 10 : 1);
+            history.push(`${match.path}/${num - 10 > 0 ? num - 10 : 1}`);
+          } else {
+            setq(num + 10 < k ? num + 10 : num);
+            history.push(`${match.path}/${num + 10 < k ? num + 10 : num}`);
+          }
+        }}
+      >
+        {back ? <InnerBox>이전</InnerBox> : <InnerBox>이후</InnerBox>}
+      </FbuttonBox>
+    );
+  };
 
   return (
     <Box2>
-      <SortBox>
-        <select
-          onChange={(e) => {
-            let n = e.target.selectedIndex;
-            if (n === 0) {
-              let nsearch = search.sort((a, b) => {
-                return a.food_name.toUpperCase() <= b.food_name.toUpperCase()
-                  ? -1
-                  : 1;
-              });
-              dispatch(searchRecipe(nsearch));
-            } else if (n === 1) {
-              let nsearch = search.sort((a, b) => {
-                let at = new Date(a.createdAt),
-                  bt = new Date(b.createdAt);
-                return at <= bt ? -1 : 1;
-              });
-              dispatch(searchRecipe(nsearch));
-            } else {
-            }
-          }}
-        >
-          <option>이름순</option>
-          <option>시간순</option>
-          <option>평점순</option>
-        </select>
-      </SortBox>
       <InnerFrame>
         <Switch>
           <Route path={`${match.path}/:id`}>
@@ -151,29 +156,13 @@ function YesResult() {
       </InnerFrame>
 
       <Footer>
+        <LinkButton key={-1} num={q} back={true}></LinkButton>
         <FooterBox>
-          {pn.length > 10
-            ? pn.slice(q - 1, q + 9).map((x, i) => {
-                return (
-                  <Linkbox
-                    key={i}
-                    num={x > k ? "" : x}
-                    func={() => {
-                      if (x > q) {
-                        setq(x);
-                      } else if (q - 9 > 0) {
-                        setq(q - 9);
-                      } else {
-                        setq(1);
-                      }
-                    }}
-                  ></Linkbox>
-                );
-              })
-            : pn.map((x, i) => {
-                return <Linkbox key={i} num={x > k ? "" : x}></Linkbox>;
-              })}
+          {pn.slice(q - 1, q + 9).map((x, i) => {
+            return <Linkbox key={i} num={x > k ? "" : x}></Linkbox>;
+          })}
         </FooterBox>
+        <LinkButton key={11} num={q} back={false}></LinkButton>
       </Footer>
     </Box2>
   );

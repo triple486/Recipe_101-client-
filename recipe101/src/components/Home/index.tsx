@@ -5,12 +5,14 @@ import styled from "styled-components";
 import Main from "./Main";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/reducers";
-import { updateLogin, updateUserInfo } from "../../redux/userReducer";
+import { updateLogin, updateUserInfo, iskakao } from "../../redux/userReducer";
 import { isOn } from "../../redux/modalReducer";
 import Modal from "./Modal";
 import Searchbar from "./Searchbar";
 import Searchresult from "./Searchresult";
 import axios from "axios";
+import { useEffect } from "react";
+axios.defaults.withCredentials = true;
 const Frame = styled.div`
   height: 100%;
   width: 100%;
@@ -39,15 +41,24 @@ function Landingpage() {
     axios
       .post(process.env.REACT_APP_SERVER_URL + target, { code })
       .then((res) => {
-        console.log(res);
         dispatch(storeToken(res.data.data.accessToken));
         dispatch(updateLogin(true));
+        dispatch(iskakao(true));
         dispatch(updateUserInfo(res.data.data.userinfo));
         dispatch(isOn(false));
         history.push("/");
       })
       .catch();
   }
+  useEffect(() => {
+    axios.get(process.env.REACT_APP_SERVER_URL + "/refresh").then((res) => {
+      dispatch(storeToken(res.data.data.accessToken));
+      dispatch(updateLogin(true));
+      dispatch(updateUserInfo(res.data.data.userinfo));
+    });
+
+    return;
+  }, []);
 
   let Modalon = useSelector((state: RootState) => state.modalReducer);
   return (
