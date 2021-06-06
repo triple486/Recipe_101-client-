@@ -2,7 +2,7 @@ const UPDATE = "search/UPDATE" as const;
 const STATUS = "search/STATUS" as const;
 const SUCCESS = "search/SUCCESS" as const;
 
-export const searchRecipe = (item: any[]) => {
+export const searchRecipe = (item: recipe[]) => {
   return {
     type: UPDATE,
     payload: item,
@@ -28,10 +28,23 @@ type SearchAction =
   | ReturnType<typeof isSearch>
   | ReturnType<typeof isFail>;
 
+interface recipe {
+  id?: number;
+  food_id?: number;
+  food_name: string;
+  foodName: string;
+  food_img: string;
+  imgUrl: string;
+  level: string;
+  cooking_time: string;
+  cookingTime: string;
+  createdAt: string;
+}
+
 type searchState = {
   isSearch: boolean;
   isFail: boolean;
-  search: any[];
+  search: recipe[];
 };
 
 const initialState: searchState = {

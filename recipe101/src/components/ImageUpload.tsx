@@ -7,6 +7,7 @@ const ImgBox = styled.div`
   justify-content: center;
   align-items: center;
   border: solid 1px white;
+  background-color: #f6eace;
 `;
 const ImgInput = styled.input`
   height: 1px;
@@ -24,6 +25,12 @@ const ImgLabel = styled.label`
   border-radius: 10px;
   opacity: 0.6;
   border: solid 1px black;
+  background-color: #b17d55;
+  &:hover {
+    border: solid 1px black;
+    background-color: #f6eace;
+    opacity: 0.7;
+    color: black;
 `;
 
 const InnerBox = styled.div`

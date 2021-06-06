@@ -75,9 +75,11 @@ export default function Profile() {
     },
   };
   let [data, setdata] = useState<comment[] | undefined>(undefined);
+  let [reload, setload] = useState(false);
   let [call, setcall] = useState(false);
   let [del, setdel] = useState(0);
-  if (!data) {
+
+  if (!reload) {
     axios
       .get(
         process.env.REACT_APP_SERVER_URL +
@@ -85,6 +87,7 @@ export default function Profile() {
         config
       )
       .then((rst) => {
+        setload(true);
         setdata([...rst.data.data]);
       });
   }
@@ -138,7 +141,8 @@ export default function Profile() {
                 config
               )
               .then((rst) => {
-                setcall(true);
+                setload(false);
+                setcall(false);
                 console.log("완료");
               })
               .catch((err) => {

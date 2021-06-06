@@ -59,6 +59,11 @@ const Buttonline = styled.div`
 
 const InputButton = styled.button`
   flex: 1 0 0;
+  background-color: white;
+  border: 1px solid white;
+  &:hover {
+    border: solid 1px white;
+    background-color: #f6eace
 `;
 
 const Frame = styled.div`

@@ -8,6 +8,7 @@ const Modal = styled.div`
   left: 0;
   position: fixed;
   display: flex;
+
   justify-content: center;
   align-items: center;
 `;

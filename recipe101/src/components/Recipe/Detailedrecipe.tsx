@@ -3,13 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/reducers";
 import { useHistory, useParams } from "react-router-dom";
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import StepBox from "./StepBox";
 import LabelBox from "./LabelBox";
-import { storeToken } from "../../redux/tokenReducer";
 import Comment from "./Comment";
 import CommentBox from "./CommentBox";
 import Message from "../Addrecipe/messagebox";
+import { getdata, isLoad } from "../../redux/newReducer";
 
 axios.defaults.withCredentials = true;
 const Frame = styled.div`
@@ -147,50 +147,6 @@ const ItemBox = styled.div`
   align-items: center;
 `;
 
-interface Food_info {
-  id: number;
-  userName: string;
-  foodName: string;
-  summary: string;
-  nation: string;
-  type: string;
-  cookingTime: string;
-  calorie: string;
-  qnt: string;
-  level: string;
-  imgUrl: string;
-  store: number;
-  score: number;
-  createdAt: string;
-  updatedAt: string;
-}
-
-interface Ingredients {
-  name: string;
-  type: string;
-  cap: string;
-}
-interface Recipe {
-  cookingNo: number;
-  cookingDc: string;
-  stepImage: string;
-  stepTip: string;
-}
-interface Commentf {
-  id: number;
-  userName: string;
-  comment: string;
-  createdAt: string;
-  score: number;
-}
-
-interface Recipe_info {
-  food_info?: Food_info;
-  Ingredients?: Ingredients[];
-  Recipes?: Recipe[];
-  Comment?: Commentf[];
-}
-
 interface Image_extend {
   isEx?: boolean;
   image?: string;
@@ -202,48 +158,56 @@ function Detailedrecipe() {
   let dispatch = useDispatch();
   let user = useSelector((state: RootState) => state.userReducer);
   let accessToken = useSelector((state: RootState) => state.tokenReducer);
-  let [data, setdata] = useState<Recipe_info>({});
+  let data = useSelector((state: RootState) => state.newReducer);
   let [iex, setiex] = useState<Image_extend>({ isEx: false });
-  let [mkc, setc] = useState(false);
   let [call, setcall] = useState(false);
   let [call2, setcall2] = useState(false);
+  let [call3, setcall3] = useState(false);
   let [add, setadd] = useState(true);
   let [del, setdel] = useState(0);
   let [store, setstore] = useState(false);
+  useEffect(() => {
+    if (!data.isLoad) {
+      axios
+        .get(process.env.REACT_APP_SERVER_URL + `/recipe/${id}`)
+        .then((rst) => {
+          dispatch(getdata(rst.data.data));
+          dispatch(isLoad(true));
 
-  if (!data.food_info || mkc) {
-    axios
-      .get(process.env.REACT_APP_SERVER_URL + `/recipe/${id}`)
-      .then((rst) => {
-        setdata({ ...rst.data.data });
-        setc(false);
+          let data = rst.data.data;
+          data.Comment.forEach((x: any, i: any) => {
+            if (x.userName === user.userInfo.userName) {
+              setadd(false);
+            }
+          });
+          if (user.isLogin) {
+            axios
+              .get(process.env.REACT_APP_SERVER_URL + "/store", {
+                headers: {
+                  authorization: "bearer " + accessToken,
+                },
+              })
+              .then((rst) => {
+                rst.data.data.forEach((x: any) => {
+                  if (x.id === data.food_info?.id) {
+                    setstore(true);
+                  }
+                });
+              });
+          }
+        });
+    }
 
-        return;
-      });
-  }
-
-  axios
-    .get(process.env.REACT_APP_SERVER_URL + "/store", {
-      headers: {
-        authorization: "bearer " + accessToken,
-      },
-    })
-    .then((rst) => {
-      rst.data.data.forEach((x: any) => {
-        if (x.id && x.id === data.food_info?.id) {
-          setstore(true);
-        }
-      });
-    });
-
-  if (data.Comment) {
-    data.Comment.forEach((x, i) => {
-      if (x.userName === user.userInfo.userName) {
-        setadd(false);
-      }
-    });
-  }
-
+    return () => {};
+  }, [
+    add,
+    accessToken,
+    data.isLoad,
+    dispatch,
+    id,
+    user.isLogin,
+    user.userInfo.userName,
+  ]);
   function Eximage() {
     return (
       <Modal
@@ -267,53 +231,56 @@ function Detailedrecipe() {
         <ButtonLine>
           <Button
             onClick={() => {
+              setadd(true);
               history.goBack();
             }}
           >
             <TextBox>{"돌아가기"}</TextBox>
           </Button>
+          {user.isLogin ? (
+            store ? (
+              <Button
+                onClick={() => {
+                  axios
+                    .delete(
+                      process.env.REACT_APP_SERVER_URL +
+                        `/store/${data.food_info?.id}`,
+                      {
+                        headers: {
+                          authorization: "bearer " + accessToken,
+                        },
+                      }
+                    )
+                    .then((rst) => {
+                      setstore(false);
+                    });
+                }}
+              >
+                <TextBox>{"구독 취소"}</TextBox>
+              </Button>
+            ) : (
+              <Button
+                onClick={() => {
+                  axios
+                    .post(
+                      process.env.REACT_APP_SERVER_URL + "/store",
+                      { id: data.food_info?.id },
+                      {
+                        headers: {
+                          authorization: "bearer " + accessToken,
+                        },
+                      }
+                    )
+                    .then((rst) => {
+                      setstore(true);
+                    });
+                }}
+              >
+                <TextBox>{"구독 하기"}</TextBox>
+              </Button>
+            )
+          ) : null}
 
-          {store ? (
-            <Button
-              onClick={() => {
-                axios
-                  .delete(
-                    process.env.REACT_APP_SERVER_URL +
-                      `/store/${data.food_info?.id}`,
-                    {
-                      headers: {
-                        authorization: "bearer " + accessToken,
-                      },
-                    }
-                  )
-                  .then((rst) => {
-                    setstore(false);
-                  });
-              }}
-            >
-              <TextBox>{"구독 취소"}</TextBox>
-            </Button>
-          ) : (
-            <Button
-              onClick={() => {
-                axios
-                  .post(
-                    process.env.REACT_APP_SERVER_URL + "/store",
-                    { id: data.food_info?.id },
-                    {
-                      headers: {
-                        authorization: "bearer " + accessToken,
-                      },
-                    }
-                  )
-                  .then((rst) => {
-                    setstore(true);
-                  });
-              }}
-            >
-              <TextBox>{"구독 하기"}</TextBox>
-            </Button>
-          )}
           {user.userInfo.userName === data.food_info?.userName ? (
             <Button
               onClick={() => {
@@ -364,6 +331,25 @@ function Detailedrecipe() {
                 <LabelBox
                   l={"작성자"}
                   v={data.food_info?.userName || ""}
+                  func={() => {
+                    if (user.userInfo.userName !== data.food_info?.userName) {
+                      axios
+                        .get(
+                          process.env.REACT_APP_SERVER_URL +
+                            `/subscribe/${data.food_info?.id}`,
+
+                          {
+                            headers: {
+                              authorization: "bearer " + accessToken,
+                            },
+                          }
+                        )
+                        .then((rst) => {
+                          console.log(rst);
+                        });
+                      setcall3(true);
+                    }
+                  }}
                 ></LabelBox>
               </Line>
               <Line>
@@ -479,7 +465,7 @@ function Detailedrecipe() {
           <Comment
             n={data.Comment?.length || 0}
             h={200}
-            func={setc}
+            func={setadd}
             data={{ id: data.food_info?.id }}
             add={add}
           ></Comment>
@@ -554,6 +540,30 @@ function Detailedrecipe() {
                 });
             }}
             buttonMessage={"확인"}
+          ></Message>
+        ) : null}
+        {call3 ? (
+          <Message
+            cancel={() => {
+              setcall(false);
+            }}
+            message={"해당 유저를 구독하겠습니까?"}
+            button={() => {
+              axios
+                .post(
+                  process.env.REACT_APP_SERVER_URL + `/subscribe`,
+                  { username: data.food_info?.userName },
+                  {
+                    headers: {
+                      authorization: "bearer " + accessToken,
+                    },
+                  }
+                )
+                .then((rst) => {
+                  setcall3(false);
+                });
+            }}
+            buttonMessage={"예"}
           ></Message>
         ) : null}
       </InnerFrame>

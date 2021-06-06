@@ -1,6 +1,4 @@
 import styled from "styled-components";
-import { useSelector, useDispatch } from "react-redux";
-import { useHistory, useLocation } from "react-router-dom";
 import logo2 from "../../../icon/logo2.png";
 // import "../../css/index.css";
 const Frame = styled.div`
@@ -11,7 +9,6 @@ const Frame = styled.div`
   justify-content: center;
   border-bottom: solid 1px black;
   background-color: white;
-
 `;
 
 const Body = styled.div`
@@ -86,7 +83,6 @@ const Innerbox = styled.div`
 `;
 
 export default function BottomSide() {
-  let history = useHistory();
   return (
     <Frame>
       <Body>

@@ -127,9 +127,12 @@ export default function Comment({
             axios
               .post(process.env.REACT_APP_SERVER_URL + `/comment`, body, config)
               .then((rst) => {
-                func(true);
+                func(false);
                 sety(0);
-                settext(text);
+                settext("");
+              })
+              .catch((x) => {
+                console.dir(x);
               });
           }}
         >

@@ -39,6 +39,7 @@ const Innerframe = styled.div`
   height: 100%;
   width: 100%;
   display: flex;
+  overflow: hidden;
   flex-direction: column;
   // border: solid 1px red;
 `;
@@ -46,7 +47,7 @@ const Innerframe = styled.div`
 const DataArea = styled.div`
   flex: 16 0 0;
   overflow: hidden;
-  animation: ${slide} 4s infinite linear normal;
+  animation: ${slide} 12s infinite linear normal;
   background-image: url(${img});
   border-left: solid 1px white;
   border-right: solid 1px white;

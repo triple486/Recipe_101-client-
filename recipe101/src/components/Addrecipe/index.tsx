@@ -153,7 +153,9 @@ const ImgBox3 = styled.div`
 const RecipeAddButton = styled.button`
   width: 100%;
   max-width: 1200px;
-  height: 30px;
+  height: 60px;
+  background-color: #f6eace;
+  border: 1px white solid;
 `;
 
 //foodName, summary, nation, ,cookingTime, calorie, qnt, level
