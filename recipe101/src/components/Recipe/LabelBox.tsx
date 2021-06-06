@@ -14,12 +14,17 @@ const InnerFrame = styled.div`
   display: flex;
 `;
 const Label = styled.div<{ s?: number; w?: number }>`
+  flex: 3 0 0;
+  ${({ s }) => (s ? `font-size: ${s}px;` : null)}
+  ${({ w }) => (w ? `font-weight: ${w};` : null)}
+`;
+const Label1 = styled.div<{ s?: number; w?: number }>`
   flex: 1 0 0;
   ${({ s }) => (s ? `font-size: ${s}px;` : null)}
   ${({ w }) => (w ? `font-weight: ${w};` : null)}
 `;
 const Text = styled.div<{ s?: number; w?: number }>`
-  flex: 2 0 0;
+  flex: 6 0 0;
   ${({ s }) => (s ? `font-size: ${s}px;` : null)}
   ${({ w }) => (w ? `font-weight: ${w};` : null)}
 `;
@@ -43,9 +48,9 @@ export default function LabelBox({
         <Label s={s} w={w}>
           {l}
         </Label>
-        <Label s={s} w={w}>
+        <Label1 s={s} w={w}>
           {":"}
-        </Label>
+        </Label1>
         <Text
           s={s}
           w={w}

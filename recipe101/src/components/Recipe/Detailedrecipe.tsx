@@ -41,6 +41,14 @@ const BoxFrame = styled.div<Boxset>`
   display: flex;
   flex-direction: ${({ c }) => (c ? "column" : "row")};
   border: solid 1px white;
+  color: white;
+`;
+const BoxFrame1 = styled.div<Boxset>`
+  height: ${({ h }) => (h ? h : 100)}px;
+  width: 100%;
+  display: flex;
+  flex-direction: ${({ c }) => (c ? "column" : "row")};
+  border-bottom: solid 1px white;
 `;
 
 const MinBoxFrame = styled.div<Boxset>`
@@ -51,18 +59,73 @@ const MinBoxFrame = styled.div<Boxset>`
   display: flex;
   flex-direction: ${({ c }) => (c ? "column" : "row")};
   border: solid 1px white;
+  color: white;
+`;
+const MinBoxFrame1 = styled.div<Boxset>`
+  min-height: ${({ h }) => (h ? h : 100)}px;
+  flex: 1 0 1;
+  width: 100%;
+  position: releative;
+  display: flex;
+  flex-direction: ${({ c }) => (c ? "column" : "row")};
+  border-left: solid 1px white;
+  border-right: solid 1px white;
+  color: white;
+`;
+const MinBoxFrame2 = styled.div<Boxset>`
+  min-height: ${({ h }) => (h ? h : 100)}px;
+  flex: 1 0 1;
+  width: 100%;
+  position: releative;
+  display: flex;
+  flex-direction: ${({ c }) => (c ? "column" : "row")};
+  // border: solid 1px white;
+`;
+const MinBoxFrame3 = styled.div<Boxset>`
+  // min-height: ${({ h }) => (h ? h : 100)}px;
+  flex: 1 0 1;
+  width: 100%;
+  position: releative;
+  display: flex;
+  flex-direction: ${({ c }) => (c ? "column" : "row")};
+  border-left: solid 1px white;
+  border-right: solid 1px white;
+  color: white;
+`;
+const MinBoxFrame4 = styled.div<Boxset>`
+  min-height: ${({ h }) => (h ? h : 100)}px;
+  flex: 1 0 1;
+  width: 100%;
+  position: releative;
+  display: flex;
+  flex-direction: ${({ c }) => (c ? "column" : "row")};
+  border-bottom: solid 1px white;
+  border-left: solid 1px white;
+  border-right: solid 1px white;
+`;
+const MinBoxFrame5 = styled.div<Boxset>`
+  // min-height: ${({ h }) => (h ? h : 100)}px;
+  flex: 1 0 1;
+  width: 100%;
+  position: releative;
+  display: flex;
+  flex-direction: ${({ c }) => (c ? "column" : "row")};
+  border-bottom: solid ${({ h }) => (h ? 1 : 0)} white;
+  border-left: solid ${({ h }) => (h ? 1 : 0)} white;
+  border-right: solid ${({ h }) => (h ? 1 : 0)} white;
 `;
 
 const Img = styled.img`
-  height: 400px;
+  // height: 400px;
   width: 400px;
+  border-right: 1px solid white;
 `;
 const BasicDataBox = styled.div`
   flex: 1 0 0;
   height: 100%;
   display: flex;
   flex-direction: column;
-  border: solid 1px white;
+  // border: solid 1px white;
 `;
 
 interface Lineset {
@@ -79,6 +142,50 @@ const Line = styled.div<Lineset>`
   align-items: center;
   border: solid 1px white;
 `;
+const Line1 = styled.div<Lineset>`
+  flex: ${({ f }) => (f ? f : 1)} 0 0;
+  display: flex;
+  flex-direction: ${({ c }) => (c ? "column" : "row")};
+  justify-content: center;
+  align-items: center;
+  // border: solid 1px white;
+`;
+const Line2 = styled.div<Lineset>`
+  flex: ${({ f }) => (f ? f : 1)} 0 0;
+  display: flex;
+  flex-direction: ${({ c }) => (c ? "column" : "row")};
+  justify-content: center;
+  align-items: center;
+  border-bottom: solid 1px white;
+`;
+const Line3 = styled.div<Lineset>`
+  flex: ${({ f }) => (f ? f : 1)} 0 0;
+  display: flex;
+  flex-direction: ${({ c }) => (c ? "column" : "row")};
+  justify-content: center;
+  align-items: center;
+  border-left: solid 1px white;
+  border-right: solid 1px white;
+`;
+const Line4 = styled.div<Lineset>`
+  flex: ${({ f }) => (f ? f : 1)} 0 0;
+  display: flex;
+  flex-direction: ${({ c }) => (c ? "column" : "row")};
+  justify-content: center;
+  align-items: center;
+  // border: solid 1px white;
+  padding: 10px 0;
+`;
+const Line5 = styled.div<Lineset>`
+  flex: ${({ f }) => (f ? f : 1)} 0 0;
+  display: flex;
+  flex-direction: ${({ c }) => (c ? "column" : "row")};
+  justify-content: center;
+  align-items: center;
+  border-left: solid 1px white;
+  border-right: solid 1px white;
+  padding: 5px 0;
+`;
 interface Flineset {
   h?: number;
   c?: boolean;
@@ -90,7 +197,23 @@ const FLine = styled.div<Flineset>`
   flex-direction: ${({ c }) => (c ? "column" : "row")};
   justify-content: center;
   align-items: center;
-  border: solid 1px white;
+  border-bottom: solid 1px white;
+`;
+const FLine1 = styled.div<Flineset>`
+  height: ${({ h }) => (h ? h : 100)}px;
+  display: flex;
+  flex-direction: ${({ c }) => (c ? "column" : "row")};
+  justify-content: center;
+  align-items: center;
+  // border-bottom: solid 1px white;
+`;
+const FLine2 = styled.div<Flineset>`
+  height: fit-content;
+  display: flex;
+  flex-direction: ${({ c }) => (c ? "column" : "row")};
+  justify-content: center;
+  align-items: center;
+  border-bottom: solid 1px white;
 `;
 
 const ButtonLine = styled.div`
@@ -103,15 +226,17 @@ const ButtonLine = styled.div`
 `;
 const DateBox = styled.div`
   height: 40px;
-  width: 240px;
+  width: 400px;
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
+  flex-direction: row;
+  color: white;
+  line-height: 40px;
 `;
 
 const Button = styled.button`
-  height: 40px;
+  // height: 40px;
   display: flex;
 
   justify-content: center;
@@ -122,6 +247,13 @@ const TextBox = styled.div<{ s?: number; w?: number }>`
   display: flex;
   ${({ s }) => (s ? `font-size: ${s}px;` : null)}
   ${({ w }) => (w ? `font-weight: ${w};` : null)}
+`;
+const TextBox1 = styled.div<{ s?: number; w?: number }>`
+  display: flex;
+  ${({ s }) => (s ? `font-size: ${s}px;` : null)}
+  ${({ w }) => (w ? `font-weight: ${w};` : null)}
+  flex: 5 0 0;
+  justify-content: center;
 `;
 
 const Modal = styled.div`
@@ -143,7 +275,7 @@ const ItemBox = styled.div`
   height: 40px;
   width: 100%;
   display: flex;
-  justify-content: space-around;
+  // justify-content: space-around;
   align-items: center;
 `;
 
@@ -306,28 +438,28 @@ function Detailedrecipe() {
 
           <DateBox>
             <LabelBox
-              l={"작성 일자"}
+              l={"작성일"}
               v={timecutter(data.food_info?.createdAt || "")}
-              s={1}
+              s={15}
             ></LabelBox>
             <LabelBox
-              l={"수정 일자"}
+              l={"수정일"}
               v={timecutter(data.food_info?.updatedAt || "")}
-              s={1}
+              s={15}
             ></LabelBox>
           </DateBox>
         </ButtonLine>
         <BoxFrame h={400}>
           <Img src={data.food_info?.imgUrl}></Img>
           <BasicDataBox>
-            <Line>
+            <Line2>
               <TextBox s={40} w={700}>
                 {data.food_info?.foodName}
               </TextBox>
-            </Line>
+            </Line2>
 
-            <Line>
-              <Line>
+            <Line2>
+              <Line1>
                 <LabelBox
                   l={"작성자"}
                   v={data.food_info?.userName || ""}
@@ -351,117 +483,117 @@ function Detailedrecipe() {
                     }
                   }}
                 ></LabelBox>
-              </Line>
-              <Line>
+              </Line1>
+              <Line1>
                 <LabelBox
                   l={"요리 국적"}
                   v={data.food_info?.nation || ""}
                 ></LabelBox>
-              </Line>
-            </Line>
-            <Line>
-              <Line>
+              </Line1>
+            </Line2>
+            <Line2>
+              <Line1>
                 <LabelBox l={"분류"} v={data.food_info?.type || ""}></LabelBox>
-              </Line>
-              <Line>
+              </Line1>
+              <Line1>
                 <LabelBox l={"분량"} v={data.food_info?.qnt || ""}></LabelBox>
-              </Line>
-            </Line>
-            <Line>
-              <Line>
+              </Line1>
+            </Line2>
+            <Line2>
+              <Line1>
                 <LabelBox
                   l={"난이도"}
                   v={data.food_info?.level || ""}
                 ></LabelBox>
-              </Line>
-              <Line>
+              </Line1>
+              <Line1>
                 <LabelBox
                   l={"조리 시간"}
                   v={data.food_info?.level || ""}
                 ></LabelBox>
-              </Line>
-            </Line>
-            <Line>
-              <Line>
+              </Line1>
+            </Line2>
+            <Line1>
+              <Line1>
                 <LabelBox l={"저장"} v={`${data.food_info?.store}`}></LabelBox>
-              </Line>
-              <Line>
+              </Line1>
+              <Line1>
                 <LabelBox l={"평점"} v={`${data.food_info?.score}`}></LabelBox>
-              </Line>
-            </Line>
+              </Line1>
+            </Line1>
           </BasicDataBox>
         </BoxFrame>
-        <MinBoxFrame h={200}>
-          <Line c={true}>
-            <Line>
+        <MinBoxFrame1 h={200}>
+          <Line1 c={true}>
+            <Line1>
               <TextBox s={20}>{"간단한 설명"}</TextBox>
-            </Line>
-            <Line f={4}>
+            </Line1>
+            <Line1 f={4}>
               <TextBox>{data.food_info?.summary}</TextBox>
-            </Line>
-          </Line>
-        </MinBoxFrame>
+            </Line1>
+          </Line1>
+        </MinBoxFrame1>
         <MinBoxFrame h={400} c={true}>
-          <BoxFrame>
-            <Line>
+          <BoxFrame1>
+            <Line1>
               <TextBox s={30}>{"주 재료"}</TextBox>
-            </Line>
-            <Line>
+            </Line1>
+            <Line3>
               <TextBox s={30}>{"부 재료"}</TextBox>
-            </Line>
-            <Line>
+            </Line3>
+            <Line1>
               <TextBox s={30}>{"양념"}</TextBox>
-            </Line>
-          </BoxFrame>
-          <MinBoxFrame h={300}>
-            <Line c={true}>
+            </Line1>
+          </BoxFrame1>
+          <MinBoxFrame2 h={300}>
+            <Line4 c={true}>
               {data.Ingredients?.filter((x) => x.type === "주재료").map(
                 (x, i) => {
                   return (
                     <ItemBox key={i}>
-                      <TextBox>{x.name}</TextBox>
-                      <TextBox>{x.cap}</TextBox>
+                      <TextBox1>{x.name}</TextBox1>
+                      <TextBox1>{x.cap}</TextBox1>
                     </ItemBox>
                   );
                 }
               )}
-            </Line>
-            <Line c={true}>
+            </Line4>
+            <Line5 c={true}>
               {data.Ingredients?.filter((x) => x.type === "부재료").map(
                 (x, i) => {
                   return (
                     <ItemBox key={i}>
-                      <TextBox>{x.name}</TextBox>
-                      <TextBox>{x.cap}</TextBox>
+                      <TextBox1>{x.name}</TextBox1>
+                      <TextBox1>{x.cap}</TextBox1>
                     </ItemBox>
                   );
                 }
               )}
-            </Line>
-            <Line c={true}>
+            </Line5>
+            <Line4 c={true}>
               {data.Ingredients?.filter((x) => x.type === "양념").map(
                 (x, i) => {
                   return (
                     <ItemBox key={i}>
-                      <TextBox>{x.name}</TextBox>
-                      <TextBox>{x.cap}</TextBox>
+                      <TextBox1>{x.name}</TextBox1>
+                      <TextBox1>{x.cap}</TextBox1>
                     </ItemBox>
                   );
                 }
               )}
-            </Line>
-          </MinBoxFrame>
+            </Line4>
+          </MinBoxFrame2>
         </MinBoxFrame>
-        <MinBoxFrame h={500} c={true}>
+        <MinBoxFrame3 h={500} c={true}>
           {data.Recipes?.map((x, i) => {
             return (
-              <FLine key={i}>
+              <FLine2 key={i}>
                 <StepBox data={x} func={setiex}></StepBox>
-              </FLine>
+              </FLine2>
             );
           })}
-        </MinBoxFrame>
-        <MinBoxFrame h={200}>
+        </MinBoxFrame3>
+        <MinBoxFrame4 h={200}>
           <Comment
             n={data.Comment?.length || 0}
             h={200}
@@ -469,11 +601,11 @@ function Detailedrecipe() {
             data={{ id: data.food_info?.id }}
             add={add}
           ></Comment>
-        </MinBoxFrame>
-        <MinBoxFrame h={0} c={true}>
+        </MinBoxFrame4>
+        <MinBoxFrame5 h={0} c={true}>
           {data.Comment?.map((x, i) => {
             return (
-              <FLine h={200} key={i}>
+              <FLine1 h={200} key={i}>
                 <CommentBox
                   h={200}
                   data={x}
@@ -482,10 +614,10 @@ function Detailedrecipe() {
                     setdel(x.id);
                   }}
                 ></CommentBox>
-              </FLine>
+              </FLine1>
             );
           })}
-        </MinBoxFrame>
+        </MinBoxFrame5>
         {call ? (
           <Message
             cancel={() => {

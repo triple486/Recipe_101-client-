@@ -102,6 +102,14 @@ const InnerBox = styled.div`
     cursor: pointer;
   }
 `;
+const InnerBox2 = styled.div`
+  display: flex;
+  color: white;
+  &:hover {
+    cursor: pointer;
+  }
+  font-weight: 700;
+`;
 const SortBox = styled.div`
   height: 20px;
   width: 100%;
@@ -111,8 +119,9 @@ const LinkNumber = styled.div`
   color: white;
 `;
 const Slink = styled(Link)<{ iscolor: boolean }>`
-  text-decoration: none;
-  ${({ iscolor }) => (iscolor ? "red" : "white")};
+  text-decoration: ${({ iscolor }) => (iscolor ? "underline" : "none")};
+  font-weight: ${({ iscolor }) => (iscolor ? "700" : "400")};
+  color: white;
 `;
 function YesResult() {
   let [id, setid] = useState<number>(1);
@@ -169,7 +178,7 @@ function YesResult() {
           }
         }}
       >
-        {back ? <InnerBox>이전</InnerBox> : <InnerBox>이후</InnerBox>}
+        {back ? <InnerBox2>이전</InnerBox2> : <InnerBox2>다음</InnerBox2>}
       </FbuttonBox>
     );
   };
