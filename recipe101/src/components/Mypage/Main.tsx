@@ -73,7 +73,7 @@ const ContentNameBox = styled.div`
   color: black;
 `;
 
-export default function Main() {
+export default function Main({ func }: { func: Function }) {
   let names = [
     "프로필",
     "비밀번호",
@@ -118,7 +118,7 @@ export default function Main() {
                 ) : null}
               </UpperLine>
               {x === "프로필" ? <ContextProfile /> : null}
-              {x === "비밀번호" ? <ContextPassword /> : null}
+              {x === "비밀번호" ? <ContextPassword func={func} /> : null}
               {x !== "프로필" && x !== "비밀번호" ? (
                 <ContextDefault type={x} />
               ) : null}
