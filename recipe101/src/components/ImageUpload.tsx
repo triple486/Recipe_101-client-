@@ -6,7 +6,7 @@ const ImgBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  border: solid 1px red;
+  border: solid 1px white;
 `;
 const ImgInput = styled.input`
   height: 1px;

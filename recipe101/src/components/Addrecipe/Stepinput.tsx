@@ -18,7 +18,7 @@ const StepLine = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  border: solid 1px black;
+  border: solid 1px white;
 `;
 
 const Addstep = styled.div`
@@ -28,7 +28,7 @@ const Addstep = styled.div`
   justify-content: center;
   align-items: center;
 
-  border: dashed 1px black;
+  border: dashed 1px white;
 `;
 const TextBox = styled.div``;
 

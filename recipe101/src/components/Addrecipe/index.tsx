@@ -20,6 +20,7 @@ import Message from "./messagebox";
 import axios from "axios";
 axios.defaults.withCredentials = true;
 const Frame = styled.div`
+  background-color: #b17d55;
   height: 100%;
   width: 100%;
   display: flex;
@@ -42,7 +43,7 @@ const DataFrame = styled.div`
   display: flex;
   max-width: 1200px;
   flex-direction: row;
-  border: solid 1px red;
+  border: solid 1px white;
 `;
 
 const ItemFrame = styled.div`
@@ -50,14 +51,14 @@ const ItemFrame = styled.div`
   width: 100%;
   max-width: 1200px;
   display: flex;
-  border: solid 1px blue;
+  border: solid 1px white;
 `;
 
 const StepFrame = styled.div`
   flex: 3 0 0;
   width: 100%;
   max-width: 1200px;
-  border: solid 1px blue;
+  border: solid 1px white;
 `;
 const ImgBox = styled.div`
   flex: 1 0 0;
@@ -65,11 +66,11 @@ const ImgBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  border: solid 1px red;
+  border: solid 1px white;
 `;
 const TextBox = styled.div`
   flex: 2 0 0;
-  border: solid 1px red;
+  border: solid 1px white;
   display: flex;
   flex-direction: column;
 `;
@@ -96,20 +97,20 @@ const Textupper = styled.div`
   flex: 3 0 0;
   display: flex;
   flex-direction: row;
-  border: solid 1px red;
+  border: solid 1px white;
 `;
 const Textlower = styled.div`
   flex: 1 0 0;
   display: flex;
   flex-direction: row;
-  border: solid 1px red;
+  border: solid 1px white;
 `;
 
 const TextColumn = styled.div`
   flex: 1 0 0;
   display: flex;
   flex-direction: column;
-  border: solid 1px red;
+  border: solid 1px #b17d55;
 `;
 
 const FoodDescName = styled.div`

@@ -18,7 +18,7 @@ const MessageBox = styled.div`
   display: flex;
   flex-direction: column;
   background: white;
-  border: solid 1px black;
+  border: solid 1px white;
 `;
 
 const TextLine = styled.div`

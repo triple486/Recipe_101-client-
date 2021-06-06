@@ -25,7 +25,7 @@ const InputArea = styled.div`
   z-index: 2;
   flex-direction: row;
   background: white;
-  border: solid 2px black;
+  border: solid 2px white;
 `;
 const Inputline = styled.div`
   flex: 1 0 0;

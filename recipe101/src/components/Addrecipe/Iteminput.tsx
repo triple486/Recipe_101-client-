@@ -13,7 +13,7 @@ const NameArea = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  border: solid 1px red;
+  border: solid 1px white;
 `;
 const NameBox = styled.div`
   height: 100%;
@@ -50,7 +50,7 @@ const ItemBox = styled.div`
   width: 10%;
   height: 50%;
   flex-direction: column;
-  border: solid 1px red;
+  border: solid 1px white;
 `;
 
 const CancelButton = styled.button`
