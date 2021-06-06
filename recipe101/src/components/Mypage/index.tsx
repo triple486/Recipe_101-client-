@@ -80,12 +80,6 @@ export default function Mypage() {
   let history = useHistory();
   let location = useLocation();
   let dispatch = useDispatch();
-  let accessToken = useSelector((state: RootState) => state.tokenReducer);
-  const config = {
-    headers: {
-      authorization: "bearer " + accessToken,
-    },
-  };
 
   useEffect(() => {
     axios
@@ -93,14 +87,18 @@ export default function Mypage() {
       .then((res) => {
         dispatch(storeToken(res.data.data.accessToken));
         dispatch(updateLogin(true));
-        dispatch(updateUserInfo(res.data.data.userinfo));
+        const config = {
+          headers: {
+            authorization: "bearer " + res.data.data.accessToken,
+          },
+        };
+        return axios.get(process.env.REACT_APP_SERVER_URL + `/user`, config);
       })
-      .catch();
-    axios
-      .get(process.env.REACT_APP_SERVER_URL + `/user`, config)
       .then((rst) => {
         dispatch(updateUserInfo(rst.data.data.userinfo));
-      });
+      })
+      .catch();
+
     return;
   }, []);
   return (
