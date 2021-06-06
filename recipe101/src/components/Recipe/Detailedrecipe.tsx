@@ -427,20 +427,7 @@ function Detailedrecipe() {
           {user.userInfo.userName === data.food_info?.userName ? (
             <Button
               onClick={() => {
-                axios
-                  .delete(
-                    process.env.REACT_APP_SERVER_URL +
-                      `/recipe/${data.food_info?.id}`,
-
-                    {
-                      headers: {
-                        authorization: "bearer " + accessToken,
-                      },
-                    }
-                  )
-                  .then((rst) => {
-                    setcall2(true);
-                  });
+                setcall2(true);
               }}
             >
               <TextBox>{"삭제하기"}</TextBox>
@@ -652,7 +639,7 @@ function Detailedrecipe() {
         {call2 ? (
           <Message
             cancel={() => {
-              setcall(false);
+              setcall2(false);
             }}
             message={"레시피를 지우시겠습니까?"}
             button={() => {
