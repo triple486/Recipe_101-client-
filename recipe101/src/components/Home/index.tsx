@@ -51,11 +51,14 @@ function Landingpage() {
       .catch();
   }
   useEffect(() => {
-    axios.get(process.env.REACT_APP_SERVER_URL + "/refresh").then((res) => {
-      dispatch(storeToken(res.data.data.accessToken));
-      dispatch(updateLogin(true));
-      dispatch(updateUserInfo(res.data.data.userinfo));
-    });
+    axios
+      .get(process.env.REACT_APP_SERVER_URL + "/refresh")
+      .then((res) => {
+        dispatch(storeToken(res.data.data.accessToken));
+        dispatch(updateLogin(true));
+        dispatch(updateUserInfo(res.data.data.userinfo));
+      })
+      .catch();
 
     return;
   }, []);

@@ -17,8 +17,10 @@ const BoxFrame = styled.div`
   display: flex;
 `;
 
-export default function Recipepage() {
+export default function Recipepage({ func = () => {} }: { func?: Function }) {
   let { id } = useParams<{ id?: string }>();
+  console.log(id);
+  func(Number(id));
   let nid = Number(id) - 1;
   let { search } = useSelector((state: RootState) => state.searchReducer);
   let data = search.slice(nid * 12, (nid + 1) * 12);
