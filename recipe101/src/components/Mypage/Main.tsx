@@ -5,6 +5,7 @@ import { RootState } from "../../redux/reducers";
 import { useSelector, useDispatch } from "react-redux";
 import { init } from "../../redux/userReducer";
 import axios from "axios";
+axios.defaults.withCredentials = true;
 const InnerFrame = styled.div`
   min-height: ${window.innerHeight - 100}px;
   width: 100%;
