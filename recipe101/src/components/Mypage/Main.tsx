@@ -82,12 +82,13 @@ export default function Main() {
     "구독한 유저들",
   ];
   let accessToken = useSelector((state: RootState) => state.tokenReducer);
+  let user = useSelector((state: RootState) => state.userReducer);
   let dispatch = useDispatch();
   let history = useHistory();
   return (
     <InnerFrame>
       {names.map((x, i) => {
-        return (
+        return user.isKakao && x === "비밀번호" ? null : (
           <OuterFrame key={i}>
             <ContentBox>
               <UpperLine>
