@@ -11,6 +11,8 @@ import Modal from "./Modal";
 import Searchbar from "./Searchbar";
 import Searchresult from "./Searchresult";
 import axios from "axios";
+import { useEffect } from "react";
+axios.defaults.withCredentials = true;
 const Frame = styled.div`
   height: 100%;
   width: 100%;
@@ -48,6 +50,15 @@ function Landingpage() {
       })
       .catch();
   }
+  useEffect(() => {
+    axios.get(process.env.REACT_APP_SERVER_URL + "/refresh").then((res) => {
+      dispatch(storeToken(res.data.data.accessToken));
+      dispatch(updateLogin(true));
+      dispatch(updateUserInfo(res.data.data.userinfo));
+    });
+
+    return;
+  }, []);
 
   let Modalon = useSelector((state: RootState) => state.modalReducer);
   return (
