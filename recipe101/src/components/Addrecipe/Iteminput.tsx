@@ -96,9 +96,9 @@ const Button = styled.button`
 
   &:hover {
     border: solid 1px white;
-    background-color: white;
-    opacity: 0.7;
-    color: black;
+    // background-color: white;
+    // opacity: 0.7;
+    // color: black;
 `;
 
 const Frameline = styled.div`
