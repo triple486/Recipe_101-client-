@@ -48,6 +48,7 @@ const LineBox = styled.div`
   width: 100%;
   display: flex;
   border: solid 1px black;
+  border-top: none;
 `;
 
 const Textarea = styled.textarea`
@@ -55,6 +56,9 @@ const Textarea = styled.textarea`
   display: flex;
   width: 100%;
   resize: none;
+  border-color: black;
+  border-top: none;
+  border-bottom: none;
 `;
 const Bbox = styled.div`
   height: 100%;
@@ -69,7 +73,9 @@ const Tbox = styled.div`
   text-align: right;
 `;
 
-const TextBox = styled.div``;
+const TextBox = styled.div`
+  color: black;
+`;
 
 export default function Comment({
   h,

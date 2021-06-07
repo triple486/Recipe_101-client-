@@ -257,6 +257,18 @@ const TextBox1 = styled.div<{ s?: number; w?: number }>`
   flex: 5 0 0;
   justify-content: center;
 `;
+const TextBox2 = styled.div<{ s?: number; w?: number }>`
+  display: flex;
+  ${({ s }) => (s ? `font-size: ${s}px;` : null)}
+  ${({ w }) => (w ? `font-weight: ${w};` : null)}
+  padding: 20px 0 10px;
+`;
+const TextBox3 = styled.div<{ s?: number; w?: number }>`
+  display: flex;
+  ${({ s }) => (s ? `font-size: ${s}px;` : null)}
+  ${({ w }) => (w ? `font-weight: ${w};` : null)}
+  padding: 10px 40px 30px;
+`;
 
 const Modal = styled.div`
   height: 100vh;
@@ -419,7 +431,7 @@ function Detailedrecipe() {
                     });
                 }}
               >
-                <TextBox>{"구독 하기"}</TextBox>
+                <TextBox>{"구독하기"}</TextBox>
               </Button>
             )
           ) : null}
@@ -514,10 +526,10 @@ function Detailedrecipe() {
         <MinBoxFrame1 h={200}>
           <Line1 c={true}>
             <Line1 f={2}>
-              <TextBox s={20}>{"간단한 설명"}</TextBox>
+              <TextBox2 s={20}>{"간단한 설명"}</TextBox2>
             </Line1>
             <Line1 f={3}>
-              <TextBox>{data.food_info?.summary}</TextBox>
+              <TextBox3>{data.food_info?.summary}</TextBox3>
             </Line1>
           </Line1>
         </MinBoxFrame1>
