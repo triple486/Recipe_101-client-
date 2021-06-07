@@ -115,7 +115,6 @@ const LoginBtn2 = styled.button`
 
 const KakaoBtn = styled.img`
   margin-top: 5px;
-  height: 40px;
   width: 100%;
   outline: none;
   border: none;
