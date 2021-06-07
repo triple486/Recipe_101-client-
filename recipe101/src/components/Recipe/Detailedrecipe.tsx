@@ -22,7 +22,7 @@ const Frame = styled.div`
   margin: 0;
   overflow-y: scroll;
   justify-content: center;
-  background-color: #B17D55;
+  background-color: #b17d55;
 `;
 const InnerFrame = styled.div`
   height: 100%;
@@ -257,6 +257,18 @@ const TextBox1 = styled.div<{ s?: number; w?: number }>`
   flex: 5 0 0;
   justify-content: center;
 `;
+const TextBox2 = styled.div<{ s?: number; w?: number }>`
+  display: flex;
+  ${({ s }) => (s ? `font-size: ${s}px;` : null)}
+  ${({ w }) => (w ? `font-weight: ${w};` : null)}
+  padding: 20px 0 10px;
+`;
+const TextBox3 = styled.div<{ s?: number; w?: number }>`
+  display: flex;
+  ${({ s }) => (s ? `font-size: ${s}px;` : null)}
+  ${({ w }) => (w ? `font-weight: ${w};` : null)}
+  padding: 10px 40px 30px;
+`;
 
 const Modal = styled.div`
   height: 100vh;
@@ -419,7 +431,7 @@ function Detailedrecipe() {
                     });
                 }}
               >
-                <TextBox>{"구독 하기"}</TextBox>
+                <TextBox>{"구독하기"}</TextBox>
               </Button>
             )
           ) : null}
@@ -427,20 +439,7 @@ function Detailedrecipe() {
           {user.userInfo.userName === data.food_info?.userName ? (
             <Button
               onClick={() => {
-                axios
-                  .delete(
-                    process.env.REACT_APP_SERVER_URL +
-                      `/recipe/${data.food_info?.id}`,
-
-                    {
-                      headers: {
-                        authorization: "bearer " + accessToken,
-                      },
-                    }
-                  )
-                  .then((rst) => {
-                    setcall2(true);
-                  });
+                setcall2(true);
               }}
             >
               <TextBox>{"삭제하기"}</TextBox>
@@ -475,7 +474,11 @@ function Detailedrecipe() {
                   l={"작성자"}
                   v={data.food_info?.userName || ""}
                   func={() => {
-                    if (user.userInfo.userName !== data.food_info?.userName) {
+                    console.log(user.isLogin);
+                    if (
+                      user.isLogin &&
+                      user.userInfo.userName !== data.food_info?.userName
+                    ) {
                       setcall3(true);
                     }
                   }}
@@ -523,10 +526,10 @@ function Detailedrecipe() {
         <MinBoxFrame1 h={200}>
           <Line1 c={true}>
             <Line1 f={2}>
-              <TextBox s={20}>{"간단한 설명"}</TextBox>
+              <TextBox2 s={20}>{"간단한 설명"}</TextBox2>
             </Line1>
             <Line1 f={3}>
-              <TextBox>{data.food_info?.summary}</TextBox>
+              <TextBox3>{data.food_info?.summary}</TextBox3>
             </Line1>
           </Line1>
         </MinBoxFrame1>
@@ -648,7 +651,7 @@ function Detailedrecipe() {
         {call2 ? (
           <Message
             cancel={() => {
-              setcall(false);
+              setcall2(false);
             }}
             message={"레시피를 지우시겠습니까?"}
             button={() => {
@@ -674,7 +677,7 @@ function Detailedrecipe() {
         {call3 ? (
           <Message
             cancel={() => {
-              setcall(false);
+              setcall3(false);
             }}
             message={"해당 유저를 구독하겠습니까?"}
             button={() => {

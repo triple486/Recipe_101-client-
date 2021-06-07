@@ -4,7 +4,7 @@ import Main from "./Main";
 // import Profile from "./Pages/Profile";
 import { RootState } from "../../redux/reducers";
 import { useSelector, useDispatch } from "react-redux";
-import { updateUserInfo, updateLogin } from "../../redux/userReducer";
+import { updateUserInfo, updateLogin, init } from "../../redux/userReducer";
 import { storeToken } from "../../redux/tokenReducer";
 import Password from "./Pages/Password";
 import Profile from "./Pages/PageModify";
@@ -13,7 +13,8 @@ import Recipe from "./Pages/AddedRecipe";
 import Store from "./Pages/StoreRecipe";
 import Subscribe from "./Pages/Subscribe";
 import axios from "axios";
-import { useEffect } from "react";
+import Message from "../Addrecipe/messagebox";
+import { useEffect, useState } from "react";
 axios.defaults.withCredentials = true;
 const Frame = styled.div`
   background-color: #b17d55;
@@ -80,20 +81,14 @@ export default function Mypage() {
   let history = useHistory();
   let location = useLocation();
   let dispatch = useDispatch();
-  // let accessToken = useSelector((state: RootState) => state.tokenReducer);
-  // const config = {
-  //   headers: {
-  //     authorization: "bearer " + accessToken,
-  //   },
-  // };
-
+  let [call, setcall] = useState(false);
+  let accessToken = useSelector((state: RootState) => state.tokenReducer);
   useEffect(() => {
     axios
       .get(process.env.REACT_APP_SERVER_URL + "/refresh")
       .then((res) => {
         dispatch(storeToken(res.data.data.accessToken));
         dispatch(updateLogin(true));
-        // dispatch(updateUserInfo(res.data.data.userinfo));
         const config = {
           headers: {
             authorization: "bearer " + res.data.data.accessToken,
@@ -101,12 +96,8 @@ export default function Mypage() {
         };
         return axios.get(process.env.REACT_APP_SERVER_URL + `/user`, config);
       })
-      //   .catch();
-      // axios
-      //   .get(process.env.REACT_APP_SERVER_URL + `/user`, config)
       .then((rst) => {
         dispatch(updateUserInfo(rst.data.data.userinfo));
-        // });
       })
       .catch();
 
@@ -139,8 +130,32 @@ export default function Mypage() {
         <Route path={"/mypage/storerecipe"} component={Store}></Route>
         <Route path={"/mypage/password"} component={Password}></Route>
         <Route path={"/mypage/profile"} component={Profile}></Route>
-        <Route path={"/mypage/"} component={Main}></Route>
+        <Route path={"/mypage/"}>
+          <Main func={setcall}></Main>
+        </Route>
       </Switch>
+      {call ? (
+        <Message
+          cancel={() => {
+            setcall(false);
+          }}
+          message={"탈퇴하시겠습니까?"}
+          button={() => {
+            axios
+              .delete(process.env.REACT_APP_SERVER_URL + `/user`, {
+                headers: {
+                  authorization: "bearer " + accessToken,
+                },
+              })
+              .then((rst) => {
+                dispatch(init());
+                setcall(false);
+                history.push("/");
+              });
+          }}
+          buttonMessage={"예"}
+        ></Message>
+      ) : null}
     </Frame>
   );
 }

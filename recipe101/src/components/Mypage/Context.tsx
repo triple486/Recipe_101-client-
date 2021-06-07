@@ -3,6 +3,7 @@ import { RootState } from "../../redux/reducers";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
+import axios from "axios";
 const Frame = styled.div`
   height: 100%;
   width: 100%;
@@ -44,11 +45,11 @@ const ProfiledataLine = styled.div`
 `;
 const ProfiledataLine2 = styled.div`
   flex: 1 0 0;
-  margin-left: 150px;
+  // margin-left: 150px;
   margin-top: 20px;
   display: flex;
-  flex-direction: row;
-  padding-left: 30px;
+  flex-direction: row-reverse;
+  padding-right: 10px;
   align-items: center;
 `;
 const TextBox = styled.div`
@@ -127,7 +128,7 @@ const TextBox2 = styled.div`
 
 const DummyBox = styled.div`
   height: 100%;
-  width: 300px;
+  width: 200px;
   padding-top: 0px;
   padding-left: 0px;
   display: flex;
@@ -144,7 +145,7 @@ const Button3 = styled.div`
   display: inline-block;
   font-size: 16px;
   margin: 115px 0px 0px 0px;
-
+  margin-left: 15px;
   -webkit-transition-duration: 0.4s; /* Safari */
   transition-duration: 0.4s;
   cursor: pointer;
@@ -156,8 +157,9 @@ const Button3 = styled.div`
     color: black;
   }
 `;
-function ContextPassword() {
+function ContextPassword({ func }: { func: Function }) {
   let history = useHistory();
+
   return (
     <Frame>
       <DummyBox></DummyBox>
@@ -167,6 +169,13 @@ function ContextPassword() {
         }}
       >
         수정하기
+      </Button3>
+      <Button3
+        onClick={() => {
+          func(true);
+        }}
+      >
+        탈퇴하기
       </Button3>
     </Frame>
   );

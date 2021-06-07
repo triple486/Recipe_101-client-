@@ -14,7 +14,7 @@ const Modal = styled.div`
 `;
 
 const MessageBox = styled.div`
-  height: 100px;
+  height: 130px;
   width: 800px;
   display: flex;
   flex-direction: column;
@@ -33,6 +33,7 @@ const ButtonLine = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 10px 0 30px;
 `;
 const Button = styled.button`
   width: 10%;
