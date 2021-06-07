@@ -153,7 +153,7 @@ function ItemBoxFrame({
               dispatch(deleteOneIngredient(id));
             }}
           >
-            <BTBOX>{"X"}</BTBOX>
+            <BTBOX>&times;</BTBOX>
           </CancelButton>
         </ButtonLine>
         <FrameBox>
