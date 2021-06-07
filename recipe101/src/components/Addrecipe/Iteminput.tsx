@@ -69,7 +69,8 @@ const CancelButton = styled.button`
   padding: 2px;
   justify-content: center;
   align-items: center;
-  background-color: #f6eace;
+  background-color: #b17d55;
+  border: solid 1px white;
 `;
 
 const BTBOX = styled.div`

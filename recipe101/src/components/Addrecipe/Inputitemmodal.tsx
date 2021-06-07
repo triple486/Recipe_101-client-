@@ -22,7 +22,8 @@ const InputBox = styled.div`
   display: flex;
   z-index: 2;
   flex-direction: column;
-  background-color: #f6eace;
+  background-color: #b17d55;
+  border: solid 1px black;
 `;
 const Inputline = styled.div`
   flex: 1 0 0;
@@ -34,7 +35,7 @@ const InputButton = styled.button`
   flex: 1 0 0;
   border: 1px solid white;
   background-color: white;
-
+  border: solid 1px black;
   &:hover {
     border: solid 1px white;
     background-color: #f6eace;
