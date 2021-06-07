@@ -182,7 +182,6 @@ function Addrecipe() {
   let accessToken = useSelector((state: RootState) => state.tokenReducer);
   let history = useHistory();
   let dispatch = useDispatch();
-  let [isresister, setresister] = useState<boolean>(false);
   let [Tdata, setTdata] = useState<FormData>();
   let [isinputigr, setinputigr] = useState<boolean>(false);
   let [isinputstep, setinputstep] = useState<boolean>(false);
@@ -369,14 +368,12 @@ function Addrecipe() {
           cancel={() => {
             setmessage(false);
           }}
-          message={
-            "레시피 추가에는 회원가입된 계정을 필요로 합니다. 회원가입을 진행 하시겠습니까?"
-          }
+          message={"레시피 추가에는 회원가입된 계정을 필요로 합니다."}
           button={() => {
             setmessage(false);
-            setresister(true);
+            history.push("/");
           }}
-          buttonMessage={"가입 진행"}
+          buttonMessage={"예"}
         ></Message>
       ) : null}
       {ismessage2 ? (
@@ -391,9 +388,6 @@ function Addrecipe() {
           }}
           buttonMessage={"예"}
         ></Message>
-      ) : null}
-      {isresister ? (
-        <Resister data={Tdata} func={setresister}></Resister>
       ) : null}
     </Frame>
   );
