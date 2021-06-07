@@ -123,7 +123,7 @@ function ContextProfile() {
 const TextBox2 = styled.div`
   font-size: 20px;
   display: flex;
-  padding-right: 20px;
+  padding-right: 10px;
 `;
 
 const DummyBox = styled.div`

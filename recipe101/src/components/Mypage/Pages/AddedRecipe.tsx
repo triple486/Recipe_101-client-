@@ -16,8 +16,8 @@ import Recipepage from "../../Recipepage";
 axios.defaults.withCredentials = true;
 
 const Frame = styled.div`
-  height: ${window.innerHeight - 100}px;
-  width: 100%;
+  height: 1500px;
+  width: 1500px;
   display: flex;
   padding-top: 20px;
   padding-bottom: 20px;

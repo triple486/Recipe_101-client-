@@ -18,17 +18,22 @@ const StepLine = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  border: solid 1px black;
+  border: solid 1px white;
 `;
 
 const Addstep = styled.div`
+  margin-top: 10px;
+
   height: 50px;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
 
-  border: dashed 1px black;
+  border: dashed 1px white;
+  &:hover {
+    border: solid 1px white;
+    background-color: #f6eace;
 `;
 const TextBox = styled.div``;
 
@@ -140,7 +145,7 @@ export default function Stepinput({ func }: { func: Function }) {
               func(true);
             }}
           >
-            <TextBox>{"레시피 추가"}</TextBox>
+            <TextBox>{"레시피 단계 추가"}</TextBox>
           </Addstep>,
         ]}
       </StepBox>
