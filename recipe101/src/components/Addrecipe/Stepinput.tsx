@@ -72,12 +72,18 @@ const Tipbox = styled.div`
   align-items: center;
 `;
 const CancelButton = styled.button`
-  height: 20px;
-  width: 20px;
+  height: 40px;
+  width: 60px;
   display: flex;
-  border-radius: 50%;
   padding: 2px;
-  background-color: grey;
+  justify-content: center;
+  align-items: center;
+  background-color: #f6eace;
+  border-radius: 10px;
+`;
+
+const BTBOX = styled.div`
+  display: flex;
 `;
 
 function RecipeStep({
@@ -100,9 +106,7 @@ function RecipeStep({
       <NumberBox>
         <TextBox>{num}</TextBox>
       </NumberBox>
-      <Imgbox>
-        <Img src={img} />
-      </Imgbox>
+      <Imgbox>{img ? <Img src={img} alt={""} /> : null}</Imgbox>
       <Descbox>
         <TextBox>{desc}</TextBox>
       </Descbox>
@@ -114,7 +118,9 @@ function RecipeStep({
           dispatch(deleteOneStepImage(id));
           dispatch(deleteOneRecipe(id));
         }}
-      />
+      >
+        <BTBOX>삭제</BTBOX>
+      </CancelButton>
     </StepLine>
   );
 }
@@ -123,6 +129,7 @@ export default function Stepinput({ func }: { func: Function }) {
   let { Recipe, StepImage } = useSelector(
     (state: RootState) => state.addrecipeReducer
   );
+  console.log(StepImage);
   return (
     <Frame>
       <StepBox>
