@@ -13,6 +13,7 @@ const Modal = styled.div`
   left: 0;
   position: fixed;
   display: flex;
+  color: black;
   justify-content: center;
   align-items: center;
 `;
@@ -73,8 +74,8 @@ const Frame = styled.div`
   flex-direction: column;
 `;
 const ImgBox2 = styled.div`
-  height: 300px;
-  width: 300px;
+  height: 295px;
+  width: 295px;
 `;
 
 const StepImage = styled.img`
