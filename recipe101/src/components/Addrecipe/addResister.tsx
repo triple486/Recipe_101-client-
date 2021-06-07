@@ -16,6 +16,7 @@ const Modal = styled.div`
   left: 0;
   position: fixed;
   display: flex;
+  color: black;
   justify-content: center;
   align-items: center;
 `;
