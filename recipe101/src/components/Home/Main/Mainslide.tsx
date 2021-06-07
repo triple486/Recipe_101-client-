@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
-import styled, { keyframes } from "styled-components";
+import styled, { css, keyframes } from "styled-components";
 import Recipeslide from "./Recipeslide";
 import img from "../../../Assets/Images/food-2068217_1920-turned.jpg";
 
@@ -15,6 +15,18 @@ const slide = keyframes`
 }
 90% {
   margin-left:0;
+  width:100%
+}
+100% {
+  margin-left:-100%;
+  width:100%
+} 
+
+`;
+
+const Out = keyframes`
+0% {
+  margin-left:0%;
   width:100%
 }
 100% {
@@ -44,10 +56,15 @@ const Innerframe = styled.div`
   // border: solid 1px red;
 `;
 
-const DataArea = styled.div`
+const DataArea = styled.div<{ isOut: boolean }>`
   flex: 16 0 0;
   overflow: hidden;
-  animation: ${slide} 6s infinite linear normal;
+
+  ${({ isOut }) =>
+    css`
+      animation: ${isOut ? Out : slide} ${isOut ? "0.5" : "6"}s
+        ${isOut ? "" : "infinite"} linear normal;
+    `}
   background-image: url(${img});
   border-left: solid 1px white;
   border-right: solid 1px white;
@@ -87,6 +104,7 @@ interface recipe {
 function Mainslide() {
   let [Recipes, setRecipes] = useState<recipe[]>([]);
   let [next, setnext] = useState(1);
+  let [isOut, setOut] = useState(false);
   let [data, setdata] = useState<recipe>();
   let url = `${process.env.REACT_APP_SERVER_URL}/recommend/10`;
   if (!Recipes.length) {
@@ -96,12 +114,14 @@ function Mainslide() {
       setnext(1);
     });
   }
-
   return (
     <Frame>
       <Innerframe>
         <DataArea
-          onClick={() => {}}
+          isOut={isOut}
+          onAnimationEnd={(e) => {
+            setOut(false);
+          }}
           onAnimationIteration={(e) => {
             let n = next + 1 < Recipes.length ? next + 1 : 0;
             setdata(Recipes[next]);
@@ -119,6 +139,7 @@ function Mainslide() {
                 onClick={() => {
                   setdata(x);
                   setnext(i + 1 < Recipes.length ? i + 1 : 0);
+                  setOut(true);
                 }}
               ></SelectBox>
             );
