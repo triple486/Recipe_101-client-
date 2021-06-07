@@ -9,7 +9,7 @@ const CancelButton = styled.button`
   // background-color: grey;
   // border: solid 1px black;
   &:before {
-    content: 'x';
+    content: "x";
     font-size: 20px;
     vertical-align: top;
     line-height: 12px;
