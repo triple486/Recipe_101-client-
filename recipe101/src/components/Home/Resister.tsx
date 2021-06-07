@@ -14,18 +14,22 @@ axios.defaults.withCredentials = true;
 
 const Frame = styled.div`
   position: realtive;
-  height: 600px;
+  height: 520px;
   width: 760px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   background: white;
   border-radius: 5px;
 `;
 
 const InnerFrame = styled.div`
-  height: 360px;
+  height: 520px;
   width: 760px;
   display: flex;
+  justify-content: center;
+  align-items: center;
   flex-direction: row;
 `;
 
@@ -159,66 +163,6 @@ export default function Resister() {
     password: "",
   });
 
-  // const handleChange = (event: any) => {
-  //   setUserInfo({
-  //     ...userInfo,
-  //     [event.target.id]: event.target.value,
-  //   });
-  // };
-
-  // function validation(type: string) {
-  //   const email = new RegExp(
-  //     /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i
-  //   );
-  //   const username = new RegExp(/^[A-za-z0-9]{5,15}/g);
-  //   const password = new RegExp(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/);
-  //   const phone = new RegExp(/^\d{2,3}-\d{3,4}-\d{4}$/);
-  //   return function (value: string) {
-  //     let ans = true,
-  //       ndata = { ...validcheck };
-  //     switch (type) {
-  //       case "email":
-  //         ans = value.length ? !email.test(value) : false;
-  //         ndata["email"] = ans;
-  //         validcheckf({ ...ndata });
-  //         if (!ans) {
-  //           setUserInfo({ ...userInfo, email: value });
-  //         }
-  //         return ans;
-
-  //       case "password":
-  //         ans = value.length ? !password.test(value) : false;
-  //         ndata["password"] = ans;
-  //         validcheckf({ ...ndata });
-  //         if (!ans) {
-  //           setUserInfo({ ...userInfo, password: value });
-  //         }
-
-  //         return ans;
-
-  //       case "phone":
-  //         ans = value.length ? !phone.test(value) : false;
-  //         ndata["phone"] = ans;
-  //         validcheckf({ ...ndata });
-  //         if (!ans) {
-  //           setUserInfo({ ...userInfo, phone: value });
-  //         }
-
-  //         return ans;
-
-  //       default:
-  //         ans = value.length ? !username.test(value) : false;
-  //         ndata["username"] = ans;
-  //         validcheckf({ ...ndata });
-  //         if (!ans) {
-  //           setUserInfo({ ...userInfo, username: value });
-  //         }
-
-  //         return ans;
-  //     }
-  //   };
-  // }
-
   function validation(type: string) {
     if (!userInfo.username) {
       errors.username = "Name is required.";
@@ -239,61 +183,6 @@ export default function Resister() {
 
   let history = useHistory();
   let dispatch = useDispatch();
-
-  // const checkInputs = () => {
-  //   const usernameValue = userInfo.username.trim();
-  //   const passworValue = userInfo.password.trim();
-  //   const emailValue = userInfo.email.trim();
-  //   const phoeValue = userInfo.phone.trim();
-
-  //   if (usernameValue === "") {
-  //     ///show error
-  //     /// add error class
-  //     setErrorFor(username, "Username cannot be blank");
-  //   } else {
-  //     // add success class
-  //     setSuccessFor(username);
-  //   }
-  // };
-
-  // function valdateInfo(type: string) {
-  //   let [errMesUsername, setErrMesUsername] = useState("");
-  //   let [errMesPassword, setErrMesPassword] = useState("");
-  //   let [errMesEmail, setErrMesEmail] = useState("");
-  //   let [errMesPhone, setErrMesPhone] = useState("");
-
-  //   if (!userInfo.username.trim()) {
-  //     setErrMesUsername("Username is required")
-  //   } else (!/^[A-za-z0-9]{5,15}/g.test(userInfo.username)) {
-  //     setErrMesUsername("Username should be more than 5")
-  //   }
-
-  //   if (!userInfo.password.trim()) {
-  //     setErrMesPassword("Password is required")
-  //   } else (userInfo.password.length <5) {
-  //     setErrMesPassword("Password should contain more than 5")
-  //   }
-
-  //   if (!userInfo.email.trim()) {
-  //     setErrMesEmail("Email is required")
-  //   } else if (!/\S+@\S+\.\S+/.test(values.email)) {
-  //     errors.email = "Eamil address is invalid";
-  //   }
-
-  //   if (!values.password) {
-  //     errors.password = "Password is required";
-  //   } else if (values.password.length < 6) {
-  //     errors.password = "Password needs to be 6 characters or more";
-  //   }
-
-  //   if (!values.password2) {
-  //     errors.password2 = "Password is required";
-  //   } else if (values.password2 !== values.password) {
-  //     errors.password2 = "Passwords do not match";
-  //   }
-
-  //   return errors;
-  // }
 
   function ToRegister() {
     let formdata = new FormData();
