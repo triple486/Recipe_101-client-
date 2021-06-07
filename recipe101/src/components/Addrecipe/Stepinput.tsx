@@ -75,9 +75,14 @@ const CancelButton = styled.button`
   height: 20px;
   width: 20px;
   display: flex;
-  border-radius: 50%;
   padding: 2px;
-  background-color: grey;
+  justify-content: center;
+  align-items: center;
+`;
+
+const BTBOX = styled.div`
+  display: flex;
+  font-size: 20px;
 `;
 
 function RecipeStep({
@@ -114,7 +119,9 @@ function RecipeStep({
           dispatch(deleteOneStepImage(id));
           dispatch(deleteOneRecipe(id));
         }}
-      />
+      >
+        <BTBOX>{"X"}</BTBOX>
+      </CancelButton>
     </StepLine>
   );
 }
@@ -123,6 +130,7 @@ export default function Stepinput({ func }: { func: Function }) {
   let { Recipe, StepImage } = useSelector(
     (state: RootState) => state.addrecipeReducer
   );
+  console.log(StepImage);
   return (
     <Frame>
       <StepBox>

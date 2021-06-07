@@ -32,11 +32,12 @@ const Inputline = styled.div`
 
 const InputButton = styled.button`
   flex: 1 0 0;
-  border : 1px solid white;
+  border: 1px solid white;
   background-color: white;
   &:hover {
     border: solid 1px white;
-    background-color: #f6eace
+    background-color: #f6eace;
+  }
 `;
 
 export default function ItemInput({ func }: { func: Function }) {

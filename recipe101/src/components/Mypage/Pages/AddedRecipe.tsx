@@ -10,25 +10,22 @@ import {
   Redirect,
   useHistory,
 } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import Recipepage from "../../Recipepage";
 axios.defaults.withCredentials = true;
 
 const Frame = styled.div`
-  height: 1500px;
+  min-height: ${window.innerHeight - 100}px;
   width: 1500px;
   display: flex;
   padding-top: 20px;
   padding-bottom: 20px;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
 `;
 const InnerFrame = styled.div`
-  height: 100%;
   width: 100%;
-  max-width: 1200px;
+  max-width: 1500px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -38,7 +35,7 @@ const InnerFrame = styled.div`
 const InnerFrame2 = styled.div`
   flex: 1 0 0;
   width: 100%;
-  max-width: 1200px;
+  max-width: 1500px;
   display: flex;
   flex-direction: column;
 `;
@@ -57,6 +54,7 @@ const InnerBox = styled.div`
 
 const TextLine = styled.div`
   height: 50px;
+  flex: 1 0 1;
   width: 1200px;
   display: flex;
 `;
@@ -91,9 +89,13 @@ const Footer = styled.div`
   justify-content: center;
   align-items: center;
 `;
-const SortBox = styled.div`
-  height: 20px;
+const TextOuterBox = styled.div`
+  flex: 1 0 0;
   width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   display: flex; ;
 `;
 const Slink = styled(Link)<{ iscolor: boolean }>`
@@ -115,7 +117,8 @@ export default function Profile() {
   let [q, setq] = useState(1);
   let match = useRouteMatch();
   let [k, setk] = useState(1);
-  if (!data) {
+
+  useEffect(() => {
     axios
       .get(
         process.env.REACT_APP_SERVER_URL +
@@ -127,7 +130,8 @@ export default function Profile() {
         setdata([...rst.data.data.recipe]);
         setk(Math.ceil(rst.data.data.recipe.length / 12));
       });
-  }
+    return;
+  }, []);
   let pn: number[] = [];
   for (let i = 0; i < 10 * Math.ceil(k / 10); i++) {
     pn.push(i + 1);
@@ -165,32 +169,35 @@ export default function Profile() {
       <TextLine>
         <TextBox>작성한 레시피들</TextBox>
       </TextLine>
-      <InnerFrame>
-        <InnerFrame2>
-          <Switch>
-            <Route path={`${match.path}/:id`}>
-              <Recipepage func={setid}></Recipepage>
-            </Route>
-            <Route path={`${match.path}`}>
-              {data && data.length ? (
-                <Redirect to={`${match.path}/${1}`} />
-              ) : (
-                <TextBox>{`작성한 레시피가 없습니다.`}</TextBox>
-              )}
-            </Route>
-          </Switch>
-        </InnerFrame2>
 
-        <Footer>
-          <LinkButton key={-1} num={q} back={true}></LinkButton>
-          <FooterBox>
-            {pn.slice(q - 1, q + 9).map((x, i) => {
-              return <Linkbox key={i} num={x > k ? 0 : x}></Linkbox>;
-            })}
-          </FooterBox>
-          <LinkButton key={11} num={q} back={false}></LinkButton>
-        </Footer>
-      </InnerFrame>
+      {data && data.length ? (
+        <InnerFrame>
+          <InnerFrame2>
+            <Switch>
+              <Route path={`${match.path}/:id`}>
+                <Recipepage func={setid}></Recipepage>
+              </Route>
+              <Route path={`${match.path}`}>
+                <Redirect to={`${match.path}/${1}`} />
+              </Route>
+            </Switch>
+          </InnerFrame2>
+
+          <Footer>
+            <LinkButton key={-1} num={q} back={true}></LinkButton>
+            <FooterBox>
+              {pn.slice(q - 1, q + 9).map((x, i) => {
+                return <Linkbox key={i} num={x > k ? 0 : x}></Linkbox>;
+              })}
+            </FooterBox>
+            <LinkButton key={11} num={q} back={false}></LinkButton>
+          </Footer>
+        </InnerFrame>
+      ) : (
+        <TextOuterBox>
+          <TextBox>{`새로운 레시피를 작성해보세요.`}</TextBox>
+        </TextOuterBox>
+      )}
     </Frame>
   );
 }
