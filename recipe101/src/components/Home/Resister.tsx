@@ -143,13 +143,6 @@ export default function Resister() {
 
   let [err, seterr] = useState("");
 
-  const [errors, setErrors] = useState<errors>({
-    username: "",
-    email: "",
-    phone: "",
-    password: "",
-  });
-
   const [validcheck, validcheckf] = useState({
     username: false,
     password: false,
@@ -316,11 +309,16 @@ export default function Resister() {
               type="text"
               id="username"
               err={validcheck.username}
+              onFocus={(e) => {
+                validcheckf({ ...validcheck, username: false });
+              }}
               onBlur={(event: any) =>
                 validation("username")(event.target.value)
               }
             />
-            {errors.username && <p className="error">{errors.username}</p>}
+            {/* {validcheck.username && (
+              <p className="error">{"형식에 맞지 않는 아이디입니다."}</p>
+            )} */}
           </Element>
           <Element>
             <Label>Password</Label>
@@ -328,11 +326,16 @@ export default function Resister() {
               type="password"
               id="password"
               err={validcheck.password}
+              onFocus={(e) => {
+                validcheckf({ ...validcheck, password: false });
+              }}
               onBlur={(event: any) =>
                 validation("password")(event.target.value)
               }
             />
-            {errors.password && <p className="error">{errors.password}</p>}
+            {/* {validcheck.password && (
+              <p className="error">{"형식에 맞지 않는 비밀번호 입니다."}</p>
+            )} */}
           </Element>
           <Element>
             <Label>Email</Label>
@@ -340,9 +343,14 @@ export default function Resister() {
               type="email"
               id="email"
               err={validcheck.email}
+              onFocus={(e) => {
+                validcheckf({ ...validcheck, email: false });
+              }}
               onBlur={(event: any) => validation("email")(event.target.value)}
             />
-            {errors.email && <p className="error">{errors.email}</p>}
+            {/* {validcheck.email && (
+              <p className="error">{"형식에 맞지 않는 이메일입니다."}</p>
+            )} */}
           </Element>
           <Element>
             <Label>Phone</Label>
@@ -350,9 +358,14 @@ export default function Resister() {
               type="tel"
               id="phone"
               err={validcheck.phone}
+              onFocus={(e) => {
+                validcheckf({ ...validcheck, phone: false });
+              }}
               onBlur={(event: any) => validation("phone")(event.target.value)}
             />
-            {errors.phone && <p className="error">{errors.phone}</p>}
+            {/* {validcheck.phone && (
+              <p className="error">{"형식에 맞지 않는 전화번호입니다."}</p>
+            )} */}
           </Element>
           <Element>
             <Line>{err && err.length ? err : null}</Line>
