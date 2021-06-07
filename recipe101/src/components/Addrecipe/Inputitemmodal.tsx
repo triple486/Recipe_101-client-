@@ -22,7 +22,7 @@ const InputBox = styled.div`
   display: flex;
   z-index: 2;
   flex-direction: column;
-  background: grey;
+  background-color: #f6eace;
 `;
 const Inputline = styled.div`
   flex: 1 0 0;
@@ -32,6 +32,11 @@ const Inputline = styled.div`
 
 const InputButton = styled.button`
   flex: 1 0 0;
+  border : 1px solid white;
+  background-color: white;
+  &:hover {
+    border: solid 1px white;
+    background-color: #f6eace
 `;
 
 export default function ItemInput({ func }: { func: Function }) {

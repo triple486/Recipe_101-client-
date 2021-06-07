@@ -25,7 +25,7 @@ const InputArea = styled.div`
   z-index: 2;
   flex-direction: row;
   background: white;
-  border: solid 2px black;
+  border: solid 2px white;
 `;
 const Inputline = styled.div`
   flex: 1 0 0;
@@ -59,6 +59,11 @@ const Buttonline = styled.div`
 
 const InputButton = styled.button`
   flex: 1 0 0;
+  background-color: white;
+  border: 1px solid white;
+  &:hover {
+    border: solid 1px white;
+    background-color: #f6eace
 `;
 
 const Frame = styled.div`

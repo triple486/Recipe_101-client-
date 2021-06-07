@@ -13,9 +13,10 @@ const NameArea = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  border: solid 1px red;
+  border: solid 1px white;
 `;
 const NameBox = styled.div`
+  background-color: white;
   height: 100%;
   width: 100%;
   font-size: 20px;
@@ -50,7 +51,7 @@ const ItemBox = styled.div`
   width: 10%;
   height: 50%;
   flex-direction: column;
-  border: solid 1px red;
+  border: solid 1px white;
 `;
 
 const CancelButton = styled.button`
@@ -65,6 +66,24 @@ const CancelButton = styled.button`
 const Button = styled.button`
   height: 90%;
   width: 90%;
+  border: solid 1px #dfdfdf;
+  background-color: #f6eace;
+  color: black;
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 14px;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  cursor: pointer;
+
+  &:hover {
+    border: solid 1px white;
+    background-color: white;
+    opacity: 0.7;
+    color: black;
 `;
 
 const Frameline = styled.div`
