@@ -83,6 +83,17 @@ export default function Mypage() {
   let dispatch = useDispatch();
   let [call, setcall] = useState(false);
   let accessToken = useSelector((state: RootState) => state.tokenReducer);
+  const config = {
+    headers: {
+      authorization: "bearer " + accessToken,
+    },
+  };
+  axios
+    .get(process.env.REACT_APP_SERVER_URL + `/user`, config)
+    .then((rst) => {
+      dispatch(updateUserInfo(rst.data.data.userinfo));
+    })
+    .catch();
   useEffect(() => {
     axios
       .get(process.env.REACT_APP_SERVER_URL + "/refresh")

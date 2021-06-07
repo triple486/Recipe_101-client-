@@ -130,6 +130,7 @@ const FoodDescTextbox = styled.textarea`
   display: flex;
   flex: 5 0 0;
   resize: none;
+  border: solid 1px black;
 `;
 
 const Dummy = styled.div`
