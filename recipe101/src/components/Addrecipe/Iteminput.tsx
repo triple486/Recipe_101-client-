@@ -22,6 +22,7 @@ const NameBox = styled.div`
   font-size: 20px;
   display: flex;
   justify-content: center;
+  background-color: #b17d55;
   align-items: center;
   flex-direction: column;
 `;
@@ -62,12 +63,13 @@ const ItemInnerBox = styled.div`
 `;
 
 const CancelButton = styled.button`
-  height: 10px;
-  width: 10px;
+  height: 15px;
+  width: 15px;
   display: flex;
   padding: 2px;
   justify-content: center;
   align-items: center;
+  background-color: #f6eace;
 `;
 
 const BTBOX = styled.div`

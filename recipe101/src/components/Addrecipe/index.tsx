@@ -23,6 +23,7 @@ const Frame = styled.div`
   height: 100%;
   width: 100%;
   display: flex;
+  color: white;
 
   flex-direction: column;
   justify-content: center;
@@ -171,6 +172,7 @@ const CancelButton = styled.button`
 
 const BTBOX = styled.div`
   display: flex;
+  background-color: #f6eace;
 `;
 
 //foodName, summary, nation, ,cookingTime, calorie, qnt, level
