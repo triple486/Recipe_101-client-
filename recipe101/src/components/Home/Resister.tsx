@@ -166,76 +166,76 @@ export default function Resister() {
   //   });
   // };
 
-  // function validation(type: string) {
-  //   const email = new RegExp(
-  //     /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i
-  //   );
-  //   const username = new RegExp(/^[A-za-z0-9]{5,15}/g);
-  //   const password = new RegExp(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/);
-  //   const phone = new RegExp(/^\d{2,3}-\d{3,4}-\d{4}$/);
-  //   return function (value: string) {
-  //     let ans = true,
-  //       ndata = { ...validcheck };
-  //     switch (type) {
-  //       case "email":
-  //         ans = value.length ? !email.test(value) : false;
-  //         ndata["email"] = ans;
-  //         validcheckf({ ...ndata });
-  //         if (!ans) {
-  //           setUserInfo({ ...userInfo, email: value });
-  //         }
-  //         return ans;
-
-  //       case "password":
-  //         ans = value.length ? !password.test(value) : false;
-  //         ndata["password"] = ans;
-  //         validcheckf({ ...ndata });
-  //         if (!ans) {
-  //           setUserInfo({ ...userInfo, password: value });
-  //         }
-
-  //         return ans;
-
-  //       case "phone":
-  //         ans = value.length ? !phone.test(value) : false;
-  //         ndata["phone"] = ans;
-  //         validcheckf({ ...ndata });
-  //         if (!ans) {
-  //           setUserInfo({ ...userInfo, phone: value });
-  //         }
-
-  //         return ans;
-
-  //       default:
-  //         ans = value.length ? !username.test(value) : false;
-  //         ndata["username"] = ans;
-  //         validcheckf({ ...ndata });
-  //         if (!ans) {
-  //           setUserInfo({ ...userInfo, username: value });
-  //         }
-
-  //         return ans;
-  //     }
-  //   };
-  // }
-
   function validation(type: string) {
-    if (!userInfo.username) {
-      errors.username = "Name is required.";
-    }
-    if (!userInfo.email) {
-      errors.email = "Email is required";
-    } else if (!/\S+@\S+\.\S+/.test(userInfo.email)) {
-      errors.email = "Email is invalid";
-    }
-    if (!userInfo.password) {
-      errors.password = "Password is required";
-    } else if (userInfo.password.length < 5) {
-      errors.password = "Password must be more than five characters.";
-    }
+    const email = new RegExp(
+      /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i
+    );
+    const username = new RegExp(/^[A-za-z0-9]{5,15}/g);
+    const password = new RegExp(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/);
+    const phone = new RegExp(/^\d{2,3}-\d{3,4}-\d{4}$/);
+    return function (value: string) {
+      let ans = true,
+        ndata = { ...validcheck };
+      switch (type) {
+        case "email":
+          ans = value.length ? !email.test(value) : false;
+          ndata["email"] = ans;
+          validcheckf({ ...ndata });
+          if (!ans) {
+            setUserInfo({ ...userInfo, email: value });
+          }
+          return ans;
 
-    return errors;
+        case "password":
+          ans = value.length ? !password.test(value) : false;
+          ndata["password"] = ans;
+          validcheckf({ ...ndata });
+          if (!ans) {
+            setUserInfo({ ...userInfo, password: value });
+          }
+
+          return ans;
+
+        case "phone":
+          ans = value.length ? !phone.test(value) : false;
+          ndata["phone"] = ans;
+          validcheckf({ ...ndata });
+          if (!ans) {
+            setUserInfo({ ...userInfo, phone: value });
+          }
+
+          return ans;
+
+        default:
+          ans = value.length ? !username.test(value) : false;
+          ndata["username"] = ans;
+          validcheckf({ ...ndata });
+          if (!ans) {
+            setUserInfo({ ...userInfo, username: value });
+          }
+
+          return ans;
+      }
+    };
   }
+
+  // const validation = () => {
+  //   if (!userInfo.username) {
+  //     errors.username = "Name is required.";
+  //   }
+  //   if (!userInfo.email) {
+  //     errors.email = "Email is required";
+  //   } else if (!/\S+@\S+\.\S+/.test(userInfo.email)) {
+  //     errors.email = "Email is invalid";
+  //   }
+  //   if (!userInfo.password) {
+  //     errors.password = "Password is required";
+  //   } else if (userInfo.password.length < 5) {
+  //     errors.password = "Password must be more than five characters.";
+  //   }
+
+  //   return errors;
+  // };
 
   let history = useHistory();
   let dispatch = useDispatch();
@@ -280,16 +280,10 @@ export default function Resister() {
   //     errors.email = "Eamil address is invalid";
   //   }
 
-  //   if (!values.password) {
-  //     errors.password = "Password is required";
-  //   } else if (values.password.length < 6) {
+  //   if (!userInfo.phone) {
+  //     setErrMesPhone("Password is required")
+  //   } else if (userInfo.password.length < 6) {
   //     errors.password = "Password needs to be 6 characters or more";
-  //   }
-
-  //   if (!values.password2) {
-  //     errors.password2 = "Password is required";
-  //   } else if (values.password2 !== values.password) {
-  //     errors.password2 = "Passwords do not match";
   //   }
 
   //   return errors;
@@ -395,6 +389,7 @@ export default function Resister() {
               onChange={(event: any) =>
                 setUserInfo({ ...userInfo, username: event.target.value })
               }
+              required
             />
             {errors.username && <p className="error">{errors.username}</p>}
           </Element>
@@ -407,6 +402,7 @@ export default function Resister() {
               onChange={(event: any) =>
                 setUserInfo({ ...userInfo, password: event.target.value })
               }
+              required
             />
             {errors.password && <p className="error">{errors.password}</p>}
           </Element>
@@ -419,6 +415,7 @@ export default function Resister() {
               onChange={(event: any) =>
                 setUserInfo({ ...userInfo, email: event.target.value })
               }
+              required
             />
             {errors.email && <p className="error">{errors.email}</p>}
           </Element>
@@ -431,6 +428,7 @@ export default function Resister() {
               onChange={(event: any) =>
                 setUserInfo({ ...userInfo, phone: event.target.value })
               }
+              required
             />
             {errors.phone && <p className="error">{errors.phone}</p>}
           </Element>
