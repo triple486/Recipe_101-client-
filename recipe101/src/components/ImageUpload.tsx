@@ -27,10 +27,11 @@ const ImgLabel = styled.label`
   border: solid 1px black;
   background-color: #b17d55;
   &:hover {
-    border: solid 1px black;
-    background-color: #f6eace;
-    opacity: 0.7;
-    color: black;
+    // border: solid 1px black;
+    // background-color: #f6eace;
+    // opacity: 0.7;
+    // color: black;
+    cursor: pointer;
 `;
 
 const InnerBox = styled.div`

@@ -88,7 +88,7 @@ const FooterBox = styled.div`
 
 const FbuttonBox = styled.div`
   height: 30px;
-  width: 30px;
+  width: 40px;
   display: flex;
   justify-content: center;
   align-items: center;

@@ -37,7 +37,7 @@ const Out = keyframes`
 `;
 
 const Frame = styled.div`
-  height: 816px;
+  height: 879px;
   width: 100%;
   display: flex;
   overflow: hidden;

@@ -59,6 +59,8 @@ const Textarea = styled.textarea`
   border-color: black;
   border-top: none;
   border-bottom: none;
+  outline: none;
+  padding: 15px;
 `;
 const Bbox = styled.div`
   height: 100%;
