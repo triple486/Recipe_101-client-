@@ -158,6 +158,9 @@ const RecipeAddButton = styled.button`
   height: 60px;
   background-color: #f6eace;
   border: 1px white solid;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const CancelButton = styled.button`
@@ -174,6 +177,9 @@ const CancelButton = styled.button`
 const BTBOX = styled.div`
   display: flex;
   background-color: #f6eace;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 //foodName, summary, nation, ,cookingTime, calorie, qnt, level

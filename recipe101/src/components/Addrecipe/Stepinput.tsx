@@ -33,7 +33,8 @@ const Addstep = styled.div`
   border: dashed 1px white;
   &:hover {
     border: solid 1px white;
-    background-color: #f6eace;
+    // background-color: #f6eace;
+    cursor: pointer;
 `;
 const TextBox = styled.div``;
 
