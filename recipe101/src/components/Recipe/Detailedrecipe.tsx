@@ -240,7 +240,7 @@ const DateBox = styled.div`
 const Button = styled.button`
   // height: 40px;
   display: flex;
-
+  cursor: pointer;
   justify-content: center;
   align-items: center;
 `;
@@ -277,6 +277,7 @@ const Modal = styled.div`
   top: 0;
   left: 0;
   display: flex;
+  cursor: pointer;
   justify-content: center;
   align-items: center;
 `;
@@ -369,6 +370,7 @@ function Detailedrecipe() {
         onClick={() => {
           setiex({ ...iex, isEx: false });
         }}
+        title={"클릭시 레시피 창으로 돌아갑니다."}
       >
         <IMG src={iex.image}></IMG>
       </Modal>
@@ -385,6 +387,7 @@ function Detailedrecipe() {
         {/* <NaviBar></NaviBar> */}
         <ButtonLine>
           <Button
+            title={"클릭시 이전 화면으로 이동합니다."}
             onClick={() => {
               setadd(true);
               history.goBack();

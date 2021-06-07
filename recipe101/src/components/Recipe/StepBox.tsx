@@ -54,6 +54,7 @@ const IMG = styled.img`
   max-width: 100%;
   object-fit: cover;
   display: block;
+  cursor: pointer;
 `;
 
 interface Recipe {
@@ -80,7 +81,11 @@ export default function StepBox({
           func({ isEx: true, image: data?.stepImage });
         }}
       >
-        <IMG src={data?.stepImage} alt={""}></IMG>
+        <IMG
+          src={data?.stepImage}
+          alt={""}
+          title={"클릭시 큰이미지로 확인 가능합니다."}
+        ></IMG>
       </Box>
       <LongBox>
         <HLongBox>

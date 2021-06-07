@@ -1,11 +1,12 @@
 import styled from "styled-components";
 
-const Frame = styled.div`
+const Frame = styled.div<{ l: string }>`
   height: 100%;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+  ${({ l }) => (l === "작성자" ? "cursor:pointer ;" : "")}
 `;
 
 const InnerFrame = styled.div`
@@ -23,8 +24,9 @@ const Label1 = styled.div<{ s?: number; w?: number }>`
   ${({ s }) => (s ? `font-size: ${s}px;` : null)}
   ${({ w }) => (w ? `font-weight: ${w};` : null)}
 `;
-const Text = styled.div<{ s?: number; w?: number }>`
+const Text = styled.div<{ s?: number; w?: number; l: string }>`
   flex: 6 0 0;
+  ${({ l }) => (l === "작성자" ? "curser: default ;" : "")}
   ${({ s }) => (s ? `font-size: ${s}px;` : null)}
   ${({ w }) => (w ? `font-weight: ${w};` : null)}
 `;
@@ -43,7 +45,14 @@ export default function LabelBox({
   func?: Function;
 }) {
   return (
-    <Frame>
+    <Frame
+      l={l}
+      title={
+        l === "작성자"
+          ? "로그인한 유저는 작성자 이름을 클릭하여 해당 유저를 구독 할수 있습니다."
+          : undefined
+      }
+    >
       <InnerFrame>
         <Label s={s} w={w}>
           {l}
@@ -52,6 +61,7 @@ export default function LabelBox({
           {":"}
         </Label1>
         <Text
+          l={l}
           s={s}
           w={w}
           onClick={() => {
