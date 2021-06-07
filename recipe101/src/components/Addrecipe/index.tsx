@@ -6,7 +6,6 @@ import {
   setFoodImage,
   initial,
 } from "../../redux/addrecipeReducer";
-import CancelButton from "../CancelButton";
 import Input from "../Input";
 import ImageUpload from "../ImageUpload";
 import { useState } from "react";
@@ -35,6 +34,7 @@ const CancelFrame = styled.div`
   max-width: 1200px;
   display: flex;
   top: 0;
+  flex-direction: row-reverse;
 `;
 
 const DataFrame = styled.div`
@@ -158,6 +158,21 @@ const RecipeAddButton = styled.button`
   border: 1px white solid;
 `;
 
+const CancelButton = styled.button`
+  height: 40px;
+  width: 80px;
+  display: flex;
+  padding: 2px;
+  justify-content: center;
+  align-items: center;
+  background-color: #f6eace;
+  border-radius: 10px;
+`;
+
+const BTBOX = styled.div`
+  display: flex;
+`;
+
 //foodName, summary, nation, ,cookingTime, calorie, qnt, level
 function Addrecipe() {
   let user = useSelector((state: RootState) => state.userReducer);
@@ -184,11 +199,13 @@ function Addrecipe() {
     <Frame>
       <CancelFrame>
         <CancelButton
-          Cancel={() => {
+          onClick={() => {
             dispatch(initial());
             history.push("/");
           }}
-        ></CancelButton>
+        >
+          <BTBOX> {"돌아가기"}</BTBOX>
+        </CancelButton>
       </CancelFrame>
       <DataFrame>
         <ImgBox>

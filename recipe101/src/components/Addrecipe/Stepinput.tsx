@@ -72,17 +72,18 @@ const Tipbox = styled.div`
   align-items: center;
 `;
 const CancelButton = styled.button`
-  height: 20px;
-  width: 20px;
+  height: 40px;
+  width: 60px;
   display: flex;
   padding: 2px;
   justify-content: center;
   align-items: center;
+  background-color: #f6eace;
+  border-radius: 10px;
 `;
 
 const BTBOX = styled.div`
   display: flex;
-  font-size: 20px;
 `;
 
 function RecipeStep({
@@ -118,7 +119,7 @@ function RecipeStep({
           dispatch(deleteOneRecipe(id));
         }}
       >
-        <BTBOX>&times;</BTBOX>
+        <BTBOX>삭제</BTBOX>
       </CancelButton>
     </StepLine>
   );
