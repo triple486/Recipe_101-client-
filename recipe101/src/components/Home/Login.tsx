@@ -6,19 +6,11 @@ import styled from "styled-components";
 import axios from "axios";
 import { useState } from "react";
 import { isOn } from "../../redux/modalReducer";
-import Input from "../Input";
+import kakaobutton from "../../icon/kakao_login_medium_wide.png";
+import logo from "../../icon/logo2.png";
 import CancelButton from "../CancelButton";
-import kakaobutton from "../../icon/kakao_login_medium_narrow.png";
+
 axios.defaults.withCredentials = true;
-const Frame = styled.div`
-  height: 320px;
-  width: 400px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background: white;
-  border: solid 1px red;
-`;
 
 const Line = styled.div`
   flex: 1 0 0;
@@ -28,48 +20,131 @@ const Line = styled.div`
   justify-content: center;
 `;
 
-const Kakaobutton = styled.img`
-  border-radius: 12px;
-  display: flex;
-  height: 80%;
-
-  border: solid 1px black;
-  box-shadow: 0px 0px 1px 1px black;
+const Popup = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1.15);
+  width: 300px;
+  height: 490px;
+  background: #f5f5f5;
+  z-index: 2;
+  box-shadow: 5px 5px 3px rgba(0, 0, 0, 0.2);
+  transition: transform 300ms ease-in-out, opacity 300ms ease-in-out;
+  border-radius: 5px;
 `;
 
-const Loginbutton = styled.button`
-  border-radius: 12px;
-  width: 160px;
-  height: 80%;
-  margin: 0;
-  padding: 0;
+const PopupClose = styled.div`
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  width: 40px;
+  height: 40px;
+  background: #555;
+  color: #f5f5f5;
+  font-size: 25px;
+  font-weight: 600;
+  text-align: center;
+  border-radius: 50%;
+  cursor: pointer;
+`;
+
+const Avatar = styled.img`
+  margin: 5px;
+  text-align: center;
+  width: 200px;
+`;
+
+const Header = styled.div`
+  text-align: center;
+  font-size: 20px;
+  font-weight: 600;
+  color: #222;
+  margin: 20px 0px;
+`;
+
+const Element = styled.div`
+  padding: 8px 20px;
+`;
+
+const Label = styled.div`
+  display: block;
+  font-size: 14px;
+  color: #222;
+  margin-bottom: 5px;
+`;
+
+const Input = styled.input`
+  width: 100%;
+  padding: 8px 10px;
+  box-sizing: border-box;
+  outline: none;
+  border: 1px solid #aaa;
+  background: #eee;
+  border-radius: 5px;
+`;
+
+const LoginBtn = styled.button`
+  margin-top: 5px;
+  width: 100%;
+  padding: 10px 0px;
+  text-transform: uppercase;
+  outline: none;
+  border: none;
   font-size: 15px;
-  align-items: center;
-  justify-content: center;
-  display: flex;
-  border: solid 1px black;
-  box-shadow: 0px 0px 1px 1px black;
-`;
-const TextBox = styled.span`
-  font-size: 15px;
-  display: flex;
+  font-weight: 600;
+  border-radius: 5px;
+  cursor: pointer;
+  background: #b17d55;
+  color: #f5f5f5;
 `;
 
-function Login() {
+const LoginBtn2 = styled.button`
+  width: 100%;
+  padding: 10px 0px;
+  text-transform: uppercase;
+  outline: none;
+  border: none;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 5px;
+  cursor: pointer;
+  background: #b17d55;
+  color: #f5f5f5;
+`;
+
+const KakaoBtn = styled.img`
+  margin-top: 5px;
+  height: 40px;
+  width: 100%;
+  outline: none;
+  border: none;
+`;
+
+interface userInfo {
+  username: string;
+  password: string;
+}
+
+const Login = () => {
+  const [userInfo, setUserInfo] = useState<userInfo>({
+    username: "",
+    password: "",
+  });
   const dispatch = useDispatch();
   let location = useLocation();
   let path = location.pathname.slice(0, -6);
+  console.log(path, location.pathname);
   let history = useHistory();
-  const [name, namef] = useState("");
-  const [password, passwordf] = useState("");
   let [err, seterr] = useState("");
+
   const Tologin = () => {
     let cmd = `${process.env.REACT_APP_SERVER_URL}/signin`;
     return axios
-      .post(cmd, { username: name, password: password })
+      .post(cmd, { username: userInfo.username, password: userInfo.password })
       .then((res) => {
-        namef("");
-        passwordf("");
+        setUserInfo({ ...userInfo, username: "" });
+        setUserInfo({ ...userInfo, password: "" });
         dispatch(storeToken(res.data.data.accessToken));
         dispatch(updateLogin(true));
         dispatch(updateUserInfo(res.data.data.userinfo));
@@ -81,34 +156,50 @@ function Login() {
       });
   };
 
+  const Cancel = () => {
+    dispatch(isOn(false));
+    history.push(path.length ? path : "/");
+  };
+
   return (
-    <Frame>
+    <Popup>
       <CancelButton
         Cancel={() => {
           dispatch(isOn(false));
           history.push(path.length ? path : "/");
         }}
-      />
-      <Input label={"username"} type={"text"} value={name} func={namef}></Input>
-      <Input
-        label={"password"}
-        type={"password"}
-        value={password}
-        func={passwordf}
-      ></Input>
-      <Line>{err.length ? err : null}</Line>
+      ></CancelButton>
       <Line>
-        <Loginbutton
-          onClick={() => {
-            Tologin();
-          }}
-        >
-          <TextBox>로그인</TextBox>
-        </Loginbutton>
+        <Avatar src={logo} />
       </Line>
-
-      <Line>
-        <Kakaobutton
+      <Header>Member login</Header>
+      <Element>
+        <Label className="username">Username</Label>
+        <Input
+          type="text"
+          id="username"
+          value={userInfo.username}
+          onChange={(event: any) =>
+            setUserInfo({ ...userInfo, username: event.target.value })
+          }
+        />
+      </Element>
+      <Element>
+        <Label className="password">Password</Label>
+        <Input
+          type="password"
+          className="password"
+          value={userInfo.password}
+          onChange={(event: any) =>
+            setUserInfo({ ...userInfo, password: event.target.value })
+          }
+        />
+      </Element>
+      <Line>{err.length ? err : null}</Line>
+      <Element>
+        <LoginBtn onClick={() => Tologin()}>Login</LoginBtn>
+        <KakaoBtn
+          className="kakao-btn"
           src={kakaobutton}
           onClick={() => {
             let url =
@@ -117,15 +208,17 @@ function Login() {
               `&response_type=code`;
             window.location.assign(url);
           }}
-        ></Kakaobutton>
-      </Line>
-      <Line>
-        <Link to={path.length ? path + "/resister" : "/resister"}>
-          아직 계정이 없으십니까?
-        </Link>
-      </Line>
-    </Frame>
+        ></KakaoBtn>
+        <LoginBtn2
+          onClick={() => {
+            history.push(path.length ? path + "/resister" : "/resister");
+          }}
+        >
+          Register
+        </LoginBtn2>
+      </Element>
+    </Popup>
   );
-}
+};
 
 export default Login;
