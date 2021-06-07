@@ -48,8 +48,15 @@ const ItemLine = styled.div`
 
 const ItemBox = styled.div`
   display: flex;
-  width: 10%;
-  height: 50%;
+  width: 20%;
+  height: 75%;
+  justify-content: center;
+  align-items: center;
+`;
+const ItemInnerBox = styled.div`
+  display: flex;
+  width: 90%;
+  height: 90%;
   flex-direction: column;
   border: solid 1px white;
 `;
@@ -58,9 +65,14 @@ const CancelButton = styled.button`
   height: 10px;
   width: 10px;
   display: flex;
-  border-radius: 50%;
   padding: 2px;
-  background-color: grey;
+  justify-content: center;
+  align-items: center;
+`;
+
+const BTBOX = styled.div`
+  display: flex;
+  font-size: 5px;
 `;
 
 const Button = styled.button`
@@ -90,6 +102,8 @@ const Frameline = styled.div`
   flex: 1 0 0;
   width: 100%;
   display: flex;
+  padding-left: 10px;
+  padding-right: 10px;
   justify-content: space-around;
   flex-direction: row;
 `;
@@ -132,27 +146,31 @@ function ItemBoxFrame({
 
   return (
     <ItemBox>
-      <ButtonLine>
-        <CancelButton
-          onClick={() => {
-            dispatch(deleteOneIngredient(id));
-          }}
-        />
-      </ButtonLine>
-      <FrameBox>
-        <Frameline>
-          <Label>{"종류"}</Label>
-          <Text>{type}</Text>
-        </Frameline>
-        <Frameline>
-          <Label>{"이름"}</Label>
-          <Text>{name}</Text>
-        </Frameline>
-        <Frameline>
-          <Label>{"양"}</Label>
-          <Text>{cap}</Text>
-        </Frameline>
-      </FrameBox>
+      <ItemInnerBox>
+        <ButtonLine>
+          <CancelButton
+            onClick={() => {
+              dispatch(deleteOneIngredient(id));
+            }}
+          >
+            <BTBOX>{"X"}</BTBOX>
+          </CancelButton>
+        </ButtonLine>
+        <FrameBox>
+          <Frameline>
+            <Label>{"종류"}</Label>
+            <Text>{type}</Text>
+          </Frameline>
+          <Frameline>
+            <Label>{"이름"}</Label>
+            <Text>{name}</Text>
+          </Frameline>
+          <Frameline>
+            <Label>{"양"}</Label>
+            <Text>{cap}</Text>
+          </Frameline>
+        </FrameBox>
+      </ItemInnerBox>
     </ItemBox>
   );
 }

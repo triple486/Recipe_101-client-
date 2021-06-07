@@ -63,7 +63,8 @@ const InputButton = styled.button`
   border: 1px solid white;
   &:hover {
     border: solid 1px white;
-    background-color: #f6eace
+    background-color: #f6eace;
+  }
 `;
 
 const Frame = styled.div`
