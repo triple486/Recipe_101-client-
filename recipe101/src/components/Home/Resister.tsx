@@ -61,14 +61,14 @@ const Label = styled.div`
   color: #222;
   margin-bottom: 5px;
 `;
-const Input = styled.input`
+const Input = styled.input<{ err: boolean }>`
   width: 100%;
   padding: 8px 10px;
   box-sizing: border-box;
   outline: none;
   border: 1px solid #aaa;
-  background: #eee;
   border-radius: 5px;
+  background-color: ${({ err }) => (err ? "red" : "#eee")};
 `;
 
 const Header = styled.div`
@@ -123,7 +123,7 @@ interface imgdata {
   isin?: boolean;
 }
 
-interface useInfo {
+interface userInfo {
   username: string;
   password: string;
   email: string;
@@ -140,20 +140,7 @@ interface errors {
 export default function Resister() {
   let location = useLocation();
   let path = location.pathname.slice(0, -9);
-  const [userInfo, setUserInfo] = useState<useInfo>({
-    username: "",
-    email: "",
-    phone: "",
-    password: "",
-    userImage: { isin: false },
-  });
 
-  const [validcheck, validcheckf] = useState({
-    username: false,
-    password: false,
-    email: false,
-    phone: false,
-  });
   let [err, seterr] = useState("");
 
   const [errors, setErrors] = useState<errors>({
@@ -163,22 +150,70 @@ export default function Resister() {
     password: "",
   });
 
+  const [validcheck, validcheckf] = useState({
+    username: false,
+    password: false,
+    email: false,
+    phone: false,
+  });
+  const [userinfo, setuserinfo] = useState<userInfo>({
+    username: "",
+    email: "",
+    phone: "",
+    password: "",
+    userImage: { isin: false },
+  });
   function validation(type: string) {
-    if (!userInfo.username) {
-      errors.username = "Name is required.";
-    }
-    if (!userInfo.email) {
-      errors.email = "Email is required";
-    } else if (!/\S+@\S+\.\S+/.test(userInfo.email)) {
-      errors.email = "Email is invalid";
-    }
-    if (!userInfo.password) {
-      errors.password = "Password is required";
-    } else if (userInfo.password.length < 5) {
-      errors.password = "Password must be more than five characters.";
-    }
+    const email = new RegExp(
+      /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i
+    );
+    const username = new RegExp(/^[A-za-z0-9]{5,15}/g);
+    const password = new RegExp(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/);
+    const phone = new RegExp(/^\d{2,3}-\d{3,4}-\d{4}$/);
+    return function (value: string) {
+      let ans = true,
+        ndata = { ...validcheck };
+      switch (type) {
+        case "email":
+          ans = value.length ? !email.test(value) : false;
+          ndata["email"] = ans;
+          validcheckf({ ...ndata });
+          if (!ans) {
+            setuserinfo({ ...userinfo, email: value });
+          }
+          return ans;
 
-    return errors;
+        case "password":
+          ans = value.length ? !password.test(value) : false;
+          ndata["password"] = ans;
+          validcheckf({ ...ndata });
+          if (!ans) {
+            setuserinfo({ ...userinfo, password: value });
+          }
+
+          return ans;
+
+        case "phone":
+          ans = value.length ? !phone.test(value) : false;
+          ndata["phone"] = ans;
+          validcheckf({ ...ndata });
+          if (!ans) {
+            setuserinfo({ ...userinfo, phone: value });
+          }
+
+          return ans;
+
+        default:
+          ans = value.length ? !username.test(value) : false;
+          ndata["username"] = ans;
+          validcheckf({ ...ndata });
+          if (!ans) {
+            setuserinfo({ ...userinfo, username: value });
+          }
+
+          return ans;
+      }
+    };
   }
 
   let history = useHistory();
@@ -186,13 +221,13 @@ export default function Resister() {
 
   function ToRegister() {
     let formdata = new FormData();
-    if (userInfo.userImage.file) {
-      formdata.append("userImage", userInfo.userImage.file);
+    if (userinfo.userImage.file) {
+      formdata.append("userImage", userinfo.userImage.file);
     }
-    formdata.append("username", userInfo.username);
-    formdata.append("password", userInfo.password);
-    formdata.append("email", userInfo.email);
-    formdata.append("phone", userInfo.phone);
+    formdata.append("username", userinfo.username);
+    formdata.append("password", userinfo.password);
+    formdata.append("email", userinfo.email);
+    formdata.append("phone", userinfo.phone);
     const config = {
       headers: {
         "content-type": "multipart/form-data",
@@ -232,19 +267,19 @@ export default function Resister() {
       ></CancelButton>
       <InnerFrame>
         <ImageFrame>
-          {userInfo.userImage.isin ? (
+          {userinfo.userImage.isin ? (
             <IMGBox>
               <IMG
                 src={
-                  typeof userInfo.userImage.imgpath === "string"
-                    ? userInfo.userImage.imgpath
+                  typeof userinfo.userImage.imgpath === "string"
+                    ? userinfo.userImage.imgpath
                     : ""
                 }
               ></IMG>
               <Imagecancel
                 onClick={() => {
-                  setUserInfo({
-                    ...userInfo,
+                  setuserinfo({
+                    ...userinfo,
                     userImage: {
                       isin: false,
                     },
@@ -257,8 +292,8 @@ export default function Resister() {
           ) : (
             <Imageupload
               func={(files: any) => {
-                setUserInfo({
-                  ...userInfo,
+                setuserinfo({
+                  ...userinfo,
                   userImage: {
                     file: files[0],
                     imgpath: URL.createObjectURL(files[0]),
@@ -280,9 +315,9 @@ export default function Resister() {
             <Input
               type="text"
               id="username"
-              value={userInfo.username}
-              onChange={(event: any) =>
-                setUserInfo({ ...userInfo, username: event.target.value })
+              err={validcheck.username}
+              onBlur={(event: any) =>
+                validation("username")(event.target.value)
               }
             />
             {errors.username && <p className="error">{errors.username}</p>}
@@ -292,9 +327,9 @@ export default function Resister() {
             <Input
               type="password"
               id="password"
-              value={userInfo.password}
-              onChange={(event: any) =>
-                setUserInfo({ ...userInfo, password: event.target.value })
+              err={validcheck.password}
+              onBlur={(event: any) =>
+                validation("password")(event.target.value)
               }
             />
             {errors.password && <p className="error">{errors.password}</p>}
@@ -304,10 +339,8 @@ export default function Resister() {
             <Input
               type="email"
               id="email"
-              value={userInfo.email}
-              onChange={(event: any) =>
-                setUserInfo({ ...userInfo, email: event.target.value })
-              }
+              err={validcheck.email}
+              onBlur={(event: any) => validation("email")(event.target.value)}
             />
             {errors.email && <p className="error">{errors.email}</p>}
           </Element>
@@ -316,10 +349,8 @@ export default function Resister() {
             <Input
               type="tel"
               id="phone"
-              value={userInfo.phone}
-              onChange={(event: any) =>
-                setUserInfo({ ...userInfo, phone: event.target.value })
-              }
+              err={validcheck.phone}
+              onBlur={(event: any) => validation("phone")(event.target.value)}
             />
             {errors.phone && <p className="error">{errors.phone}</p>}
           </Element>
@@ -331,9 +362,9 @@ export default function Resister() {
                   history.push(path.length ? path + "/login" : "/login");
                 }}
               >
-                To Login
+                로그인 창으로
               </Button>
-              <Button onClick={() => ToRegister()}>Submit</Button>
+              <Button onClick={() => ToRegister()}>회원 가입</Button>
             </Line>
           </Element>
         </InputFrame>
