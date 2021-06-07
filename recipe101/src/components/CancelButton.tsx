@@ -25,7 +25,7 @@ export default function Canclebutton({ Cancel = dummy }: { Cancel: Function }) {
   return (
     <CancelLine>
       <CancelButton onClick={(e) => Cancel(e)}>
-        <BTBOX>{"X"}</BTBOX>
+        <BTBOX>&times;</BTBOX>
       </CancelButton>
     </CancelLine>
   );

@@ -105,9 +105,7 @@ function RecipeStep({
       <NumberBox>
         <TextBox>{num}</TextBox>
       </NumberBox>
-      <Imgbox>
-        <Img src={img} />
-      </Imgbox>
+      <Imgbox>{img ? <Img src={img} alt={""} /> : null}</Imgbox>
       <Descbox>
         <TextBox>{desc}</TextBox>
       </Descbox>
@@ -120,7 +118,7 @@ function RecipeStep({
           dispatch(deleteOneRecipe(id));
         }}
       >
-        <BTBOX>{"X"}</BTBOX>
+        <BTBOX>&times;</BTBOX>
       </CancelButton>
     </StepLine>
   );
