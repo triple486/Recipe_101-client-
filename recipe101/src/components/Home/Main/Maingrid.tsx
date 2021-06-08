@@ -21,6 +21,18 @@ const Body = styled.div`
   flex-wrap: wrap;
 `;
 
+const Title = styled.div`
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  font-size: 3em;
+  font-weight: 700;
+  justify-content: center;
+  margin-bottom: 60px;
+  color: white;
+`;
+
 function Maingrid() {
   let [recipes, setRecipes] = React.useState([]);
   let [loaded, setLoaded] = React.useState(false);
@@ -36,6 +48,7 @@ function Maingrid() {
 
   return (
     <Frame>
+      <Title>최신 업데이트 레시피</Title>
       <Body>
         {recipes.map((x, i) => {
           return <Recipegrid key={i} data={x}></Recipegrid>;

@@ -123,10 +123,19 @@ function ContextProfile() {
 const TextBox2 = styled.div`
   font-size: 20px;
   display: flex;
-  padding-right: 20px;
+  padding-right: 10px;
 `;
 
 const DummyBox = styled.div`
+  height: 100%;
+  width: 300px;
+  padding-top: 0px;
+  padding-left: 0px;
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+`;
+const DummyBox2 = styled.div`
   height: 100%;
   width: 200px;
   padding-top: 0px;
@@ -135,6 +144,7 @@ const DummyBox = styled.div`
   flex-direction: row;
   justify-content: end;
 `;
+
 const Button3 = styled.div`
   background-color: #b17d55;
   border: solid 1px #dfdfdf;
@@ -162,7 +172,7 @@ function ContextPassword({ func }: { func: Function }) {
 
   return (
     <Frame>
-      <DummyBox></DummyBox>
+      <DummyBox2></DummyBox2>
       <Button3
         onClick={() => {
           history.push("/mypage/password");

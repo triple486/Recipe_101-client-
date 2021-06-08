@@ -14,13 +14,12 @@ const Modal = styled.div`
 `;
 
 const MessageBox = styled.div`
-  height: 100px;
+  height: 130px;
   width: 800px;
   display: flex;
   flex-direction: column;
   background: white;
-  color: black;
-  border: solid 1px black;
+  border: solid 1px white;
 `;
 
 const TextLine = styled.div`
@@ -28,18 +27,38 @@ const TextLine = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  color: black;
 `;
 const ButtonLine = styled.div`
   flex: 1 0 0;
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 10px 0 30px;
 `;
 const Button = styled.button`
   width: 10%;
   height: 100%;
   min-width: 50px;
   min-height: 25px;
+  background-color: #b17d55;
+  border: solid 1px #dfdfdf;
+  color: white;
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 14px;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  cursor: pointer;
+
+  &:hover {
+    border: solid 1px white;
+    background-color: #f6eace
+    opacity: 0.7;
+    color: black;
 `;
 
 const dummy = () => {};

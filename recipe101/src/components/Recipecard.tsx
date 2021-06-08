@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 
 const Frame = styled.div`
   display: flex;
-  flex: 0 0 1;
+  // flex: 0 0 1;
   width: calc(25% - 60px);
   height: 330px;
   justify-content: center;
@@ -42,7 +42,8 @@ const Image = styled.img`
 `;
 
 const ImageBox = styled.div`
-  flex: 4 0 0;
+  // flex: 4 0 0;
+  height: 80%;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -53,18 +54,13 @@ const ImageBox = styled.div`
 const Desc = styled.div`
   height: 20%;
   display: flex;
-  flex: 1 0 0;
+  // flex: 1 0 0;
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
   font-size: 1.7em;
   letter-spacing: 1px;
   padding-bottom: 8%;
-  // height: 20%;
-  // display: flex;
-  // flex-direction: row;
-  // justify-content: space-around;
-  // align-items: center;
 `;
 const Box = styled.div`
   flex: 1 0 1;

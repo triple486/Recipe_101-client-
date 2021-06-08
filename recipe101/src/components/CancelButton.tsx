@@ -4,10 +4,14 @@ const CancelButton = styled.button`
   height: 20px;
   width: 20px;
   display: flex;
-  border-radius: 50%;
   padding: 2px;
-  background-color: grey;
-  border: solid 1px black;
+  justify-content: center;
+  align-items: center;
+`;
+
+const BTBOX = styled.div`
+  display: flex;
+  font-size: 20px;
 `;
 
 const CancelLine = styled.div`
@@ -21,7 +25,7 @@ export default function Canclebutton({ Cancel = dummy }: { Cancel: Function }) {
   return (
     <CancelLine>
       <CancelButton onClick={(e) => Cancel(e)}>
-        <span></span>
+        <BTBOX>&times;</BTBOX>
       </CancelButton>
     </CancelLine>
   );

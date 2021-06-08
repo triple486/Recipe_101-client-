@@ -6,7 +6,6 @@ import {
   setFoodImage,
   initial,
 } from "../../redux/addrecipeReducer";
-import CancelButton from "../CancelButton";
 import Input from "../Input";
 import ImageUpload from "../ImageUpload";
 import { useState } from "react";
@@ -20,9 +19,11 @@ import Message from "./messagebox";
 import axios from "axios";
 axios.defaults.withCredentials = true;
 const Frame = styled.div`
+  background-color: #b17d55;
   height: 100%;
   width: 100%;
   display: flex;
+  color: white;
 
   flex-direction: column;
   justify-content: center;
@@ -34,6 +35,7 @@ const CancelFrame = styled.div`
   max-width: 1200px;
   display: flex;
   top: 0;
+  flex-direction: row-reverse;
 `;
 
 const DataFrame = styled.div`
@@ -42,22 +44,23 @@ const DataFrame = styled.div`
   display: flex;
   max-width: 1200px;
   flex-direction: row;
-  border: solid 1px red;
+  border: solid 1px white;
 `;
 
 const ItemFrame = styled.div`
   flex: 1 0 0;
   width: 100%;
   max-width: 1200px;
+  min-height: 150px;
   display: flex;
-  border: solid 1px blue;
+  border: solid 1px white;
 `;
 
 const StepFrame = styled.div`
   flex: 3 0 0;
   width: 100%;
   max-width: 1200px;
-  border: solid 1px blue;
+  border: solid 1px white;
 `;
 const ImgBox = styled.div`
   flex: 1 0 0;
@@ -65,11 +68,11 @@ const ImgBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  border: solid 1px red;
+  border: solid 1px white;
 `;
 const TextBox = styled.div`
   flex: 2 0 0;
-  border: solid 1px red;
+  border: solid 1px white;
   display: flex;
   flex-direction: column;
 `;
@@ -96,20 +99,20 @@ const Textupper = styled.div`
   flex: 3 0 0;
   display: flex;
   flex-direction: row;
-  border: solid 1px red;
+  border: solid 1px white;
 `;
 const Textlower = styled.div`
   flex: 1 0 0;
   display: flex;
   flex-direction: row;
-  border: solid 1px red;
+  border: solid 1px white;
 `;
 
 const TextColumn = styled.div`
   flex: 1 0 0;
   display: flex;
   flex-direction: column;
-  border: solid 1px red;
+  border: solid 1px #b17d55;
 `;
 
 const FoodDescName = styled.div`
@@ -128,6 +131,7 @@ const FoodDescTextbox = styled.textarea`
   display: flex;
   flex: 5 0 0;
   resize: none;
+  border: solid 1px black;
 `;
 
 const Dummy = styled.div`
@@ -152,7 +156,31 @@ const ImgBox3 = styled.div`
 const RecipeAddButton = styled.button`
   width: 100%;
   max-width: 1200px;
-  height: 30px;
+  height: 60px;
+  background-color: #f6eace;
+  border: 1px white solid;
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+const CancelButton = styled.button`
+  height: 40px;
+  width: 80px;
+  display: flex;
+  padding: 2px;
+  justify-content: center;
+  align-items: center;
+  background-color: #f6eace;
+  border-radius: 10px;
+`;
+
+const BTBOX = styled.div`
+  display: flex;
+  background-color: #f6eace;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 //foodName, summary, nation, ,cookingTime, calorie, qnt, level
@@ -162,7 +190,6 @@ function Addrecipe() {
   let accessToken = useSelector((state: RootState) => state.tokenReducer);
   let history = useHistory();
   let dispatch = useDispatch();
-  let [isresister, setresister] = useState<boolean>(false);
   let [Tdata, setTdata] = useState<FormData>();
   let [isinputigr, setinputigr] = useState<boolean>(false);
   let [isinputstep, setinputstep] = useState<boolean>(false);
@@ -181,10 +208,13 @@ function Addrecipe() {
     <Frame>
       <CancelFrame>
         <CancelButton
-          Cancel={() => {
+          onClick={() => {
+            dispatch(initial());
             history.push("/");
           }}
-        ></CancelButton>
+        >
+          <BTBOX> {"돌아가기"}</BTBOX>
+        </CancelButton>
       </CancelFrame>
       <DataFrame>
         <ImgBox>
@@ -346,14 +376,12 @@ function Addrecipe() {
           cancel={() => {
             setmessage(false);
           }}
-          message={
-            "레시피 추가에는 회원가입된 계정을 필요로 합니다. 회원가입을 진행 하시겠습니까?"
-          }
+          message={"레시피 추가에는 회원가입된 계정을 필요로 합니다."}
           button={() => {
             setmessage(false);
-            setresister(true);
+            history.push("/");
           }}
-          buttonMessage={"가입 진행"}
+          buttonMessage={"예"}
         ></Message>
       ) : null}
       {ismessage2 ? (
@@ -368,9 +396,6 @@ function Addrecipe() {
           }}
           buttonMessage={"예"}
         ></Message>
-      ) : null}
-      {isresister ? (
-        <Resister data={Tdata} func={setresister}></Resister>
       ) : null}
     </Frame>
   );

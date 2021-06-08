@@ -240,7 +240,7 @@ const DateBox = styled.div`
 const Button = styled.button`
   // height: 40px;
   display: flex;
-
+  cursor: pointer;
   justify-content: center;
   align-items: center;
 `;
@@ -257,6 +257,18 @@ const TextBox1 = styled.div<{ s?: number; w?: number }>`
   flex: 5 0 0;
   justify-content: center;
 `;
+const TextBox2 = styled.div<{ s?: number; w?: number }>`
+  display: flex;
+  ${({ s }) => (s ? `font-size: ${s}px;` : null)}
+  ${({ w }) => (w ? `font-weight: ${w};` : null)}
+  padding: 20px 0 10px;
+`;
+const TextBox3 = styled.div<{ s?: number; w?: number }>`
+  display: flex;
+  ${({ s }) => (s ? `font-size: ${s}px;` : null)}
+  ${({ w }) => (w ? `font-weight: ${w};` : null)}
+  padding: 10px 40px 30px;
+`;
 
 const Modal = styled.div`
   height: 100vh;
@@ -265,6 +277,7 @@ const Modal = styled.div`
   top: 0;
   left: 0;
   display: flex;
+  cursor: pointer;
   justify-content: center;
   align-items: center;
 `;
@@ -357,6 +370,7 @@ function Detailedrecipe() {
         onClick={() => {
           setiex({ ...iex, isEx: false });
         }}
+        title={"클릭시 레시피 창으로 돌아갑니다."}
       >
         <IMG src={iex.image}></IMG>
       </Modal>
@@ -373,6 +387,7 @@ function Detailedrecipe() {
         {/* <NaviBar></NaviBar> */}
         <ButtonLine>
           <Button
+            title={"클릭시 이전 화면으로 이동합니다."}
             onClick={() => {
               setadd(true);
               history.goBack();
@@ -419,7 +434,7 @@ function Detailedrecipe() {
                     });
                 }}
               >
-                <TextBox>{"구독 하기"}</TextBox>
+                <TextBox>{"구독하기"}</TextBox>
               </Button>
             )
           ) : null}
@@ -514,10 +529,10 @@ function Detailedrecipe() {
         <MinBoxFrame1 h={200}>
           <Line1 c={true}>
             <Line1 f={2}>
-              <TextBox s={20}>{"간단한 설명"}</TextBox>
+              <TextBox2 s={20}>{"간단한 설명"}</TextBox2>
             </Line1>
             <Line1 f={3}>
-              <TextBox>{data.food_info?.summary}</TextBox>
+              <TextBox3>{data.food_info?.summary}</TextBox3>
             </Line1>
           </Line1>
         </MinBoxFrame1>

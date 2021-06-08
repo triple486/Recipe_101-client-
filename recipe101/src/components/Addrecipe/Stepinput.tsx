@@ -18,17 +18,21 @@ const StepLine = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  border: solid 1px black;
+  border: solid 1px white;
 `;
 
 const Addstep = styled.div`
-  height: 50px;
+  margin: 10px 0;
+  min-height: 50px;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-
-  border: dashed 1px black;
+  border: dashed 1px white;
+  &:hover {
+    border: solid 1px white;
+    // background-color: #f6eace;
+    cursor: pointer;
 `;
 const TextBox = styled.div``;
 
@@ -67,12 +71,18 @@ const Tipbox = styled.div`
   align-items: center;
 `;
 const CancelButton = styled.button`
-  height: 20px;
-  width: 20px;
+  height: 40px;
+  width: 60px;
   display: flex;
-  border-radius: 50%;
   padding: 2px;
-  background-color: grey;
+  justify-content: center;
+  align-items: center;
+  background-color: #f6eace;
+  border-radius: 10px;
+`;
+
+const BTBOX = styled.div`
+  display: flex;
 `;
 
 function RecipeStep({
@@ -95,9 +105,7 @@ function RecipeStep({
       <NumberBox>
         <TextBox>{num}</TextBox>
       </NumberBox>
-      <Imgbox>
-        <Img src={img} />
-      </Imgbox>
+      <Imgbox>{img ? <Img src={img} alt={""} /> : null}</Imgbox>
       <Descbox>
         <TextBox>{desc}</TextBox>
       </Descbox>
@@ -109,7 +117,9 @@ function RecipeStep({
           dispatch(deleteOneStepImage(id));
           dispatch(deleteOneRecipe(id));
         }}
-      />
+      >
+        <BTBOX>삭제</BTBOX>
+      </CancelButton>
     </StepLine>
   );
 }
@@ -118,6 +128,7 @@ export default function Stepinput({ func }: { func: Function }) {
   let { Recipe, StepImage } = useSelector(
     (state: RootState) => state.addrecipeReducer
   );
+  console.log(StepImage);
   return (
     <Frame>
       <StepBox>
@@ -140,7 +151,7 @@ export default function Stepinput({ func }: { func: Function }) {
               func(true);
             }}
           >
-            <TextBox>{"레시피 추가"}</TextBox>
+            <TextBox>{"레시피 단계 추가"}</TextBox>
           </Addstep>,
         ]}
       </StepBox>

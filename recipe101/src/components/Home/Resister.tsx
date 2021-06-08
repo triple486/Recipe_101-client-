@@ -18,14 +18,18 @@ const Frame = styled.div`
   width: 760px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   background: white;
   border-radius: 5px;
 `;
 
 const InnerFrame = styled.div`
-  height: 360px;
+  height: 520px;
   width: 760px;
   display: flex;
+  justify-content: center;
+  align-items: center;
   flex-direction: row;
 `;
 
@@ -57,14 +61,13 @@ const Label = styled.div`
   color: #222;
   margin-bottom: 5px;
 `;
-const Input = styled.input`
+const Input = styled.input<{ err: boolean }>`
   width: 100%;
   padding: 8px 10px;
   box-sizing: border-box;
   outline: none;
-  border: 1px solid #aaa;
-  background: #eee;
   border-radius: 5px;
+  border: 1px solid ${({ err }) => (err ? "red" : "#aaa")};
 `;
 
 const Header = styled.div`
@@ -119,7 +122,7 @@ interface imgdata {
   isin?: boolean;
 }
 
-interface useInfo {
+interface userInfo {
   username: string;
   password: string;
   email: string;
@@ -127,22 +130,11 @@ interface useInfo {
   userImage: imgdata;
 }
 
-interface errors {
-  username: string;
-  password: string;
-  email: string;
-  phone: string;
-}
 export default function Resister() {
   let location = useLocation();
   let path = location.pathname.slice(0, -9);
-  const [userInfo, setUserInfo] = useState<useInfo>({
-    username: "",
-    email: "",
-    phone: "",
-    password: "",
-    userImage: { isin: false },
-  });
+
+  let [err, seterr] = useState("");
 
   const [validcheck, validcheckf] = useState({
     username: false,
@@ -150,22 +142,13 @@ export default function Resister() {
     email: false,
     phone: false,
   });
-  let [err, seterr] = useState("");
-
-  const [errors, setErrors] = useState<errors>({
+  const [userinfo, setuserinfo] = useState<userInfo>({
     username: "",
     email: "",
     phone: "",
     password: "",
+    userImage: { isin: false },
   });
-
-  // const handleChange = (event: any) => {
-  //   setUserInfo({
-  //     ...userInfo,
-  //     [event.target.id]: event.target.value,
-  //   });
-  // };
-
   function validation(type: string) {
     const email = new RegExp(
       /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i
@@ -182,7 +165,7 @@ export default function Resister() {
           ndata["email"] = ans;
           validcheckf({ ...ndata });
           if (!ans) {
-            setUserInfo({ ...userInfo, email: value });
+            setuserinfo({ ...userinfo, email: value });
           }
           return ans;
 
@@ -191,7 +174,7 @@ export default function Resister() {
           ndata["password"] = ans;
           validcheckf({ ...ndata });
           if (!ans) {
-            setUserInfo({ ...userInfo, password: value });
+            setuserinfo({ ...userinfo, password: value });
           }
 
           return ans;
@@ -201,7 +184,7 @@ export default function Resister() {
           ndata["phone"] = ans;
           validcheckf({ ...ndata });
           if (!ans) {
-            setUserInfo({ ...userInfo, phone: value });
+            setuserinfo({ ...userinfo, phone: value });
           }
 
           return ans;
@@ -211,7 +194,7 @@ export default function Resister() {
           ndata["username"] = ans;
           validcheckf({ ...ndata });
           if (!ans) {
-            setUserInfo({ ...userInfo, username: value });
+            setuserinfo({ ...userinfo, username: value });
           }
 
           return ans;
@@ -219,85 +202,18 @@ export default function Resister() {
     };
   }
 
-  // const validation = () => {
-  //   if (!userInfo.username) {
-  //     errors.username = "Name is required.";
-  //   }
-  //   if (!userInfo.email) {
-  //     errors.email = "Email is required";
-  //   } else if (!/\S+@\S+\.\S+/.test(userInfo.email)) {
-  //     errors.email = "Email is invalid";
-  //   }
-  //   if (!userInfo.password) {
-  //     errors.password = "Password is required";
-  //   } else if (userInfo.password.length < 5) {
-  //     errors.password = "Password must be more than five characters.";
-  //   }
-
-  //   return errors;
-  // };
-
   let history = useHistory();
   let dispatch = useDispatch();
 
-  // const checkInputs = () => {
-  //   const usernameValue = userInfo.username.trim();
-  //   const passworValue = userInfo.password.trim();
-  //   const emailValue = userInfo.email.trim();
-  //   const phoeValue = userInfo.phone.trim();
-
-  //   if (usernameValue === "") {
-  //     ///show error
-  //     /// add error class
-  //     setErrorFor(username, "Username cannot be blank");
-  //   } else {
-  //     // add success class
-  //     setSuccessFor(username);
-  //   }
-  // };
-
-  // function valdateInfo(type: string) {
-  //   let [errMesUsername, setErrMesUsername] = useState("");
-  //   let [errMesPassword, setErrMesPassword] = useState("");
-  //   let [errMesEmail, setErrMesEmail] = useState("");
-  //   let [errMesPhone, setErrMesPhone] = useState("");
-
-  //   if (!userInfo.username.trim()) {
-  //     setErrMesUsername("Username is required")
-  //   } else (!/^[A-za-z0-9]{5,15}/g.test(userInfo.username)) {
-  //     setErrMesUsername("Username should be more than 5")
-  //   }
-
-  //   if (!userInfo.password.trim()) {
-  //     setErrMesPassword("Password is required")
-  //   } else (userInfo.password.length <5) {
-  //     setErrMesPassword("Password should contain more than 5")
-  //   }
-
-  //   if (!userInfo.email.trim()) {
-  //     setErrMesEmail("Email is required")
-  //   } else if (!/\S+@\S+\.\S+/.test(values.email)) {
-  //     errors.email = "Eamil address is invalid";
-  //   }
-
-  //   if (!userInfo.phone) {
-  //     setErrMesPhone("Password is required")
-  //   } else if (userInfo.password.length < 6) {
-  //     errors.password = "Password needs to be 6 characters or more";
-  //   }
-
-  //   return errors;
-  // }
-
   function ToRegister() {
     let formdata = new FormData();
-    if (userInfo.userImage.file) {
-      formdata.append("userImage", userInfo.userImage.file);
+    if (userinfo.userImage.file) {
+      formdata.append("userImage", userinfo.userImage.file);
     }
-    formdata.append("username", userInfo.username);
-    formdata.append("password", userInfo.password);
-    formdata.append("email", userInfo.email);
-    formdata.append("phone", userInfo.phone);
+    formdata.append("username", userinfo.username);
+    formdata.append("password", userinfo.password);
+    formdata.append("email", userinfo.email);
+    formdata.append("phone", userinfo.phone);
     const config = {
       headers: {
         "content-type": "multipart/form-data",
@@ -337,19 +253,19 @@ export default function Resister() {
       ></CancelButton>
       <InnerFrame>
         <ImageFrame>
-          {userInfo.userImage.isin ? (
+          {userinfo.userImage.isin ? (
             <IMGBox>
               <IMG
                 src={
-                  typeof userInfo.userImage.imgpath === "string"
-                    ? userInfo.userImage.imgpath
+                  typeof userinfo.userImage.imgpath === "string"
+                    ? userinfo.userImage.imgpath
                     : ""
                 }
               ></IMG>
               <Imagecancel
                 onClick={() => {
-                  setUserInfo({
-                    ...userInfo,
+                  setuserinfo({
+                    ...userinfo,
                     userImage: {
                       isin: false,
                     },
@@ -362,8 +278,8 @@ export default function Resister() {
           ) : (
             <Imageupload
               func={(files: any) => {
-                setUserInfo({
-                  ...userInfo,
+                setuserinfo({
+                  ...userinfo,
                   userImage: {
                     file: files[0],
                     imgpath: URL.createObjectURL(files[0]),
@@ -385,52 +301,76 @@ export default function Resister() {
             <Input
               type="text"
               id="username"
-              value={userInfo.username}
-              onChange={(event: any) =>
-                setUserInfo({ ...userInfo, username: event.target.value })
+              err={validcheck.username}
+              onFocus={(e) => {
+                validcheckf({ ...validcheck, username: false });
+              }}
+              onBlur={(event: any) =>
+                validation("username")(event.target.value)
               }
               required
             />
-            {errors.username && <p className="error">{errors.username}</p>}
+            {validcheck.username && (
+              <small className="error">
+                {"형식에 맞지 않는 아이디입니다."}
+              </small>
+            )}
           </Element>
           <Element>
             <Label>Password</Label>
             <Input
               type="password"
               id="password"
-              value={userInfo.password}
-              onChange={(event: any) =>
-                setUserInfo({ ...userInfo, password: event.target.value })
+              err={validcheck.password}
+              onFocus={(e) => {
+                validcheckf({ ...validcheck, password: false });
+              }}
+              onBlur={(event: any) =>
+                validation("password")(event.target.value)
               }
               required
             />
-            {errors.password && <p className="error">{errors.password}</p>}
+            {validcheck.password && (
+              <small className="error">
+                {"형식에 맞지 않는 비밀번호 입니다."}
+              </small>
+            )}
           </Element>
           <Element>
             <Label>Email</Label>
             <Input
               type="email"
               id="email"
-              value={userInfo.email}
-              onChange={(event: any) =>
-                setUserInfo({ ...userInfo, email: event.target.value })
-              }
+              err={validcheck.email}
+              onFocus={(e) => {
+                validcheckf({ ...validcheck, email: false });
+              }}
+              onBlur={(event: any) => validation("email")(event.target.value)}
               required
             />
-            {errors.email && <p className="error">{errors.email}</p>}
+            {validcheck.email && (
+              <small className="error">
+                {"형식에 맞지 않는 이메일입니다."}
+              </small>
+            )}
           </Element>
           <Element>
             <Label>Phone</Label>
             <Input
               type="tel"
               id="phone"
-              value={userInfo.phone}
-              onChange={(event: any) =>
-                setUserInfo({ ...userInfo, phone: event.target.value })
-              }
+              err={validcheck.phone}
+              onFocus={(e) => {
+                validcheckf({ ...validcheck, phone: false });
+              }}
+              onBlur={(event: any) => validation("phone")(event.target.value)}
               required
             />
-            {errors.phone && <p className="error">{errors.phone}</p>}
+            {validcheck.phone && (
+              <small className="error">
+                {"형식에 맞지 않는 전화번호입니다."}
+              </small>
+            )}
           </Element>
           <Element>
             <Line>{err && err.length ? err : null}</Line>
@@ -440,9 +380,9 @@ export default function Resister() {
                   history.push(path.length ? path + "/login" : "/login");
                 }}
               >
-                To Login
+                로그인 창으로
               </Button>
-              <Button onClick={() => ToRegister()}>Submit</Button>
+              <Button onClick={() => ToRegister()}>회원 가입</Button>
             </Line>
           </Element>
         </InputFrame>

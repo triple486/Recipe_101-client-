@@ -37,13 +37,15 @@ const MessageBox = styled.div`
 `;
 
 const LineBox = styled.div`
-  flex: 1 0 0;
+  flex: 1.3 0 0;
   width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   border: solid 1px black;
+  border-top: none;
+  border-right: none;
 `;
 
 const Textarea = styled.div`
@@ -54,9 +56,11 @@ const Textarea = styled.div`
   align-items: center;
 `;
 const Button = styled.button`
-  width: 40px;
-  height: 40px;
+  width: 50px;
+  height: 25px;
   display: flex;
+  justify-content: center;
+  margin-right: 5px;
 `;
 
 const TextBox = styled.div`
