@@ -151,7 +151,9 @@ const Login = () => {
         history.push(path.length ? path : "/");
       })
       .catch((err) => {
-        seterr(err.response.data.message);
+        seterr(
+          err.response && err.response.data ? err.response.data.message : ""
+        );
       });
   };
 
@@ -196,7 +198,7 @@ const Login = () => {
       </Element>
       <Line>{err.length ? err : null}</Line>
       <Element>
-        <LoginBtn onClick={() => Tologin()}>Login</LoginBtn>
+        <LoginBtn onClick={() => Tologin()}>로그인</LoginBtn>
         <KakaoBtn
           className="kakao-btn"
           src={kakaobutton}
@@ -213,7 +215,7 @@ const Login = () => {
             history.push(path.length ? path + "/resister" : "/resister");
           }}
         >
-          Register
+          회원가입
         </LoginBtn2>
       </Element>
     </Popup>

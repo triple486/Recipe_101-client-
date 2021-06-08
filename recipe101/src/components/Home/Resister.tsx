@@ -14,7 +14,7 @@ axios.defaults.withCredentials = true;
 
 const Frame = styled.div`
   position: realtive;
-  height: 520px;
+  height: 600px;
   width: 760px;
   display: flex;
   flex-direction: column;
@@ -66,9 +66,8 @@ const Input = styled.input<{ err: boolean }>`
   padding: 8px 10px;
   box-sizing: border-box;
   outline: none;
-  border: 1px solid #aaa;
   border-radius: 5px;
-  background-color: ${({ err }) => (err ? "red" : "#eee")};
+  border: 1px solid ${({ err }) => (err ? "red" : "#aaa")};
 `;
 
 const Header = styled.div`
@@ -131,12 +130,6 @@ interface userInfo {
   userImage: imgdata;
 }
 
-interface errors {
-  username: string;
-  password: string;
-  email: string;
-  phone: string;
-}
 export default function Resister() {
   let location = useLocation();
   let path = location.pathname.slice(0, -9);
@@ -315,10 +308,13 @@ export default function Resister() {
               onBlur={(event: any) =>
                 validation("username")(event.target.value)
               }
+              required
             />
-            {/* {validcheck.username && (
-              <p className="error">{"형식에 맞지 않는 아이디입니다."}</p>
-            )} */}
+            {validcheck.username && (
+              <small className="error">
+                {"형식에 맞지 않는 아이디입니다."}
+              </small>
+            )}
           </Element>
           <Element>
             <Label>Password</Label>
@@ -332,10 +328,13 @@ export default function Resister() {
               onBlur={(event: any) =>
                 validation("password")(event.target.value)
               }
+              required
             />
-            {/* {validcheck.password && (
-              <p className="error">{"형식에 맞지 않는 비밀번호 입니다."}</p>
-            )} */}
+            {validcheck.password && (
+              <small className="error">
+                {"형식에 맞지 않는 비밀번호 입니다."}
+              </small>
+            )}
           </Element>
           <Element>
             <Label>Email</Label>
@@ -347,10 +346,13 @@ export default function Resister() {
                 validcheckf({ ...validcheck, email: false });
               }}
               onBlur={(event: any) => validation("email")(event.target.value)}
+              required
             />
-            {/* {validcheck.email && (
-              <p className="error">{"형식에 맞지 않는 이메일입니다."}</p>
-            )} */}
+            {validcheck.email && (
+              <small className="error">
+                {"형식에 맞지 않는 이메일입니다."}
+              </small>
+            )}
           </Element>
           <Element>
             <Label>Phone</Label>
@@ -362,10 +364,13 @@ export default function Resister() {
                 validcheckf({ ...validcheck, phone: false });
               }}
               onBlur={(event: any) => validation("phone")(event.target.value)}
+              required
             />
-            {/* {validcheck.phone && (
-              <p className="error">{"형식에 맞지 않는 전화번호입니다."}</p>
-            )} */}
+            {validcheck.phone && (
+              <small className="error">
+                {"형식에 맞지 않는 전화번호입니다."}
+              </small>
+            )}
           </Element>
           <Element>
             <Line>{err && err.length ? err : null}</Line>
