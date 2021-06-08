@@ -42,11 +42,50 @@ const InputButton = styled.button`
   }
 `;
 
+const TypeBox = styled.div`
+  flex: 1 0 0;
+  display: flex;
+  align-items: center;
+`;
+const TBox = styled.div<{ select: boolean }>`
+  flex: 1 0 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+  ${({ select }) => (select ? "border: solid 1px black;" : "")}
+  border-radius: 10px;
+`;
+
+const Label = styled.label`
+  flex: 4 0 0;
+  font-size: 20px;
+  font-weight: 500;
+  text-align: right;
+  vertical-align: middle;
+`;
+
+const TypeBox2 = styled.div`
+  flex: 9 0 0;
+  display: flex;
+  align-items: center;
+`;
+
+const Box = styled.span`
+  flex: 1 0 0;
+  display: flex;
+`;
+const Box2 = styled.span`
+  flex: 1 0 0;
+  display: flex;
+  justify-content: center;
+`;
+
 export default function ItemInput({ func }: { func: Function }) {
   let dispatch = useDispatch();
   let [data, setdata] = useState<{ name: string; type: string; cap: string }>({
     name: "",
-    type: "",
+    type: "주재료",
     cap: "",
   });
 
@@ -60,8 +99,47 @@ export default function ItemInput({ func }: { func: Function }) {
   return (
     <Modal>
       <InputBox>
+        <TypeBox>
+          <Box></Box>
+          <Label>{`${"종류명"}`}</Label>
+          <Box></Box>
+          <TypeBox2>
+            <Box2>
+              <TBox
+                select={data.type === "주재료"}
+                onClick={() => {
+                  inputf("type")("주재료");
+                }}
+              >
+                <Box2>{"주 재료"}</Box2>
+              </TBox>
+            </Box2>
+            <Box2>
+              <TBox
+                select={data.type === "부재료"}
+                onClick={() => {
+                  inputf("type")("부재료");
+                }}
+              >
+                <Box2>{"부 재료"}</Box2>
+              </TBox>
+            </Box2>
+            <Box2>
+              <TBox
+                select={data.type === "양념"}
+                onClick={() => {
+                  inputf("type")("양념");
+                }}
+              >
+                <Box2>{"양념"}</Box2>
+              </TBox>
+            </Box2>
+          </TypeBox2>
+
+          <Box></Box>
+        </TypeBox>
         <Input label={"재료명"} bfunc={inputf("name")}></Input>
-        <Input label={"종류"} bfunc={inputf("type")}></Input>
+
         <Input label={"용량"} bfunc={inputf("cap")}></Input>
         <Inputline>
           <InputButton

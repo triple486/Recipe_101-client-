@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../../redux/reducers";
 import { useHistory } from "react-router-dom";
 import "../../../css/Mypage/MypageMain.css";
@@ -7,6 +7,7 @@ import axios from "axios";
 import "../../../css/Mypage/Modify.css";
 import Input from "../Input";
 import styled from "styled-components";
+import { updateUserInfo } from "../../../redux/userReducer";
 axios.defaults.withCredentials = true;
 const InputArea = styled.div`
   display: flex;
@@ -38,6 +39,7 @@ const ImgInput = styled.input`
   height: 1px;
   width: 1px;
   margin: -1;
+  cursor: pointer;
   overflow: hidden;
 `;
 const ImgLabel = styled.label<{ image: string }>`
@@ -49,6 +51,7 @@ const ImgLabel = styled.label<{ image: string }>`
   justify-content: center;
   align-items: center;
   border-radius: 50%;
+  cursor: pointer;
   background-image: url(${({ image }) => image});
   background-size: cover;
   border: solid 1px white;
@@ -84,9 +87,10 @@ background-color: #b17d55;
 
 function PageModify() {
   let accessToken = useSelector((state: RootState) => state.tokenReducer);
+  let usehistory = useHistory();
+  let dispatch = useDispatch();
   let user = useSelector((state: RootState) => state.userReducer);
   let userInfo = user.userInfo;
-  let usehistory = useHistory();
 
   const [newImage, setNewImage] = useState<File>();
   const [newUsername, setNewUsername] = useState("");
@@ -125,6 +129,14 @@ function PageModify() {
           },
         })
         .then((res) => {
+          return axios.get(process.env.REACT_APP_SERVER_URL + "/user", {
+            headers: {
+              Authorization: "Bearer " + accessToken,
+            },
+          });
+        })
+        .then((rst) => {
+          dispatch(updateUserInfo(rst.data.data.userinfo));
           usehistory.push("/mypage");
         })
         .catch((e) => console.log(e));
@@ -140,7 +152,11 @@ function PageModify() {
           <form onSubmit={(e) => e.preventDefault()} id="editUserInfo">
             <h2>회원정보 수정</h2>
             <InputBox>
-              <ImgLabel image={url} htmlFor={"aaaaa"}>
+              <ImgLabel
+                image={url}
+                htmlFor={"aaaaa"}
+                title={"클릭시 이미지 업로드가 가능합니다."}
+              >
                 <ImgInput
                   type={"file"}
                   onChange={(e) => {
