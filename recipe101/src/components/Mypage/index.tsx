@@ -118,7 +118,7 @@ export default function Mypage() {
       });
 
     return;
-  }, []);
+  }, [accessToken, dispatch]);
   return (
     <Frame>
       <Header>

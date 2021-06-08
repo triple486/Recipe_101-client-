@@ -136,14 +136,6 @@ interface Lineset {
   line?: boolean;
 }
 
-const Line = styled.div<Lineset>`
-  flex: ${({ f }) => (f ? f : 1)} 0 0;
-  display: flex;
-  flex-direction: ${({ c }) => (c ? "column" : "row")};
-  justify-content: center;
-  align-items: center;
-  border: solid 1px white;
-`;
 const Line1 = styled.div<Lineset>`
   flex: ${({ f }) => (f ? f : 1)} 0 0;
   display: flex;
@@ -193,14 +185,6 @@ interface Flineset {
   c?: boolean;
 }
 
-const FLine = styled.div<Flineset>`
-  height: ${({ h }) => (h ? h : 100)}px;
-  display: flex;
-  flex-direction: ${({ c }) => (c ? "column" : "row")};
-  justify-content: center;
-  align-items: center;
-  border-bottom: solid 1px white;
-`;
 const FLine1 = styled.div<Flineset>`
   height: ${({ h }) => (h ? h : 100)}px;
   display: flex;
@@ -313,6 +297,7 @@ function Detailedrecipe() {
   let [add, setadd] = useState(true);
   let [del, setdel] = useState(0);
   let [store, setstore] = useState(false);
+
   useEffect(() => {
     if (!data.isLoad) {
       axios
@@ -322,7 +307,6 @@ function Detailedrecipe() {
           dispatch(isLoad(true));
 
           let data = rst.data.data;
-          console.log(data);
           data.Comment.forEach((x: any, i: any) => {
             if (x.userName === user.userInfo.userName) {
               setadd(false);
@@ -355,7 +339,6 @@ function Detailedrecipe() {
             .catch();
         });
     }
-    console.log(data);
     return () => {};
   }, [
     add,

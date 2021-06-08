@@ -3,7 +3,6 @@ import { RootState } from "../../redux/reducers";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
-import axios from "axios";
 const Frame = styled.div`
   height: 100%;
   width: 100%;
@@ -45,7 +44,6 @@ const ProfiledataLine = styled.div`
 `;
 const ProfiledataLine2 = styled.div`
   flex: 1 0 0;
-  // margin-left: 150px;
   margin-top: 20px;
   display: flex;
   flex-direction: row-reverse;

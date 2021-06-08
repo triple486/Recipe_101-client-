@@ -1,8 +1,6 @@
 import styled from "styled-components";
 import "../../../css/Home/Recipeslide.css";
 import { useHistory } from "react-router-dom";
-import { text } from "@fortawesome/fontawesome-svg-core";
-import ReactDOM from 'react-dom';
 
 const Frame = styled.div`
   display: flex;
@@ -51,7 +49,6 @@ interface recipe {
 
 function Recipeslide({ data }: { data: recipe }) {
   let history = useHistory();
-  let foodName = data.food_name;
   return (
     <Frame>
       <ImgBox>
