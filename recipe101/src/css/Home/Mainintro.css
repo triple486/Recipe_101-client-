@@ -9,7 +9,7 @@
   display: inline-flex;
   width: calc(50% - 20px);
   height: 600px;
-  border: 1px solid white;
+  /* border: 1px solid white; */
   box-sizing: border-box;
   /* text-align: center;
   line-height: 600px; */
@@ -23,7 +23,7 @@
   display: inline-flex;
   width: calc(50% - 20px);
   height: 600px;
-  border: 1px solid white;
+  /* border: 1px solid white; */
   box-sizing: border-box;
   /* text-align: center;
   line-height: 600px; */

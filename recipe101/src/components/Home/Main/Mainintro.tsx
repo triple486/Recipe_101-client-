@@ -25,10 +25,11 @@ const Innerframe = styled.div`
 
 const Image = styled.img`
   // height: 670px;
-  height: 100%;
+  width: 100%;
   object-fit: contain;
   overflow: hidden;
   // margin-top: 5%;
+  border: solid 1px white;
 `;
 
 function Mainintro() {
