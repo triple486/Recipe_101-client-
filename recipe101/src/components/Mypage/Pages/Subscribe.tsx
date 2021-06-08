@@ -19,10 +19,9 @@ const InnerFrame = styled.div`
   height: 100%;
   max-width: 1200px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   padding: 10px;
   flex-wrap: wrap;
-  justify-content: center;
   border: solid 3px white;
 `;
 
@@ -32,6 +31,7 @@ const BoxFrame = styled.div`
   display: flex;
   padding: 10px;
   flex-direction: row;
+  margin-top: 10px;
   justify-content: center;
   align-items: center;
 `;
