@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import "../../../css/Home/Mainintro.css";
 
-import img1 from "../../../icon/addrecipe.gif";
-import img2 from "../../../icon/search.gif";
-import img3 from "../../../icon/storerecipe.gif";
+import img1 from "../../../icon/addrecipe2.gif";
+import img2 from "../../../icon/search2.gif";
+import img3 from "../../../icon/storerecipe2.gif";
 
 const Frame = styled.div`
   // height: ${Math.floor((window.innerHeight - 100) * 0.8)}px;
