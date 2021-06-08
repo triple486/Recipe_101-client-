@@ -314,15 +314,6 @@ function Detailedrecipe() {
   let [del, setdel] = useState(0);
   let [store, setstore] = useState(false);
   useEffect(() => {
-    axios
-      .get(process.env.REACT_APP_SERVER_URL + "/refresh")
-      .then((res) => {
-        dispatch(storeToken(res.data.data.accessToken));
-        dispatch(updateLogin(true));
-        dispatch(updateUserInfo(res.data.data.userinfo));
-      })
-      .catch();
-
     if (!data.isLoad) {
       axios
         .get(process.env.REACT_APP_SERVER_URL + `/recipe/${id}`)
@@ -331,6 +322,7 @@ function Detailedrecipe() {
           dispatch(isLoad(true));
 
           let data = rst.data.data;
+          console.log(data);
           data.Comment.forEach((x: any, i: any) => {
             if (x.userName === user.userInfo.userName) {
               setadd(false);
@@ -351,9 +343,19 @@ function Detailedrecipe() {
                 });
               });
           }
+        })
+        .catch((err) => {
+          axios
+            .get(process.env.REACT_APP_SERVER_URL + "/refresh")
+            .then((res) => {
+              dispatch(storeToken(res.data.data.accessToken));
+              dispatch(updateLogin(true));
+              dispatch(updateUserInfo(res.data.data.userinfo));
+            })
+            .catch();
         });
     }
-
+    console.log(data);
     return () => {};
   }, [
     add,
@@ -380,6 +382,7 @@ function Detailedrecipe() {
   function timecutter(x: string) {
     return x.length ? x.split("T")[0].split("-").join(" / ") : x;
   }
+
   return (
     <Frame>
       <InnerFrame>
@@ -574,16 +577,16 @@ function Detailedrecipe() {
               )}
             </Line5>
             <Line4 c={true}>
-              {data.Ingredients?.filter((x) => x.type === "양념").map(
-                (x, i) => {
-                  return (
-                    <ItemBox key={i}>
-                      <TextBox1>{x.name}</TextBox1>
-                      <TextBox1>{x.cap}</TextBox1>
-                    </ItemBox>
-                  );
-                }
-              )}
+              {data.Ingredients?.filter(
+                (x) => x.type !== "부재료" && x.type !== "주재료"
+              ).map((x, i) => {
+                return (
+                  <ItemBox key={i}>
+                    <TextBox1>{x.name}</TextBox1>
+                    <TextBox1>{x.cap}</TextBox1>
+                  </ItemBox>
+                );
+              })}
             </Line4>
           </MinBoxFrame2>
         </MinBoxFrame>
