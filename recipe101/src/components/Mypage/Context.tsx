@@ -128,13 +128,24 @@ const TextBox2 = styled.div`
 
 const DummyBox = styled.div`
   height: 100%;
-  width: 300px;
+  width: 90%;
   padding-top: 0px;
   padding-left: 0px;
   display: flex;
-  flex-direction: row;
-  justify-content: end;
+  flex-direction: column;
+  justify-content: space-around;
 `;
+
+const BBox = styled.div`
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+`;
+const BBox2 = styled.div`
+  display: flex;
+  flex-direction: row-reverse;
+`;
+
 const DummyBox2 = styled.div`
   height: 100%;
   width: 200px;
@@ -199,8 +210,6 @@ const Button4 = styled.div`
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-  margin: 115px 0px 30px 0px;
-
   -webkit-transition-duration: 0.4s; /* Safari */
   transition-duration: 0.4s;
   cursor: pointer;
@@ -219,68 +228,84 @@ function ContextDefault({ type }: { type: string }) {
     <Frame>
       {type === "작성한 감상평들" ? (
         <DummyBox>
-          <TextBox2>{"작성한 감상평 수 :"}</TextBox2>
-          <TextBox2>
-            <Link to={"/mypage/addedcomment"}>{user.userInfo.comment}</Link>
-            {" 개"}
-          </TextBox2>
-          <Button4
-            onClick={() => {
-              history.push("/mypage/addedcomment");
-            }}
-          >
-            이동하기
-          </Button4>
+          <BBox>
+            <TextBox2>{"작성한 감상평 수 :"}</TextBox2>
+            <TextBox2>
+              <Link to={"/mypage/addedcomment"}>{user.userInfo.comment}</Link>
+              {" 개"}
+            </TextBox2>
+          </BBox>
+          <BBox2>
+            <Button4
+              onClick={() => {
+                history.push("/mypage/addedcomment");
+              }}
+            >
+              이동하기
+            </Button4>
+          </BBox2>
         </DummyBox>
       ) : null}
 
       {type === "담아온 레시피" ? (
         <DummyBox>
-          <TextBox2>{"담아온 레시피 수 :"}</TextBox2>
-          <TextBox2>
-            <Link to={"/mypage/storerecipe"}>{user.userInfo.userStore}</Link>
-            {"개"}
-          </TextBox2>
-          <Button4
-            onClick={() => {
-              history.push("/mypage/storerecipe");
-            }}
-          >
-            이동하기
-          </Button4>
+          <BBox>
+            <TextBox2>{"담아온 레시피 수 :"}</TextBox2>
+            <TextBox2>
+              <Link to={"/mypage/storerecipe"}>{user.userInfo.userStore}</Link>
+              {"개"}
+            </TextBox2>
+          </BBox>
+          <BBox2>
+            <Button4
+              onClick={() => {
+                history.push("/mypage/storerecipe");
+              }}
+            >
+              이동하기
+            </Button4>
+          </BBox2>
         </DummyBox>
       ) : null}
 
       {type === "작성한 레시피" ? (
         <DummyBox>
-          <TextBox2>{"작성한 레시피 수 :"}</TextBox2>
-          <TextBox2>
-            <Link to={"/mypage/addedrecipe"}>{user.userInfo.foodInfo}</Link>
-            {" 개"}
-          </TextBox2>
-          <Button4
-            onClick={() => {
-              history.push("/mypage/addedrecipe");
-            }}
-          >
-            이동하기
-          </Button4>
+          <BBox>
+            <TextBox2>{"작성한 레시피 수 :"}</TextBox2>
+            <TextBox2>
+              <Link to={"/mypage/addedrecipe"}>{user.userInfo.foodInfo}</Link>
+              {" 개"}
+            </TextBox2>
+          </BBox>
+          <BBox2>
+            <Button4
+              onClick={() => {
+                history.push("/mypage/addedrecipe");
+              }}
+            >
+              이동하기
+            </Button4>
+          </BBox2>
         </DummyBox>
       ) : null}
       {type === "구독한 유저들" ? (
         <DummyBox>
-          <TextBox2>{"구독한 유저들 수 :"}</TextBox2>
-          <TextBox2>
-            <Link to={"/mypage/subscribe"}>{user.userInfo.follow}</Link>
-            {" 개"}
-          </TextBox2>
-          <Button4
-            onClick={() => {
-              history.push("/mypage/subscribe");
-            }}
-          >
-            이동하기
-          </Button4>
+          <BBox>
+            <TextBox2>{"구독한 유저들 수 :"}</TextBox2>
+            <TextBox2>
+              <Link to={"/mypage/subscribe"}>{user.userInfo.follow}</Link>
+              {" 개"}
+            </TextBox2>
+          </BBox>
+          <BBox2>
+            <Button4
+              onClick={() => {
+                history.push("/mypage/subscribe");
+              }}
+            >
+              이동하기
+            </Button4>
+          </BBox2>
         </DummyBox>
       ) : null}
     </Frame>

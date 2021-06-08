@@ -14,7 +14,7 @@ axios.defaults.withCredentials = true;
 
 const Frame = styled.div`
   position: realtive;
-  height: 600px;
+  height: 540px;
   width: 760px;
   display: flex;
   flex-direction: column;
@@ -310,11 +310,11 @@ export default function Resister() {
               }
               required
             />
-            {validcheck.username && (
+            {/* {validcheck.username && (
               <small className="error">
                 {"형식에 맞지 않는 아이디입니다."}
               </small>
-            )}
+            )} */}
           </Element>
           <Element>
             <Label>Password</Label>
@@ -330,11 +330,11 @@ export default function Resister() {
               }
               required
             />
-            {validcheck.password && (
+            {/* {validcheck.password && (
               <small className="error">
                 {"형식에 맞지 않는 비밀번호 입니다."}
               </small>
-            )}
+            )} */}
           </Element>
           <Element>
             <Label>Email</Label>
@@ -348,11 +348,11 @@ export default function Resister() {
               onBlur={(event: any) => validation("email")(event.target.value)}
               required
             />
-            {validcheck.email && (
+            {/* {validcheck.email && (
               <small className="error">
                 {"형식에 맞지 않는 이메일입니다."}
               </small>
-            )}
+            )} */}
           </Element>
           <Element>
             <Label>Phone</Label>
@@ -366,11 +366,11 @@ export default function Resister() {
               onBlur={(event: any) => validation("phone")(event.target.value)}
               required
             />
-            {validcheck.phone && (
+            {/* {validcheck.phone && (
               <small className="error">
                 {"형식에 맞지 않는 전화번호입니다."}
               </small>
-            )}
+            )} */}
           </Element>
           <Element>
             <Line>{err && err.length ? err : null}</Line>

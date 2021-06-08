@@ -70,7 +70,6 @@ export default function StepBox({
   data?: Recipe;
   func?: Function;
 }) {
-  console.log(data);
   return (
     <Frame>
       <Box>

@@ -78,9 +78,9 @@ const TextBox = styled.div`
 `;
 
 const Image = styled.img`
-  max-height: 100%;
-  max-width: 100%;
-  display: flex;
+  height: 279px;
+  width: 385px;
+  display: block;
   object-fit: contain;
 `;
 const ShowBox = styled.div`
