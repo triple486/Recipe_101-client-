@@ -63,7 +63,7 @@ export default function InputComp({
             onChange={(e) => func(e.target.value)}
             onBlur={(e) => bfunc(e.target.value)}
             placeholder={placeholder}
-            size={16}
+            size={10}
           />
           <Box></Box>
         </Inputbox>
