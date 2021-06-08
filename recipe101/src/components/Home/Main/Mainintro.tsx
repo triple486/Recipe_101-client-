@@ -1,7 +1,9 @@
 import styled from "styled-components";
 import "../../../css/Home/Mainintro.css";
-import img from "./armando-ascorve-morales-ypZI_CA91M0-unsplash.jpg";
-import img3 from "../../../icon/mypage.gif";
+
+import img1 from "../../../icon/addrecipe.gif";
+import img2 from "../../../icon/search.gif";
+import img3 from "../../../icon/storerecipe.gif";
 
 const Frame = styled.div`
   // height: ${Math.floor((window.innerHeight - 100) * 0.8)}px;
@@ -23,8 +25,9 @@ const Innerframe = styled.div`
 
 const Image = styled.img`
   // height: 670px;
-  width: 100%;
-  // object-fit: contain;
+  height: 100%;
+  object-fit: contain;
+  overflow: hidden;
   // margin-top: 5%;
 `;
 
@@ -34,25 +37,25 @@ function Mainintro() {
       <Innerframe>
         <div className="mainintro_frame">
           <div className="mainintro_img_box">
-            <Image src={img} />
+            <Image src={img1} />
           </div>
           <div className="mainintro_desc">
             <p className="mainintro_text">
-              갈비탕은 누구나 좋아하는 음식이죠! 이런 음식에 대해 나만의
-              레시피가 있다면 레시피 101에 조리법을 올려주세요! 누구나 좋아하는
-              레시피를 만들어서 올릴 수 있습니다!
+              라면은 누구나 좋아하는 음식이죠! 이런 음식에 대해 나만의 레시피가
+              있다면 레시피 101에 조리법을 올려주세요! 누구나 좋아하는 레시피를
+              만들어서 올릴 수 있습니다!
             </p>
           </div>
           <div className="mainintro_desc">
             <p className="mainintro_text">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris
-              enim tortor, commodo eu cursus vitae, elementum in nibh. Sed
-              rhoncus tempus lobortis. Suspendisse efficitur efficitur nulla,
-              vitae lacinia tellus consectetur non. Pellentesque rutrum orci eu.
+              유저들이 올린 많은 레시피에서 당신이 원하시는 레시피를 찾으실수
+              있습니다. 좋아하시는 작성자가 있으시다면 유저 네임으로 좋아하시는
+              종류의 음식이 있으시다면 음식이름으로 원하시는 재료가 들어간
+              음식을 찾는다면 재료로 검색이 가능합니다.
             </p>
           </div>
           <div className="mainintro_img_box">
-            <Image src={img} />
+            <Image src={img2} />
           </div>
           <div className="mainintro_img_box">
             <Image src={img3} />
