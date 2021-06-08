@@ -14,6 +14,7 @@ axios.defaults.withCredentials = true;
 
 const Line = styled.div`
   flex: 1 0 0;
+  height: 20px;
   display: flex;
   width: 100%;
   align-items: center;
@@ -26,7 +27,7 @@ const Popup = styled.div`
   left: 50%;
   transform: translate(-50%, -50%) scale(1.15);
   width: 300px;
-  height: 490px;
+  height: 450px;
   background: #f5f5f5;
   z-index: 2;
   box-shadow: 5px 5px 3px rgba(0, 0, 0, 0.2);
