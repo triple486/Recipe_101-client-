@@ -1,4 +1,4 @@
-import { useHistory, useLocation, Link } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { storeToken } from "../../redux/tokenReducer";
 import { updateLogin, updateUserInfo } from "../../redux/userReducer";
@@ -33,21 +33,6 @@ const Popup = styled.div`
   box-shadow: 5px 5px 3px rgba(0, 0, 0, 0.2);
   transition: transform 300ms ease-in-out, opacity 300ms ease-in-out;
   border-radius: 5px;
-`;
-
-const PopupClose = styled.div`
-  position: absolute;
-  top: -10px;
-  right: -10px;
-  width: 40px;
-  height: 40px;
-  background: #555;
-  color: #f5f5f5;
-  font-size: 25px;
-  font-weight: 600;
-  text-align: center;
-  border-radius: 50%;
-  cursor: pointer;
 `;
 
 const Avatar = styled.img`
@@ -156,11 +141,6 @@ const Login = () => {
           err.response && err.response.data ? err.response.data.message : ""
         );
       });
-  };
-
-  const Cancel = () => {
-    dispatch(isOn(false));
-    history.push(path.length ? path : "/");
   };
 
   return (

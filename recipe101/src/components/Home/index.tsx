@@ -61,7 +61,7 @@ function Landingpage() {
       .catch();
 
     return;
-  }, []);
+  }, [dispatch]);
 
   let Modalon = useSelector((state: RootState) => state.modalReducer);
   return (

@@ -12,7 +12,6 @@ import { useState } from "react";
 import ItemInput from "./Iteminput";
 import StepInput from "./Stepinput";
 import { useHistory } from "react-router-dom";
-import Resister from "./addResister";
 import ItemModal from "./Inputitemmodal";
 import StepModal from "./Inputstepmodal";
 import Message from "./messagebox";
@@ -190,7 +189,7 @@ function Addrecipe() {
   let accessToken = useSelector((state: RootState) => state.tokenReducer);
   let history = useHistory();
   let dispatch = useDispatch();
-  let [Tdata, setTdata] = useState<FormData>();
+
   let [isinputigr, setinputigr] = useState<boolean>(false);
   let [isinputstep, setinputstep] = useState<boolean>(false);
   let [ismessage, setmessage] = useState<boolean>(false);
@@ -343,8 +342,6 @@ function Addrecipe() {
           data.StepImage.forEach((x) => {
             rdata.append("stepImages", x.file);
           });
-
-          setTdata(rdata);
 
           if (user.isLogin) {
             const config = {

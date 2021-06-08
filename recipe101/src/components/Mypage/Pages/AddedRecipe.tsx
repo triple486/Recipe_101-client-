@@ -108,17 +108,18 @@ export default function Profile() {
   let user = useSelector((state: RootState) => state.userReducer);
   let accessToken = useSelector((state: RootState) => state.tokenReducer);
   let [data, setdata] = useState<recipe[]>();
-  const config = {
-    headers: {
-      authorization: "bearer " + accessToken,
-    },
-  };
+
   let [id, setid] = useState<number>(1);
   let [q, setq] = useState(1);
   let match = useRouteMatch();
   let [k, setk] = useState(1);
 
   useEffect(() => {
+    const config = {
+      headers: {
+        authorization: "bearer " + accessToken,
+      },
+    };
     axios
       .get(
         process.env.REACT_APP_SERVER_URL +
@@ -131,7 +132,7 @@ export default function Profile() {
         setk(Math.ceil(rst.data.data.recipe.length / 12));
       });
     return;
-  }, []);
+  }, [accessToken, dispatch, user]);
   let pn: number[] = [];
   for (let i = 0; i < 10 * Math.ceil(k / 10); i++) {
     pn.push(i + 1);

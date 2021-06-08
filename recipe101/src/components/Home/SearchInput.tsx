@@ -27,7 +27,6 @@ const Search = styled.div`
 
 const SearchBox = styled.div`
   height: 40px;
-  // border: 1px solid black;
   background: white;
   border-radius: 20px;
 `;
@@ -46,22 +45,12 @@ const Select = styled.div<{ type: string; name: string }>`
   border-radius: 50%;
 `;
 const Input = styled.input`
-  // height: 50px;
-  // width: 60%;
-  // text-align: right;
-  // text-indent: -5em;
-  // background: #B17D55;
-  // position: absolute;
-  // top: 0;
-  // left: 0;
   width: 350px;
   height: 40px;
   line-height: 30px;
   outline: 0;
   border: 0;
-  // display: none;
   font-size: 1em;
-  // border-radius: 20px;
   padding-left: 13px;
   padding-right: 20px;
 
@@ -130,7 +119,7 @@ export default function SearchInput() {
       .catch();
 
     return;
-  }, []);
+  }, [dispatch]);
 
   return (
     <Search>

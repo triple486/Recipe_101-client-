@@ -11,12 +11,6 @@ const Frame = styled.div`
   flex-wrap: wrap;
 `;
 
-const BoxFrame = styled.div`
-  height: 200px;
-  width: 25%;
-  display: flex;
-`;
-
 export default function Recipepage({ func = () => {} }: { func?: Function }) {
   let { id } = useParams<{ id?: string }>();
   console.log(id);

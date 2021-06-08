@@ -1,6 +1,6 @@
 import Recipepage from "../Recipepage";
 import styled from "styled-components";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { RootState } from "../../redux/reducers";
 import {
   Route,
@@ -14,8 +14,6 @@ import { useState } from "react";
 const Frame = styled.div`
   flex: 1 0 0;
   width: 100%;
-  // border: solid 1px blue;
-  // display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -25,7 +23,6 @@ const Frame = styled.div`
 const InnerFrame = styled.div`
   flex: 1 0 0;
   width: 100%;
-  // border: solid 1px blue;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -108,14 +105,7 @@ const InnerBox2 = styled.div`
   }
   font-weight: 700;
 `;
-const SortBox = styled.div`
-  height: 20px;
-  width: 100%;
-  display: flex;
-`;
-const LinkNumber = styled.div`
-  color: white;
-`;
+
 const Slink = styled(Link)<{ iscolor: boolean }>`
   text-decoration: ${({ iscolor }) => (iscolor ? "underline" : "none")};
   font-weight: ${({ iscolor }) => (iscolor ? "700" : "400")};
@@ -123,7 +113,6 @@ const Slink = styled(Link)<{ iscolor: boolean }>`
 `;
 function YesResult() {
   let [id, setid] = useState<number>(1);
-  let dispatch = useDispatch();
   let history = useHistory();
   let { search } = useSelector((state: RootState) => state.searchReducer);
   let [q, setq] = useState(1);
@@ -134,23 +123,6 @@ function YesResult() {
   }
 
   let match = useRouteMatch();
-
-  // const Linkbox = function ({
-  //   num,
-  //   func = () => {},
-  // }: {
-  //   num: number | string;
-  //   func?: Function;
-  // }) {
-  //   return (
-  //     <InnerBox onClick={() => func()}>
-  //       <Link to={`${match.path}/${num}`} style={{ textDecoration:'none'}}>
-  //         <LinkNumber>{num}</LinkNumber>
-  //       </Link>
-  //     </InnerBox>
-  //   ) : null;
-  // };
-
 
   const Linkbox = function ({ num }: { num: number }) {
     let p = id === num;
