@@ -640,7 +640,8 @@ function Detailedrecipe() {
                   config
                 )
                 .then((rst) => {
-                  setcall(true);
+                  setcall(false);
+                  setadd(true);
                   console.log("완료");
                 })
                 .catch((err) => {
