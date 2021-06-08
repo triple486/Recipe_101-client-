@@ -25,6 +25,7 @@ const ScoreBox = styled.div<{ l: number }>`
   width: ${({ l }) => l}px;
   flex: 0 0 1;
   display: flex;
+  color: black;
   justify-content: center;
   align-items: center;
 `;
