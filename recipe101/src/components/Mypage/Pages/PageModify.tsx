@@ -93,7 +93,9 @@ function PageModify() {
   const [newPhone, setNewPhone] = useState("");
   const [newEmail, setNewEmail] = useState("");
   const [url, seturl] = useState(
-    process.env.REACT_APP_SERVER_URL + "/image/default.png"
+    userInfo.userImage
+      ? userInfo.userImage
+      : process.env.REACT_APP_SERVER_URL + "/image/default.png"
   );
 
   const onEdit = () => {
