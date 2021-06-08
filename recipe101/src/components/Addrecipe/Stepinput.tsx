@@ -22,14 +22,12 @@ const StepLine = styled.div`
 `;
 
 const Addstep = styled.div`
-  margin-top: 10px;
-
-  height: 50px;
+  margin: 10px 0;
+  min-height: 50px;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-
   border: dashed 1px white;
   &:hover {
     border: solid 1px white;

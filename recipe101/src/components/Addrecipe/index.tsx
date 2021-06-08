@@ -51,6 +51,7 @@ const ItemFrame = styled.div`
   flex: 1 0 0;
   width: 100%;
   max-width: 1200px;
+  min-height: 150px;
   display: flex;
   border: solid 1px white;
 `;
