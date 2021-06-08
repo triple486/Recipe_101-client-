@@ -154,21 +154,21 @@ function PageModify() {
               <InputArea>
                 <TextInput>
                   <Input
-                    label={"username"}
+                    label={"유저네임"}
                     type={"text"}
                     value={newUsername}
                     func={setNewUsername}
                     placeholder={userInfo.userName || ""}
                   ></Input>
                   <Input
-                    label={"phone"}
+                    label={"전화번호"}
                     type={"text"}
                     value={newPhone}
                     func={setNewPhone}
                     placeholder={userInfo.phone || ""}
                   ></Input>
                   <Input
-                    label={"email"}
+                    label={"이메일"}
                     type={"text"}
                     value={newEmail}
                     func={setNewEmail}
